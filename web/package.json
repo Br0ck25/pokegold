@@ -4,12 +4,14 @@
   "scripts": {
     "build": "./build.sh",
     "dev": "./build.sh && wrangler dev",
-    "deploy": "./build.sh && wrangler deploy"
+    "deploy": "./build.sh && wrangler deploy",
+    "test": "node test/flow.js"
   },
   "dependencies": {
     "wasmboy": "0.7.1"
   },
   "devDependencies": {
-    "wrangler": "^4"
+    "wrangler": "^4",
+    "playwright": "^1"
   }
 }

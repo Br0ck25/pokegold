@@ -1,0 +1,7 @@
+/* name choice */
+#hd .names .portrait { bottom:5%; width:56%; left:22%; }
+#hd .panel { position:absolute; left:8%; right:8%; top:6%; padding:3cqw; border-radius:5cqw; background:rgba(10,18,50,.85); border:.6cqw solid var(--gold); }
+#hd .panel h2 { margin:0 0 2.5cqw; font-size:4.6cqw; text-align:center; font-weight:700; }
+#hd .panel ul { margin:0; padding:0; list-style:none; }
+#hd .panel li { margin:0 0 1.6cqw; padding:1.6cqw 3cqw; font-size:4.6cqw; border-radius:3cqw; background:rgba(255,246,220,.08); }
+#hd .panel li.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); font-weight:700; }

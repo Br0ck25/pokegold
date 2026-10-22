@@ -5,3 +5,5 @@ public/vendor/
 package-lock.json
 dist/
 public/hd/syms.js
+public/hd.bundle.*
+test/out/

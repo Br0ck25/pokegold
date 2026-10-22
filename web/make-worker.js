@@ -30,7 +30,7 @@ const files = { "/index.html": html };
 const walk = (dir) => {
   for (const entry of fs.readdirSync(path.join(__dirname, "public", dir), { withFileTypes: true })) {
     const rel = path.posix.join(dir, entry.name);
-    if (entry.isDirectory()) { if (rel !== "roms" && rel !== "vendor") walk(rel); }
+    if (entry.isDirectory()) { if (!["roms", "vendor", "hd"].includes(rel)) walk(rel); }
     else if (/\.(js|css)$/.test(entry.name)) files["/" + rel] = read(path.join("public", rel)).toString();
   }
 };

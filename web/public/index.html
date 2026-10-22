@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, interactive-widget=resizes-content">
 <title>Buddymon Gold</title>
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="hd/hd.css">
+<link rel="stylesheet" href="hd.bundle.css">
 </head>
 <body>
 <main>
@@ -26,13 +26,8 @@
   </div>
 
   <div id="pad" hidden>
-    <div class="dpad">
-      <button data-key="UP">▲</button>
-      <button data-key="LEFT">◀</button>
-      <button data-key="RIGHT">▶</button>
-      <button data-key="DOWN">▼</button>
-    </div>
-    <div class="mid">
+    <div id="dpad" aria-label="Directional pad"><i class="u"></i><i class="d"></i><i class="l"></i><i class="r"></i></div>
+    <div class="center">
       <button data-key="SELECT">Select</button>
       <button data-key="START">Start</button>
     </div>
@@ -51,11 +46,7 @@
     Use the in-game SAVE menu; it syncs to the cloud automatically.</p>
 </main>
 <script src="vendor/wasmboy.wasm.iife.js"></script>
-<script src="hd/syms.js"></script>
-<script src="hd/art.js"></script>
-<script src="hd/art2.js"></script>
-<script src="hd/core.js"></script>
-<script src="hd/scenes.js"></script>
+<script src="hd.bundle.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

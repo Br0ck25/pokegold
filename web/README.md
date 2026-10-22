@@ -18,14 +18,14 @@ vector scenes over it:
 
 - The ROM writes a scene id to `wHDScene` (`constants/hd_constants.asm`) at the
   title, main menu, clock, professor intro, name choice and name entry.
-- `core.js` polls emulator memory ~30x/s: scene id, the on-screen tilemap
+- `hd/core/engine.js` polls emulator memory ~30x/s: scene id, the on-screen tilemap
   (decoded to text), map/coordinates/facing, and the naming cursor. RAM
   addresses come from `pokegold.sym` (`build.sh` writes `hd/syms.js`).
-- `scenes.js` builds one DOM/SVG scene per screen; `art.js`/`art2.js` hold the
-  vector art; `hd.css` styles it. Anything without a scene shows the pixel canvas.
+- `hd/scenes/*` one DOM/SVG scene per screen (CSS beside it), `hd/art/*` the vector
+  art, `hd/ui/*` shared pieces. `bundle.js` globs them into `hd.bundle.js/css`.
+  Anything without a scene shows the pixel canvas.
 
-To redraw another screen: set a `wHDScene` value in the asm, add a scene in
-`scenes.js`, and add it to `pick()` in `core.js`.
+To redraw another screen see "Add a screen" in `docs/UI.md`. Rules: `docs/UI.md`.
 
 ## Run locally
 

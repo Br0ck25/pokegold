@@ -1,0 +1,12 @@
+/* naming keyboard */
+#hd .naming .portrait { left:5%; top:3%; bottom:auto; width:20%; }
+#hd .entry { position:absolute; left:30%; right:5%; top:5%; padding:2.4cqw 3cqw; border-radius:4cqw; background:rgba(10,18,50,.85); border:.6cqw solid var(--gold); }
+#hd .entry h2 { margin:0 0 1.6cqw; font-size:4cqw; font-weight:700; text-align:center; }
+#hd .slots { display:flex; gap:1.4cqw; justify-content:center; }
+#hd .slots span { width:7.4cqw; height:9cqw; line-height:9cqw; text-align:center; font-size:6cqw; font-weight:700; border-radius:2cqw; background:rgba(255,246,220,.1); border-bottom:.7cqw solid rgba(255,246,220,.4); }
+#hd .slots span.on { border-bottom-color:var(--gold); box-shadow:0 0 2cqw rgba(255,201,60,.6); }
+#hd .kb { position:absolute; left:5%; right:5%; bottom:4%; display:grid; grid-template-columns:repeat(9,1fr); gap:1.4cqw; padding:2.6cqw; border-radius:4cqw; background:rgba(10,18,50,.85); border:.6cqw solid rgba(255,246,220,.3); }
+#hd .kb b, #hd .kb em { display:flex; align-items:center; justify-content:center; height:8.6cqw; font-style:normal; font-size:4.6cqw; font-weight:600; border-radius:2.2cqw; background:rgba(255,246,220,.1); }
+#hd .kb b.gap { background:none; }
+#hd .kb em.wide { grid-column:span 3; font-size:4cqw; }
+#hd .kb .sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); box-shadow:0 .7cqw 0 var(--gold2); transform:scale(1.08); }

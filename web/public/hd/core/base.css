@@ -1,0 +1,18 @@
+/* Buddymon HD layer. Sized in cqw so it scales with the game screen. */
+:root { --ink:#0b1730; --gold:#ffc93c; --gold2:#f08a14; --cream:#fff6dc; --navy:#10204f; --teal:#3de0c4; --coral:#ff6b5e; }
+
+#hd { position:absolute; inset:0; container-type:size; overflow:hidden; border-radius:6px; display:none;
+  font-family:'Fredoka',system-ui,sans-serif; color:var(--cream); background:#050a22; user-select:none; pointer-events:none; }
+.hd-on #hd { display:block; }
+.hd-on #screen { visibility:hidden; }
+#hd .scene { position:absolute; inset:0; overflow:hidden; }
+#hd .sky, #hd .sky-svg { position:absolute; inset:0; width:100%; height:100%; }
+#hd .sky.dim { filter:brightness(.55) saturate(.9); }
+#hd .sky.warm { background:radial-gradient(120% 90% at 50% 100%, #ffb76b 0%, #f08a5a 38%, #7a4a9c 78%, #2b2a6b 100%); }
+#hd .star { animation:twinkle 3.6s ease-in-out infinite; }
+@keyframes twinkle { 0%,100%{opacity:.25} 50%{opacity:1} }
+#hd .clouds { animation:drift 40s linear infinite alternate; }
+@keyframes drift { to { transform:translateX(120px); } }
+
+
+@media (prefers-reduced-motion: reduce) { #hd *, #hd *::before { animation:none !important; transition:none !important; } }

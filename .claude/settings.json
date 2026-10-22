@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./**/*.o)",
+      "Read(./**/*.sym)",
+      "Read(./**/*.map)",
+      "Read(./**/*.gbc)",
+      "Read(./**/*.2bpp)",
+      "Read(./**/*.lz)",
+      "Read(./web/node_modules/**)",
+      "Read(./web/public/roms/**)",
+      "Read(./web/public/vendor/**)",
+      "Read(./web/public/hd.bundle.*)",
+      "Read(./web/dist/**)",
+      "Read(./web/package-lock.json)"
+    ]
+  }
+}
