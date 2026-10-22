@@ -106,6 +106,7 @@ async function start() {
     }
 
     await WB.play();
+    HD.start(WB, $("hd"), Scenes);
     $("start").hidden = true;
     $("pad").hidden = false;
     syncBtn.disabled = false;

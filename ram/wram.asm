@@ -119,6 +119,8 @@ wSpriteUpdatesEnabled:: db
 
 wUnusedScriptByte:: db
 
+wHDScene:: db ; HDSCENE_*, read by the browser HD layer
+
 wMapTimeOfDay:: db
 
 	ds 3

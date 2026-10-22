@@ -3,18 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Pokémon Gold / Silver</title>
+<title>Buddymon Gold</title>
 <link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="hd/hd.css">
 </head>
 <body>
 <main>
   <div id="screen-wrap">
     <canvas id="screen" width="160" height="144"></canvas>
+    <div id="hd"></div>
     <div id="start">
       <select id="game" aria-label="Game">
-        <option value="gold">Pokémon Gold</option>
-        <option value="silver">Pokémon Silver</option>
+        <option value="gold">Buddymon Gold</option>
+        <option value="silver">Buddymon Silver</option>
       </select>
       <button id="play">Play</button>
     </div>
@@ -46,6 +51,11 @@
     Use the in-game SAVE menu; it syncs to the cloud automatically.</p>
 </main>
 <script src="vendor/wasmboy.wasm.iife.js"></script>
+<script src="hd/syms.js"></script>
+<script src="hd/art.js"></script>
+<script src="hd/art2.js"></script>
+<script src="hd/core.js"></script>
+<script src="hd/scenes.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

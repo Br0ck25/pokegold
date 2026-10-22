@@ -3,6 +3,8 @@ DEF TIMESET_DOWN_ARROW EQU '♀' ; $f5
 
 InitClock:
 ; Ask the player to set the time.
+	ld a, HDSCENE_CLOCK
+	ld [wHDScene], a
 	ldh a, [hInMenu]
 	push af
 	ld a, $1

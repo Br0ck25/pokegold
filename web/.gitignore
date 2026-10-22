@@ -4,3 +4,4 @@ public/vendor/
 .wrangler/
 package-lock.json
 dist/
+public/hd/syms.js

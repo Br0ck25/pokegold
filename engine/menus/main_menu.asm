@@ -26,6 +26,8 @@ MainMenu:
 	xor a
 	ld [wDisableTextAcceleration], a
 	call ClearTilemapEtc
+	ld a, HDSCENE_MAIN_MENU
+	ld [wHDScene], a
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	ld hl, wGameTimerPaused
@@ -270,11 +272,15 @@ ClearTilemapEtc:
 	ret
 
 MysteryGift:
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	call UpdateTime
 	farcall DoMysteryGiftIfDayHasPassed
 	farcall DoMysteryGift
 	ret
 
 Option:
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	farcall _Option
 	ret

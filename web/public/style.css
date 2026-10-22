@@ -3,6 +3,7 @@
 body { margin:0; background:var(--bg); color:var(--fg); font:16px system-ui,sans-serif; }
 main { max-width:640px; margin:0 auto; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); }
 #screen-wrap { position:relative; }
+#screen-wrap.hd-on #start { background:transparent; }
 #screen { width:100%; aspect-ratio:160/144; image-rendering:pixelated; background:#000; display:block; border-radius:6px; }
 #start { position:absolute; inset:0; display:flex; gap:8px; align-items:center; justify-content:center; background:#000c; border-radius:6px; }
 #start[hidden] { display:none; }

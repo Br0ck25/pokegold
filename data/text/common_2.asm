@@ -1146,19 +1146,20 @@ _OakText1::
 	line "keep you waiting!"
 
 	para "Welcome to the"
-	line "world of #MON!"
+	line "world of BUDDYMON!"
 
-	para "My name is OAK."
+	para "I'm PROF. WILLOW."
 
-	para "People call me the"
-	line "#MON PROF."
+	para "Folks around here"
+	line "call me the BUDDY"
+	cont "PROFESSOR."
 	prompt
 
 _OakText2::
-	text "This world is in-"
-	line "habited by crea-"
-	cont "tures that we call"
-	cont "#MON.@"
+	text "This world is full"
+	line "of wonderful"
+	cont "animals that we"
+	cont "call BUDDYMON.@"
 	text_end
 
 _OakText3::
@@ -1166,28 +1167,30 @@ _OakText3::
 	text_end
 
 _OakText4::
-	text "People and #MON"
-	line "live together by"
-
-	para "supporting each"
-	line "other."
+	text "Folks and BUDDYMON"
+	line "are the best of"
+	cont "friends, always"
+	cont "looking out for"
+	cont "each other."
 
 	para "Some people play"
-	line "with #MON, some"
-	cont "battle with them."
+	line "with BUDDYMON,"
+	cont "some battle side"
+	cont "by side with them."
 	prompt
 
 _OakText5::
-	text "But we don't know"
-	line "everything about"
-	cont "#MON yet."
+	text "But we still don't"
+	line "know everything"
+	cont "about BUDDYMON."
 
-	para "There are still"
-	line "many mysteries to"
-	cont "solve."
+	para "There are many"
+	line "mysteries left to"
+	cont "uncover."
 
 	para "That's why I study"
-	line "#MON every day."
+	line "BUDDYMON every"
+	cont "single day."
 	prompt
 
 _OakText6::
@@ -1200,8 +1203,8 @@ _OakText7::
 	line "ready?"
 
 	para "Your very own"
-	line "#MON story is"
-	cont "about to unfold."
+	line "BUDDYMON story is"
+	cont "about to begin."
 
 	para "You'll face fun"
 	line "times and tough"
@@ -1210,7 +1213,7 @@ _OakText7::
 	para "A world of dreams"
 	line "and adventures"
 
-	para "with #MON"
+	para "with BUDDYMON"
 	line "awaits! Let's go!"
 
 	para "I'll be seeing you"

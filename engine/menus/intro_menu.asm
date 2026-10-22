@@ -5,6 +5,8 @@ NewGame:
 	call ClearTilemapEtc
 	call OakSpeech
 	call InitializeWorld
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 
 	ld a, SPAWN_HOME
 	ld [wDefaultSpawnpoint], a
@@ -249,6 +251,8 @@ LoadOrRegenerateLuckyIDNumber:
 	jp CloseSRAM
 
 Continue:
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	farcall TryLoadSaveFile
 	jr c, .FailToLoad
 	call LoadStandardMenuHeader
@@ -493,6 +497,8 @@ Continue_DisplayGameTime:
 
 OakSpeech:
 	farcall InitClock
+	ld a, HDSCENE_PROF_INTRO
+	ld [wHDScene], a
 	call RotateFourPalettesLeft
 	call ClearTilemap
 
@@ -516,7 +522,7 @@ OakSpeech:
 	call RotateThreePalettesRight
 	call ClearTilemap
 
-	ld a, MARILL
+	ld a, CHIKORITA
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
@@ -579,7 +585,7 @@ OakText1:
 OakText2:
 	text_far _OakText2
 	text_asm
-	ld a, MARILL
+	ld a, CHIKORITA
 	call PlayMonCry
 	call WaitSFX
 	ld hl, OakText3
@@ -606,6 +612,8 @@ OakText7:
 	text_end
 
 NamePlayer:
+	ld a, HDSCENE_NAME_CHOICE
+	ld [wHDScene], a
 	call MovePlayerPicRight
 	ld hl, NameMenuHeader
 	call ShowPlayerNamingChoices
@@ -619,9 +627,13 @@ NamePlayer:
 	ret
 
 .NewName:
+	ld a, HDSCENE_NAMING
+	ld [wHDScene], a
 	ld b, NAME_PLAYER
 	ld de, wPlayerName
 	farcall NamingScreen
+	ld a, HDSCENE_PROF_INTRO
+	ld [wHDScene], a
 
 	call RotateThreePalettesRight
 	call ClearTilemap
@@ -846,6 +858,8 @@ Intro_PlaceChrisSprite:
 DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	callfar SplashScreen
 	jr c, StartTitleScreen
 	callfar GoldSilverIntro
@@ -853,6 +867,8 @@ IntroSequence:
 	; fallthrough
 
 StartTitleScreen:
+	ld a, HDSCENE_TITLE
+	ld [wHDScene], a
 	call TitleScreen
 	call DelayFrame
 .loop
