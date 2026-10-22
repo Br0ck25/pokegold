@@ -22,13 +22,9 @@ export default {
 
     const url = new URL(request.url);
     if (url.pathname.startsWith("/api/")) return handleApi(request, env, url);
-    if (!env.ASSETS) {
-      return new Response(
-        "No ASSETS binding: deploy with `npm run deploy` from web/ (wrangler deploy), " +
-          "not by pasting worker.js into the dashboard.",
-        { status: 500 }
-      );
-    }
+    // Single-file build (make-worker.js) prepends an EMBEDDED constant; the
+    // wrangler build serves public/ through the ASSETS binding instead.
+    if (typeof EMBEDDED !== "undefined") return serveEmbedded(url);
     return env.ASSETS.fetch(request);
   },
 };
@@ -117,4 +113,39 @@ function json(body, status = 200, headers = new Headers()) {
   headers.set("Content-Type", "application/json");
   headers.set("Cache-Control", "no-store");
   return new Response(JSON.stringify(body), { status, headers });
+}
+
+// --- single-file mode -------------------------------------------------------
+
+const TYPES = {
+  "/": "text/html; charset=utf-8",
+  "/index.html": "text/html; charset=utf-8",
+  "/app.js": "text/javascript; charset=utf-8",
+  "/style.css": "text/css; charset=utf-8",
+};
+const romCache = {};
+
+async function serveEmbedded(url) {
+  let path = url.pathname;
+  const rom = path.match(/^\/roms\/poke([a-z]+)\.gbc$/);
+  if (rom) {
+    const gz = EMBEDDED.roms[rom[1]];
+    if (!gz) return new Response("Not found", { status: 404 });
+    romCache[rom[1]] ||= gunzip(gz);
+    return new Response(await romCache[rom[1]], {
+      headers: { "Content-Type": "application/octet-stream", "Cache-Control": "private, max-age=3600" },
+    });
+  }
+  if (path === "/") path = "/index.html";
+  const body = EMBEDDED.files[path];
+  if (body === undefined) return new Response("Not found", { status: 404 });
+  return new Response(body, { headers: { "Content-Type": TYPES[path] } });
+}
+
+async function gunzip(b64) {
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Response(stream).arrayBuffer();
 }

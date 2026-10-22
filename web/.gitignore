@@ -3,3 +3,4 @@ public/roms/
 public/vendor/
 .wrangler/
 package-lock.json
+dist/
