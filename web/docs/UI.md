@@ -34,6 +34,12 @@ Follow these for every screen, control and piece of art. Change a rule here firs
   itself with CSS from mount time. Keep the animation length <= the ROM wait (60 frames = 1s).
 - Studio name is "Brock Family" (badger emblem, `art/badger.js`). No Nintendo / Game Freak text anywhere on start-up.
 
+## Rooms (scenes/room.js)
+- One entry in `ROOMS` per map (key = map number in group 24, size in cells) + an `art/<room>.js` drawn at 100 units per cell.
+- Draw against the real collision: `python3 tools/mapgrid.py <MapName>` (from the repo root) prints it. Blocked cells = furniture, walkable = floor.
+- People come from the game's object list (`state.objects`); map SPRITE_* ids to art in `NPC_ART`. Position, facing and walking follow the game.
+- Pixel-only popups (Start menu, Yes/No) trigger `state.menu`; the room steps aside and the pixel screen shows. Design those next.
+
 ## Add a screen (checklist)
 1. ROM: set `wHDScene` to a new `HDSCENE_*` (constants/hd_constants.asm) where the screen starts; reset to 0 where it ends.
 2. `scenes/<name>.js` (+ `<name>.css` beside it): `Scenes.<name> = function (root, flags) { ...; return { update(state) {} }; };`

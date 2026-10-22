@@ -14,7 +14,8 @@ python3 - <<'PY'
 import json
 want = ["wHDScene", "wTilemap", "wMapGroup", "wMapNumber", "wXCoord", "wYCoord",
         "wPlayerDirection", "wPlayerName", "wCurPartySpecies", "wMenuCursorY",
-        "wNamingScreenCursorObjectPointer", "wNamingScreenCurNameLength", "wNamingScreenMaxNameLength"]
+        "wNamingScreenCursorObjectPointer", "wNamingScreenCurNameLength", "wNamingScreenMaxNameLength",
+        "wObjectStructs"]
 syms = {}
 for line in open("../pokegold.sym"):
     if line.startswith(";") or " " not in line:

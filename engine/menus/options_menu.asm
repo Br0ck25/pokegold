@@ -12,6 +12,8 @@ DEF NUM_OPTIONS EQU const_value ; 8
 
 _Option:
 ; BUG: Options menu fails to clear joypad state on initialization (see docs/bugs_and_glitches.md)
+	ld a, HDSCENE_OPTIONS
+	ld [wHDScene], a
 	ld hl, hInMenu
 	ld a, [hl]
 	push af
@@ -69,6 +71,8 @@ _Option:
 .ExitOptions:
 	pop af
 	ldh [hInMenu], a
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	ret
 
 StringOptions:

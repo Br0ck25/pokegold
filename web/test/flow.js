@@ -42,6 +42,14 @@ const out = process.argv[3] || "test/out";
   await tapKey("START"); await page.waitForTimeout(1500);
   if ((await scene()) !== 2) { console.error("FAIL: single Start tap did not open the menu"); process.exitCode = 1; }
   await snap();
+  // Options open as an HD scene and Back returns to the menu.
+  await tapDpad("DOWN"); await page.waitForTimeout(500);
+  await tapKey("A");
+  await page.waitForFunction(() => HD.last && HD.last.scene === 9, null, { timeout: 5000 }).catch(() => { console.error("FAIL: Options did not open as HD scene 9"); process.exitCode = 1; });
+  await page.waitForTimeout(800); await shot("options");
+  await tapKey("B");
+  await page.waitForFunction(() => HD.last && HD.last.scene === 2, null, { timeout: 5000 }).catch(() => { console.error("FAIL: B did not return from Options"); process.exitCode = 1; });
+  await tapDpad("UP"); await page.waitForTimeout(500);
   await tapKey("A");
   await page.waitForFunction(() => HD.last && HD.last.scene !== 2, null, { timeout: 8000 })
     .catch(() => { console.error("FAIL: single A tap did not choose New Game"); process.exitCode = 1; });
@@ -62,6 +70,24 @@ const out = process.argv[3] || "test/out";
     const x1 = await page.evaluate(() => HD.last.x);
     if (x1 !== x0 - 1) { console.error(`FAIL: second D-pad tap moved x ${x0} -> ${x1}`); process.exitCode = 1; }
     await shot("room");
+    // A Start menu has no HD design yet: the room must step aside and show the pixel screen.
+    await tapKey("START"); await page.waitForTimeout(1200);
+    const stepped = await page.evaluate(() => HD.last.menu && !document.getElementById("screen-wrap").classList.contains("hd-on"));
+    if (!stepped) { console.error("FAIL: room did not step aside for the Start menu"); process.exitCode = 1; }
+    await tapKey("B"); await page.waitForTimeout(1200);
+    // Walk to the stairs (7,0): right along the row, then up. Mom should be drawn in the living room.
+    const hold = async (key, done) => {
+      await page.evaluate((k) => setKey(k, true), key);
+      await page.waitForFunction(done, null, { timeout: 8000 }).catch(() => {});
+      await page.evaluate((k) => setKey(k, false), key);
+      await page.waitForTimeout(400);
+    };
+    await hold("RIGHT", () => HD.last.x >= 7);
+    await hold("UP", () => HD.last.map.number === 6);
+    await page.waitForTimeout(2500);
+    const living = await page.evaluate(() => ({ label: document.querySelector("#hd .loc")?.textContent, npcs: document.querySelectorAll("#hd .actor.npc").length }));
+    if (living.label !== "Home · Living Room" || living.npcs < 1) { console.error("FAIL: living room not drawn with Mom", JSON.stringify(living)); process.exitCode = 1; }
+    await shot("room1f");
   }
   console.log(process.exitCode ? "FAILED" : "OK", "scenes seen:", [...seen].join(","));
   await browser.close();

@@ -8,7 +8,7 @@ const HD = (() => {
   const WRAM_START = 0x4800;
   const WRAM_END = WRAM_START + 0x2000;
 
-  const ROOM = { group: 24, number: 7 }; // PLAYERS_HOUSE_2F
+  const ROOM_GROUP = 24; // New Bark Town; the room maps are listed in scenes/room.js
 
   // Tile ids in wTilemap -> characters (see constants/charmap.asm).
   const CHARS = { 0x7f: " ", 0x75: "…", 0xe0: "'", 0xe3: "-", 0xe6: "?", 0xe7: "!", 0xe8: ".", 0xe9: "&",
@@ -42,7 +42,18 @@ const HD = (() => {
       map: { group: at("wMapGroup"), number: at("wMapNumber") },
       x: at("wXCoord"), y: at("wYCoord"),
       dir: (at("wPlayerDirection") >> 2) & 3, // 0 down, 1 up, 2 left, 3 right
+      // A bordered box other than the dialogue box (Start menu, Yes/No...): scenes without a menu design step aside.
+      menu: (() => { for (let i = 0; i < 360; i++) if (tiles[i] === 0x79 && i !== 12 * 20) return true; return false; })(),
       species: at("wCurPartySpecies"),
+      // Other people on the map (object 0 is the player); structs are 40 bytes, coords carry a +4 offset.
+      objects: (() => {
+        const out = [], base = HD_SYMS.wObjectStructs - 0xc000;
+        for (let i = 1; i < 13; i++) {
+          const o = base + i * 40;
+          if (mem[o]) out.push({ id: i, sprite: mem[o], x: mem[o + 0x10] - 4, y: mem[o + 0x11] - 4, dir: (mem[o + 8] >> 2) & 3 });
+        }
+        return out;
+      })(),
       naming: (() => {
         const p = mem[HD_SYMS.wNamingScreenCursorObjectPointer - 0xc000] | (mem[HD_SYMS.wNamingScreenCursorObjectPointer + 1 - 0xc000] << 8);
         if (p < 0xc000 || p > 0xdfff) return null;
@@ -84,8 +95,9 @@ const HD = (() => {
       case 6: return "naming";
       case 7: return "splash";
       case 8: return "intro";
+      case 9: return "options";
       case 0:
-        return state.map.group === ROOM.group && state.map.number === ROOM.number ? "room" : null;
+        return state.map.group === ROOM_GROUP && Scenes.room.maps.includes(state.map.number) && !state.menu ? "room" : null;
       default: return null;
     }
   }

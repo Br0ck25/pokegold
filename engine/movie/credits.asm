@@ -37,11 +37,6 @@ Credits::
 	lb bc, BANK(CreditsBorderGFX), 9
 	call Request2bpp
 
-	ld de, CopyrightGFX
-	ld hl, vTiles2 tile $60
-	lb bc, BANK(CopyrightGFX), 30
-	call Request2bpp
-
 	ld de, TheEndGFX
 	ld hl, vTiles2 tile $40
 	lb bc, BANK(TheEndGFX), 16

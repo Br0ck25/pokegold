@@ -280,7 +280,5 @@ MysteryGift:
 	ret
 
 Option:
-	xor a ; HDSCENE_NONE
-	ld [wHDScene], a
 	farcall _Option
 	ret

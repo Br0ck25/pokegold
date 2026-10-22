@@ -32,8 +32,7 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 
 ## Save tokens
 - Never read generated/binary files (blocked in `.claude/settings.json`): `*.o *.sym *.map *.gbc *.2bpp *.lz`,
-  `web/public/{roms,vendor,hd.bundle.*}`, `node_modules`; also never Read `web/paste/worker.js` (1 MB). Find a RAM address with
-  `grep -w wName pokegold.sym`, not by opening the file.
+  `web/public/{roms,vendor,hd.bundle.*}`, `node_modules`; also never Read `web/paste/worker.js` (1 MB). RAM addresses:   nothing to look up in the file: add the symbol to the list in `web/build.sh` and read it from `HD_SYMS` (generated `hd/syms.js`).
 - Edit the source file, not the bundle. Keep files under ~150 lines; split by scene/creature, not by type.
 - Use Grep/Glob before Read; Read with offset/limit on big asm files. A new art/scene file needs no registration
   (`web/bundle.js` globs `public/hd`). Add RAM symbols in `web/build.sh` only.

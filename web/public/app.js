@@ -44,12 +44,53 @@ async function readRam() {
   }
 }
 
-// Inject a battery save by loading it into a fresh-boot save state.
-async function writeRam(ram) {
-  await WB.pause();
-  const state = await WB.saveState();
-  state.wasmboyMemory.cartridgeRam = ram;
-  await WB.loadState(state);
+// WasmBoy keeps battery saves in IndexedDB ("wasmboy"/"keyval"), keyed by ROM bytes 0x134-0x14E, and
+// loads them in loadROM. Writing the chosen cloud save there *before* loadROM means the game sees it at boot
+// (restoring after boot would miss the save check the game does in GameInit).
+const saveKey = (rom) => rom.slice(0x134, 0x134 + 27);
+
+const wasmboyDb = () => new Promise((ok, fail) => {
+  const req = indexedDB.open("wasmboy", 1);
+  req.onupgradeneeded = () => req.result.createObjectStore("keyval");
+  req.onsuccess = () => ok(req.result);
+  req.onerror = () => fail(req.error);
+});
+
+async function localSaveEntry(key) {
+  const store = (await wasmboyDb()).transaction("keyval").objectStore("keyval");
+  return new Promise((ok) => { const q = store.get(key); q.onsuccess = () => ok(q.result || {}); });
+}
+
+async function storeLocalSave(key, ram) {
+  const entry = await localSaveEntry(key);
+  entry.cartridgeRam = ram;
+  const tx = (await wasmboyDb()).transaction("keyval", "readwrite");
+  tx.objectStore("keyval").put(entry, key);
+  return new Promise((ok, fail) => { tx.oncomplete = ok; tx.onerror = () => fail(tx.error); });
+}
+
+// On page unload WasmBoy stashes the running RAM in localStorage and replays it over IndexedDB at the
+// next init, which would overwrite whatever we choose below. Replay it ourselves first, then drop it.
+async function flushUnloadStash() {
+  const raw = localStorage.getItem("WASMBOY_UNLOAD_STORAGE");
+  if (!raw) return;
+  localStorage.removeItem("WASMBOY_UNLOAD_STORAGE");
+  const { header, cartridgeRam } = JSON.parse(raw);
+  await storeLocalSave(new Uint8Array(header), new Uint8Array(cartridgeRam));
+}
+
+async function restoreCloudSave(key) {
+  await flushUnloadStash();
+  const res = await api(`/api/save/${game}`);
+  if (!res.ok) return;
+  const cloud = new Uint8Array(await res.arrayBuffer());
+  const local = (await localSaveEntry(key)).cartridgeRam;
+  lastSynced = hash(cloud);
+  const differs = !local || hash(local) !== lastSynced;
+  const localEmpty = !local || local.every((b) => b === 0 || b === 0xff);
+  if (differs && (localEmpty || confirm("A cloud save exists and differs from this device's save.\nOK = use the cloud save, Cancel = keep this device's save."))) {
+    await storeLocalSave(key, cloud);
+  }
 }
 
 async function pushToCloud({ force = false } = {}) {
@@ -77,7 +118,8 @@ async function start() {
   setStatus("Loading…");
   try {
     await ensurePlayer();
-    const rom = await (await fetch(`roms/poke${game}.gbc`)).arrayBuffer();
+    const rom = new Uint8Array(await (await fetch(`roms/poke${game}.gbc`)).arrayBuffer());
+    await restoreCloudSave(saveKey(rom));
 
     await WB.config(
       {
@@ -91,19 +133,7 @@ async function start() {
       },
       canvas
     );
-    await WB.loadROM(new Uint8Array(rom));
-
-    const res = await api(`/api/save/${game}`);
-    if (res.ok) {
-      const cloud = new Uint8Array(await res.arrayBuffer());
-      const local = await readRam();
-      lastSynced = hash(cloud);
-      const differs = !local || hash(local) !== lastSynced;
-      const localEmpty = !local || local.every((b) => b === 0 || b === 0xff);
-      if (differs && (localEmpty || confirm("A cloud save exists and differs from this device's save.\nOK = use the cloud save, Cancel = keep this device's save."))) {
-        await writeRam(cloud);
-      }
-    }
+    await WB.loadROM(rom);
 
     await WB.play();
     HD.start(WB, $("hd"), Scenes);

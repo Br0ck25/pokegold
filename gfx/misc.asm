@@ -35,12 +35,6 @@ FontInversed::
 INCBIN "gfx/font/font_inversed.1bpp"
 
 
-SECTION "Copyright", ROMX
-
-CopyrightGFX::
-INCBIN "gfx/splash/copyright.2bpp"
-
-
 SECTION "Title Screen 2", ROMX
 
 IF DEF(_GOLD)
