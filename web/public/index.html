@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Pokémon Gold / Silver</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div id="screen-wrap">
+    <canvas id="screen" width="160" height="144"></canvas>
+    <div id="start">
+      <select id="game" aria-label="Game">
+        <option value="gold">Pokémon Gold</option>
+        <option value="silver">Pokémon Silver</option>
+      </select>
+      <button id="play">Play</button>
+    </div>
+  </div>
+
+  <div id="pad" hidden>
+    <div class="dpad">
+      <button data-key="UP">▲</button>
+      <button data-key="LEFT">◀</button>
+      <button data-key="RIGHT">▶</button>
+      <button data-key="DOWN">▼</button>
+    </div>
+    <div class="mid">
+      <button data-key="SELECT">Select</button>
+      <button data-key="START">Start</button>
+    </div>
+    <div class="ab">
+      <button data-key="B">B</button>
+      <button data-key="A">A</button>
+    </div>
+  </div>
+
+  <section id="cloud">
+    <span id="status">Not playing</span>
+    <button id="sync" disabled>Save to cloud</button>
+    <button id="code">Recovery code…</button>
+  </section>
+  <p class="hint">Keys: arrows, Z = B, X = A, Enter = Start, Shift = Select.
+    Use the in-game SAVE menu; it syncs to the cloud automatically.</p>
+</main>
+<script src="vendor/wasmboy.wasm.iife.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

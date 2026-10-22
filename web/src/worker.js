@@ -1,0 +1,113 @@
+// Cloudflare Worker: serves the browser build of the game and stores each
+// player's battery save (cartridge RAM) in KV.
+//
+//   GET    /api/save/:game   -> raw save bytes, 404 if none
+//   PUT    /api/save/:game   -> store raw save bytes
+//   DELETE /api/save/:game
+//   GET    /api/me           -> { code }   the player's recovery code
+//   POST   /api/me           -> { code }   adopt a recovery code (new device)
+//
+// A player is identified by a random 128-bit code kept in an HttpOnly cookie.
+// Anyone holding the code can read and write that player's saves.
+
+const GAMES = new Set(["gold", "silver"]);
+const SAVE_SIZE = 0x8000; // MBC3 + 32 KB SRAM, see rgbfix -r 3
+const COOKIE = "player";
+const CODE_RE = /^[0-9a-f]{32}$/;
+
+export default {
+  async fetch(request, env) {
+    const denied = checkPassword(request, env);
+    if (denied) return denied;
+
+    const url = new URL(request.url);
+    if (url.pathname.startsWith("/api/")) return handleApi(request, env, url);
+    return env.ASSETS.fetch(request);
+  },
+};
+
+function checkPassword(request, env) {
+  if (!env.SITE_PASSWORD) return null;
+  const header = request.headers.get("Authorization") || "";
+  if (header.startsWith("Basic ")) {
+    try {
+      const pass = atob(header.slice(6)).split(":").slice(1).join(":");
+      if (pass === env.SITE_PASSWORD) return null;
+    } catch {}
+  }
+  return new Response("Password required", {
+    status: 401,
+    headers: { "WWW-Authenticate": 'Basic realm="pokegold"' },
+  });
+}
+
+async function handleApi(request, env, url) {
+  const cookies = parseCookies(request.headers.get("Cookie"));
+  let code = CODE_RE.test(cookies[COOKIE] || "") ? cookies[COOKIE] : null;
+  const headers = new Headers();
+
+  if (url.pathname === "/api/me") {
+    if (request.method === "POST") {
+      const body = await request.json().catch(() => ({}));
+      const wanted = String(body.code || "").trim().toLowerCase();
+      if (!CODE_RE.test(wanted)) return json({ error: "Invalid code" }, 400);
+      code = wanted;
+    }
+    if (!code) code = newCode();
+    setCookie(headers, code);
+    return json({ code }, 200, headers);
+  }
+
+  const match = url.pathname.match(/^\/api\/save\/([a-z]+)$/);
+  if (!match || !GAMES.has(match[1])) return json({ error: "Not found" }, 404);
+  if (!code) return json({ error: "No player; call /api/me first" }, 401);
+  const key = `save:${code}:${match[1]}`;
+
+  switch (request.method) {
+    case "GET": {
+      const data = await env.SAVES.get(key, "arrayBuffer");
+      if (!data) return json({ error: "No save" }, 404);
+      return new Response(data, {
+        headers: { "Content-Type": "application/octet-stream", "Cache-Control": "no-store" },
+      });
+    }
+    case "PUT": {
+      const data = await request.arrayBuffer();
+      if (data.byteLength !== SAVE_SIZE) return json({ error: "Bad save size" }, 400);
+      await env.SAVES.put(key, data);
+      return json({ ok: true });
+    }
+    case "DELETE":
+      await env.SAVES.delete(key);
+      return json({ ok: true });
+    default:
+      return json({ error: "Method not allowed" }, 405);
+  }
+}
+
+function newCode() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  return [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function setCookie(headers, code) {
+  headers.append(
+    "Set-Cookie",
+    `${COOKIE}=${code}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Strict`
+  );
+}
+
+function parseCookies(header) {
+  const out = {};
+  for (const part of (header || "").split(";")) {
+    const i = part.indexOf("=");
+    if (i > 0) out[part.slice(0, i).trim()] = part.slice(i + 1).trim();
+  }
+  return out;
+}
+
+function json(body, status = 200, headers = new Headers()) {
+  headers.set("Content-Type", "application/json");
+  headers.set("Cache-Control", "no-store");
+  return new Response(JSON.stringify(body), { status, headers });
+}
