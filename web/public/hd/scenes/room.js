@@ -10,6 +10,7 @@ Scenes.room = function (root) {
   root.appendChild(el);
   const wrap = el.querySelector(".room-wrap"), loc = el.querySelector(".loc");
   const dlg = dialogue(el);
+  const menus = popups(el);
   let room = null, map = null, hero = null, actors = new Map();
 
   const build = (number) => {
@@ -55,6 +56,7 @@ Scenes.room = function (root) {
       }
       for (const [id, a] of actors) if (!seen.has(id)) { a.remove(); actors.delete(id); }
       dlg.update(state.dialogue);
+      menus.update(state.boxes);
     },
   };
 };

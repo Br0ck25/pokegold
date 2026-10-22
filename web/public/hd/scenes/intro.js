@@ -17,7 +17,7 @@ Scenes.intro = function (root) {
     <div class="act" style="--i:3"><div class="burst"></div>
       <div class="jump j1">${Art.bramblet()}</div><div class="jump j2">${Art.sparkit()}</div><div class="jump j3">${Art.chomplet()}</div>
       <p class="cap big">…your adventure begins!</p></div>
-    <div class="skip">Press any button to skip</div>
+    <div class="skip">Tap or press any button to skip</div>
   </div>`);
   el.querySelector(".nightbg").appendChild(h(`<div class="sky">${Art.sky()}</div>`));
   root.appendChild(el);

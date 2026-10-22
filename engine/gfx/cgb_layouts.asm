@@ -38,7 +38,6 @@ CGBLayoutJumptable:
 	dw _CGB_Pokedex
 	dw _CGB_SlotMachine
 	dw _CGB_BetaTitleScreen
-	dw _CGB_GSIntro
 	dw _CGB_Diploma
 	dw _CGB_MapPals
 	dw _CGB_PartyMenu
@@ -56,7 +55,6 @@ CGBLayoutJumptable:
 	dw _CGB_PokedexUnownMode
 	dw _CGB_BillsPC
 	dw _CGB_UnownPuzzle
-	dw _CGB_GamefreakLogo
 	dw _CGB_PlayerOrMonFrontpicPals
 	dw _CGB_TradeTube
 	dw _CGB_TrainerOrMonFrontpicPals
@@ -420,9 +418,6 @@ _CGB_BetaTitleScreen:
 	ldh [hCGBPalUpdate], a
 	ret
 
-_CGB_GSIntro: ; unused; the intro is drawn by the HD layer
-	ret
-
 _CGB_BetaPoker:
 	ld hl, BetaPokerPals
 	ld de, wBGPals1
@@ -740,9 +735,6 @@ _CGB_MagnetTrain: ; unused
 	call ApplyPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	ret
-
-_CGB_GamefreakLogo: ; unused; the splash is drawn by the HD layer
 	ret
 
 _CGB_PlayerOrMonFrontpicPals:

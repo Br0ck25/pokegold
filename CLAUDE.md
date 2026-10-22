@@ -13,6 +13,9 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 3. **Surgical changes.** Touch only what you must. Don't "improve" adjacent code/comments/formatting or
    refactor what isn't broken. Match existing style. Mention unrelated dead code, don't delete it. Remove only
    orphans YOUR change created. Every changed line must trace to the request.
+   **Exception (this repo): when new code replaces old, delete the old code, art, data and tests in the same change.**
+   If it is entangled with shared tables, say what is left and why (still left: GS-intro/Game Freak entries in the
+   index-coupled `data/sprite_anims` tables, `PREDEFPAL_*` intro palettes, `Sfx_GameFreakLogoGs`).
 4. **Goal-driven execution.** Turn tasks into verifiable goals (bug -> reproduce, then fix; refactor -> tests
    pass before/after). For multi-step work state a plan: `1. step -> verify: check`. Loop until verified.
 

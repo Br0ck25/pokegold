@@ -70,11 +70,13 @@ const out = process.argv[3] || "test/out";
     const x1 = await page.evaluate(() => HD.last.x);
     if (x1 !== x0 - 1) { console.error(`FAIL: second D-pad tap moved x ${x0} -> ${x1}`); process.exitCode = 1; }
     await shot("room");
-    // A Start menu has no HD design yet: the room must step aside and show the pixel screen.
+    // The Start menu is an HD popup over the room (not a pixel fallback).
     await tapKey("START"); await page.waitForTimeout(1200);
-    const stepped = await page.evaluate(() => HD.last.menu && !document.getElementById("screen-wrap").classList.contains("hd-on"));
-    if (!stepped) { console.error("FAIL: room did not step aside for the Start menu"); process.exitCode = 1; }
+    const start = await page.evaluate(() => ({ rows: [...document.querySelectorAll("#hd .popup li")].map((l) => l.textContent), hd: document.getElementById("screen-wrap").classList.contains("hd-on") }));
+    if (!start.hd || !start.rows.includes("PACK") || !start.rows.includes("EXIT")) { console.error("FAIL: Start menu popup", JSON.stringify(start)); process.exitCode = 1; }
+    await shot("startmenu");
     await tapKey("B"); await page.waitForTimeout(1200);
+    if (await page.locator("#hd .popup").count()) { console.error("FAIL: Start menu popup did not close"); process.exitCode = 1; }
     // Walk to the stairs (7,0): right along the row, then up. Mom should be drawn in the living room.
     const hold = async (key, done) => {
       await page.evaluate((k) => setKey(k, true), key);

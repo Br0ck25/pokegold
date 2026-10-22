@@ -39,8 +39,9 @@
 
   <section id="cloud">
     <span id="status">Not playing</span>
-    <button id="sync" disabled>Save to cloud</button>
-    <button id="code">Recovery code…</button>
+    <button id="controls" title="Controls: on-screen pad or screen gestures">Pad</button>
+    <button id="sync" disabled title="Save to cloud">Save</button>
+    <button id="code" title="Recovery code">Code</button>
   </section>
   <p class="hint">Keys: arrows, Z = B, X = A, Enter = Start, Shift = Select.
     Use the in-game SAVE menu; it syncs to the cloud automatically.</p>
@@ -48,5 +49,6 @@
 <script src="vendor/wasmboy.wasm.iife.js"></script>
 <script src="hd.bundle.js"></script>
 <script src="app.js"></script>
+<script src="pad.js"></script>
 </body>
 </html>

@@ -31,6 +31,26 @@ const HD = (() => {
   const flags = { seenNaming: false };
   const listeners = [];
 
+  // Every bordered box except the dialogue box: { c0, r0, c1, r1, rows: [{ text, selected }] } (cols/rows are tile coords).
+  function readBoxes(tiles) {
+    const boxes = [];
+    for (let i = 0; i < 360; i++) {
+      if (tiles[i] !== 0x79 || i === 12 * 20) continue;
+      const c0 = i % 20, r0 = (i / 20) | 0;
+      let c1 = c0 + 1, r1 = r0 + 1;
+      while (c1 < 20 && tiles[r0 * 20 + c1] !== 0x7b) c1++;
+      while (r1 < 18 && tiles[r1 * 20 + c0] !== 0x7d) r1++;
+      if (c1 >= 20 || r1 >= 18) continue;
+      const rows = [];
+      for (let r = r0 + 1; r < r1; r++) {
+        const text = decode(tiles, r * 20 + c0 + 2, r * 20 + c1).trim();
+        if (text) rows.push({ text, selected: tiles[r * 20 + c0 + 1] === 0xed });
+      }
+      boxes.push({ c0, r0, c1, r1, rows });
+    }
+    return boxes;
+  }
+
   function readState(mem) {
     const at = (sym) => mem[HD_SYMS[sym] - 0xc000];
     const tiles = mem.subarray(HD_SYMS.wTilemap - 0xc000, HD_SYMS.wTilemap - 0xc000 + 360);
@@ -42,8 +62,8 @@ const HD = (() => {
       map: { group: at("wMapGroup"), number: at("wMapNumber") },
       x: at("wXCoord"), y: at("wYCoord"),
       dir: (at("wPlayerDirection") >> 2) & 3, // 0 down, 1 up, 2 left, 3 right
-      // A bordered box other than the dialogue box (Start menu, Yes/No...): scenes without a menu design step aside.
-      menu: (() => { for (let i = 0; i < 360; i++) if (tiles[i] === 0x79 && i !== 12 * 20) return true; return false; })(),
+      // Bordered boxes other than the dialogue box (Start menu, Yes/No...), see readBoxes().
+      boxes: readBoxes(tiles),
       species: at("wCurPartySpecies"),
       // Other people on the map (object 0 is the player); structs are 40 bytes, coords carry a +4 offset.
       objects: (() => {
@@ -97,7 +117,7 @@ const HD = (() => {
       case 8: return "intro";
       case 9: return "options";
       case 0:
-        return state.map.group === ROOM_GROUP && Scenes.room.maps.includes(state.map.number) && !state.menu ? "room" : null;
+        return state.map.group === ROOM_GROUP && Scenes.room.maps.includes(state.map.number) && (!state.boxes.length || state.boxes.every((b) => b.rows.length)) ? "room" : null;
       default: return null;
     }
   }

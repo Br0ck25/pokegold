@@ -11,7 +11,9 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - Every target >= 48px. The pad lives in `app.js`/`style.css`; keys reach the emulator **only** through the
   `ResponsiveGamepad` plugin there. Never call `WB.setJoypadState` (WasmBoy overwrites it every frame).
 - Presses are held >= 110ms so a tap can't fall between frames. D-pad is one touch surface (thumb can roll).
-- `npm test` (needs `npm run dev` running) must pass: single taps register, D-pad turns/steps, room reached.
+- Two control modes (header button, remembered per device): **Pad** (buttons above) and **Gesture** (pad hidden, the game screen is the
+  controller: drag/hold = walk, tap = A, two-finger tap = B, long-press = Start). Code lives in `public/pad.js`; keep both modes working.
+- `npm test` (needs `npm run dev` running) must pass: single taps register, D-pad turns/steps, rooms reached, gestures press the right keys.
 
 ## HD layer (web/public/hd)
 - **Vector only**: SVG + DOM + CSS. No bitmap art, no canvas. Must stay crisp at any size.
@@ -38,7 +40,7 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - One entry in `ROOMS` per map (key = map number in group 24, size in cells) + an `art/<room>.js` drawn at 100 units per cell.
 - Draw against the real collision: `python3 tools/mapgrid.py <MapName>` (from the repo root) prints it. Blocked cells = furniture, walkable = floor.
 - People come from the game's object list (`state.objects`); map SPRITE_* ids to art in `NPC_ART`. Position, facing and walking follow the game.
-- Pixel-only popups (Start menu, Yes/No) trigger `state.menu`; the room steps aside and the pixel screen shows. Design those next.
+- Menu boxes (Start menu, Yes/No) are read from the tilemap (`state.boxes`) and drawn by `ui/popup.js` over the room. A box with no readable rows makes the room step aside to the pixel screen.
 
 ## Add a screen (checklist)
 1. ROM: set `wHDScene` to a new `HDSCENE_*` (constants/hd_constants.asm) where the screen starts; reset to 0 where it ends.
