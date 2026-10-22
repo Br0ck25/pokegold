@@ -42,6 +42,14 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - People come from the game's object list (`state.objects`); map SPRITE_* ids to art in `NPC_ART`. Position, facing and walking follow the game.
 - Menu boxes (Start menu, Yes/No) are read from the tilemap (`state.boxes`) and drawn by `ui/popup.js` over the room. A box with no readable rows makes the room step aside to the pixel screen.
 
+## Outdoor maps (scenes/world.js)
+- Add the map name to `OUTDOOR` in `web/gen-maps.py` (writes the generated `hd/maps.js`: blocks + the map's border block).
+- Draw each block id it uses: `Art.johtoBlocks[id]` in `art/_johto.js` (terrain) / `art/johtoBuildings.js`; a block is 200 x 200 units = 2 x 2 cells.
+  Unknown ids fall back to grass. Overlap fills by 1 unit so no seams show between blocks.
+- The camera keeps the hero centred, 10 cells across; outside the map the game's border block is drawn.
+- Indoor rooms: build from `Art.shell` + `Art.furniture` (`art/furniture.js`) and add a `ROOMS` entry. Rooms taller than the stage scroll.
+- People: a look per SPRITE_* name in `art/looks.js`; non-people (Poke Balls) in `art/props.js`. Unlisted sprites draw as a plain villager.
+
 ## Add a screen (checklist)
 1. ROM: set `wHDScene` to a new `HDSCENE_*` (constants/hd_constants.asm) where the screen starts; reset to 0 where it ends.
 2. `scenes/<name>.js` (+ `<name>.css` beside it): `Scenes.<name> = function (root, flags) { ...; return { update(state) {} }; };`

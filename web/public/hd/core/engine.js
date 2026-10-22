@@ -8,7 +8,6 @@ const HD = (() => {
   const WRAM_START = 0x4800;
   const WRAM_END = WRAM_START + 0x2000;
 
-  const ROOM_GROUP = 24; // New Bark Town; the room maps are listed in scenes/room.js
 
   // Tile ids in wTilemap -> characters (see constants/charmap.asm).
   const CHARS = { 0x7f: " ", 0x75: "…", 0xe0: "'", 0xe3: "-", 0xe6: "?", 0xe7: "!", 0xe8: ".", 0xe9: "&",
@@ -117,7 +116,9 @@ const HD = (() => {
       case 8: return "intro";
       case 9: return "options";
       case 0:
-        return state.map.group === ROOM_GROUP && Scenes.room.maps.includes(state.map.number) && (!state.boxes.length || state.boxes.every((b) => b.rows.length)) ? "room" : null;
+        if (state.map.group !== HD_GROUP || (state.boxes.length && !state.boxes.every((b) => b.rows.length))) return null;
+        if (Scenes.room.maps.includes(state.map.number)) return "room";
+        return Scenes.world.maps.includes(state.map.number) ? "world" : null;
       default: return null;
     }
   }

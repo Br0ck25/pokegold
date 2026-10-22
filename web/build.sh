@@ -30,4 +30,5 @@ PY
 
 [ -d node_modules/wasmboy ] || npm install --no-audit --no-fund
 cp node_modules/wasmboy/dist/wasmboy.wasm.iife.js public/vendor/
+python3 gen-maps.py
 node bundle.js

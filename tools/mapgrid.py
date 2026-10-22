@@ -5,6 +5,7 @@ Usage: mapgrid.py PlayersHouse1F
   . floor  # wall/blocked  T tv  P pc  R radio  B bookshelf  W window  S stairs  D door/warp mat  ? other
 Cell (x, y) is row y, column x, the same coordinates the game and HD layer use.
 """
+import os
 import re
 import sys
 
@@ -22,7 +23,18 @@ w, h = int(dims.group(1)), int(dims.group(2))
 
 coll = [re.match(r"\s*tilecoll (\w+), (\w+), (\w+), (\w+)", l).groups()
         for l in open(f"data/tilesets/{tileset}_collision.asm") if l.strip().startswith("tilecoll")]
-blocks = open(f"maps/{name}.blk", "rb").read()
+blk = f"maps/{name}.blk"
+if not os.path.exists(blk):  # several maps share one .blk through label aliases in data/maps/blocks.asm
+    labels = []
+    for line in open("data/maps/blocks.asm"):
+        label = re.match(r"(\w+)_Blocks:", line)
+        if label:
+            labels.append(label.group(1))
+        elif "INCBIN" in line:
+            if name in labels:
+                blk = re.search(r'"([^"]+)"', line).group(1)
+            labels = []
+blocks = open(blk, "rb").read()
 sym = {"FLOOR": ".", "WALL": "#", "TV": "T", "PC": "P", "RADIO": "R", "BOOKSHELF": "B",
        "WINDOW": "W", "STAIRCASE": "S", "WARP_CARPET_DOWN": "D"}
 for by in range(h):

@@ -90,6 +90,33 @@ const out = process.argv[3] || "test/out";
     const living = await page.evaluate(() => ({ label: document.querySelector("#hd .loc")?.textContent, npcs: document.querySelectorAll("#hd .actor.npc").length }));
     if (living.label !== "Home · Living Room" || living.npcs < 1) { console.error("FAIL: living room not drawn with Mom", JSON.stringify(living)); process.exitCode = 1; }
     await shot("room1f");
+
+    // Mom's scene ends with Yes/No clock questions: answer YES until the dialogue is over.
+    let quiet = 0;
+    for (let i = 0; i < 200 && quiet < 5; i++) {
+      const sel = await page.evaluate(() => document.querySelector("#hd .popup li.sel")?.textContent);
+      if (sel === "NO") await tapDpad("UP");
+      await tapKey("A"); await page.waitForTimeout(500);
+      quiet = (await page.evaluate(() => !!HD.last.dialogue)) ? 0 : quiet + 1;
+    }
+    // Single steps (a 260ms press is one step) so every move lands on an exact cell.
+    const walk = async (key, done, max = 15) => {
+      for (let i = 0; i < max && !(await page.evaluate(done)); i++) {
+        await page.evaluate((k) => { setKey(k, true); setTimeout(() => setKey(k, false), 260); }, key);
+        await page.waitForTimeout(700);
+      }
+    };
+    const scene = async () => page.evaluate(() => ({ label: document.querySelector("#hd .loc")?.textContent, npcs: document.querySelectorAll("#hd .actor.npc").length, map: HD.last.map.number }));
+    await walk("DOWN", () => HD.last.y >= 6); await walk("LEFT", () => HD.last.x <= 7); await walk("DOWN", () => HD.last.map.number === 4);
+    await page.waitForTimeout(2500);
+    const town = await scene();
+    if (town.map !== 4 || town.label !== "New Bark Town" || !(await page.locator("#hd .world-svg").count())) { console.error("FAIL: town not drawn", JSON.stringify(town)); process.exitCode = 1; }
+    await shot("town");
+    await walk("LEFT", () => HD.last.x <= 6); await walk("UP", () => HD.last.map.number === 5);
+    await page.waitForTimeout(2500);
+    const lab = await scene();
+    if (lab.map !== 5 || !lab.label.includes("Elm's Lab") || lab.npcs < 1) { console.error("FAIL: Elm's lab not drawn with Elm", JSON.stringify(lab)); process.exitCode = 1; }
+    await shot("lab");
   }
   console.log(process.exitCode ? "FAILED" : "OK", "scenes seen:", [...seen].join(","));
   await browser.close();

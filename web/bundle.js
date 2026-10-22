@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // Concatenates public/hd/**/* into public/hd.bundle.js and hd.bundle.css so a new
 // art/scene/ui file needs no manual registration. Order: core/registry first, then
-// ui, art, scenes, the rest of core (engine) and generated syms.
+// the generated syms.js/maps.js (scenes read them at load), ui, art, scenes, the rest of core (engine).
 const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "public/hd");
-const order = ["core/registry.js", "ui", "art", "scenes", "core", "."];
+const order = ["core/registry.js", "syms.js", "maps.js", "ui", "art", "scenes", "core", "."];
 const seen = new Set();
 const collect = (ext) => {
   const files = [];
