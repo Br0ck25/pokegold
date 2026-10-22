@@ -21,7 +21,7 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 
 ## Map (read only what you need)
 - ROM source: `engine/ home/ data/ constants/ ram/ maps/ gfx/` (pret layout). Build: `make gold` (needs rgbds 1.0.1).
-- `web/src/worker.js` Worker (assets or embedded + KV saves). `web/make-worker.js` -> `web/paste/worker.js` (paste-in file; hand it to the user with SendUserFile, never Read it).
+- `web/src/worker.js` Worker (assets or embedded + KV saves). `web/make-worker.js` -> `web/paste/worker.js` (the paste-in file; it embeds the ROM, so keep the repo private. COMMIT the regenerated file with every push: the user copies it from GitHub. Never Read it).
 - `web/public/app.js` page logic, touch pad, cloud save. `web/public/style.css` shell/pad.
 - `web/public/hd/` HD layer, one small file per thing, CSS beside its JS:
   `core/` engine+registry, `ui/` shared bits (dialogue, popup, actors), `art/` SVG art, `scenes/` one screen each (room, world, ...).
@@ -41,4 +41,4 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 - Use Grep/Glob before Read; Read with offset/limit on big asm files. A new art/scene file needs no registration
   (`web/bundle.js` globs `public/hd`). Add RAM symbols in `web/build.sh` only.
 - Don't restate big files in replies; refer to `path:line`.
-- Don't commit generated output (`web/public/hd/syms.js`, bundles, ROMs, paste, test/out); they are gitignored.
+- Don't commit generated output (`web/public/hd/syms.js`, bundles, ROMs, test/out); they are gitignored. Exception: `web/paste/worker.js` is committed.

@@ -3,7 +3,6 @@ public/roms/
 public/vendor/
 .wrangler/
 package-lock.json
-paste/
 public/hd/syms.js
 public/hd.bundle.*
 test/out/
