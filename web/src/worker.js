@@ -22,6 +22,13 @@ export default {
 
     const url = new URL(request.url);
     if (url.pathname.startsWith("/api/")) return handleApi(request, env, url);
+    if (!env.ASSETS) {
+      return new Response(
+        "No ASSETS binding: deploy with `npm run deploy` from web/ (wrangler deploy), " +
+          "not by pasting worker.js into the dashboard.",
+        { status: 500 }
+      );
+    }
     return env.ASSETS.fetch(request);
   },
 };

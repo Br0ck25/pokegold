@@ -1,4 +1,4 @@
-name = "pokegold"
+name = "buddymon-gold"
 main = "src/worker.js"
 compatibility_date = "2025-01-01"
 
