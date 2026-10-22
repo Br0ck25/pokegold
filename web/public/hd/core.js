@@ -43,6 +43,11 @@ const HD = (() => {
       x: at("wXCoord"), y: at("wYCoord"),
       dir: (at("wPlayerDirection") >> 2) & 3, // 0 down, 1 up, 2 left, 3 right
       species: at("wCurPartySpecies"),
+      naming: (() => {
+        const p = mem[HD_SYMS.wNamingScreenCursorObjectPointer - 0xc000] | (mem[HD_SYMS.wNamingScreenCursorObjectPointer + 1 - 0xc000] << 8);
+        if (p < 0xc000 || p > 0xdfff) return null;
+        return { col: mem[p + 12 - 0xc000], row: mem[p + 13 - 0xc000], max: at("wNamingScreenMaxNameLength") };
+      })(),
       name: (() => {
         const o = HD_SYMS.wPlayerName - 0xc000;
         let n = "";
@@ -59,6 +64,15 @@ const HD = (() => {
   }
 
   const text = (state, row, from, to) => decode(state.tiles, row * 20 + from, row * 20 + to);
+  // Known characters on a row with their exact tile columns.
+  const cells = (state, row) => {
+    const out = [];
+    for (let c = 0; c < 20; c++) {
+      const ch = CHARS[state.tiles[row * 20 + c]];
+      if (ch && ch !== " ") out.push({ col: c, ch });
+    }
+    return out;
+  };
 
   function pick(state) {
     switch (state.scene) {
@@ -67,6 +81,7 @@ const HD = (() => {
       case 3: return "clock";
       case 4: return "prof";
       case 5: return "names";
+      case 6: return "naming";
       case 0:
         return state.map.group === ROOM.group && state.map.number === ROOM.number ? "room" : null;
       default: return null;
@@ -102,7 +117,7 @@ const HD = (() => {
   }
 
   return {
-    last: null, text, decode,
+    last: null, text, cells, decode,
     start(emulator, rootEl, sceneTable) {
       wb = emulator; root = rootEl; scenes = sceneTable;
       timer = setInterval(tick, 1000 / 30);

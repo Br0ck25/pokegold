@@ -100,10 +100,9 @@ function json(body, status = 200, headers = new Headers()) {
 // --- single-file mode -------------------------------------------------------
 
 const TYPES = {
-  "/": "text/html; charset=utf-8",
-  "/index.html": "text/html; charset=utf-8",
-  "/app.js": "text/javascript; charset=utf-8",
-  "/style.css": "text/css; charset=utf-8",
+  html: "text/html; charset=utf-8",
+  js: "text/javascript; charset=utf-8",
+  css: "text/css; charset=utf-8",
 };
 const romCache = {};
 
@@ -121,7 +120,7 @@ async function serveEmbedded(url) {
   if (path === "/") path = "/index.html";
   const body = EMBEDDED.files[path];
   if (body === undefined) return new Response("Not found", { status: 404 });
-  return new Response(body, { headers: { "Content-Type": TYPES[path] } });
+  return new Response(body, { headers: { "Content-Type": TYPES[path.split(".").pop()] } });
 }
 
 async function gunzip(b64) {

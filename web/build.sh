@@ -13,7 +13,8 @@ cp ../pokegold.gbc ../pokesilver.gbc public/roms/
 python3 - <<'PY'
 import json
 want = ["wHDScene", "wTilemap", "wMapGroup", "wMapNumber", "wXCoord", "wYCoord",
-        "wPlayerDirection", "wPlayerName", "wCurPartySpecies", "wMenuCursorY"]
+        "wPlayerDirection", "wPlayerName", "wCurPartySpecies", "wMenuCursorY",
+        "wNamingScreenCursorObjectPointer", "wNamingScreenCurNameLength", "wNamingScreenMaxNameLength"]
 syms = {}
 for line in open("../pokegold.sym"):
     if line.startswith(";") or " " not in line:

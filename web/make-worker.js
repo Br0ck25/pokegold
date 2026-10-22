@@ -24,14 +24,18 @@ for (const g of ["gold", "silver"]) {
   if (!roms[g]) html = html.replace(new RegExp(`\\s*<option value="${g}">.*</option>`), "");
 }
 
-const embedded = {
-  files: {
-    "/index.html": html,
-    "/app.js": read("public/app.js").toString(),
-    "/style.css": read("public/style.css").toString(),
-  },
-  roms,
+// Every text asset under public/ (app, styles, the hd/ layer) except the big
+// generated folders, which are loaded from a CDN or embedded separately.
+const files = { "/index.html": html };
+const walk = (dir) => {
+  for (const entry of fs.readdirSync(path.join(__dirname, "public", dir), { withFileTypes: true })) {
+    const rel = path.posix.join(dir, entry.name);
+    if (entry.isDirectory()) { if (rel !== "roms" && rel !== "vendor") walk(rel); }
+    else if (/\.(js|css)$/.test(entry.name)) files["/" + rel] = read(path.join("public", rel)).toString();
+  }
 };
+walk("");
+const embedded = { files, roms };
 
 fs.mkdirSync(path.join(__dirname, "dist"), { recursive: true });
 const out = path.join(__dirname, "dist/worker.js");

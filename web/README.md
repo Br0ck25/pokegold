@@ -10,6 +10,23 @@ cookie.
     web/public/         index.html, app.js, style.css (ROMs and emulator are generated)
     web/build.sh        make gold silver, then stage ROMs and the emulator into public/
 
+## The HD layer
+
+The Game Boy screen is 160x144 pixels, so crisp graphics can't come from the ROM.
+Instead the ROM stays the game engine and a browser layer (`public/hd/`) draws
+vector scenes over it:
+
+- The ROM writes a scene id to `wHDScene` (`constants/hd_constants.asm`) at the
+  title, main menu, clock, professor intro, name choice and name entry.
+- `core.js` polls emulator memory ~30x/s: scene id, the on-screen tilemap
+  (decoded to text), map/coordinates/facing, and the naming cursor. RAM
+  addresses come from `pokegold.sym` (`build.sh` writes `hd/syms.js`).
+- `scenes.js` builds one DOM/SVG scene per screen; `art.js`/`art2.js` hold the
+  vector art; `hd.css` styles it. Anything without a scene shows the pixel canvas.
+
+To redraw another screen: set a `wHDScene` value in the asm, add a scene in
+`scenes.js`, and add it to `pick()` in `core.js`.
+
 ## Run locally
 
 Needs rgbds >= 1.0.1 (see ../INSTALL.md), node and npm.
