@@ -7,4 +7,4 @@
 
 	page "its short legs, it"
 	next "is quick at hunt-"
-	next "ing RATTATA.@"
+	next "ing NIBBLET.@"

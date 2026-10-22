@@ -2,7 +2,7 @@
 	dw 211, 620 ; height, weight
 
 	db   "Vicious in nature,"
-	next "it drives PIDGEY"
+	next "it drives CHIRPLET"
 	next "from their nests"
 
 	page "and feasts on the"

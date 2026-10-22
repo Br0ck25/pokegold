@@ -33,7 +33,8 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 ## World naming (game text)
 Rename a name only when the game reaches it, and rename it everywhere it appears in that part (strings, tables, HD labels).
 Done so far: Buddymon / BUDDYDEX / BUDDYGEAR / BUDDY BALL (everywhere), PROF. WILLOW (was Elm), PROF. ASPEN (was Oak) in the radio text,
-your room, the neighbor's house and Willow's lab, and the starters BRAMBLET / SPARKIT / CHOMPLET (their evolutions are still the old names).
+your room, the neighbor's house and Willow's lab, the starters BRAMBLET / SPARKIT / CHOMPLET, and the Route 29 species CHIRPLET (Pidgey) / NIBBLET (Rattata) / PEEKAT (Sentret) / HOOTLING (Hoothoot).
+Evolutions of all of these are still the old names. A species is renamed in the table and in every string at once.
 Not yet: Oak in Pallet Town / his lab / Pokecenter PC / Mr. Buddymon's house / Radio Tower / Lance, every other species, other characters, towns.
 Use the full words in strings (trainer class names have a 12-char limit); `#`-shorthand must not come back.
 

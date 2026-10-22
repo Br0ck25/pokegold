@@ -74,7 +74,7 @@ MrFujisNidorinoText:
 	done
 
 MrFujisPidgeyText:
-	text "PIDGEY: Pijji!"
+	text "CHIRPLET: Pijji!"
 	done
 
 MrFujisHouse_MapEvents:
