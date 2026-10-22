@@ -6,8 +6,8 @@ compatibility_date = "2025-01-01"
 [assets]
 directory = "./public"
 binding = "ASSETS"
-# Let the Worker see every request so it can serve /api/* and (optionally)
-# gate the site behind a password. Assets are still served by env.ASSETS.
+# Let the Worker see every request so it can serve /api/*. Assets are still
+# served by env.ASSETS.
 run_worker_first = true
 
 # Battery saves (the 32 KB cartridge RAM), one entry per player per game.
@@ -16,5 +16,3 @@ run_worker_first = true
 [[kv_namespaces]]
 binding = "SAVES"
 id = "REPLACE_WITH_KV_NAMESPACE_ID"
-
-# Optional: `npx wrangler secret put SITE_PASSWORD` to require a password.

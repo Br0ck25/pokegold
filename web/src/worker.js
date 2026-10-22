@@ -17,9 +17,6 @@ const CODE_RE = /^[0-9a-f]{32}$/;
 
 export default {
   async fetch(request, env) {
-    const denied = checkPassword(request, env);
-    if (denied) return denied;
-
     const url = new URL(request.url);
     if (url.pathname.startsWith("/api/")) return handleApi(request, env, url);
     // Single-file build (make-worker.js) prepends an EMBEDDED constant; the
@@ -28,21 +25,6 @@ export default {
     return env.ASSETS.fetch(request);
   },
 };
-
-function checkPassword(request, env) {
-  if (!env.SITE_PASSWORD) return null;
-  const header = request.headers.get("Authorization") || "";
-  if (header.startsWith("Basic ")) {
-    try {
-      const pass = atob(header.slice(6)).split(":").slice(1).join(":");
-      if (pass === env.SITE_PASSWORD) return null;
-    } catch {}
-  }
-  return new Response("Password required", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="pokegold"' },
-  });
-}
 
 async function handleApi(request, env, url) {
   const cookies = parseCookies(request.headers.get("Cookie"));

@@ -20,7 +20,6 @@ Needs rgbds >= 1.0.1 (see ../INSTALL.md), node and npm.
 
     cd web
     npx wrangler kv namespace create SAVES   # paste the id into wrangler.toml
-    npx wrangler secret put SITE_PASSWORD    # optional: HTTP Basic password gate
     npm run deploy
 
 ## Changing the game
@@ -29,4 +28,4 @@ Edit the `.asm`/`.inc` files, then `npm run dev` (or `npm run deploy`).
 The ROM is rebuilt on every run.
 
 Note: the built ROMs contain Nintendo's copyrighted game. Keep the deployment
-private (e.g. `SITE_PASSWORD` or Cloudflare Access) rather than publicly hosting it.
+private (e.g. Cloudflare Access) rather than publicly hosting it.
