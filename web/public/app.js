@@ -47,6 +47,13 @@ async function readRam() {
 // WasmBoy keeps battery saves in IndexedDB ("wasmboy"/"keyval"), keyed by ROM bytes 0x134-0x14E, and
 // loads them in loadROM. Writing the chosen cloud save there *before* loadROM means the game sees it at boot
 // (restoring after boot would miss the save check the game does in GameInit).
+// The game clock follows the device: the ROM keeps a "DEVT" marker, then day of week (0 = Sunday), hours, minutes, seconds.
+function setDeviceTime(rom) {
+  const at = rom.subarray(0, 0x4000).findIndex((_, i) => rom[i] === 0x44 && rom[i + 1] === 0x45 && rom[i + 2] === 0x56 && rom[i + 3] === 0x54);
+  const now = new Date();
+  if (at >= 0) rom.set([now.getDay(), now.getHours(), now.getMinutes(), now.getSeconds()], at + 4);
+}
+
 const saveKey = (rom) => rom.slice(0x134, 0x134 + 27);
 
 const wasmboyDb = () => new Promise((ok, fail) => {
@@ -133,6 +140,7 @@ async function start() {
       },
       canvas
     );
+    setDeviceTime(rom);
     await WB.loadROM(rom);
 
     await WB.play();

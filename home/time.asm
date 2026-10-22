@@ -167,6 +167,11 @@ FixTime::
 	ld [wCurDay], a
 	ret
 
+	db "DEVT" ; the browser finds this marker to patch DeviceTime
+DeviceTime::
+; Day of week (0 = Sunday), hours, minutes, seconds of the device clock, patched into the ROM image by the browser.
+	db 0, 10, 0, 0
+
 InitTimeOfDay::
 	xor a
 	ld [wStringBuffer2], a

@@ -14,7 +14,7 @@ Art.person = function (dir, o) {
     ? `<path fill="${dir === 1 ? o.hair : o.hat}" d="M14 26 C14 8 46 8 46 26 C38 20 22 20 14 26 Z"/>${dir === 1 ? `<path fill="${o.hat}" d="M15 26 C15 10 45 10 45 26 C38 22 22 22 15 26 Z"/>` : ""}`
     : `<path fill="${o.hair}" d="M13 28 C11 6 49 6 47 28 C42 18 18 18 13 28 Z"/>${dir === 1 ? `<path fill="${o.hair}" d="M14 28 C14 12 46 12 46 30 C40 36 20 36 14 28 Z"/>` : ""}${o.bun ? `<circle cx="30" cy="${dir === 1 ? 9 : 8}" r="${dir === 1 ? 6 : 5}" fill="${o.hair}"/>` : ""}`;
   const body = o.dress
-    ? `<path fill="${o.top}" d="M14 64 C12 48 18 40 30 40 C42 40 48 48 46 64 Z"/>${o.apron ? `<path fill="${o.apron}" d="M22 64 C22 52 24 46 30 46 C36 46 38 52 38 64 Z"/>` : ""}`
+    ? `<path fill="${o.top}" d="M14 64 C12 48 18 40 30 40 C42 40 48 48 46 64 Z"/>${o.apron && dir !== 1 ? `<path fill="${o.apron}" d="M22 64 C22 52 24 46 30 46 C36 46 38 52 38 64 Z"/>` : ""}`
     : `<path fill="${o.top}" d="M16 56 C14 44 20 40 30 40 C40 40 46 44 44 56 Z"/>`;
   const top = o.dress ? 60 : 56;
   return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">

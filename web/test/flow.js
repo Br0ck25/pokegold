@@ -35,7 +35,7 @@ const out = process.argv[3] || "test/out";
   await page.waitForFunction(() => document.getElementById("start").hidden, null, { timeout: 60000 });
   await shot("00-pixel-or-intro");
   for (let i = 0; i < 120 && (await scene()) !== 1; i++) { await snap(); await page.waitForTimeout(1000); }
-  for (const id of [7, 8]) if (!seen.has(id)) { console.error(`FAIL: startup scene ${id} (splash=7, intro=8) never showed`); process.exitCode = 1; }
+  for (const id of [6, 7]) if (!seen.has(id)) { console.error(`FAIL: startup scene ${id} (splash=6, intro=7) never showed`); process.exitCode = 1; }
   await page.waitForTimeout(2000); await snap();
 
   // One tap each: Start opens the menu, A starts a new game.
@@ -45,7 +45,7 @@ const out = process.argv[3] || "test/out";
   // Options open as an HD scene and Back returns to the menu.
   await tapDpad("DOWN"); await page.waitForTimeout(500);
   await tapKey("A");
-  await page.waitForFunction(() => HD.last && HD.last.scene === 9, null, { timeout: 5000 }).catch(() => { console.error("FAIL: Options did not open as HD scene 9"); process.exitCode = 1; });
+  await page.waitForFunction(() => HD.last && HD.last.scene === 8, null, { timeout: 5000 }).catch(() => { console.error("FAIL: Options did not open as HD scene 8"); process.exitCode = 1; });
   await page.waitForTimeout(800); await shot("options");
   await tapKey("B");
   await page.waitForFunction(() => HD.last && HD.last.scene === 2, null, { timeout: 5000 }).catch(() => { console.error("FAIL: B did not return from Options"); process.exitCode = 1; });
@@ -91,7 +91,7 @@ const out = process.argv[3] || "test/out";
     if (living.label !== "Home · Living Room" || living.npcs < 1) { console.error("FAIL: living room not drawn with Mom", JSON.stringify(living)); process.exitCode = 1; }
     await shot("room1f");
 
-    // Mom's scene ends with Yes/No clock questions: answer YES until the dialogue is over.
+    // Mom's scene ends with a Yes/No phone question: answer YES until the dialogue is over.
     let quiet = 0;
     const said = [];
     for (let i = 0; i < 200 && quiet < 5; i++) {

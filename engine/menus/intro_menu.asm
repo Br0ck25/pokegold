@@ -251,28 +251,9 @@ LoadOrRegenerateLuckyIDNumber:
 	jp CloseSRAM
 
 Continue:
-	xor a ; HDSCENE_NONE
-	ld [wHDScene], a
 	farcall TryLoadSaveFile
 	jr c, .FailToLoad
-	call LoadStandardMenuHeader
-	call DisplaySaveInfoOnContinue
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld c, 20
-	call DelayFrames
-	call ConfirmContinue
-	jr nc, .Check1Pass
-	call CloseWindow
-	jr .FailToLoad
-
-.Check1Pass:
-	call Continue_CheckRTC_RestartClock
-	jr nc, .Check2Pass
-	call CloseWindow
-	jr .FailToLoad
-
-.Check2Pass:
+	farcall SyncDeviceTime
 	ld a, $8
 	ld [wMusicFade], a
 	ld a, LOW(MUSIC_NONE)
@@ -280,13 +261,14 @@ Continue:
 	ld a, HIGH(MUSIC_NONE)
 	ld [wMusicFadeID + 1], a
 	call ClearBGPalettes
-	call CloseWindow
 	call ClearTilemap
 	ld c, 20
 	call DelayFrames
 	farcall JumpRoamMons
 	farcall CopyMysteryGiftReceivedDecorationsToPC
 	farcall ClockContinue
+	xor a ; HDSCENE_NONE
+	ld [wHDScene], a
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_LANCE
 	jr z, .SpawnAfterE4
@@ -314,36 +296,6 @@ PostCreditsSpawn:
 	ldh [hMapEntryMethod], a
 	ret
 
-ConfirmContinue:
-.loop
-	call DelayFrame
-	call GetJoypad
-	ld hl, hJoyPressed
-	bit A_BUTTON_F, [hl]
-	jr nz, .PressA
-	bit B_BUTTON_F, [hl]
-	jr z, .loop
-	scf
-	ret
-
-.PressA:
-	ret
-
-Continue_CheckRTC_RestartClock:
-	call CheckRTCStatus
-	and RTC_RESET
-	jr z, .pass
-	farcall RestartClock
-	ld a, c
-	and a
-	jr z, .pass
-	scf
-	ret
-
-.pass
-	xor a
-	ret
-
 FinishContinueFunction:
 .loop
 	xor a
@@ -360,31 +312,10 @@ FinishContinueFunction:
 	call SpawnAfterRed
 	jr .loop
 
-DisplaySaveInfoOnContinue:
-	call CheckRTCStatus
-	and RTC_RESET
-	jr z, .clock_ok
-	lb de, 4, 8
-	call DisplayContinueDataWithRTCError
-	ret
-
-.clock_ok
-	lb de, 4, 8
-	call DisplayNormalContinueData
-	ret
-
 DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDex
 	call Continue_PrintGameTime
-	call LoadFontsExtra
-	call UpdateSprites
-	ret
-
-DisplayContinueDataWithRTCError:
-	call Continue_LoadMenuHeader
-	call Continue_DisplayBadgesDex
-	call Continue_UnknownGameTime
 	call LoadFontsExtra
 	call UpdateSprites
 	ret
@@ -452,16 +383,6 @@ Continue_PrintGameTime:
 	call Continue_DisplayGameTime
 	ret
 
-Continue_UnknownGameTime:
-	decoord 9, 8, 0
-	add hl, de
-	ld de, .three_question_marks
-	call PlaceString
-	ret
-
-.three_question_marks
-	db " ???@"
-
 Continue_DisplayBadgeCount:
 	push hl
 	ld hl, wJohtoBadges
@@ -496,7 +417,7 @@ Continue_DisplayGameTime:
 	jp PrintNum
 
 OakSpeech:
-	farcall InitClock
+	farcall SyncDeviceTime
 	ld a, HDSCENE_PROF_INTRO
 	ld [wHDScene], a
 	call RotateFourPalettesLeft

@@ -53,7 +53,6 @@ SpecialsPointers::
 	add_special BankOfMom
 	add_special MagnetTrain
 	add_special NameRival
-	add_special SetDayOfWeek
 	add_special OverworldTownMap
 	add_special UnownPrinter
 	add_special MapRadio
@@ -124,7 +123,5 @@ SpecialsPointers::
 	add_special FadeOutMusic
 	add_special Diploma
 	add_special PrintDiploma
-	add_special InitialSetDSTFlag
-	add_special InitialClearDSTFlag
 	add_special MrChrono
 	add_special UnusedDummySpecial ; unused

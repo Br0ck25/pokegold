@@ -5,10 +5,9 @@
 	const HDSCENE_NONE        ; 0
 	const HDSCENE_TITLE       ; 1
 	const HDSCENE_MAIN_MENU   ; 2
-	const HDSCENE_CLOCK       ; 3
-	const HDSCENE_PROF_INTRO  ; 4
-	const HDSCENE_NAME_CHOICE ; 5
-	const HDSCENE_NAMING      ; 6
-	const HDSCENE_SPLASH      ; 7
-	const HDSCENE_INTRO       ; 8
-	const HDSCENE_OPTIONS     ; 9
+	const HDSCENE_PROF_INTRO  ; 3
+	const HDSCENE_NAME_CHOICE ; 4
+	const HDSCENE_NAMING      ; 5
+	const HDSCENE_SPLASH      ; 6
+	const HDSCENE_INTRO       ; 7
+	const HDSCENE_OPTIONS     ; 8

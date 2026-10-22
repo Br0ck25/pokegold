@@ -129,13 +129,12 @@ const HD = (() => {
     switch (state.scene) {
       case 1: return "title";
       case 2: return "menu";
-      case 3: return "clock";
-      case 4: return "prof";
-      case 5: return "names";
-      case 6: return "naming";
-      case 7: return "splash";
-      case 8: return "intro";
-      case 9: return "options";
+      case 3: return "prof";
+      case 4: return "names";
+      case 5: return "naming";
+      case 6: return "splash";
+      case 7: return "intro";
+      case 8: return "options";
       case 0:
         // The battle HUD is on screen (not a Pack/Party screen or a transition): an enemy or player name in its place.
         if (state.battle && state.battle.enemy.name && (text(state, 0, 0, 12).includes(state.battle.enemy.name) || text(state, 7, 0, 20).includes(state.battle.player.name))) return "battle";
@@ -167,7 +166,7 @@ const HD = (() => {
     try {
       const mem = await wb._getWasmMemorySection(WRAM_START, WRAM_END);
       const state = readState(mem);
-      if (state.scene === 5 || state.scene === 6) flags.seenNaming = true;
+      if (state.scene === 4 || state.scene === 5) flags.seenNaming = true;
       if (state.scene === 1 || state.scene === 2) flags.seenNaming = false;
       show(pick(state));
       if (current) current.update(state);
