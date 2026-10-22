@@ -241,6 +241,10 @@ endef
 $(foreach pic, $(wildcard gfx/pokemon/*/front_gold.png),\
 	$(eval $(call PIC_GS,$(pic:/front_gold.png=))))
 
+# Creatures drawn as SVG are rasterized to the indexed PNGs (see tools/svgpic.py)
+gfx/pokemon/%/front_gold.png: gfx/pokemon/%/front_gold.svg tools/svgpic.py ; python3 tools/svgpic.py $< $@
+gfx/pokemon/%/back.png: gfx/pokemon/%/back.svg tools/svgpic.py ; python3 tools/svgpic.py $< $@
+
 gfx/trainers/%.2bpp: RGBGFXFLAGS += --columns
 gfx/trainers/%.2bpp: gfx/trainers/%.png gfx/trainers/%.gbcpal
 	$(RGBGFX) $(RGBGFXFLAGS) --colors gbc:$(word 2,$^) -o $@ $<

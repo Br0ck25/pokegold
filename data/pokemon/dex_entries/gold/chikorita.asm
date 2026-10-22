@@ -1,10 +1,10 @@
-	db "LEAF@" ; species name
+	db "THORN@" ; species name
 	dw 211, 140 ; height, weight
 
-	db   "A sweet aroma"
-	next "gently wafts from"
-	next "the leaf on its"
+	db   "Leaf-shaped spines"
+	next "grow along its back."
+	next "It rolls into a"
 
-	page "head. It is docile"
-	next "and loves to soak"
-	next "up the sun's rays.@"
+	page "ball when scared and"
+	next "unrolls to bask in"
+	next "the morning sun.@"

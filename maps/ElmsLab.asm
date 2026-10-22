@@ -733,7 +733,7 @@ TakeTotodileText:
 
 TakeChikoritaText:
 	text "ELM: So, you like"
-	line "CHIKORITA, the"
+	line "BRAMBLET, the"
 	cont "grass #MON?"
 	done
 

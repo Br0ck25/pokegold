@@ -151,7 +151,7 @@ PokemonNames::
 	dname "DRAGONITE"
 	dname "MEWTWO"
 	dname "MEW"
-	dname "CHIKORITA"
+	dname "BRAMBLET"
 	dname "BAYLEEF"
 	dname "MEGANIUM"
 	dname "CYNDAQUIL"

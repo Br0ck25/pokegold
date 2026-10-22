@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" data-palette="#ffffff #f0c070 #3aa63a #000000">
+  <g stroke="#000" stroke-width="1" stroke-linejoin="round" shape-rendering="crispEdges">
+    <!-- feet -->
+    <ellipse fill="#f0c070" cx="15" cy="44" rx="6" ry="3"/>
+    <ellipse fill="#f0c070" cx="33" cy="44" rx="6" ry="3"/>
+    <!-- ears peeking over the back -->
+    <circle fill="#f0c070" cx="15" cy="13" r="3.5"/>
+    <circle fill="#f0c070" cx="33" cy="13" r="3.5"/>
+    <!-- dome of leaf spines -->
+    <path fill="#3aa63a" d="M3 42 L3 30 L7 31 L6 21 L11 24 L12 14 L17 19 L19 8 L24 15 L29 8 L31 19 L36 14 L37 24 L42 21 L41 31 L45 30 L45 42 L36 45 L12 45 Z"/>
+  </g>
+  <g fill="none" stroke="#000" stroke-width="1" shape-rendering="crispEdges">
+    <path d="M12 38 L17 30 M24 40 L24 28 M36 38 L31 30 M18 24 L21 20 M30 24 L27 20"/>
+  </g>
+</svg>
