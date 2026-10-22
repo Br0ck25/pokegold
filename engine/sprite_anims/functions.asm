@@ -930,8 +930,7 @@ AnimSeq_MailCursor:
 	callfar ComposeMail_AnimateCursor
 	ret
 
-AnimSeq_GameFreakLogo:
-	callfar GameFreakPresents_UpdateLogoPal
+AnimSeq_GameFreakLogo: ; unused; the splash is drawn by the HD layer
 	ret
 
 AnimSeq_GSGameFreakLogoStar:

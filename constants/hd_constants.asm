@@ -9,3 +9,5 @@
 	const HDSCENE_PROF_INTRO  ; 4
 	const HDSCENE_NAME_CHOICE ; 5
 	const HDSCENE_NAMING      ; 6
+	const HDSCENE_SPLASH      ; 7
+	const HDSCENE_INTRO       ; 8

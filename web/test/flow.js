@@ -34,7 +34,8 @@ const out = process.argv[3] || "test/out";
   await page.touchscreen.tap(play.x + play.width / 2, play.y + play.height / 2);
   await page.waitForFunction(() => document.getElementById("start").hidden, null, { timeout: 60000 });
   await shot("00-pixel-or-intro");
-  for (let i = 0; i < 120 && (await scene()) !== 1; i++) await page.waitForTimeout(1000);
+  for (let i = 0; i < 120 && (await scene()) !== 1; i++) { await snap(); await page.waitForTimeout(1000); }
+  for (const id of [7, 8]) if (!seen.has(id)) { console.error(`FAIL: startup scene ${id} (splash=7, intro=8) never showed`); process.exitCode = 1; }
   await page.waitForTimeout(2000); await snap();
 
   // One tap each: Start opens the menu, A starts a new game.

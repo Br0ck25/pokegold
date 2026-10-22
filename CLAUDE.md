@@ -22,6 +22,7 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 - `web/public/app.js` page logic, touch pad, cloud save. `web/public/style.css` shell/pad.
 - `web/public/hd/` HD layer, one small file per thing, CSS beside its JS:
   `core/` engine+registry, `ui/` shared bits, `art/` SVG art, `scenes/` one screen each. See `web/docs/UI.md`.
+- Start-up screens (splash, cinematic) are HD scenes; old pixel intro/splash code and gfx were deleted. Credits still show the old copyright text.
 - `gfx/pokemon/<slot>/*.svg` creature art -> PNG via `tools/svgpic.py` (pixel fallback only).
 - Rules for UI/UX/art: **`web/docs/UI.md`**.
 

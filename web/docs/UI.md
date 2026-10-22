@@ -29,6 +29,11 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - Unique gradient ids per file (`bb-`, `sp-`, `ch-` prefixes). Original designs only: no real Pokemon likeness.
 - Register its species id in `SPECIES_ART` (scenes/prof.js) when the game shows that species.
 
+## Timed scenes (splash 7, intro 8)
+- The ROM only waits (`engine/movie/hd_intro.asm`: `SPLASH_FRAMES`, `INTRO_FRAMES`) and lets any button skip; the scene animates
+  itself with CSS from mount time. Keep the animation length <= the ROM wait (60 frames = 1s).
+- Studio name is "Brock Family" (badger emblem, `art/badger.js`). No Nintendo / Game Freak text anywhere on start-up.
+
 ## Add a screen (checklist)
 1. ROM: set `wHDScene` to a new `HDSCENE_*` (constants/hd_constants.asm) where the screen starts; reset to 0 where it ends.
 2. `scenes/<name>.js` (+ `<name>.css` beside it): `Scenes.<name> = function (root, flags) { ...; return { update(state) {} }; };`

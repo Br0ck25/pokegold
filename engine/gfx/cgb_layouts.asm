@@ -420,59 +420,7 @@ _CGB_BetaTitleScreen:
 	ldh [hCGBPalUpdate], a
 	ret
 
-_CGB_GSIntro:
-	ld b, 0
-	ld hl, .Jumptable
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.Jumptable:
-	dw .ShellderLaprasScene
-	dw .JigglypuffPikachuScene
-	dw .StartersCharizardScene
-
-.ShellderLaprasScene:
-	ld hl, .ShellderLaprasBGPalette
-	ld de, wBGPals1
-	call LoadHLPaletteIntoDE
-	ld hl, .ShellderLaprasOBPals
-	ld de, wOBPals1
-	ld bc, 2 palettes
-	call CopyBytes
-	call WipeAttrmap
-	ret
-
-.ShellderLaprasBGPalette:
-INCLUDE "gfx/intro/shellder_lapras_bg.pal"
-
-.ShellderLaprasOBPals:
-INCLUDE "gfx/intro/shellder_lapras_ob.pal"
-
-.JigglypuffPikachuScene:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_GS_INTRO_JIGGLYPUFF_PIKACHU_BG
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-
-	ld de, wOBPals1
-	ld a, PREDEFPAL_GS_INTRO_JIGGLYPUFF_PIKACHU_OB
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	ret
-
-.StartersCharizardScene:
-	ld hl, PalPacket_Pack + 1
-	call CopyFourPalettes
-	ld de, wOBPals1
-	ld a, PREDEFPAL_GS_INTRO_STARTERS_TRANSITION
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	call WipeAttrmap
+_CGB_GSIntro: ; unused; the intro is drawn by the HD layer
 	ret
 
 _CGB_BetaPoker:
@@ -794,22 +742,7 @@ _CGB_MagnetTrain: ; unused
 	ldh [hCGBPalUpdate], a
 	ret
 
-_CGB_GamefreakLogo:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_GAMEFREAK_LOGO_BG
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	ld de, wOBPals1
-	ld a, PREDEFPAL_GAMEFREAK_LOGO_OB
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	ld de, wOBPals1 palette 1
-	ld a, PREDEFPAL_GAMEFREAK_LOGO_OB
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	call ApplyAttrmap
-	call ApplyPals
+_CGB_GamefreakLogo: ; unused; the splash is drawn by the HD layer
 	ret
 
 _CGB_PlayerOrMonFrontpicPals:

@@ -82,6 +82,8 @@ const HD = (() => {
       case 4: return "prof";
       case 5: return "names";
       case 6: return "naming";
+      case 7: return "splash";
+      case 8: return "intro";
       case 0:
         return state.map.group === ROOM.group && state.map.number === ROOM.number ? "room" : null;
       default: return null;

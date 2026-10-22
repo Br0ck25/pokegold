@@ -16,7 +16,7 @@ Scenes.room = function (root) {
     update(state) {
       if (state.dir !== dir) { dir = state.dir; hero.innerHTML = Art.heroSprite(dir); }
       if (state.x !== px || state.y !== py) {
-        if (px !== null) walkUntil = performance.now() + 220;
+        if (px !== null) walkUntil = performance.now() + 400;
         px = state.x; py = state.y;
         place(px, py);
       }

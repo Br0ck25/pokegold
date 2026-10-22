@@ -1,6 +1,4 @@
-; This file is INCLUDEd twice in different ROM banks:
-; once for Credits_Copyright (see data/credits_strings.asm),
-; and once for CopyrightString (see engine/menus/intro_menu.asm).
+; Used by Credits_Copyright (see data/credits_strings.asm).
 
 	db   $60                               ; ©
 	db   $61, $62, $63, $7a, $7b, $7c, $7d ; 1995-2000

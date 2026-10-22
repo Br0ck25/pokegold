@@ -1139,20 +1139,6 @@ ENDM
 	trail_coords  0,  0, 11, 11
 ENDC
 
-Copyright:
-	call ClearTilemap
-	call LoadFontsExtra
-	ld de, CopyrightGFX
-	ld hl, vTiles2 tile $60
-	lb bc, BANK(CopyrightGFX), 30
-	call Request2bpp
-	hlcoord 2, 7
-	ld de, CopyrightString
-	jp PlaceString
-
-CopyrightString:
-INCLUDE "data/copyright.asm"
-
 GameInit::
 	call ClearWindowData
 	farcall TryLoadSaveData
