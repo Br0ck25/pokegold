@@ -60,7 +60,7 @@ PlayersNeighborsDaughterText:
 	done
 
 PlayerNeighborRadioText1:
-	text "PROF.OAK'S BUDDYMON"
+	text "PROF.ASPEN'S BUDDYMON"
 	line "TALK! Please tune"
 	cont "in next time!"
 	done

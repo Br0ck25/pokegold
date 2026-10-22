@@ -721,13 +721,13 @@ LabWhereGoingText:
 
 TakeCyndaquilText:
 	text "WILLOW: You'll take"
-	line "CYNDAQUIL, the"
+	line "SPARKIT, the"
 	cont "fire BUDDYMON?"
 	done
 
 TakeTotodileText:
 	text "WILLOW: Do you want"
-	line "TOTODILE, the"
+	line "CHOMPLET, the"
 	cont "water BUDDYMON?"
 	done
 
@@ -847,7 +847,7 @@ ElmAfterTheftText4:
 ElmAfterTheftText5:
 	text "WILLOW: What?!?"
 
-	para "PROF.OAK gave you"
+	para "PROF.ASPEN gave you"
 	line "a BUDDYDEX?"
 
 	para "<PLAYER>, is that"
@@ -1061,7 +1061,7 @@ ElmGiveTicketText2:
 	cont "with your BUDDYMON."
 
 	para "Give my regards to"
-	line "PROF.OAK in KANTO!"
+	line "PROF.ASPEN in KANTO!"
 	done
 
 ElmsLabMonEggText: ; unreferenced

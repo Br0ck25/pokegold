@@ -116,7 +116,8 @@ const out = process.argv[3] || "test/out";
     const town = await scene();
     if (town.map !== 4 || town.label !== "New Bark Town" || !(await page.locator("#hd .world-svg").count())) { console.error("FAIL: town not drawn", JSON.stringify(town)); process.exitCode = 1; }
     await shot("town");
-    await walk("LEFT", () => HD.last.x <= 6); await walk("UP", () => HD.last.map.number === 5);
+    await walk("LEFT", () => HD.last.x <= 6); await walk("RIGHT", () => HD.last.x >= 6, 3); // land exactly on the door column
+    await walk("UP", () => HD.last.map.number === 5);
     await page.waitForTimeout(2500);
     const lab = await scene();
     if (lab.map !== 5 || !lab.label.includes("Willow's Lab") || lab.npcs < 1) { console.error("FAIL: Willow's lab not drawn with Willow", JSON.stringify(lab)); process.exitCode = 1; }

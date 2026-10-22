@@ -1696,7 +1696,7 @@ NoRadioStation:
 	ldh [hBGMapMode], a
 	ret
 
-OaksPKMNTalkName:     db "OAK's <PK><MN> Talk@"
+OaksPKMNTalkName:     db "ASPEN's <PK><MN> Talk@"
 PokedexShowName:      db "BUDDYDEX Show@"
 PokemonMusicName:     db "BUDDYMON Music@"
 LuckyChannelName:     db "Lucky Channel@"

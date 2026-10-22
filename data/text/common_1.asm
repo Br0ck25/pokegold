@@ -468,7 +468,7 @@ _ForYourMonWillTradeText::
 
 _OPT_IntroText1::
 	text_start
-	line "MARY: PROF.OAK'S"
+	line "MARY: PROF.ASPEN'S"
 	done
 
 _OPT_IntroText2::
@@ -483,7 +483,7 @@ _OPT_IntroText3::
 
 _OPT_OakText1::
 	text_start
-	line "OAK: @"
+	line "ASPEN: @"
 	text_ram wMonOrItemNameBuffer
 	text_end
 
