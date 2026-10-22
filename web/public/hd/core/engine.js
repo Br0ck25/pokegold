@@ -13,7 +13,7 @@ const HD = (() => {
   const CHARS = { 0x7f: " ", 0x75: "…", 0xe0: "'", 0xe3: "-", 0xe6: "?", 0xe7: "!", 0xe8: ".", 0xe9: "&",
     0xea: "é", 0xed: "▶", 0xee: "▼", 0xef: "♂", 0xf0: "¥", 0xf3: "/", 0xf4: ",", 0xf5: "♀", 0x9a: "(", 0x9b: ")",
     0x9c: ":", 0x9d: ";", 0x9e: "[", 0x9f: "]", 0x72: "“", 0x73: "”", 0xd4: "'s", 0xd5: "'t", 0xd0: "'d",
-    0xd1: "'l", 0xd2: "'m", 0xd3: "'r", 0xd6: "'v" };
+    0xd1: "'l", 0xd2: "'m", 0xd3: "'r", 0xd6: "'v", 0xe1: "PK", 0xe2: "MN" };
   for (let i = 0; i < 26; i++) {
     CHARS[0x80 + i] = String.fromCharCode(65 + i);
     CHARS[0xa0 + i] = String.fromCharCode(97 + i);
@@ -50,6 +50,24 @@ const HD = (() => {
     return boxes;
   }
 
+  // A name as the game stores it: charmap bytes ending in 0x50.
+  function readName(mem, addr, max) {
+    let n = "";
+    for (let i = 0; i < max && mem[addr - 0xc000 + i] !== 0x50; i++) n += CHARS[mem[addr - 0xc000 + i]] ?? "";
+    return n;
+  }
+
+  // The battle mons (battle_struct: species +0, level +13, HP +16, max HP +18, HP big-endian), or null outside battle.
+  function readBattle(mem) {
+    const mode = mem[HD_SYMS.wBattleMode - 0xc000];
+    if (!mode) return null;
+    const mon = (addr, nick) => {
+      const o = addr - 0xc000;
+      return { species: mem[o], level: mem[o + 13], hp: (mem[o + 16] << 8) | mem[o + 17], max: (mem[o + 18] << 8) | mem[o + 19], name: readName(mem, nick, 10) };
+    };
+    return { mode, enemy: mon(HD_SYMS.wEnemyMon, HD_SYMS.wEnemyMonNickname), player: mon(HD_SYMS.wBattleMon, HD_SYMS.wBattleMonNickname) };
+  }
+
   function readState(mem) {
     const at = (sym) => mem[HD_SYMS[sym] - 0xc000];
     const tiles = mem.subarray(HD_SYMS.wTilemap - 0xc000, HD_SYMS.wTilemap - 0xc000 + 360);
@@ -78,12 +96,8 @@ const HD = (() => {
         if (p < 0xc000 || p > 0xdfff) return null;
         return { col: mem[p + 12 - 0xc000], row: mem[p + 13 - 0xc000], max: at("wNamingScreenMaxNameLength") };
       })(),
-      name: (() => {
-        const o = HD_SYMS.wPlayerName - 0xc000;
-        let n = "";
-        for (let i = 0; i < 8 && mem[o + i] !== 0x50; i++) n += CHARS[mem[o + i]] ?? "";
-        return n;
-      })(),
+      name: readName(mem, HD_SYMS.wPlayerName, 8),
+      battle: readBattle(mem),
       cursorRow: at("wMenuCursorY"),
       // A dialogue box is the bordered text window on rows 12-17.
       dialogue: tiles[12 * 20] === 0x79 && tiles[17 * 20] === 0x7d
@@ -116,6 +130,8 @@ const HD = (() => {
       case 8: return "intro";
       case 9: return "options";
       case 0:
+        // The battle HUD is on screen (not a Pack/Party screen or a transition): an enemy or player name in its place.
+        if (state.battle && state.battle.enemy.name && (text(state, 0, 0, 12).includes(state.battle.enemy.name) || text(state, 7, 0, 20).includes(state.battle.player.name))) return "battle";
         if (state.map.group !== HD_GROUP || (state.boxes.length && !state.boxes.every((b) => b.rows.length))) return null;
         if (Scenes.room.maps.includes(state.map.number)) return "room";
         return Scenes.world.maps.includes(state.map.number) ? "world" : null;

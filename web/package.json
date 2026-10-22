@@ -5,7 +5,7 @@
     "build": "./build.sh",
     "dev": "./build.sh && wrangler dev",
     "deploy": "./build.sh && wrangler deploy",
-    "test": "node test/flow.js && node test/cloud-save.js && node test/gestures.js"
+    "test": "node test/flow.js && node test/cloud-save.js && node test/gestures.js && node test/battle-ui.js"
   },
   "dependencies": {
     "wasmboy": "0.7.1"

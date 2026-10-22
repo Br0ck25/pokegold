@@ -1,6 +1,3 @@
-// Species shown on the pixel screen -> HD art.
-const SPECIES_ART = { 152: "bramblet", 155: "sparkit", 158: "chomplet" };
-
 Scenes.prof = function (root, flags) {
   const el = h(`<div class="scene prof">
     <div class="lab"></div>
@@ -21,11 +18,10 @@ Scenes.prof = function (root, flags) {
         dlg.setTag(who === "hero" ? (state.name || "YOU") : "PROF. WILLOW");
       }
       dlg.update(state.dialogue);
-      const art = SPECIES_ART[state.species] || null;
-      if (art !== shown) {
-        shown = art;
-        creature.hidden = !art;
-        creature.innerHTML = art ? Art[art]() : "";
+      if (state.species !== shown) {
+        shown = state.species;
+        creature.hidden = !shown;
+        creature.innerHTML = shown ? Art.creature(shown) : "";
       }
     },
   };

@@ -50,6 +50,15 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - Indoor rooms: build from `Art.shell` + `Art.furniture` (`art/furniture.js`) and add a `ROOMS` entry. Rooms taller than the stage scroll.
 - People: a look per SPRITE_* name in `art/looks.js`; non-people (Poke Balls) in `art/props.js`. Unlisted sprites draw as a plain villager.
 
+## Battle (scenes/battle.js)
+- Shown when `wBattleMode` is set AND the battle HUD is on screen (enemy/player name in its tilemap slot), so Pack/Party screens and the
+  transition fall back to pixels. Names, levels and HP come from RAM (`state.battle`); the command menu (rows 14/16) and moves (rows 9-16)
+  are read from the tilemap; battle text uses the shared dialogue box.
+- Creatures: `Art.creature(speciesId)`. Hand-drawn ones are listed in `art/creature.js`; every other species falls back to the seeded
+  placeholder in `art/critter.js` (same look every time). Replace a placeholder by adding `art/<name>.js` and one line in `Art.speciesArt`.
+- Card/panel classes are scene-prefixed (`bt-card`): bare names like `.card` collide across scenes.
+- No automated battle in `npm test` (needs a battle trigger the ROM doesn't ship); `test/battle-ui.js` feeds the scene synthetic state.
+
 ## Add a screen (checklist)
 1. ROM: set `wHDScene` to a new `HDSCENE_*` (constants/hd_constants.asm) where the screen starts; reset to 0 where it ends.
 2. `scenes/<name>.js` (+ `<name>.css` beside it): `Scenes.<name> = function (root, flags) { ...; return { update(state) {} }; };`
