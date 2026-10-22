@@ -27,7 +27,7 @@ ElmsWifeText:
 	line "he's OK."
 
 	para "When he's caught"
-	line "up in his #MON"
+	line "up in his BUDDYMON"
 
 	para "research, he even"
 	line "forgets to eat."
@@ -39,7 +39,7 @@ ElmsSonText:
 	cont "my Dad!"
 
 	para "I'm going to be a"
-	line "great #MON"
+	line "great BUDDYMON"
 	cont "professor!"
 	done
 
@@ -52,11 +52,11 @@ ElmsHouseLabFoodText: ; unreferenced
 ElmsHousePokemonFoodText: ; unreferenced
 	text "There's some food"
 	line "here. This must be"
-	cont "for #MON."
+	cont "for BUDDYMON."
 	done
 
 ElmsHousePCText:
-	text "#MON. Where do"
+	text "BUDDYMON. Where do"
 	line "they come from? "
 
 	para "Where are they"
@@ -64,18 +64,18 @@ ElmsHousePCText:
 
 	para "Why has no one"
 	line "ever witnessed a"
-	cont "#MON's birth?"
+	cont "BUDDYMON's birth?"
 
 	para "I want to know! I"
 	line "will dedicate my"
 
 	para "life to the study"
-	line "of #MON!"
+	line "of BUDDYMON!"
 
 	para "…"
 
 	para "It's a part of"
-	line "PROF.ELM's re-"
+	line "PROF.WILLOW's re-"
 	cont "search papers."
 	done
 

@@ -91,13 +91,13 @@ PlayersHouseGameConsoleScript:
 	describedecoration DECODESC_CONSOLE
 
 PlayersRadioText1:
-	text "PROF.OAK'S #MON"
+	text "PROF.OAK'S BUDDYMON"
 	line "TALK! Please tune"
 	cont "in next time!"
 	done
 
 PlayersRadioText2:
-	text "#MON CHANNEL!"
+	text "BUDDYMON CHANNEL!"
 	done
 
 PlayersRadioText3:
@@ -106,8 +106,8 @@ PlayersRadioText3:
 	done
 
 PlayersRadioText4:
-	text "#MON!"
-	line "#MON CHANNEL…"
+	text "BUDDYMON!"
+	line "BUDDYMON CHANNEL…"
 	done
 
 PlayersHouse2F_MapEvents:

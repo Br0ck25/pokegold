@@ -186,10 +186,10 @@ WhitneyBeforeText:
 	text "Hi! I'm WHITNEY!"
 
 	para "Everyone was into"
-	line "#MON, so I got"
+	line "BUDDYMON, so I got"
 	cont "into it too!"
 
-	para "#MON are"
+	para "BUDDYMON are"
 	line "super-cute!"
 
 	para "You want to bat-"
@@ -235,13 +235,13 @@ PlayerReceivedPlainBadgeText:
 
 WhitneyPlainBadgeText:
 	text "PLAINBADGE lets"
-	line "your #MON use"
+	line "your BUDDYMON use"
 
 	para "STRENGTH outside"
 	line "of battle."
 
 	para "It also boosts"
-	line "your #MON's"
+	line "your BUDDYMON's"
 	cont "SPEED."
 
 	para "Oh, you can have"
@@ -252,7 +252,7 @@ WhitneyAttractText:
 	text "It's ATTRACT!"
 	line "It makes full use"
 
-	para "of a #MON's"
+	para "of a BUDDYMON's"
 	line "charm."
 
 	para "Isn't it just per-"
@@ -280,19 +280,19 @@ LassCarrieBeatenText:
 
 LassCarrieAfterBattleText:
 	text "In the world of"
-	line "#MON, I wonder"
+	line "BUDDYMON, I wonder"
 
 	para "what's stronger:"
 	line "male or female?"
 	done
 
 LassBridgetSeenText:
-	text "I like cute #-"
+	text "I like cute BUDDY-"
 	line "MON better than"
-	cont "strong #MON."
+	cont "strong BUDDYMON."
 
 	para "But I have strong"
-	line "and cute #MON!"
+	line "and cute BUDDYMON!"
 	done
 
 LassBridgetBeatenText:
@@ -364,11 +364,11 @@ GoldenrodGymGuideText:
 
 	para "This GYM is home"
 	line "to normal-type"
-	cont "#MON trainers."
+	cont "BUDDYMON trainers."
 
 	para "I recommend you"
 	line "use fighting-type"
-	cont "#MON."
+	cont "BUDDYMON."
 	done
 
 GoldenrodGymGuideWinText:

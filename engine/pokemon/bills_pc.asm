@@ -2294,7 +2294,7 @@ BillsPC_PrintBoxCountAndCapacity:
 	ret
 
 .Pokemon:
-	db "#MON@"
+	db "BUDDYMON@"
 
 .OutOf20:
 	db "/{d:MONS_PER_BOX}@" ; "/20@"
@@ -2473,7 +2473,7 @@ BillsPC_PlaceEmptyBoxString_SFX:
 	ret
 
 .NoMonString:
-	db "There's no #MON.@"
+	db "There's no BUDDYMON.@"
 
 BillsPC_PlaceChangeBoxString:
 	push de

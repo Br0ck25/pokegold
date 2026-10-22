@@ -97,7 +97,7 @@ TrainerHouse1FYoungsterText:
 
 TrainerHouse1FGentlemanText:
 	text "Whew… I'm taking a"
-	line "rest from #MON"
+	line "rest from BUDDYMON"
 	cont "battles."
 	done
 

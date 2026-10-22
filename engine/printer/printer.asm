@@ -663,7 +663,7 @@ PrintPCBox_Page1:
 	ret
 
 .String_PokemonList:
-	db "#MON LIST@"
+	db "BUDDYMON LIST@"
 
 PrintPCBox_Page2:
 	hlcoord 0, 0

@@ -55,7 +55,7 @@ PokefanmCarterSeenText:
 	line "I had a hard time"
 
 	para "catching my prized"
-	line "#MON."
+	line "BUDDYMON."
 	done
 
 PokefanmCarterBeatenText:
@@ -73,7 +73,7 @@ PokefanmCarterAfterBattleText:
 BirdKeeperRoySeenText:
 	text "My dream is to fly"
 	line "with my beloved"
-	cont "bird #MON."
+	cont "bird BUDDYMON."
 	done
 
 BirdKeeperRoyBeatenText:
@@ -82,7 +82,7 @@ BirdKeeperRoyBeatenText:
 	done
 
 BirdKeeperRoyAfterBattleText:
-	text "You have #MON"
+	text "You have BUDDYMON"
 	line "that know the HM"
 
 	para "move FLY, don't"

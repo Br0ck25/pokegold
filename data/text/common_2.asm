@@ -47,7 +47,7 @@ _CantUseDigText::
 
 _TeleportReturnText::
 	text "Return to the last"
-	line "#MON CENTER."
+	line "BUDDYMON CENTER."
 	done
 
 _CantUseTeleportText::
@@ -58,7 +58,7 @@ _CantUseTeleportText::
 	done
 
 _AlreadyUsingStrengthText::
-	text "A #MON is using"
+	text "A BUDDYMON is using"
 	line "STRENGTH already."
 	prompt
 
@@ -75,7 +75,7 @@ _MoveBoulderText::
 	prompt
 
 _AskStrengthText::
-	text "A #MON may be"
+	text "A BUDDYMON may be"
 	line "able to move this."
 
 	para "Want to use"
@@ -88,7 +88,7 @@ _BouldersMoveText::
 	done
 
 _BouldersMayMoveText::
-	text "A #MON may be"
+	text "A BUDDYMON may be"
 	line "able to move this."
 	done
 
@@ -102,7 +102,7 @@ _MayPassWhirlpoolText::
 	text "It's a vicious"
 	line "whirlpool!"
 
-	para "A #MON may be"
+	para "A BUDDYMON may be"
 	line "able to pass it."
 	done
 
@@ -125,7 +125,7 @@ _HeadbuttNothingText::
 	done
 
 _AskHeadbuttText::
-	text "A #MON could be"
+	text "A BUDDYMON could be"
 	line "in this tree."
 
 	para "Want to HEADBUTT"
@@ -139,7 +139,7 @@ _UseRockSmashText::
 	prompt
 
 _MaySmashText::
-	text "A #MON may be"
+	text "A BUDDYMON may be"
 	line "able to break it."
 	done
 
@@ -211,7 +211,7 @@ _CantCarryItemText::
 
 _WhitedOutText::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable BUDDYMON!"
 
 	para "<PLAYER> whited"
 	line "out!"
@@ -236,7 +236,7 @@ _PoisonFaintText::
 
 _PoisonWhiteoutText::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable BUDDYMON!"
 
 	para "<PLAYER> whited"
 	line "out!"
@@ -262,7 +262,7 @@ _SquirtbottleNothingText::
 	done
 
 _UseSacredAshText::
-	text "<PLAYER>'s #MON"
+	text "<PLAYER>'s BUDDYMON"
 	line "were all healed!"
 	done
 
@@ -304,7 +304,7 @@ _OakThisIsntTheTimeText::
 
 _YouDontHaveAMonText::
 	text "You don't have a"
-	line "#MON!"
+	line "BUDDYMON!"
 	prompt
 
 _RegisteredItemText::
@@ -556,7 +556,7 @@ _WasSentToBillsPCText::
 
 _PCGottaHavePokemonText::
 	text "You gotta have"
-	line "#MON to call!"
+	line "BUDDYMON to call!"
 	prompt
 
 _PCWhatText::
@@ -564,7 +564,7 @@ _PCWhatText::
 	done
 
 _PCMonHoldingMailText::
-	text "There is a #MON"
+	text "There is a BUDDYMON"
 	line "holding MAIL."
 
 	para "Please remove the"
@@ -573,17 +573,17 @@ _PCMonHoldingMailText::
 
 _PCNoSingleMonText::
 	text "You don't have a"
-	line "single #MON!"
+	line "single BUDDYMON!"
 	prompt
 
 _PCCantDepositLastMonText::
 	text "You can't deposit"
-	line "your last #MON!"
+	line "your last BUDDYMON!"
 	prompt
 
 _PCCantTakeText::
 	text "You can't take any"
-	line "more #MON."
+	line "more BUDDYMON."
 	prompt
 
 _ContestCaughtMonText::
@@ -593,7 +593,7 @@ _ContestCaughtMonText::
 	prompt
 
 _ContestAskSwitchText::
-	text "Switch #MON?"
+	text "Switch BUDDYMON?"
 	done
 
 _ContestAlreadyCaughtText::
@@ -724,7 +724,7 @@ _CaughtAskNicknameText::
 
 _PokecenterPCCantUseText::
 	text "Bzzzzt! You must"
-	line "have a #MON to"
+	line "have a BUDDYMON to"
 	cont "use this!"
 	prompt
 
@@ -793,7 +793,7 @@ _PokecenterBillsPCText::
 	text "BILL's PC"
 	line "accessed."
 
-	para "#MON Storage"
+	para "BUDDYMON Storage"
 	line "System opened."
 	prompt
 
@@ -808,7 +808,7 @@ _PokecenterOaksPCText::
 	text "PROF.OAK's PC"
 	line "accessed."
 
-	para "#DEX Rating"
+	para "BUDDYDEX Rating"
 	line "System opened."
 	prompt
 
@@ -819,34 +819,34 @@ _PokecenterPCOaksClosedText::
 
 _OakPCText1::
 	text "Want to get your"
-	line "#DEX rated?"
+	line "BUDDYDEX rated?"
 	done
 
 _OakPCText2::
-	text "Current #DEX"
+	text "Current BUDDYDEX"
 	line "completion level:"
 	prompt
 
 _OakPCText3::
 	text_ram wStringBuffer3
-	text " #MON seen"
+	text " BUDDYMON seen"
 	line "@"
 	text_ram wStringBuffer4
-	text " #MON owned"
+	text " BUDDYMON owned"
 
 	para "PROF.OAK's"
 	line "Rating:"
 	done
 
 _OakRating01::
-	text "Look for #MON"
+	text "Look for BUDDYMON"
 	line "in grassy areas!"
 	done
 
 _OakRating02::
 	text "Good. I see you"
 	line "understand how to"
-	cont "use # BALLS."
+	cont "use BUDDY BALLS."
 	done
 
 _OakRating03::
@@ -859,23 +859,23 @@ _OakRating03::
 
 _OakRating04::
 	text "You need to fill"
-	line "up the #DEX."
+	line "up the BUDDYDEX."
 
 	para "Catch different"
-	line "kinds of #MON!"
+	line "kinds of BUDDYMON!"
 	done
 
 _OakRating05::
 	text "You're trying--I"
 	line "can see that."
 
-	para "Your #DEX is"
+	para "Your BUDDYDEX is"
 	line "coming together."
 	done
 
 _OakRating06::
 	text "To evolve, some"
-	line "#MON grow,"
+	line "BUDDYMON grow,"
 
 	para "others use the"
 	line "effects of STONES."
@@ -885,7 +885,7 @@ _OakRating07::
 	text "Have you gotten a"
 	line "fishing ROD? You"
 
-	para "can catch #MON"
+	para "can catch BUDDYMON"
 	line "by fishing."
 	done
 
@@ -896,7 +896,7 @@ _OakRating08::
 	done
 
 _OakRating09::
-	text "Some #MON only"
+	text "Some BUDDYMON only"
 	line "appear during"
 
 	para "certain times of"
@@ -904,7 +904,7 @@ _OakRating09::
 	done
 
 _OakRating10::
-	text "Your #DEX is"
+	text "Your BUDDYDEX is"
 	line "filling up. Keep"
 	cont "up the good work!"
 	done
@@ -913,27 +913,27 @@ _OakRating11::
 	text "I'm impressed."
 	line "You're evolving"
 
-	para "#MON, not just"
+	para "BUDDYMON, not just"
 	line "catching them."
 	done
 
 _OakRating12::
 	text "Have you met KURT?"
-	line "His custom #"
+	line "His custom BUDDY"
 	cont "BALLS should help."
 	done
 
 _OakRating13::
 	text "Wow. You've found"
-	line "more #MON than"
+	line "more BUDDYMON than"
 
-	para "the last #DEX"
+	para "the last BUDDYDEX"
 	line "research project."
 	done
 
 _OakRating14::
 	text "Are you trading"
-	line "your #MON?"
+	line "your BUDDYMON?"
 
 	para "It's tough to do"
 	line "this alone!"
@@ -941,13 +941,13 @@ _OakRating14::
 
 _OakRating15::
 	text "Wow! You've hit"
-	line "200! Your #DEX"
+	line "200! Your BUDDYDEX"
 	cont "is looking great!"
 	done
 
 _OakRating16::
 	text "You've found so"
-	line "many #MON!"
+	line "many BUDDYMON!"
 
 	para "You've really"
 	line "helped my studies!"
@@ -957,12 +957,12 @@ _OakRating17::
 	text "Magnificent! You"
 	line "could become a"
 
-	para "#MON professor"
+	para "BUDDYMON professor"
 	line "right now!"
 	done
 
 _OakRating18::
-	text "Your #DEX is"
+	text "Your BUDDYDEX is"
 	line "amazing! You're"
 
 	para "ready to turn"
@@ -971,7 +971,7 @@ _OakRating18::
 
 _OakRating19::
 	text "Whoa! A perfect"
-	line "#DEX! I've"
+	line "BUDDYDEX! I've"
 
 	para "dreamt about this!"
 	line "Congratulations!"
@@ -1253,7 +1253,7 @@ _LinkTimeoutText::
 
 _LinkTradeCantBattleText::
 	text "If you trade that"
-	line "#MON, you won't"
+	line "BUDDYMON, you won't"
 	cont "be able to battle."
 	prompt
 
@@ -1308,13 +1308,13 @@ _SaveFileCorruptedText::
 
 _ChangeBoxSaveText::
 	text "When you change a"
-	line "#MON BOX, data"
+	line "BUDDYMON BOX, data"
 	cont "will be saved. OK?"
 	done
 
 _MoveMonWOMailSaveText::
 	text "Each time you move"
-	line "a #MON, data"
+	line "a BUDDYMON, data"
 	cont "will be saved. OK?"
 	done
 
@@ -1422,7 +1422,7 @@ _HerbShopLadyIntroText::
 	para "They're good, but"
 	line "a trifle bitter."
 
-	para "Your #MON may"
+	para "Your BUDDYMON may"
 	line "not like them."
 
 	para "Hehehehe…"

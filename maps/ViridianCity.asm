@@ -100,7 +100,7 @@ ViridianCityCoffeeGrampsQuestionText:
 	line "like much now, but"
 
 	para "I was an expert at"
-	line "catching #MON."
+	line "catching BUDDYMON."
 
 	para "Do you believe me?"
 	done
@@ -191,7 +191,7 @@ ViridianCitySignText:
 
 ViridianGymSignText:
 	text "VIRIDIAN CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: …"
 
 	para "The rest of the"

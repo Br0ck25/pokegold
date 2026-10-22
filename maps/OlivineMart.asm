@@ -21,7 +21,7 @@ OlivineMartLassScript:
 	jumptextfaceplayer OlivineMartLassText
 
 OlivineMartCooltrainerFText:
-	text "Do your #MON"
+	text "Do your BUDDYMON"
 	line "already know the"
 
 	para "move for carrying"

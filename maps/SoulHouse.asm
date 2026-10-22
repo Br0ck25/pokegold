@@ -27,20 +27,20 @@ MrFujiText:
 	para "Hmm… You appear to"
 	line "be raising your"
 
-	para "#MON in a kind"
+	para "BUDDYMON in a kind"
 	line "and loving manner."
 
-	para "#MON lovers"
+	para "BUDDYMON lovers"
 	line "come here to pay"
 
 	para "their respects to"
-	line "departed #MON."
+	line "departed BUDDYMON."
 
 	para "Please offer con-"
 	line "dolences for the"
 
 	para "souls of the de-"
-	line "parted #MON."
+	line "parted BUDDYMON."
 
 	para "I'm sure that will"
 	line "make them happy."
@@ -48,7 +48,7 @@ MrFujiText:
 
 SoulHouseTeacherText:
 	text "There are other"
-	line "graves of #MON"
+	line "graves of BUDDYMON"
 	cont "here, I think."
 
 	para "There are many"
@@ -58,12 +58,12 @@ SoulHouseTeacherText:
 
 SoulHouseLassText:
 	text "I came with my Mom"
-	line "to visit #MON"
+	line "to visit BUDDYMON"
 	cont "graves…"
 	done
 
 SoulHouseGrannyText:
-	text "The #MON that"
+	text "The BUDDYMON that"
 	line "lived with me…"
 
 	para "I loved them like"

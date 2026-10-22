@@ -194,7 +194,7 @@ _RemainingTimeText:: ; unreferenced
 	done
 
 _YourMonsHPWasHealedText:: ; unreferenced
-	text "Your #MON's HP"
+	text "Your BUDDYMON's HP"
 	line "was healed."
 	prompt
 
@@ -215,7 +215,7 @@ _WillYouPlayWithMonText:: ; unreferenced
 	done
 
 _YouNeedTwoMonForBreedingText:: ; unreferenced
-	text "You need two #-"
+	text "You need two BUDDY-"
 	line "MON for breeding."
 	prompt
 
@@ -473,7 +473,7 @@ _OPT_IntroText1::
 
 _OPT_IntroText2::
 	text_start
-	line "#MON TALK!"
+	line "BUDDYMON TALK!"
 	done
 
 _OPT_IntroText3::
@@ -669,7 +669,7 @@ _OPT_SpeedyText::
 	done
 
 _OPT_PokemonChannelText::
-	text "#MON"
+	text "BUDDYMON"
 	done
 
 _PokedexShowText::
@@ -682,7 +682,7 @@ _PokedexShowText::
 
 _BenIntroText1::
 	text_start
-	line "BEN: #MON MUSIC"
+	line "BEN: BUDDYMON MUSIC"
 	done
 
 _BenIntroText2::
@@ -697,7 +697,7 @@ _BenIntroText3::
 
 _FernIntroText1::
 	text_start
-	line "FERN: #MUSIC!"
+	line "FERN: BUDDYMUSIC!"
 	done
 
 _FernIntroText2::
@@ -724,12 +724,12 @@ _BenFernText2B::
 
 _BenFernText3A::
 	text_start
-	line "#MON March!"
+	line "BUDDYMON March!"
 	done
 
 _BenFernText3B::
 	text_start
-	line "#MON Lullaby!"
+	line "BUDDYMON Lullaby!"
 	done
 
 ; Lucky Channel
@@ -1018,7 +1018,7 @@ _JustSawSomeRareMonText::
 
 	para "I'll call you if I"
 	line "see another rare"
-	cont "#MON, OK?"
+	cont "BUDDYMON, OK?"
 	prompt
 
 _SavingRecordText::
@@ -1066,7 +1066,7 @@ _NPCTradeFanfareText::
 	text_end
 
 _NPCTradeIntroText1::
-	text "I collect #MON."
+	text "I collect BUDDYMON."
 	line "Do you have"
 	cont "@"
 	text_ram wStringBuffer1
@@ -1108,7 +1108,7 @@ _NPCTradeAfterText1::
 
 _NPCTradeIntroText2::
 	text "Hi, I'm looking"
-	line "for this #MON."
+	line "for this BUDDYMON."
 
 	para "If you have"
 	line "@"
@@ -1208,7 +1208,7 @@ _NPCTradeAfterText3::
 
 _MomLeavingText1::
 	text "Wow, that's a cute"
-	line "#MON."
+	line "BUDDYMON."
 
 	para "Where did you get"
 	line "it?"
@@ -1244,7 +1244,7 @@ _MomLeavingText2::
 _MomLeavingText3::
 	text "Be careful."
 
-	para "#MON are your"
+	para "BUDDYMON are your"
 	line "friends. You need"
 	cont "to work as a team."
 
@@ -1333,7 +1333,7 @@ _DaycareDummyText::
 _DayCareManIntroText::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"
-	cont "raise a #MON?"
+	cont "raise a BUDDYMON?"
 	done
 
 _DayCareManIntroEggText::
@@ -1342,7 +1342,7 @@ _DayCareManIntroEggText::
 	cont "about EGGS?"
 
 	para "I was raising"
-	line "#MON with my"
+	line "BUDDYMON with my"
 	cont "wife, you see."
 
 	para "We were shocked to"
@@ -1352,7 +1352,7 @@ _DayCareManIntroEggText::
 	line "that?"
 
 	para "So, want me to"
-	line "raise a #MON?"
+	line "raise a BUDDYMON?"
 	done
 
 _DayCareLadyIntroText::
@@ -1360,7 +1360,7 @@ _DayCareLadyIntroText::
 	line "LADY."
 
 	para "Should I raise a"
-	line "#MON for you?"
+	line "BUDDYMON for you?"
 	done
 
 _DayCareLadyIntroEggText::
@@ -1370,7 +1370,7 @@ _DayCareLadyIntroEggText::
 
 	para "My husband and I"
 	line "were raising some"
-	cont "#MON, you see."
+	cont "BUDDYMON, you see."
 
 	para "We were shocked to"
 	line "find an EGG!"
@@ -1379,7 +1379,7 @@ _DayCareLadyIntroEggText::
 	line "could that be?"
 
 	para "Should I raise a"
-	line "#MON for you?"
+	line "BUDDYMON for you?"
 	done
 
 _WhatShouldIRaiseText::
@@ -1389,7 +1389,7 @@ _WhatShouldIRaiseText::
 
 _OnlyOneMonText::
 	text "Oh? But you have"
-	line "just one #MON."
+	line "just one BUDDYMON."
 	prompt
 
 _CantAcceptEggText::
@@ -1440,7 +1440,7 @@ _YourMonHasGrownText::
 	text "."
 
 	para "If you want your"
-	line "#MON back, it"
+	line "BUDDYMON back, it"
 	cont "will cost ¥@"
 	text_decimal wStringBuffer2 + 2, 3, 4
 	text "."
@@ -1448,7 +1448,7 @@ _YourMonHasGrownText::
 
 _PerfectHeresYourMonText::
 	text "Perfect! Here's"
-	line "your #MON."
+	line "your BUDDYMON."
 	prompt
 
 _GotBackMonText::
@@ -1467,7 +1467,7 @@ _BackAlreadyText::
 	line "more time with us."
 
 	para "If you want your"
-	line "#MON back, it"
+	line "BUDDYMON back, it"
 	cont "will cost ¥100."
 	done
 
@@ -1497,18 +1497,18 @@ _FoundAnEggText::
 	text "Ah, it's you!"
 
 	para "We were raising"
-	line "your #MON, and"
+	line "your BUDDYMON, and"
 
 	para "my goodness, were"
 	line "we surprised!"
 
-	para "Your #MON had"
+	para "Your BUDDYMON had"
 	line "an EGG!"
 
 	para "We don't know how"
 	line "it got there, but"
 
-	para "your #MON had"
+	para "your BUDDYMON had"
 	line "it. You want it?"
 	done
 
@@ -1534,7 +1534,7 @@ _NoRoomForEggText::
 	done
 
 _WhichMonPhotoText::
-	text "Which #MON"
+	text "Which BUDDYMON"
 	line "should I photo-"
 	cont "graph?"
 	prompt
@@ -1564,14 +1564,14 @@ _NameRaterHelloText::
 	line "the NAME RATER."
 
 	para "I rate the names"
-	line "of #MON."
+	line "of BUDDYMON."
 
 	para "Would you like me"
 	line "to rate names?"
 	done
 
 _NameRaterWhichMonText::
-	text "Which #MON's"
+	text "Which BUDDYMON's"
 	line "nickname should I"
 	cont "rate for you?"
 	prompt
@@ -1639,7 +1639,7 @@ _NameRaterSameNameText::
 
 _NameRaterNamedText::
 	text "All right. This"
-	line "#MON is now"
+	line "BUDDYMON is now"
 	cont "named @"
 	text_ram wStringBuffer1
 	text "."
@@ -1738,7 +1738,7 @@ _ContainedMoveText::
 	para "Teach @"
 	text_ram wStringBuffer2
 	text_start
-	line "to a #MON?"
+	line "to a BUDDYMON?"
 	done
 
 _TMHMNotCompatibleText::
@@ -1782,7 +1782,7 @@ _MysteryGiftCommErrorText::
 
 _RetrieveMysteryGiftText::
 	text "Must retrieve GIFT"
-	line "at #MON CENTER."
+	line "at BUDDYMON CENTER."
 	prompt
 
 _YourFriendIsNotReadyText::

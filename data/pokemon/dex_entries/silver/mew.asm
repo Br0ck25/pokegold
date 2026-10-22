@@ -5,6 +5,6 @@
 	next "contain the genet-"
 	next "ic codes of all"
 
-	page "#MON, so it can"
+	page "BUDDYMON, so it can"
 	next "use all kinds of"
 	next "techniques.@"

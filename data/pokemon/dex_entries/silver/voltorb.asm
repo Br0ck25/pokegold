@@ -2,7 +2,7 @@
 	dw 108, 230 ; height, weight
 
 	db   "It was discovered"
-	next "when # BALLS"
+	next "when BUDDY BALLS"
 	next "were introduced."
 
 	page "It is said that"

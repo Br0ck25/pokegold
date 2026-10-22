@@ -176,14 +176,14 @@ GoldenrodCityCooltrainerF2Text:
 	cont "paign right now."
 
 	para "They'll modify"
-	line "your #GEAR,"
+	line "your BUDDYGEAR,"
 
 	para "so it can also"
 	line "serve as a radio."
 	done
 
 GoldenrodCityCooltrainerF2Text_GotRadioCard:
-	text "Oh, your #GEAR"
+	text "Oh, your BUDDYGEAR"
 	line "works as a radio!"
 	done
 
@@ -200,10 +200,10 @@ GoldenrodCityYoungster2Text:
 GoldenrodCityLassText:
 	text "The man at that"
 	line "house rates your"
-	cont "#MON names."
+	cont "BUDDYMON names."
 
 	para "He can even rename"
-	line "your #MON."
+	line "your BUDDYMON."
 	done
 
 GoldenrodCityGrampsText:
@@ -238,7 +238,7 @@ GoldenrodCityRocket2Text:
 	done
 
 GoldenrodCityRocket3Text:
-	text "#MON? They're"
+	text "BUDDYMON? They're"
 	line "nothing more than"
 
 	para "tools for making"
@@ -277,7 +277,7 @@ GoldenrodCityRadioTowerSignText:
 
 GoldenrodDeptStoreSignText:
 	text "Full Selection of"
-	line "#MON Goods!"
+	line "BUDDYMON Goods!"
 
 	para "GOLDENROD CITY"
 	line "DEPT.STORE"
@@ -285,7 +285,7 @@ GoldenrodDeptStoreSignText:
 
 GoldenrodGymSignText:
 	text "GOLDENROD CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: WHITNEY"
 
 	para "The Incredibly"
@@ -315,7 +315,7 @@ GoldenrodCityGameCornerSignText:
 GoldenrodCityNameRaterSignText:
 	text "NAME RATER"
 
-	para "Get Your #MON"
+	para "Get Your BUDDYMON"
 	line "Nicknames Rated"
 	done
 

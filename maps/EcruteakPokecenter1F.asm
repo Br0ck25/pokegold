@@ -107,7 +107,7 @@ EcruteakPokecenter1F_BillText2:
 	cont "TIME CAPSULE."
 
 	para "You know that"
-	line "#MON can be"
+	line "BUDDYMON can be"
 	cont "traded, right?"
 
 	para "My TIME CAPSULE"
@@ -135,7 +135,7 @@ EcruteakPokecenter1F_BillText2:
 	para "Put simply, no"
 	line "sending new moves"
 
-	para "or new #MON in"
+	para "or new BUDDYMON in"
 	line "the TIME CAPSULE."
 
 	para "Don't you worry."
@@ -146,7 +146,7 @@ EcruteakPokecenter1F_BillText2:
 	line "CAPSULES will be"
 
 	para "running at all"
-	line "#MON CENTERS."
+	line "BUDDYMON CENTERS."
 
 	para "I have to hurry on"
 	line "back to GOLDENROD"
@@ -161,7 +161,7 @@ EcruteakPokecenter1FPokefanMText:
 
 	para "marvelous. Just"
 	line "like the way they"
-	cont "use their #MON."
+	cont "use their BUDDYMON."
 	done
 
 EcruteakPokecenter1FCooltrainerFText:
@@ -169,7 +169,7 @@ EcruteakPokecenter1FCooltrainerFText:
 	line "LEADER, is soooo"
 	cont "cool."
 
-	para "His #MON are"
+	para "His BUDDYMON are"
 	line "really tough too."
 	done
 

@@ -42,15 +42,15 @@ PlayersNeighborsHouseRadioScript:
 
 PlayersNeighborsDaughterText:
 	text "PIKACHU is an"
-	line "evolved #MON."
+	line "evolved BUDDYMON."
 
 	para "I was amazed by"
-	line "PROF.ELM's find-"
+	line "PROF.WILLOW's find-"
 	cont "ings."
 
 	para "He's so famous for"
 	line "his research on"
-	cont "#MON evolution."
+	cont "BUDDYMON evolution."
 
 	para "…sigh…"
 
@@ -60,13 +60,13 @@ PlayersNeighborsDaughterText:
 	done
 
 PlayerNeighborRadioText1:
-	text "PROF.OAK'S #MON"
+	text "PROF.OAK'S BUDDYMON"
 	line "TALK! Please tune"
 	cont "in next time!"
 	done
 
 PlayerNeighborRadioText2:
-	text "#MON CHANNEL!"
+	text "BUDDYMON CHANNEL!"
 	done
 
 PlayerNeighborRadioText3:
@@ -75,8 +75,8 @@ PlayerNeighborRadioText3:
 	done
 
 PlayerNeighborRadioText4:
-	text "#MON!"
-	line "#MON CHANNEL…"
+	text "BUDDYMON!"
+	line "BUDDYMON CHANNEL…"
 	done
 
 PlayersNeighborsHouse_MapEvents:

@@ -9,9 +9,9 @@ Scenes.world = function (root) {
   const menus = popups(el);
   let map = null, people = null;
 
-  const build = (number) => {
-    const m = HD_MAPS[`${HD_GROUP}:${number}`];
-    map = number;
+  const build = (key) => {
+    const m = HD_MAPS[key];
+    map = key;
     world.innerHTML = Art.world(m, WORLD_MARGIN);
     world.style.width = `${(m.w + WORLD_MARGIN * 2) * 20}cqw`;
     loc.textContent = m.label;
@@ -23,7 +23,7 @@ Scenes.world = function (root) {
 
   return {
     update(state) {
-      if (state.map.number !== map) build(state.map.number);
+      if (state.map.key !== map) build(state.map.key);
       const cell = (n) => (n + WORLD_MARGIN * 2 + 0.5) * 10; // hero cell centre, in cqw from the map's top-left
       world.style.transform = `translate(calc(50cqw - ${cell(state.x)}cqw), calc(44cqh - ${cell(state.y)}cqw))`;
       people.update(state);
@@ -32,4 +32,4 @@ Scenes.world = function (root) {
     },
   };
 };
-Scenes.world.maps = Object.keys(HD_MAPS).filter((k) => k.startsWith(`${HD_GROUP}:`)).map((k) => +k.split(":")[1]);
+Scenes.world.maps = Object.keys(HD_MAPS);

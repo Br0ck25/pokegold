@@ -425,7 +425,7 @@ SupernerdEricSeenText:
 
 	para "I was trying to"
 	line "cheat using my"
-	cont "#MON…"
+	cont "BUDDYMON…"
 	done
 
 SupernerdEricBeatenText:
@@ -455,15 +455,15 @@ SupernerdTeruBeatenText:
 	done
 
 SupernerdTeruAfterBattleText:
-	text "I know my #MON"
+	text "I know my BUDDYMON"
 	line "type alignments."
 
 	para "But I only use one"
-	line "type of #MON."
+	line "type of BUDDYMON."
 	done
 
 PokemaniacIssacSeenText:
-	text "My #MON just"
+	text "My BUDDYMON just"
 	line "got haircuts!"
 
 	para "I'll show you how"
@@ -475,7 +475,7 @@ PokemaniacIssacBeatenText:
 	done
 
 PokemaniacIssacAfterBattleText:
-	text "Your #MON will"
+	text "Your BUDDYMON will"
 	line "like you more if"
 
 	para "you give them"
@@ -484,7 +484,7 @@ PokemaniacIssacAfterBattleText:
 
 PokemaniacDonaldSeenText:
 	text "I think you have"
-	line "some rare #MON"
+	line "some rare BUDDYMON"
 	cont "with you."
 
 	para "Let me see them!"
@@ -497,7 +497,7 @@ PokemaniacDonaldBeatenText:
 
 PokemaniacDonaldAfterBattleText:
 	text "Are you making a"
-	line "#DEX? Here's a"
+	line "BUDDYDEX? Here's a"
 	cont "hot tip."
 
 	para "The HIKER on ROUTE"
@@ -506,7 +506,7 @@ PokemaniacDonaldAfterBattleText:
 
 	para "He'll phone you if"
 	line "he sees any rare"
-	cont "#MON."
+	cont "BUDDYMON."
 	done
 
 GoldenrodUndergroundTheDoorsLockedText:
@@ -525,7 +525,7 @@ GoldenrodUndergroundBasementKeyOpenedDoorText:
 GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText:
 	text "Welcome!"
 
-	para "I run the #MON"
+	para "I run the BUDDYMON"
 	line "SALON!"
 
 	para "I'm the older and"
@@ -533,7 +533,7 @@ GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText:
 	cont "HAIRCUT BROTHERS."
 
 	para "I can make your"
-	line "#MON beautiful"
+	line "BUDDYMON beautiful"
 	cont "for just ¥{d:GOLDENRODUNDERGROUND_OLDER_HAIRCUT_PRICE}."
 
 	para "Would you like me"
@@ -541,7 +541,7 @@ GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText:
 	done
 
 GoldenrodUndergroundOlderHaircutBrotherAskWhichMonText:
-	text "Which #MON"
+	text "Which BUDDYMON"
 	line "should I work on?"
 	done
 
@@ -572,7 +572,7 @@ GoldenrodUndergroundOlderHaircutBrotherOneHaircutADayText:
 
 GoldenrodUndergroundYoungerHaircutBrotherOfferHaircutText:
 	text "Welcome to the"
-	line "#MON SALON!"
+	line "BUDDYMON SALON!"
 
 	para "I'm the younger"
 	line "and less expen-"
@@ -580,14 +580,14 @@ GoldenrodUndergroundYoungerHaircutBrotherOfferHaircutText:
 	cont "HAIRCUT BROTHERS."
 
 	para "I'll spiff up your"
-	line "#MON for just"
+	line "BUDDYMON for just"
 	cont "¥{d:GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE}."
 
 	para "So? How about it?"
 	done
 
 GoldenrodUndergroundYoungerHaircutBrotherAskWhichMonText:
-	text "OK, which #MON"
+	text "OK, which BUDDYMON"
 	line "should I do?"
 	done
 

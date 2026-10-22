@@ -236,7 +236,7 @@ CooltrainermJakeSeenText:
 	text "I'm making my"
 	line "final preparations"
 
-	para "for the #MON"
+	para "for the BUDDYMON"
 	line "LEAGUE."
 	done
 
@@ -271,7 +271,7 @@ CooltrainermGaven3BeatenText:
 	done
 
 CooltrainermGavenAfterText:
-	text "To get to #MON"
+	text "To get to BUDDYMON"
 	line "LEAGUE, you have"
 
 	para "to get through"
@@ -322,16 +322,16 @@ CooltrainerfBeth1SeenText:
 	cont "win at any cost."
 
 	para "I felt sorry for"
-	line "his #MON."
+	line "his BUDDYMON."
 	done
 
 CooltrainerfBeth1BeatenText:
-	text "#MON aren't"
+	text "BUDDYMON aren't"
 	line "tools of war."
 	done
 
 CooltrainerfBethAfterText:
-	text "#MON are in-"
+	text "BUDDYMON are in-"
 	line "valuable, lifelong"
 	cont "partners."
 	done
@@ -353,7 +353,7 @@ PsychicRichardBeatenText:
 	done
 
 PsychicRichardAfterBattleText:
-	text "People and #MON"
+	text "People and BUDDYMON"
 	line "grow from their"
 	cont "experiences."
 
@@ -379,14 +379,14 @@ FisherScottAfterBattleText:
 	text "Just like in fish-"
 	line "ing, it's all over"
 
-	para "in #MON if you"
+	para "in BUDDYMON if you"
 	line "give up."
 	done
 
 Route26SignText:
 	text "ROUTE 26"
 
-	para "#MON LEAGUE"
+	para "BUDDYMON LEAGUE"
 	line "RECEPTION GATE"
 	done
 

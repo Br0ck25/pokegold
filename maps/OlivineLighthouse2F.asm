@@ -131,7 +131,7 @@ GentlemanAlfredBeatenText:
 	done
 
 GentlemanAlfredAfterBattleText:
-	text "Up top is a #-"
+	text "Up top is a BUDDY-"
 	line "MON that keeps the"
 	cont "LIGHTHOUSE lit."
 

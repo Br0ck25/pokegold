@@ -3,7 +3,7 @@
 
 	db   "With sharp claws,"
 	next "this ferocious,"
-	next "ancient #MON"
+	next "ancient BUDDYMON"
 
 	page "rips apart prey"
 	next "and sucks their"

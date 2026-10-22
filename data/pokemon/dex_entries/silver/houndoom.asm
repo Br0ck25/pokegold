@@ -3,7 +3,7 @@
 
 	db   "Upon hearing its"
 	next "eerie howls, other"
-	next "#MON get the"
+	next "BUDDYMON get the"
 
 	page "shivers and head"
 	next "straight back to"

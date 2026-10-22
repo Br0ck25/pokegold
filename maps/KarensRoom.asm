@@ -86,7 +86,7 @@ KarenScript_KarenBeforeText:
 	line "How amusing."
 
 	para "I love dark-type"
-	line "#MON."
+	line "BUDDYMON."
 
 	para "I find their wild,"
 	line "tough image to be"
@@ -108,9 +108,9 @@ KarenScript_KarenBeatenText:
 	done
 
 KarenScript_KarenDefeatText:
-	text "Strong #MON."
+	text "Strong BUDDYMON."
 
-	para "Weak #MON."
+	para "Weak BUDDYMON."
 
 	para "That is only the"
 	line "selfish perception"

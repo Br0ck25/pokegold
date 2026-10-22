@@ -2,7 +2,7 @@
 	dw 104, 130 ; height, weight
 
 	db   "This intelligent"
-	next "#MON roasts"
+	next "BUDDYMON roasts"
 	next "hard BERRIES with"
 
 	page "electricity to"

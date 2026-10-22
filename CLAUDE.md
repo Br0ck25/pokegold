@@ -30,6 +30,11 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 - `gfx/pokemon/<slot>/*.svg` creature art -> PNG via `tools/svgpic.py` (pixel fallback only).
 - Rules for UI/UX/art: **`web/docs/UI.md`**.
 
+## World naming (game text)
+Buddymon (not Pokemon / `#MON` / `<PKMN>`), BUDDYDEX, BUDDYGEAR, BUDDY BALL, **PROF. WILLOW** (not Elm), Prof. at the start is Willow too.
+Use the full words in strings (trainer class names have a 12-char limit). Still original and untouched: Oak mentions in radio text, species names
+other than the three starters, "POKé"-free item names beyond the BALL/DOLL/FLUTE ones.
+
 ## Commands (from `web/`)
 - `npm run build` ROM + bundle + symbols. `npm run dev` local at :8787. `npm test` touch flow at 412x924 (dev must run).
 - `node make-worker.js [gold silver]` -> `paste/worker.js`. Deploy: `npm run deploy`.

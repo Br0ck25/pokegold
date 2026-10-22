@@ -182,14 +182,14 @@ OlivineCityRivalText:
 	para "Supposedly taking"
 	line "care of a sick"
 
-	para "#MON at the"
+	para "BUDDYMON at the"
 	line "LIGHTHOUSE."
 
 	para "Humph! Boo-hoo!"
 	line "Just let sick"
-	cont "#MON go!"
+	cont "BUDDYMON go!"
 
-	para "A #MON that"
+	para "A BUDDYMON that"
 	line "can't battle is"
 	cont "worthless!"
 
@@ -222,14 +222,14 @@ OlivineCitySailor1Text:
 
 OlivineCityStandingYoungsterPokegearText:
 	text "That thing you"
-	line "have--it's a #-"
+	line "have--it's a BUDDY-"
 	cont "GEAR, right? Wow,"
 	cont "that's cool."
 	done
 
 OlivineCityStandingYoungsterPokedexText:
 	text "Wow, you have a"
-	line "#DEX!"
+	line "BUDDYDEX!"
 
 	para "That is just so"
 	line "awesome."
@@ -258,7 +258,7 @@ OlivineCityPortSignText:
 
 OlivineGymSignText:
 	text "OLIVINE CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: JASMINE"
 
 	para "The Steel-Clad"

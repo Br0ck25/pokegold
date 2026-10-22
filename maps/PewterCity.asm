@@ -84,7 +84,7 @@ PewterCityCooltrainerFText:
 	line "PEWTER GYM?"
 
 	para "The LEADER uses"
-	line "rock-type #MON."
+	line "rock-type BUDDYMON."
 	done
 
 PewterCityBugCatcherText:
@@ -134,11 +134,11 @@ PewterCitySignText:
 
 PewterGymSignText:
 	text "PEWTER CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: BROCK"
 
 	para "The Rock Solid"
-	line "#MON Trainer"
+	line "BUDDYMON Trainer"
 	done
 
 PewterMuseumSignText:

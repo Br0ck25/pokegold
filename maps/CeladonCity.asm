@@ -81,7 +81,7 @@ CeladonCityFisherText:
 
 	para "I wonder if it'll"
 	line "ever evolve into a"
-	cont "frog #MON."
+	cont "frog BUDDYMON."
 	done
 
 CeladonCityPoliwrathText:
@@ -175,7 +175,7 @@ CeladonCitySignText:
 
 CeladonGymSignText:
 	text "CELADON CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: ERIKA"
 
 	para "The Nature-Loving"
@@ -202,7 +202,7 @@ CeladonCityTrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "GUARD SPEC."
-	line "protects #MON"
+	line "protects BUDDYMON"
 
 	para "against SPECIAL"
 	line "attacks such as"

@@ -112,37 +112,37 @@ VioletGymStatue:
 
 FalknerIntroText:
 	text "I'm FALKNER, the"
-	line "VIOLET #MON GYM"
+	line "VIOLET BUDDYMON GYM"
 	cont "leader!"
 
 	para "People say you can"
 	line "clip flying-type"
 
-	para "#MON's wings"
+	para "BUDDYMON's wings"
 	line "with a jolt of"
 	cont "electricity…"
 
 	para "I won't allow such"
 	line "insults to bird"
-	cont "#MON!"
+	cont "BUDDYMON!"
 
 	para "I'll show you the"
 	line "real power of the"
 
 	para "magnificent bird"
-	line "#MON!"
+	line "BUDDYMON!"
 	done
 
 FalknerWinLossText:
 	text "…Darn! My Dad's"
 	line "cherished bird"
-	cont "#MON…"
+	cont "BUDDYMON…"
 
 	para "All right."
 	line "Take this."
 
 	para "It's the official"
-	line "#MON LEAGUE"
+	line "BUDDYMON LEAGUE"
 	cont "ZEPHYRBADGE."
 	done
 
@@ -154,10 +154,10 @@ ReceivedZephyrBadgeText:
 FalknerZephyrBadgeText:
 	text "ZEPHYRBADGE"
 	line "raises the attack"
-	cont "power of #MON."
+	cont "power of BUDDYMON."
 
 	para "It also enables"
-	line "#MON to use"
+	line "BUDDYMON to use"
 
 	para "FLASH, if they"
 	line "have it, anytime."
@@ -168,7 +168,7 @@ FalknerZephyrBadgeText:
 
 FalknerTMMudSlapText:
 	text "By using a TM, a"
-	line "#MON will"
+	line "BUDDYMON will"
 
 	para "instantly learn a"
 	line "new move."
@@ -192,7 +192,7 @@ FalknerTMMudSlapText:
 	done
 
 FalknerFightDoneText:
-	text "There are #MON"
+	text "There are BUDDYMON"
 	line "GYMS in cities and"
 	cont "towns ahead."
 
@@ -215,7 +215,7 @@ BirdKeeperRodSeenText:
 	line "training night and"
 
 	para "day to become bird"
-	line "#MON masters."
+	line "BUDDYMON masters."
 
 	para "Come on!"
 	done

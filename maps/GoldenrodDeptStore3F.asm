@@ -33,7 +33,7 @@ GoldenrodDeptStore3FSuperNerdText:
 
 	para "I use X SPEED in"
 	line "battle to speed up"
-	cont "my #MON."
+	cont "my BUDDYMON."
 	done
 
 GoldenrodDeptStore3FRockerText:

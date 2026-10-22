@@ -175,10 +175,10 @@ RuinsOfAlphResearchCenterModifiedDexText:
 	text "Done!"
 
 	para "I modified your"
-	line "#DEX."
+	line "BUDDYDEX."
 
 	para "I added an"
-	line "optional #DEX"
+	line "optional BUDDYDEX"
 
 	para "to store UNOWN"
 	line "data."
@@ -189,7 +189,7 @@ RuinsOfAlphResearchCenterModifiedDexText:
 	done
 
 RuinsOfAlphResearchCenterDexUpgradedText:
-	text "<PLAYER>'s #DEX"
+	text "<PLAYER>'s BUDDYDEX"
 	line "was upgraded."
 	done
 
@@ -229,12 +229,12 @@ RuinsOfAlphResearchCenterScientist1Text:
 
 RuinsOfAlphResearchCenterScientist1Text_GotUnownDex:
 	text "I wonder how many"
-	line "kinds of #MON"
+	line "kinds of BUDDYMON"
 	cont "are in the RUINS?"
 	done
 
 RuinsOfAlphResearchCenterScientist1Text_UnownAppeared:
-	text "#MON appeared"
+	text "BUDDYMON appeared"
 	line "in the RUINS?"
 
 	para "That's incredible"
@@ -258,7 +258,7 @@ RuinsOfAlphResearchCenterScientist2Text:
 	done
 
 RuinsOfAlphResearchCenterScientist2Text_UnownAppeared:
-	text "The strange #-"
+	text "The strange BUDDY-"
 	line "MON you saw in the"
 	cont "RUINS?"
 
@@ -283,7 +283,7 @@ RuinsOfAlphResearchCenterComputerText:
 	done
 
 RuinsOfAlphResearchCenterComputerText_GotAllUnown:
-	text "Mystery #MON"
+	text "Mystery BUDDYMON"
 	line "Name: UNOWN"
 
 	para "A total of {d:NUM_UNOWN}"

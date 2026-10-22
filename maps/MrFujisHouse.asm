@@ -56,12 +56,12 @@ MrFujisHouseSuperNerdText:
 MrFujisHouseLassText:
 	text "Some cold-hearted"
 	line "people stop caring"
-	cont "for their #MON."
+	cont "for their BUDDYMON."
 
 	para "Grandpa takes in"
 	line "the poor homeless"
 
-	para "#MON and takes"
+	para "BUDDYMON and takes"
 	line "care of them."
 	done
 

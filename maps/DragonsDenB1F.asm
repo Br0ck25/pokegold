@@ -144,11 +144,11 @@ DragonShrineRisingBadgeExplanationText:
 	text "RISINGBADGE will"
 	line "enable your"
 
-	para "#MON to use the"
+	para "BUDDYMON to use the"
 	line "move for climbing"
 	cont "waterfalls."
 
-	para "Also, all #MON"
+	para "Also, all BUDDYMON"
 	line "will recognize you"
 
 	para "as a trainer and"
@@ -185,7 +185,7 @@ ClairText_CollectedAllBadges:
 	cont "BADGES."
 
 	para "Your destination"
-	line "is the #MON"
+	line "is the BUDDYMON"
 
 	para "LEAGUE in INDIGO"
 	line "PLATEAU."
@@ -201,7 +201,7 @@ ClairText_CollectedAllBadges:
 	cont "very tough."
 
 	para "Don't you dare"
-	line "lose at the #-"
+	line "lose at the BUDDY-"
 	cont "MON LEAGUE!"
 
 	para "If you do, I'll"
@@ -215,7 +215,7 @@ DragonShrineSignpostText:
 	text "DRAGON SHRINE"
 
 	para "A shrine honoring"
-	line "the dragon #MON"
+	line "the dragon BUDDYMON"
 
 	para "said to have lived"
 	line "in DRAGON'S DEN."
@@ -228,7 +228,7 @@ RivalText_Training1:
 	para "…No, I won't"
 	line "battle you now…"
 
-	para "My #MON aren't"
+	para "My BUDDYMON aren't"
 	line "ready to beat you."
 
 	para "I can't push them"
@@ -237,7 +237,7 @@ RivalText_Training1:
 	para "I have to be dis-"
 	line "ciplined to become"
 
-	para "the greatest #-"
+	para "the greatest BUDDY-"
 	line "MON trainer…"
 	done
 

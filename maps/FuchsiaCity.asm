@@ -85,7 +85,7 @@ FuchsiaCitySignText:
 
 FuchsiaGymSignText:
 	text "FUCHSIA CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: JANINE"
 
 	para "The Poisonous"

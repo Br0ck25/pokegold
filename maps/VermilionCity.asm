@@ -134,7 +134,7 @@ VermilionCityTeacherText:
 	done
 
 VermilionMachopOwnerText:
-	text "My #MON is"
+	text "My BUDDYMON is"
 	line "preparing the land"
 	cont "for construction."
 
@@ -160,7 +160,7 @@ VermilionCitySuperNerdText:
 
 	para "That big building"
 	line "is VERMILION's"
-	cont "#MON GYM."
+	cont "BUDDYMON GYM."
 	done
 
 VermilionCitySnorlaxSleepingText:
@@ -169,7 +169,7 @@ VermilionCitySnorlaxSleepingText:
 	done
 
 VermilionCityRadioNearSnorlaxText:
-	text "The #GEAR was"
+	text "The BUDDYGEAR was"
 	line "placed near the"
 	cont "sleeping SNORLAX…"
 
@@ -223,7 +223,7 @@ VermilionCityBadgeGuyAllBadgesText:
 
 VermilionCityBadgeGuyBattleEdgeText:
 	text "Having a variety"
-	line "of #MON types"
+	line "of BUDDYMON types"
 
 	para "should give you an"
 	line "edge in battle."
@@ -242,7 +242,7 @@ VermilionCitySignText:
 
 VermilionGymSignText:
 	text "VERMILION CITY"
-	line "#MON GYM"
+	line "BUDDYMON GYM"
 	cont "LEADER: LT.SURGE"
 
 	para "The Lightning"
@@ -250,9 +250,9 @@ VermilionGymSignText:
 	done
 
 PokemonFanClubSignText:
-	text "#MON FAN CLUB"
+	text "BUDDYMON FAN CLUB"
 
-	para "All #MON Fans"
+	para "All BUDDYMON Fans"
 	line "Welcome!"
 	done
 

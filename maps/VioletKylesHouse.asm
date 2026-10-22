@@ -19,7 +19,7 @@ Kyle:
 	end
 
 VioletKylesHousePokefanMText:
-	text "A #MON you get"
+	text "A BUDDYMON you get"
 	line "in a trade grows"
 	cont "quickly."
 

@@ -282,7 +282,7 @@ NationalParkLassText:
 	para "I printed out my"
 	line "favorites from my"
 
-	para "#DEX and stuck"
+	para "BUDDYDEX and stuck"
 	line "them on my bag."
 	done
 
@@ -303,7 +303,7 @@ NationalParkTeacher1Text:
 	line "time."
 
 	para "You must be a"
-	line "#MON trainer."
+	line "BUDDYMON trainer."
 
 	para "Since you're work-"
 	line "ing so hard, I"
@@ -313,7 +313,7 @@ NationalParkTeacher1Text:
 	done
 
 NationalParkTeacher1Text_GotQuickClaw:
-	text "Let a #MON hold"
+	text "Let a BUDDYMON hold"
 	line "that QUICK CLAW."
 
 	para "Sometimes it will"
@@ -324,12 +324,12 @@ NationalParkTeacher1Text_GotQuickClaw:
 NationalParkYoungster1Text:
 	text "I'm playing with"
 	line "stickers I printed"
-	cont "from my #DEX."
+	cont "from my BUDDYDEX."
 	done
 
 NationalParkYoungster2Text:
 	text "I get the other"
-	line "guy's #DEX"
+	line "guy's BUDDYDEX"
 	cont "sticker if I win."
 	done
 
@@ -350,7 +350,7 @@ NationalParkPersianText:
 
 NationalParkGameboyKidText:
 	text "I'm printing out"
-	line "my #DEX."
+	line "my BUDDYDEX."
 
 	para "You can also print"
 	line "out stuff like"
@@ -361,7 +361,7 @@ NationalParkGameboyKidText:
 
 SchoolboyJack1SeenText:
 	text "The world of"
-	line "#MON is deep."
+	line "BUDDYMON is deep."
 
 	para "There are still"
 	line "lots of things we"
@@ -384,12 +384,12 @@ SchoolboyJackTradeMonText:
 	para "There are {d:NUM_TMS} kinds"
 	line "of TM."
 
-	para "Traded #MON"
+	para "Traded BUDDYMON"
 	line "level up faster."
 	done
 
 PokefanfBeverly1SeenText:
-	text "My #MON are so"
+	text "My BUDDYMON are so"
 	line "cute. Let me show"
 	cont "them off to you."
 	done
@@ -411,7 +411,7 @@ PokefanBeverlyCuteMonText:
 	done
 
 PokefanmWilliamSeenText:
-	text "We adore our #-"
+	text "We adore our BUDDY-"
 	line "MON, even if they"
 	cont "dislike us."
 
@@ -420,12 +420,12 @@ PokefanmWilliamSeenText:
 	done
 
 PokefanmWilliamBeatenText:
-	text "M-my #MON!"
+	text "M-my BUDDYMON!"
 	done
 
 PokefanmWilliamAfterBattleText:
 	text "I lost the battle,"
-	line "but my #MON win"
+	line "but my BUDDYMON win"
 
 	para "the prize for"
 	line "being most lovely."

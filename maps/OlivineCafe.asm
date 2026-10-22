@@ -26,7 +26,7 @@ OlivineCafeFishingGuruScript:
 	jumptextfaceplayer OlivineCafeFishingGuruText
 
 OlivineCafeStrengthSailorText:
-	text "Hah! Your #MON"
+	text "Hah! Your BUDDYMON"
 	line "sure look like"
 	cont "lightweights!"
 
@@ -64,7 +64,7 @@ OlivineCafeFishingGuruText:
 	line "pools on the way"
 	cont "to CIANWOOD."
 
-	para "Your #MON must"
+	para "Your BUDDYMON must"
 	line "know a special"
 
 	para "move to get over"

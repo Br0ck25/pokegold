@@ -45,12 +45,12 @@ RuinsOfAlphAerodactylChamberDescriptionSign:
 
 RuinsOfAlphAerodactylChamberAncientReplicaText:
 	text "It's a replica of"
-	line "an ancient #-"
+	line "an ancient BUDDY-"
 	cont "MON."
 	done
 
 RuinsOfAlphAerodactylChamberDescriptionText:
-	text "This flying #-"
+	text "This flying BUDDY-"
 	line "MON attacked its"
 
 	para "prey with saw-like"

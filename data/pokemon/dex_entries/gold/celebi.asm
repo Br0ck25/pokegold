@@ -1,7 +1,7 @@
 	db "TIMETRAVEL@" ; species name
 	dw 200, 110 ; height, weight
 
-	db   "This #MON wan-"
+	db   "This BUDDYMON wan-"
 	next "ders across time."
 	next "Grass and trees"
 

@@ -413,7 +413,7 @@ CooltrainermKevinAfterBattleText:
 	text "That was a great"
 	line "battle!"
 
-	para "You and your #-"
+	para "You and your BUDDY-"
 	line "MON are truly out-"
 	cont "standing!"
 	done

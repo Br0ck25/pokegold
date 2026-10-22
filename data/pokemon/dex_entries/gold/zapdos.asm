@@ -2,7 +2,7 @@
 	dw 503, 1160 ; height, weight
 
 	db   "This legendary"
-	next "bird #MON"
+	next "bird BUDDYMON"
 	next "causes savage"
 
 	page "thunderstorms by"

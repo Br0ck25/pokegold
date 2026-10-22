@@ -92,7 +92,7 @@ OakWelcomeKantoText:
 	done
 
 OakLabDexCheckText:
-	text "How is your #-"
+	text "How is your BUDDY-"
 	line "DEX coming?"
 
 	para "Let's see…"
@@ -126,7 +126,7 @@ OakOpenMtSilverText:
 	line "mountain that is"
 
 	para "home to many wild"
-	line "#MON."
+	line "BUDDYMON."
 
 	para "It's too dangerous"
 	line "for your average"
@@ -183,7 +183,7 @@ OakYesKantoBadgesText:
 	done
 
 OaksAssistant1Text:
-	text "The PROF's #MON"
+	text "The PROF's BUDDYMON"
 	line "TALK radio program"
 
 	para "isn't aired here"
@@ -195,7 +195,7 @@ OaksAssistant1Text:
 
 OaksAssistant2Text:
 	text "Thanks to your"
-	line "work on the #-"
+	line "work on the BUDDY-"
 	cont "DEX, the PROF's"
 
 	para "research is coming"
@@ -206,7 +206,7 @@ OaksAssistant3Text:
 	text "Don't tell anyone,"
 	line "but PROF.OAK'S"
 
-	para "#MON TALK isn't"
+	para "BUDDYMON TALK isn't"
 	line "a live broadcast."
 	done
 
@@ -250,7 +250,7 @@ OaksLabPCText:
 	para "I'm delighted to"
 	line "hear that."
 
-	para "ELM in NEW BARK"
+	para "WILLOW in NEW BARK"
 	line "TOWN 8-)"
 	done
 

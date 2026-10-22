@@ -669,7 +669,7 @@ PartyMenuStrings:
 	dw ToWhichPKMNString
 
 ChooseAMonString:
-	db "Choose a #MON.@"
+	db "Choose a BUDDYMON.@"
 
 UseOnWhichPKMNString:
 	db "Use on which <PK><MN>?@"

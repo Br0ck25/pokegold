@@ -350,16 +350,16 @@ RocketBaseRivalText:
 	line "the guy in the"
 
 	para "cape who used"
-	line "dragon #MON?"
+	line "dragon BUDDYMON?"
 
-	para "My #MON were no"
+	para "My BUDDYMON were no"
 	line "match at all."
 
 	para "I don't care that"
 	line "I lost. I can beat"
 
 	para "him by getting"
-	line "stronger #MON."
+	line "stronger BUDDYMON."
 
 	para "It's what he said"
 	line "that bothers me…"
@@ -367,7 +367,7 @@ RocketBaseRivalText:
 	para "He told me that"
 	line "I don't love and"
 
-	para "trust my #MON"
+	para "trust my BUDDYMON"
 	line "enough."
 
 	para "I'm furious that I"
@@ -507,7 +507,7 @@ ScientistRossBeatenText:
 
 ScientistRossAfterBattleText:
 	text "A radio signal"
-	line "that drives #-"
+	line "that drives BUDDY-"
 	cont "MON mad…"
 
 	para "My experiment is a"
@@ -522,7 +522,7 @@ ScientistRossAfterBattleText:
 
 ScientistMitchSeenText:
 	text "I don't care that"
-	line "#MON are hurt"
+	line "BUDDYMON are hurt"
 	cont "by our experiment."
 	done
 

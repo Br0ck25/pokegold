@@ -119,12 +119,12 @@ EcruteakTinTowerEntranceWanderingSageText:
 	line "ahead was built"
 
 	para "as a roost for"
-	line "flying #MON."
+	line "flying BUDDYMON."
 	done
 
 EcruteakTinTowerEntranceWanderingSageText_GotRainbowWing:
 	text "The TIN TOWER"
-	line "shook! A #MON"
+	line "shook! A BUDDYMON"
 
 	para "must have returned"
 	line "to the top!"
@@ -132,12 +132,12 @@ EcruteakTinTowerEntranceWanderingSageText_GotRainbowWing:
 
 EcruteakTinTowerEntranceGrampsText:
 	text "Two towers…"
-	line "Two #MON…"
+	line "Two BUDDYMON…"
 
 	para "But when one"
 	line "burned down, both"
 
-	para "#MON flew away,"
+	para "BUDDYMON flew away,"
 	line "never to return."
 	done
 

@@ -26,7 +26,7 @@ const HD = (() => {
     return s.replace(/\u0000+/g, "").replace(/\s+$/g, "");
   };
 
-  let wb, root, scenes, current = null, currentId = null, busy = false, timer = null;
+  let wb, root, scenes, current = null, currentId = null, busy = false, timer = null, emptySince = 0;
   const flags = { seenNaming: false };
   const listeners = [];
 
@@ -40,10 +40,17 @@ const HD = (() => {
       while (c1 < 20 && tiles[r0 * 20 + c1] !== 0x7b) c1++;
       while (r1 < 18 && tiles[r1 * 20 + c0] !== 0x7d) r1++;
       if (c1 >= 20 || r1 >= 18) continue;
+      // Map tiles can share the corner tile id, so require the whole frame: ─ along top/bottom, │ down both sides, ┘ at the end.
+      let frame = tiles[r1 * 20 + c1] === 0x7e;
+      for (let c = c0 + 1; c < c1 && frame; c++) frame = tiles[r0 * 20 + c] === 0x7a && tiles[r1 * 20 + c] === 0x7a;
+      for (let r = r0 + 1; r < r1 && frame; r++) frame = tiles[r * 20 + c0] === 0x7c && tiles[r * 20 + c1] === 0x7c;
+      if (!frame) continue;
       const rows = [];
       for (let r = r0 + 1; r < r1; r++) {
-        const text = decode(tiles, r * 20 + c0 + 2, r * 20 + c1).trim();
-        if (text) rows.push({ text, selected: tiles[r * 20 + c0 + 1] === 0xed });
+        // The first interior column holds the cursor when there is one, otherwise already the text (e.g. THURSDAY).
+        const raw = decode(tiles, r * 20 + c0 + 1, r * 20 + c1);
+        const text = raw.replace(/^[▶▷]/, "").trim();
+        if (text) rows.push({ text, selected: raw.startsWith("▶") });
       }
       boxes.push({ c0, r0, c1, r1, rows });
     }
@@ -76,7 +83,7 @@ const HD = (() => {
     return {
       scene: at("wHDScene"),
       tiles, rows,
-      map: { group: at("wMapGroup"), number: at("wMapNumber") },
+      map: { group: at("wMapGroup"), number: at("wMapNumber"), key: `${at("wMapGroup")}:${at("wMapNumber")}` }, // "group:number"
       x: at("wXCoord"), y: at("wYCoord"),
       dir: (at("wPlayerDirection") >> 2) & 3, // 0 down, 1 up, 2 left, 3 right
       // Bordered boxes other than the dialogue box (Start menu, Yes/No...), see readBoxes().
@@ -132,9 +139,14 @@ const HD = (() => {
       case 0:
         // The battle HUD is on screen (not a Pack/Party screen or a transition): an enemy or player name in its place.
         if (state.battle && state.battle.enemy.name && (text(state, 0, 0, 12).includes(state.battle.enemy.name) || text(state, 7, 0, 20).includes(state.battle.player.name))) return "battle";
-        if (state.map.group !== HD_GROUP || (state.boxes.length && !state.boxes.every((b) => b.rows.length))) return null;
-        if (Scenes.room.maps.includes(state.map.number)) return "room";
-        return Scenes.world.maps.includes(state.map.number) ? "world" : null;
+        // A menu box is drawn a frame or two before its text: keep the current screen briefly instead of flashing pixels.
+        if (state.boxes.length && !state.boxes.every((b) => b.rows.length)) {
+          emptySince ||= performance.now();
+          return performance.now() - emptySince < 500 && currentId ? currentId : null;
+        }
+        emptySince = 0;
+        if (Scenes.room.maps.includes(state.map.key)) return "room";
+        return Scenes.world.maps.includes(state.map.key) ? "world" : null;
       default: return null;
     }
   }
@@ -168,7 +180,7 @@ const HD = (() => {
   }
 
   return {
-    last: null, text, cells, decode,
+    last: null, text, cells, decode, readBoxes,
     start(emulator, rootEl, sceneTable) {
       wb = emulator; root = rootEl; scenes = sceneTable;
       timer = setInterval(tick, 1000 / 30);

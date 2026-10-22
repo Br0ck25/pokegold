@@ -22,7 +22,7 @@ AzaleaMartBugCatcherScript:
 
 AzaleaMartCooltrainerMText:
 	text "There's no GREAT"
-	line "BALL here. #"
+	line "BALL here. BUDDY"
 
 	para "BALLS will have"
 	line "to do."
@@ -35,8 +35,8 @@ AzaleaMartCooltrainerMText:
 AzaleaMartBugCatcherText:
 	text "A GREAT BALL is"
 	line "better for catch-"
-	cont "ing #MON than a"
-	cont "# BALL."
+	cont "ing BUDDYMON than a"
+	cont "BUDDY BALL."
 
 	para "But KURT's might"
 	line "be better some-"

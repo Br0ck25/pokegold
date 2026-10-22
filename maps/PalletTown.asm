@@ -31,7 +31,7 @@ BluesHouseSign:
 	jumptext BluesHouseSignText
 
 PalletTownTeacherText:
-	text "I'm raising #-"
+	text "I'm raising BUDDY-"
 	line "MON too."
 
 	para "They serve as my"
@@ -43,7 +43,7 @@ PalletTownFisherText:
 	line "incredible!"
 
 	para "You can now trade"
-	line "#MON across"
+	line "BUDDYMON across"
 	cont "time like e-mail."
 	done
 
@@ -59,7 +59,7 @@ RedsHouseSignText:
 	done
 
 OaksLabSignText:
-	text "OAK #MON"
+	text "OAK BUDDYMON"
 	line "RESEARCH LAB"
 	done
 

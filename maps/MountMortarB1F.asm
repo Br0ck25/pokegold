@@ -93,7 +93,7 @@ MountMortarB1FTyrogueRewardText:
 	line "defeated me, I'll"
 
 	para "give you a rare"
-	line "fighting #MON."
+	line "fighting BUDDYMON."
 	done
 
 MountMortarB1FReceiveMonText:
@@ -106,7 +106,7 @@ MountMortarB1FKiyoGotTyrogueText:
 	line "fighting-type."
 
 	para "It evolves into a"
-	line "tougher #MON."
+	line "tougher BUDDYMON."
 
 	para "Keep up the hard"
 	line "work. I'll keep"

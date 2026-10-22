@@ -76,7 +76,7 @@ MeetMomScript:
 	end
 
 PokegearName:
-	db "#GEAR@"
+	db "BUDDYGEAR@"
 
 PlayersHouse1FReceiveItemStd:
 	jumpstd ReceiveItemScript
@@ -151,7 +151,7 @@ ElmsLookingForYouText:
 	text "Oh, <PLAYER>…! Our"
 	line "neighbor, PROF."
 
-	para "ELM, was looking"
+	para "WILLOW, was looking"
 	line "for you."
 
 	para "He said he wanted"
@@ -159,7 +159,7 @@ ElmsLookingForYouText:
 	cont "thing for him."
 
 	para "Oh! I almost for-"
-	line "got! Your #MON"
+	line "got! Your BUDDYMON"
 
 	para "GEAR is back from"
 	line "the repair shop."
@@ -168,8 +168,8 @@ ElmsLookingForYouText:
 	done
 
 MomGivesPokegearText:
-	text "#MON GEAR, or"
-	line "just #GEAR."
+	text "BUDDYMON GEAR, or"
+	line "just BUDDYGEAR."
 
 	para "It's essential if"
 	line "you want to be a"
@@ -201,7 +201,7 @@ ComeHomeForDSTText:
 
 KnowTheInstructionsText:
 	text "Don't you just"
-	line "turn the #GEAR"
+	line "turn the BUDDYGEAR"
 
 	para "on and select the"
 	line "PHONE icon?"
@@ -211,7 +211,7 @@ DontKnowTheInstructionsText:
 	text "I'll read the"
 	line "instructions."
 
-	para "Turn the #GEAR"
+	para "Turn the BUDDYGEAR"
 	line "on and select the"
 	cont "PHONE icon."
 	done
@@ -228,7 +228,7 @@ InstructionsNextText:
 	done
 
 HurryUpElmIsWaitingText:
-	text "PROF.ELM is wait-"
+	text "PROF.WILLOW is wait-"
 	line "ing for you."
 
 	para "Hurry up, baby!"
@@ -236,7 +236,7 @@ HurryUpElmIsWaitingText:
 
 SoWhatWasProfElmsErrandText:
 	text "So, what was PROF."
-	line "ELM's errand?"
+	line "WILLOW's errand?"
 
 	para "…"
 

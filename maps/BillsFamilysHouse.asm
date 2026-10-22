@@ -144,7 +144,7 @@ ReceivedEeveeText:
 	done
 
 BillEeveeMayEvolveText:
-	text "BILL: PROF.ELM"
+	text "BILL: PROF.WILLOW"
 	line "claims EEVEE may"
 
 	para "evolve in new and"
@@ -154,7 +154,7 @@ BillEeveeMayEvolveText:
 BillPartyFullText:
 	text "Whoa, wait. You"
 	line "can't carry any"
-	cont "more #MON."
+	cont "more BUDDYMON."
 	done
 
 BillNoEeveeText:
@@ -173,11 +173,11 @@ BillPopWontWorkText:
 
 BillsMomText_BeforeEcruteak:
 	text "Oh, you collect"
-	line "#MON? My son"
+	line "BUDDYMON? My son"
 	cont "BILL is an expert."
 
 	para "He had to leave"
-	line "for the #MON"
+	line "for the BUDDYMON"
 
 	para "CENTER in ECRUTEAK"
 	line "CITY."
@@ -203,7 +203,7 @@ RecordedBillsNumberText:
 
 BillsYoungerSisterRefusedNumberText:
 	text "My brother made"
-	line "the PC #MON"
+	line "the PC BUDDYMON"
 	cont "storage system."
 
 	para "I was going to"
@@ -220,7 +220,7 @@ BillsYoungerSisterStorageSystemText:
 	text "My big brother"
 	line "BILL made the PC"
 
-	para "#MON storage"
+	para "BUDDYMON storage"
 	line "system."
 	done
 

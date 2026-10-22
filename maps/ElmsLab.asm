@@ -666,7 +666,7 @@ AfterChikoritaMovement:
 	step_end
 
 ElmText_Intro:
-	text "ELM: <PLAYER>!"
+	text "WILLOW: <PLAYER>!"
 	line "There you are!"
 
 	para "I needed to ask"
@@ -674,7 +674,7 @@ ElmText_Intro:
 
 	para "I have an acquain-"
 	line "tance called MR."
-	cont "#MON."
+	cont "BUDDYMON."
 
 	para "He keeps finding"
 	line "weird things and"
@@ -691,54 +691,54 @@ ElmText_Intro:
 	para "It is intriguing,"
 	line "but we're busy"
 
-	para "with our #MON"
+	para "with our BUDDYMON"
 	line "research."
 
 	para "Could you look"
 	line "into it for us?"
 
 	para "I'll give you a"
-	line "#MON for a"
+	line "BUDDYMON for a"
 	cont "partner."
 
 	para "They're all rare"
-	line "#MON that we"
+	line "BUDDYMON that we"
 	cont "just found."
 
 	para "Go on. Pick one!"
 	done
 
 ElmText_LetYourMonBattleIt:
-	text "If a wild #MON"
+	text "If a wild BUDDYMON"
 	line "appears, let your"
-	cont "#MON battle it!"
+	cont "BUDDYMON battle it!"
 	done
 
 LabWhereGoingText:
-	text "ELM: Wait! Where"
+	text "WILLOW: Wait! Where"
 	line "are you going?"
 	done
 
 TakeCyndaquilText:
-	text "ELM: You'll take"
+	text "WILLOW: You'll take"
 	line "CYNDAQUIL, the"
-	cont "fire #MON?"
+	cont "fire BUDDYMON?"
 	done
 
 TakeTotodileText:
-	text "ELM: Do you want"
+	text "WILLOW: Do you want"
 	line "TOTODILE, the"
-	cont "water #MON?"
+	cont "water BUDDYMON?"
 	done
 
 TakeChikoritaText:
-	text "ELM: So, you like"
+	text "WILLOW: So, you like"
 	line "BRAMBLET, the"
-	cont "grass #MON?"
+	cont "grass BUDDYMON?"
 	done
 
 DidntChooseStarterText:
-	text "ELM: Think it over"
+	text "WILLOW: Think it over"
 	line "carefully."
 
 	para "Your partner is"
@@ -746,9 +746,9 @@ DidntChooseStarterText:
 	done
 
 ChoseStarterText:
-	text "ELM: I think"
+	text "WILLOW: I think"
 	line "that's a great"
-	cont "#MON too!"
+	cont "BUDDYMON too!"
 	done
 
 ReceivedStarterText:
@@ -759,7 +759,7 @@ ReceivedStarterText:
 	done
 
 ElmDirectionsText1:
-	text "MR.#MON lives"
+	text "MR.BUDDYMON lives"
 	line "near CHERRYGROVE,"
 	cont "the next city."
 
@@ -769,7 +769,7 @@ ElmDirectionsText1:
 	done
 
 ElmDirectionsText2:
-	text "If your #MON is"
+	text "If your BUDDYMON is"
 	line "hurt, you should"
 
 	para "heal it with this"
@@ -785,12 +785,12 @@ ElmDirectionsText3:
 	done
 
 GotElmsNumberText:
-	text "<PLAYER> got ELM's"
+	text "<PLAYER> got WILLOW's"
 	line "phone number."
 	done
 
 ElmDescribesMrPokemonText:
-	text "MR.#MON goes"
+	text "MR.BUDDYMON goes"
 	line "everywhere and"
 	cont "finds rarities."
 
@@ -804,8 +804,8 @@ ElmDescribesMrPokemonText:
 
 ElmPokeBallText:
 	text "It contains a"
-	line "#MON caught by"
-	cont "PROF.ELM."
+	line "BUDDYMON caught by"
+	cont "PROF.WILLOW."
 	done
 
 ElmsLabHealingMachineText1:
@@ -814,41 +814,41 @@ ElmsLabHealingMachineText1:
 	done
 
 ElmsLabHealingMachineText2:
-	text "Heal #MON?"
+	text "Heal BUDDYMON?"
 	done
 
 ElmAfterTheftText1:
-	text "ELM: <PLAYER>, this"
+	text "WILLOW: <PLAYER>, this"
 	line "is terrible…"
 
 	para "Oh, yes, what was"
-	line "MR.#MON's big"
+	line "MR.BUDDYMON's big"
 	cont "discovery?"
 	done
 
 ElmAfterTheftText2:
 	text "<PLAYER> handed"
 	line "the MYSTERY EGG to"
-	cont "PROF.ELM."
+	cont "PROF.WILLOW."
 	done
 
 ElmAfterTheftText3:
-	text "ELM: This?"
+	text "WILLOW: This?"
 	done
 
 ElmAfterTheftText4:
 	text "But… Is it a"
-	line "#MON EGG?"
+	line "BUDDYMON EGG?"
 
 	para "If it is, it is a"
 	line "great discovery!"
 	done
 
 ElmAfterTheftText5:
-	text "ELM: What?!?"
+	text "WILLOW: What?!?"
 
 	para "PROF.OAK gave you"
-	line "a #DEX?"
+	line "a BUDDYDEX?"
 
 	para "<PLAYER>, is that"
 	line "true? Th-that's"
@@ -867,10 +867,10 @@ ElmAfterTheftText5:
 
 	para "You seem to be"
 	line "getting on great"
-	cont "with #MON too."
+	cont "with BUDDYMON too."
 
 	para "You should take"
-	line "the #MON GYM"
+	line "the BUDDYMON GYM"
 	cont "challenge."
 
 	para "The closest GYM"
@@ -891,7 +891,7 @@ ElmAfterTheftText6:
 	done
 
 ElmStudyingEggText:
-	text "ELM: Don't give"
+	text "WILLOW: Don't give"
 	line "up! I'll call if"
 
 	para "I learn anything"
@@ -899,7 +899,7 @@ ElmStudyingEggText:
 	done
 
 ElmAideHasEggText:
-	text "ELM: <PLAYER>?"
+	text "WILLOW: <PLAYER>?"
 	line "Didn't you meet my"
 	cont "assistant?"
 
@@ -907,7 +907,7 @@ ElmAideHasEggText:
 	line "you with the EGG"
 
 	para "at VIOLET CITY's"
-	line "#MON CENTER."
+	line "BUDDYMON CENTER."
 
 	para "You must have just"
 	line "missed him. Try to"
@@ -915,7 +915,7 @@ ElmAideHasEggText:
 	done
 
 ElmWaitingEggHatchText:
-	text "ELM: Hey, has that"
+	text "WILLOW: Hey, has that"
 	line "EGG changed any?"
 	done
 
@@ -924,26 +924,26 @@ ElmThoughtEggHatchedText:
 	line "the EGG hatched."
 
 	para "Where is the"
-	line "#MON?"
+	line "BUDDYMON?"
 	done
 
 ShowElmTogepiText1:
-	text "ELM: <PLAYER>, you"
+	text "WILLOW: <PLAYER>, you"
 	line "look great!"
 	done
 
 ShowElmTogepiText2:
 	text "What?"
-	line "That #MON!?!"
+	line "That BUDDYMON!?!"
 	done
 
 ShowElmTogepiText3:
 	text "The EGG hatched!"
-	line "So, #MON are"
+	line "So, BUDDYMON are"
 	cont "born from EGGS…"
 
 	para "No, perhaps not"
-	line "all #MON are."
+	line "all BUDDYMON are."
 
 	para "Wow, there's still"
 	line "a lot of research"
@@ -954,7 +954,7 @@ ElmGiveEverstoneText1:
 	text "Thanks, <PLAYER>!"
 	line "You're helping"
 
-	para "unravel #MON"
+	para "unravel BUDDYMON"
 	line "mysteries for us!"
 
 	para "I want you to have"
@@ -967,34 +967,34 @@ ElmGiveEverstoneText2:
 	line "EVERSTONE."
 
 	para "Some species of"
-	line "#MON evolve"
+	line "BUDDYMON evolve"
 
 	para "when they grow to"
 	line "certain levels."
 
-	para "A #MON holding"
+	para "A BUDDYMON holding"
 	line "the EVERSTONE"
 	cont "won't evolve."
 
-	para "Give it to a #-"
+	para "Give it to a BUDDY-"
 	line "MON you don't want"
 	cont "to evolve."
 	done
 
 ElmText_CallYou:
-	text "ELM: <PLAYER>, I'll"
+	text "WILLOW: <PLAYER>, I'll"
 	line "call you if any-"
 	cont "thing comes up."
 	done
 
 AideText_AfterTheft:
 	text "…sigh… That"
-	line "stolen #MON."
+	line "stolen BUDDYMON."
 
 	para "I wonder how it's"
 	line "doing."
 
-	para "They say a #MON"
+	para "They say a BUDDYMON"
 	line "raised by a bad"
 
 	para "person turns bad"
@@ -1002,7 +1002,7 @@ AideText_AfterTheft:
 	done
 
 ElmGiveMasterBallText1:
-	text "ELM: Hi, <PLAYER>!"
+	text "WILLOW: Hi, <PLAYER>!"
 	line "Thanks to you, my"
 
 	para "research is going"
@@ -1020,11 +1020,11 @@ ElmGiveMasterBallText2:
 	para "It's the ultimate"
 	line "BALL! It'll catch"
 
-	para "any #MON with-"
+	para "any BUDDYMON with-"
 	line "out fail."
 
 	para "It's given only to"
-	line "recognized #MON"
+	line "recognized BUDDYMON"
 	cont "researchers."
 
 	para "I think you can"
@@ -1035,7 +1035,7 @@ ElmGiveMasterBallText2:
 	done
 
 ElmGiveTicketText1:
-	text "ELM: <PLAYER>!"
+	text "WILLOW: <PLAYER>!"
 	line "There you are!"
 
 	para "I called because I"
@@ -1046,7 +1046,7 @@ ElmGiveTicketText1:
 	line "S.S.TICKET."
 
 	para "Now you can catch"
-	line "#MON in KANTO."
+	line "BUDDYMON in KANTO."
 	done
 
 ElmGiveTicketText2:
@@ -1058,16 +1058,16 @@ ElmGiveTicketText2:
 
 	para "After all, you've"
 	line "traveled all over"
-	cont "with your #MON."
+	cont "with your BUDDYMON."
 
 	para "Give my regards to"
 	line "PROF.OAK in KANTO!"
 	done
 
 ElmsLabMonEggText: ; unreferenced
-	text "It's the #MON"
+	text "It's the BUDDYMON"
 	line "EGG being studied"
-	cont "by PROF.ELM."
+	cont "by PROF.WILLOW."
 	done
 
 AideText_GiveYouPotion:
@@ -1088,19 +1088,19 @@ AideText_TheftTestimony:
 
 	para "When we went to"
 	line "look, someone"
-	cont "stole a #MON."
+	cont "stole a BUDDYMON."
 
 	para "It's unbelievable"
 	line "that anyone would"
 	cont "do that!"
 
 	para "…sigh… That"
-	line "stolen #MON."
+	line "stolen BUDDYMON."
 
 	para "I wonder how it's"
 	line "doing."
 
-	para "They say a #MON"
+	para "They say a BUDDYMON"
 	line "raised by a bad"
 
 	para "person turns bad"
@@ -1111,26 +1111,26 @@ AideText_GiveYouBalls:
 	text "<PLAYER>!"
 
 	para "Use these on your"
-	line "#DEX quest!"
+	line "BUDDYDEX quest!"
 	done
 
 AideText_ExplainBalls:
 	text "To add to your"
-	line "#DEX, you have"
-	cont "to catch #MON."
+	line "BUDDYDEX, you have"
+	cont "to catch BUDDYMON."
 
-	para "Throw # BALLS"
-	line "at wild #MON"
+	para "Throw BUDDY BALLS"
+	line "at wild BUDDYMON"
 	cont "to get them."
 	done
 
 ElmsLabOfficerText1:
-	text "I heard a #MON"
+	text "I heard a BUDDYMON"
 	line "was stolen here…"
 
 	para "I was just getting"
 	line "some information"
-	cont "from PROF.ELM."
+	cont "from PROF.WILLOW."
 
 	para "Apparently, it was"
 	line "a young male with"
@@ -1202,7 +1202,7 @@ ElmsLabTravelTip4Text:
 
 	para "Travel Tip 4:"
 
-	para "Check your #MON"
+	para "Check your BUDDYMON"
 	line "moves. Press the"
 
 	para "A Button to switch"
@@ -1211,7 +1211,7 @@ ElmsLabTravelTip4Text:
 
 ElmsLabTrashcanText:
 	text "The wrapper from"
-	line "the snack PROF.ELM"
+	line "the snack PROF.WILLOW"
 	cont "ate is in there…"
 	done
 

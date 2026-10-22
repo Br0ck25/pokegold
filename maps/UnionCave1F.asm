@@ -88,7 +88,7 @@ HikerRussellSeenText:
 	text "You're headed to"
 	line "AZALEA, are you?"
 
-	para "Let my #MON see"
+	para "Let my BUDDYMON see"
 	line "if you are good"
 	cont "enough to battle."
 	done
@@ -102,30 +102,30 @@ HikerRussellAfterBattleText:
 	line "I've decided."
 
 	para "I'm not leaving"
-	line "until my #MON"
+	line "until my BUDDYMON"
 	cont "get tougher!"
 	done
 
 PokemaniacLarrySeenText:
 	text "I roam far and"
 	line "wide in search of"
-	cont "#MON."
+	cont "BUDDYMON."
 
 	para "Are you looking"
-	line "for #MON too?"
+	line "for BUDDYMON too?"
 
 	para "Then you're my"
 	line "collecting rival!"
 	done
 
 PokemaniacLarryBeatenText:
-	text "Ugh. My poor #-"
+	text "Ugh. My poor BUDDY-"
 	line "MON…"
 	done
 
 PokemaniacLarryAfterBattleText:
 	text "Every Friday, you"
-	line "can hear #MON"
+	line "can hear BUDDYMON"
 
 	para "roars from deep"
 	line "inside the cave."
@@ -150,13 +150,13 @@ HikerDanielAfterBattleText:
 	cont "TAIL."
 
 	para "I feel sorry for"
-	line "the poor #MON."
+	line "the poor BUDDYMON."
 	done
 
 FirebreatherBillSeenText:
 	text "ZUBAT's SUPERSONIC"
 	line "keeps confusing"
-	cont "my #MON."
+	cont "my BUDDYMON."
 
 	para "I'm seriously"
 	line "upset about that!"
@@ -179,7 +179,7 @@ FirebreatherRaySeenText:
 	line "cave isn't scary."
 
 	para "If you're strong,"
-	line "#MON aren't"
+	line "BUDDYMON aren't"
 	cont "scary."
 	done
 
@@ -188,7 +188,7 @@ FirebreatherRayBeatenText:
 	done
 
 FirebreatherRayAfterBattleText:
-	text "It's my #MON's"
+	text "It's my BUDDYMON's"
 	line "fire that lights"
 	cont "up this cave."
 	done

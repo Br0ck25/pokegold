@@ -6,5 +6,5 @@
 	next "but this very"
 
 	page "tough and durable"
-	next "#MON never gets"
+	next "BUDDYMON never gets"
 	next "tired.@"

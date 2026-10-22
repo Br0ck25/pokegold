@@ -140,11 +140,11 @@ MortyIntroText:
 	line "have come."
 
 	para "Here in ECRUTEAK,"
-	line "#MON have been"
+	line "BUDDYMON have been"
 	cont "revered."
 
 	para "It's said that"
-	line "legendary #MON"
+	line "legendary BUDDYMON"
 
 	para "will appear to the"
 	line "truly powerful"
@@ -167,7 +167,7 @@ MortyIntroText:
 
 	para "a future in which"
 	line "I meet the legen-"
-	cont "dary #MON."
+	cont "dary BUDDYMON."
 
 	para "You're going to"
 	line "help me reach that"
@@ -189,12 +189,12 @@ Text_ReceivedFogBadge:
 
 MortyText_FogBadgeSpeech:
 	text "By having FOG-"
-	line "BADGE, #MON up"
+	line "BADGE, BUDDYMON up"
 
 	para "to L50 will obey"
 	line "you."
 
-	para "Also, #MON that"
+	para "Also, BUDDYMON that"
 	line "know SURF will be"
 
 	para "able to use that"
@@ -232,7 +232,7 @@ MortyFightDoneText:
 
 SageJeffreySeenText:
 	text "I spent the spring"
-	line "with my #MON."
+	line "with my BUDDYMON."
 
 	para "Then summer, fall"
 	line "and winter…"
@@ -250,14 +250,14 @@ SageJeffreyBeatenText:
 	done
 
 SageJeffreyAfterBattleText:
-	text "Where did #MON"
+	text "Where did BUDDYMON"
 	line "come from?"
 	done
 
 SagePingSeenText:
 	text "Can you inflict"
 	line "any damage on our"
-	cont "#MON?"
+	cont "BUDDYMON?"
 	done
 
 SagePingBeatenText:
@@ -266,7 +266,7 @@ SagePingBeatenText:
 
 SagePingAfterBattleText:
 	text "We use only ghost-"
-	line "type #MON."
+	line "type BUDDYMON."
 
 	para "No normal-type"
 	line "attack can harm"

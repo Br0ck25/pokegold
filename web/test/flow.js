@@ -93,12 +93,16 @@ const out = process.argv[3] || "test/out";
 
     // Mom's scene ends with Yes/No clock questions: answer YES until the dialogue is over.
     let quiet = 0;
+    const said = [];
     for (let i = 0; i < 200 && quiet < 5; i++) {
+      const line = await page.evaluate(() => HD.last.dialogue && HD.last.dialogue.lines.join(" "));
+      if (line) said.push(line);
       const sel = await page.evaluate(() => document.querySelector("#hd .popup li.sel")?.textContent);
       if (sel === "NO") await tapDpad("UP");
       await tapKey("A"); await page.waitForTimeout(500);
       quiet = (await page.evaluate(() => !!HD.last.dialogue)) ? 0 : quiet + 1;
     }
+    if (!said.some((l) => /WILLOW/.test(l)) || said.some((l) => /\bELM\b/.test(l))) { console.error("FAIL: professor should be named WILLOW in dialogue", JSON.stringify(said.slice(0, 6))); process.exitCode = 1; }
     // Single steps (a 260ms press is one step) so every move lands on an exact cell.
     const walk = async (key, done, max = 15) => {
       for (let i = 0; i < max && !(await page.evaluate(done)); i++) {
@@ -115,7 +119,8 @@ const out = process.argv[3] || "test/out";
     await walk("LEFT", () => HD.last.x <= 6); await walk("UP", () => HD.last.map.number === 5);
     await page.waitForTimeout(2500);
     const lab = await scene();
-    if (lab.map !== 5 || !lab.label.includes("Elm's Lab") || lab.npcs < 1) { console.error("FAIL: Elm's lab not drawn with Elm", JSON.stringify(lab)); process.exitCode = 1; }
+    if (lab.map !== 5 || !lab.label.includes("Willow's Lab") || lab.npcs < 1) { console.error("FAIL: Willow's lab not drawn with Willow", JSON.stringify(lab)); process.exitCode = 1; }
+    if (await page.locator("#hd .popup").count()) { console.error("FAIL: phantom popup in Willow's lab"); process.exitCode = 1; }
     await shot("lab");
   }
   console.log(process.exitCode ? "FAILED" : "OK", "scenes seen:", [...seen].join(","));

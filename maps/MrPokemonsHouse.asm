@@ -171,13 +171,13 @@ MrPokemonIntroText1:
 	text "Hello, hello! You"
 	line "must be <PLAYER>."
 
-	para "PROF.ELM said that"
+	para "PROF.WILLOW said that"
 	line "you would visit."
 	done
 
 MrPokemonIntroText2:
 	text "This is what I"
-	line "want PROF.ELM to"
+	line "want PROF.WILLOW to"
 	cont "examine."
 	done
 
@@ -188,7 +188,7 @@ MrPokemonsHouse_GotEggText:
 
 MrPokemonIntroText3:
 	text "I know a couple"
-	line "who run a #MON"
+	line "who run a BUDDYMON"
 	cont "DAY-CARE service."
 
 	para "They gave me that"
@@ -196,10 +196,10 @@ MrPokemonIntroText3:
 
 	para "I was intrigued,"
 	line "so I sent mail to"
-	cont "PROF.ELM."
+	cont "PROF.WILLOW."
 
-	para "For #MON evolu-"
-	line "tion, PROF.ELM is"
+	para "For BUDDYMON evolu-"
+	line "tion, PROF.WILLOW is"
 	cont "the authority."
 	done
 
@@ -211,14 +211,14 @@ MrPokemonIntroText4:
 MrPokemonIntroText5:
 	text "If my assumption"
 	line "is correct, PROF."
-	cont "ELM will know it."
+	cont "WILLOW will know it."
 	done
 
 MrPokemonsHouse_MrPokemonHealText:
 	text "You are returning"
-	line "to PROF.ELM?"
+	line "to PROF.WILLOW?"
 
-	para "Here. Your #MON"
+	para "Here. Your BUDDYMON"
 	line "should have some"
 	cont "rest."
 	done
@@ -240,42 +240,42 @@ MrPokemonsHouse_OakText1:
 	text "OAK: Aha! So"
 	line "you're <PLAYER>!"
 
-	para "I'm OAK! A #MON"
+	para "I'm OAK! A BUDDYMON"
 	line "researcher."
 
 	para "I was just visit-"
 	line "ing my old friend"
-	cont "MR.#MON."
+	cont "MR.BUDDYMON."
 
 	para "I heard you were"
 	line "running an errand"
 
-	para "for PROF.ELM, so I"
+	para "for PROF.WILLOW, so I"
 	line "waited here."
 
 	para "Oh! What's this?"
-	line "A rare #MON!"
+	line "A rare BUDDYMON!"
 
 	para "Let's see…"
 
 	para "Hm, I see!"
 
 	para "I understand why"
-	line "PROF.ELM gave you"
+	line "PROF.WILLOW gave you"
 
-	para "a #MON for this"
+	para "a BUDDYMON for this"
 	line "errand."
 
 	para "To researchers"
-	line "like PROF.ELM and"
+	line "like PROF.WILLOW and"
 
-	para "I, #MON are our"
+	para "I, BUDDYMON are our"
 	line "friends."
 
 	para "He saw that you"
 	line "would treat your"
 
-	para "#MON with love"
+	para "BUDDYMON with love"
 	line "and care."
 
 	para "…Ah!"
@@ -288,12 +288,12 @@ MrPokemonsHouse_OakText1:
 
 	para "See? This is the"
 	line "latest version of"
-	cont "#DEX."
+	cont "BUDDYDEX."
 
 	para "It automatically"
 	line "records data on"
 
-	para "#MON you've"
+	para "BUDDYMON you've"
 	line "seen or caught."
 
 	para "It's a hi-tech"
@@ -302,15 +302,15 @@ MrPokemonsHouse_OakText1:
 
 MrPokemonsHouse_GetDexText:
 	text "<PLAYER> received"
-	line "#DEX!"
+	line "BUDDYDEX!"
 	done
 
 MrPokemonsHouse_OakText2:
 	text "Go meet many kinds"
-	line "of #MON and"
+	line "of BUDDYMON and"
 
 	para "complete that"
-	line "#DEX!"
+	line "BUDDYDEX!"
 
 	para "But I've stayed"
 	line "too long."

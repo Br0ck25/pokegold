@@ -3,7 +3,7 @@
 
 	db   "Even in the most"
 	next "vicious storm,"
-	next "this #MON plays"
+	next "this BUDDYMON plays"
 
 	page "happily if thunder"
 	next "rumbles in the"

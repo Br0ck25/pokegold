@@ -3,7 +3,7 @@
 
 	db   "Revived from an"
 	next "ancient fossil,"
-	next "this #MON uses"
+	next "this BUDDYMON uses"
 
 	page "air stored in its"
 	next "shell to sink and"

@@ -81,13 +81,13 @@ TrainerCooltrainerfFran:
 CooltrainermCodySeenText:
 	text "It's not as if we"
 	line "all use dragon-"
-	cont "type #MON."
+	cont "type BUDDYMON."
 
 	para "My policy is to"
-	line "use #MON that"
+	line "use BUDDYMON that"
 
 	para "are stronger than"
-	line "dragon #MON."
+	line "dragon BUDDYMON."
 	done
 
 CooltrainermCodyBeatenText:
@@ -96,14 +96,14 @@ CooltrainermCodyBeatenText:
 
 CooltrainermCodyAfterBattleText:
 	text "But just watch!"
-	line "My #MON will"
+	line "My BUDDYMON will"
 
 	para "become even more"
 	line "powerful."
 
 	para "We'll be tougher"
 	line "as a trainer and"
-	cont "#MON team."
+	cont "BUDDYMON team."
 	done
 
 CooltrainerfFranSeenText:

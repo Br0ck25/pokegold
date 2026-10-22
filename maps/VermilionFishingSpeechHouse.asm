@@ -33,7 +33,7 @@ FishingDudeText:
 	para "Thanks to him, I"
 	line "caught a whole lot"
 
-	para "of a rare #MON."
+	para "of a rare BUDDYMON."
 	line "What a day it was!"
 	done
 

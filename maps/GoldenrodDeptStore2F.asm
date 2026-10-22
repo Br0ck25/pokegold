@@ -41,16 +41,16 @@ GoldenrodDeptStore2FElevatorButton:
 
 GoldenrodDeptStore2FUnusedText1: ; unreferenced
 	text "We intend to sell"
-	line "items for #MON"
+	line "items for BUDDYMON"
 	cont "to hold."
 
 	para "This is a free"
-	line "gift. Have a #-"
+	line "gift. Have a BUDDY-"
 	cont "MON hold it."
 	done
 
 GoldenrodDeptStore2FUnusedText2: ; unreferenced
-	text "Giving #MON"
+	text "Giving BUDDYMON"
 	line "items to hold dur-"
 	cont "ing battle could "
 	cont "tip the scales in"
@@ -58,7 +58,7 @@ GoldenrodDeptStore2FUnusedText2: ; unreferenced
 	done
 
 GoldenrodDeptStore2FYoungsterText:
-	text "#GEAR can store"
+	text "BUDDYGEAR can store"
 	line "up to ten phone"
 	cont "numbers."
 

@@ -92,7 +92,7 @@ CooltrainermNickBeatenText:
 	done
 
 CooltrainermNickAfterBattleText:
-	text "Your #MON style"
+	text "Your BUDDYMON style"
 	line "is stunning and"
 	cont "colorful, I admit."
 
@@ -117,7 +117,7 @@ CooltrainerfGwenAfterBattleText:
 	done
 
 CooltrainerfEmmaSeenText:
-	text "If the #MON I"
+	text "If the BUDDYMON I"
 	line "liked were there,"
 	cont "I'd go anywhere."
 
@@ -132,11 +132,11 @@ CooltrainerfEmmaBeatenText:
 
 CooltrainerfEmmaAfterBattleText:
 	text "Just once a week,"
-	line "a #MON comes to"
+	line "a BUDDYMON comes to"
 	cont "the water's edge."
 
 	para "I wanted to see"
-	line "that #MON…"
+	line "that BUDDYMON…"
 	done
 
 UnionCaveB2F_MapEvents:

@@ -149,7 +149,7 @@ LavRadioTowerName:   db "LAV<BSP>RADIO TOWER@"
 SilphCoName:         db "SILPH CO.@" ; unreferenced
 SafariZoneName:      db "SAFARI ZONE@" ; unreferenced
 SeafoamIslandsName:  db "SEAFOAM<BSP>ISLANDS@"
-PokemonMansionName:  db "#MON<BSP>MANSION@" ; unreferenced
+PokemonMansionName:  db "BUDDYMON<BSP>MANSION@" ; unreferenced
 CeruleanCaveName:    db "CERULEAN<BSP>CAVE@" ; unreferenced
 Route1Name:          db "ROUTE 1@"
 Route2Name:          db "ROUTE 2@"

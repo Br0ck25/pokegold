@@ -120,19 +120,19 @@ PokemonFanClubBraggingSign:
 
 PokemonFanClubChairmanDidYouVisitToHearAboutMyMonText:
 	text "I'm the CHAIRMAN"
-	line "of the #MON FAN"
+	line "of the BUDDYMON FAN"
 	cont "CLUB."
 
 	para "I've raised over"
-	line "150 #MON."
+	line "150 BUDDYMON."
 
 	para "I'm very fussy"
 	line "when it comes to"
-	cont "#MON."
+	cont "BUDDYMON."
 
 	para "Did you visit just"
 	line "to hear about my"
-	cont "#MON?"
+	cont "BUDDYMON?"
 	done
 
 PokemonFanClubChairmanRapidashText:
@@ -169,11 +169,11 @@ PokemonFanClubChairmanIWantYouToHaveThisText:
 
 PokemonFanClubChairmanItsARareCandyText:
 	text "It's a RARE CANDY"
-	line "that makes #MON"
+	line "that makes BUDDYMON"
 	cont "stronger."
 
 	para "I prefer making my"
-	line "#MON stronger"
+	line "BUDDYMON stronger"
 
 	para "by battling, so"
 	line "you can have it."
@@ -183,7 +183,7 @@ PokemonFanClubChairmanMoreTalesToTellText:
 	text "Hello, <PLAYER>!"
 
 	para "Did you come see"
-	line "me about my #-"
+	line "me about my BUDDY-"
 	cont "MON again?"
 
 	para "No? Oh… I had more"
@@ -200,7 +200,7 @@ PokemonFanClubChairmanHowDisappointingText:
 PokemonFanClubReceptionistText:
 	text "Our CHAIRMAN is"
 	line "very vocal when it"
-	cont "comes to #MON…"
+	cont "comes to BUDDYMON…"
 	done
 
 PokemonFanClubClefairyGuyClefairyIsSoAdorableText:
@@ -221,7 +221,7 @@ PokemonFanClubClefairyGuyMakingDoWithADollIFoundText:
 	para "catch one. So I'm"
 	line "making do with a"
 
-	para "# DOLL that I"
+	para "BUDDY DOLL that I"
 	line "found."
 	done
 
@@ -229,10 +229,10 @@ PokemonFanClubClefairyGuyTakeThisDollBackToGirlText:
 	text "Oh, I see now. The"
 	line "girl who lost this"
 
-	para "# DOLL is sad…"
+	para "BUDDY DOLL is sad…"
 
 	para "OK. Could you take"
-	line "this # DOLL"
+	line "this BUDDY DOLL"
 
 	para "back to that poor"
 	line "little girl?"
@@ -246,7 +246,7 @@ PokemonFanClubClefairyGuyTakeThisDollBackToGirlText:
 
 PokemonFanClubPlayerReceivedDollText:
 	text "<PLAYER> received"
-	line "# DOLL."
+	line "BUDDY DOLL."
 	done
 
 PokemonFanClubClefairyGuyGoingToGetARealClefairyText:
@@ -275,7 +275,7 @@ PokemonFanClubClefairyDollText:
 	line "Huh?"
 
 	para "Oh, right. It's a"
-	line "CLEFAIRY #"
+	line "CLEFAIRY BUDDY"
 	cont "DOLL."
 	done
 

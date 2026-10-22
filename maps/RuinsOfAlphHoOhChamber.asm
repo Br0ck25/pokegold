@@ -45,12 +45,12 @@ RuinsOfAlphHoOhChamberDescriptionSign:
 
 RuinsOfAlphHoOhChamberAncientReplicaText:
 	text "It's a replica of"
-	line "an ancient #-"
+	line "an ancient BUDDY-"
 	cont "MON."
 	done
 
 RuinsOfAlphHoOhChamberDescriptionText:
-	text "A #MON that"
+	text "A BUDDYMON that"
 	line "flew gracefully on"
 
 	para "rainbow-colored"

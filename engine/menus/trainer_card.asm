@@ -304,7 +304,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	ret
 
 .Dex_PlayTime:
-	db   "#DEX"
+	db   "BUDDYDEX"
 	next "PLAY TIME@"
 
 .Unused: ; unreferenced

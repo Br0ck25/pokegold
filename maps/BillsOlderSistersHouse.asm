@@ -21,7 +21,7 @@ BillsOlderSisterText:
 
 BillsOlderSistersHouseYoungsterText:
 	text "I saw these weird,"
-	line "slow #MON on"
+	line "slow BUDDYMON on"
 	cont "CYCLING ROAD."
 	done
 

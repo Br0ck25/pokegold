@@ -83,7 +83,7 @@ GoldenrodFlowerShopFloriaMustBeAMonText:
 	line "jumped!"
 
 	para "I think it must be"
-	line "a #MON."
+	line "a BUDDYMON."
 
 	para "But it would take"
 	line "someone like WHIT-"

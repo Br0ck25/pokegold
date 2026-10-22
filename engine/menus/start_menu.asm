@@ -197,11 +197,11 @@ StartMenu::
 .QuitString:     db "QUIT@"
 
 .PokedexDesc:
-	db   "#MON"
+	db   "BUDDYMON"
 	next "database@"
 
 .PartyDesc:
-	db   "Party <PKMN>"
+	db   "Party BUDDYMON"
 	next "status@"
 
 .PackDesc:

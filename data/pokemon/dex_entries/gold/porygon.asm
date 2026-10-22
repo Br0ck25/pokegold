@@ -2,7 +2,7 @@
 	dw 207, 800 ; height, weight
 
 	db   "It is a manmade"
-	next "#MON. Since it"
+	next "BUDDYMON. Since it"
 	next "doesn't breathe,"
 
 	page "people are eager"

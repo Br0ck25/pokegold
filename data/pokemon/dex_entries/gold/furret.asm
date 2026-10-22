@@ -6,5 +6,5 @@
 	next "skinny body. The"
 
 	page "nest is impossible"
-	next "for other #MON"
+	next "for other BUDDYMON"
 	next "to enter.@"

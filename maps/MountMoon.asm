@@ -98,7 +98,7 @@ MountMoonRivalTextBefore:
 
 	para "about what I was"
 	line "lacking with my"
-	cont "#MON…"
+	cont "BUDDYMON…"
 
 	para "And we came up"
 	line "with an answer."
@@ -111,7 +111,7 @@ MountMoonRivalTextWin:
 	text "<……> <……> <……>"
 
 	para "I thought I raised"
-	line "my #MON to be"
+	line "my BUDDYMON to be"
 
 	para "the best they"
 	line "could be…"
@@ -131,7 +131,7 @@ MountMoonRivalTextAfter:
 	cont "end."
 
 	para "I'm going to be"
-	line "the greatest #-"
+	line "the greatest BUDDY-"
 	cont "MON trainer ever."
 
 	para "Because these guys"
@@ -152,7 +152,7 @@ MountMoonRivalTextLoss:
 	para "I've repaid my"
 	line "debt to you."
 
-	para "With my #MON,"
+	para "With my BUDDYMON,"
 	line "I'm going to beat"
 
 	para "the CHAMPION and"
