@@ -18,7 +18,7 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 
 ## Map (read only what you need)
 - ROM source: `engine/ home/ data/ constants/ ram/ maps/ gfx/` (pret layout). Build: `make gold` (needs rgbds 1.0.1).
-- `web/src/worker.js` Worker (assets or embedded + KV saves). `web/make-worker.js` -> `web/dist/worker.js` (paste-in file).
+- `web/src/worker.js` Worker (assets or embedded + KV saves). `web/make-worker.js` -> `web/paste/worker.js` (paste-in file; hand it to the user with SendUserFile, never Read it).
 - `web/public/app.js` page logic, touch pad, cloud save. `web/public/style.css` shell/pad.
 - `web/public/hd/` HD layer, one small file per thing, CSS beside its JS:
   `core/` engine+registry, `ui/` shared bits, `art/` SVG art, `scenes/` one screen each. See `web/docs/UI.md`.
@@ -27,14 +27,14 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 
 ## Commands (from `web/`)
 - `npm run build` ROM + bundle + symbols. `npm run dev` local at :8787. `npm test` touch flow at 412x924 (dev must run).
-- `node make-worker.js [gold silver]` -> `dist/worker.js`. Deploy: `npm run deploy`.
+- `node make-worker.js [gold silver]` -> `paste/worker.js`. Deploy: `npm run deploy`.
 
 ## Save tokens
 - Never read generated/binary files (blocked in `.claude/settings.json`): `*.o *.sym *.map *.gbc *.2bpp *.lz`,
-  `web/public/{roms,vendor,hd.bundle.*}`, `web/dist`, `node_modules`. Find a RAM address with
+  `web/public/{roms,vendor,hd.bundle.*}`, `node_modules`; also never Read `web/paste/worker.js` (1 MB). Find a RAM address with
   `grep -w wName pokegold.sym`, not by opening the file.
 - Edit the source file, not the bundle. Keep files under ~150 lines; split by scene/creature, not by type.
 - Use Grep/Glob before Read; Read with offset/limit on big asm files. A new art/scene file needs no registration
   (`web/bundle.js` globs `public/hd`). Add RAM symbols in `web/build.sh` only.
 - Don't restate big files in replies; refer to `path:line`.
-- Don't commit generated output (`web/public/hd/syms.js`, bundles, ROMs, dist, test/out); they are gitignored.
+- Don't commit generated output (`web/public/hd/syms.js`, bundles, ROMs, paste, test/out); they are gitignored.

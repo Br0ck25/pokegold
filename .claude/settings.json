@@ -11,7 +11,6 @@
       "Read(./web/public/roms/**)",
       "Read(./web/public/vendor/**)",
       "Read(./web/public/hd.bundle.*)",
-      "Read(./web/dist/**)",
       "Read(./web/package-lock.json)"
     ]
   }

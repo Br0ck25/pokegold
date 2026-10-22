@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Writes dist/worker.js: one self-contained file you can paste into the
+// Writes paste/worker.js: one self-contained file you can paste into the
 // Cloudflare dashboard's Worker editor (page, app, and ROM(s) embedded).
 // Usage: node make-worker.js [gold] [silver]     (default: gold)
 // Build the ROMs first (./build.sh). The only binding it needs is a KV
@@ -37,7 +37,7 @@ const walk = (dir) => {
 walk("");
 const embedded = { files, roms };
 
-fs.mkdirSync(path.join(__dirname, "dist"), { recursive: true });
-const out = path.join(__dirname, "dist/worker.js");
+fs.mkdirSync(path.join(__dirname, "paste"), { recursive: true });
+const out = path.join(__dirname, "paste/worker.js");
 fs.writeFileSync(out, `const EMBEDDED = ${JSON.stringify(embedded)};\n\n${read("src/worker.js")}`);
 console.log(`${out}: ${(fs.statSync(out).size / 1e6).toFixed(2)} MB (${games.join(", ")})`);
