@@ -68,6 +68,14 @@ const out = process.argv[3] || "test/out";
   s = await st();
   if (!s.flags.GOT_BUDDYGEAR || s.say) fail("Mom's scene should finish and set GOT_BUDDYGEAR", s);
 
+  // The stairs work both ways.
+  await hold("UP", () => Game.state.map.key === "bedroom", 3000);
+  s = await page.evaluate(() => Game.state.map.key);
+  if (s !== "bedroom") fail("the stairs should lead back up to your room", s);
+  await hold("UP", () => Game.state.map.key === "livingroom", 3000);
+  s = await page.evaluate(() => Game.state.map.key);
+  if (s !== "livingroom") fail("and down again", s);
+
   // Out the front door and across New Bark Town, scene by scene as Gold has them.
   const goTo = async (tx, ty) => {
     const names = ["DOWN", "UP", "LEFT", "RIGHT"];

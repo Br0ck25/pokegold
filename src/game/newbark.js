@@ -9,7 +9,7 @@
   for (let y = 0; y < rows; y++) { put("T", [cols - 1, y]); if (y !== 9 && y !== 10) put("T", [0, y]); } // the road west is open at rows 9-10
   for (let y = 13; y <= 15; y++) for (let x = 9; x <= 11; x++) put("w", [x, y]);
   put("f", [2, 7], [9, 5], [20, 9], [18, 13], [12, 16], [6, 3], [1, 15]);
-  put("S", [10, 9], [7, 9], [12, 5], [13, 16], [7, 16]); // town sign, your house, lab, Willow's house, (7,16) is the neighbor's door sign
+  put("S", [10, 9], [8, 7], [12, 5], [13, 14], [8, 14]); // signs stand beside buildings, never in front of a door: town, your house, lab, Willow's house, neighbors'
   put("T", [1, 14], [2, 14], [1, 13]);
 
   const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
@@ -59,10 +59,10 @@
     ],
     signs: [
       { x: 10, y: 9, script: talk("NEW BARK TOWN. The town where the winds of a new beginning blow.") },
-      { x: 7, y: 9, script: talk((s) => `${s.name}'s house`) },
+      { x: 8, y: 7, script: talk((s) => `${s.name}'s house`) },
       { x: 12, y: 5, script: talk("WILLOW BUDDYMON LAB") },
-      { x: 13, y: 16, script: talk("WILLOW'S HOUSE") },
-      { x: 7, y: 16, script: talk("The neighbors' house") },
+      { x: 13, y: 14, script: talk("WILLOW'S HOUSE") },
+      { x: 8, y: 14, script: talk("The neighbors' house") },
     ],
     coords: [
       ...[9, 10].map((y) => ({ x: 1, y, script: teacherStops })),

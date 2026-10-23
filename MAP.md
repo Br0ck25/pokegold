@@ -16,7 +16,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/data/species.js` | 12 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level. |
 | `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
-| `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
+| `src/game/home.js` | 54 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/menu/card.js` | 33 | Trainer card, BuddyGear (the clock) and Options. |
 | `src/game/menu/center.js` | 13 | The Buddymon Center nurse: heals the whole party and makes this the place you wake up after a whiteout. |
@@ -84,7 +84,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
 | `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
 | `src/page/hd/scenes/world.js` | 40 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
-| `src/page/hd/ui/actors.js` | 43 | The hero and other people drawn over a room or world, kept in step with game state. |
+| `src/page/hd/ui/actors.js` | 44 | The hero and other people drawn over a room or world, kept in step with game state. |
 | `src/page/hd/ui/dialogue.css` | 17 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 20 | Bottom text box fed by state.dialogue (see core/engine.js). |
 | `src/page/hd/ui/dom.js` | 6 | DOM helpers shared by scenes. |

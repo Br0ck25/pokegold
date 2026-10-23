@@ -4,7 +4,7 @@ function actorLayer(wrap, box) {
   const npcs = new Map();
   const spawn = (cls) => {
     const a = h(`<div class="actor ${cls}"></div>`);
-    a.style.width = `${(117 / box.w) * 100}%`;
+    a.style.width = `${(104 / box.w) * 100}%`;
     wrap.appendChild(a);
     return a;
   };
@@ -16,6 +16,7 @@ function actorLayer(wrap, box) {
       if (!first) a.walkUntil = performance.now() + 400;
       else a.style.transition = "none"; // appear in place instead of gliding in from the corner
       a.dataset.x = x; a.dataset.y = y;
+      a.style.zIndex = y * 2 + (a.classList.contains("hero") ? 1 : 0); // whoever stands lower is drawn in front
       a.style.left = `${((x * 100 + 50 + box.ox) / box.w) * 100}%`;
       a.style.top = `${((y * 100 + 92 + box.oy) / box.h) * 100}%`;
       if (first) { a.offsetWidth; a.style.transition = ""; }
