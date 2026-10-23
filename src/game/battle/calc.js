@@ -34,8 +34,10 @@ const damageOf = (att, def, move) => {
 };
 
 const STATUS_TAG = { slp: "SLP", psn: "PSN", brn: "BRN", par: "PAR", frz: "FRZ" };
+// Max PP of a known move: the base value plus 20% of it (rounded down) for each PP UP used (up to 3), as in Gold.
+const maxPP = (slot) => MOVES[slot.id].pp + Math.floor(MOVES[slot.id].pp / 5) * (slot.ups || 0);
 // Full restore (Center, whiteout, rival aftermath): HP, PP and status.
-const healMon = (m) => { m.hp = statsFor(m).hp; m.status = null; m.sleep = 0; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; };
+const healMon = (m) => { m.hp = statsFor(m).hp; m.status = null; m.sleep = 0; for (const mv of m.moves) mv.pp = maxPP(mv); };
 const expGain = (foe, wild = true) => Math.floor(((SPECIES[foe.species].exp * foe.level) / 7) * (wild ? 1 : 1.5));
 
 // Catch chance, as in PokeBallEffect: ((3*max - 2*hp) * rate * net) / (3*max), + status bonus, capped at 255.

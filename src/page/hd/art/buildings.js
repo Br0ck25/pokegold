@@ -1,5 +1,5 @@
 // A building for the world scene, w x h cells (100 units each) drawn at (x, y): roof on top, wall below with windows, door on the bottom row.
-// opts: roof, wall colours; label for a shop-style plaque; door = column of the door (0-based, bottom row).
+// opts: roof, wall colours; label for a shop-style plaque; door = column of the door (0-based, bottom row; -1 = no front door).
 Art.building = function (b) {
   const o = `stroke="${INK}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"`;
   const W = b.w * 100, H = b.h * 100, roofH = Math.min(150, H * 0.5), wallY = roofH - 10;
@@ -13,7 +13,7 @@ Art.building = function (b) {
     <rect y="${H - 14}" width="${W}" height="14" fill="#c9a46a" ${o} stroke-width="3"/>${wins}
     <path d="M-12 ${roofH} L${W * 0.12} 0 H${W * 0.88} L${W + 12} ${roofH} Z" fill="${roof}" ${o}/>
     <g clip-path="inset(0)">${planks}</g>
-    <rect x="${dx + 18}" y="${H - 96}" width="64" height="96" rx="8" fill="#9a6a3a" ${o}/><circle cx="${dx + 68}" cy="${H - 46}" r="5" fill="#ffc93c"/>
+    ${b.door >= 0 ? `<rect x="${dx + 18}" y="${H - 96}" width="64" height="96" rx="8" fill="#9a6a3a" ${o}/><circle cx="${dx + 68}" cy="${H - 46}" r="5" fill="#ffc93c"/>` : ""}
     ${b.label ? `<rect x="${W / 2 - 60}" y="${roofH - 38}" width="120" height="34" rx="8" fill="#3a56b0" ${o}/><text x="${W / 2}" y="${roofH - 13}" text-anchor="middle" font-family="'Lilita One','Fredoka',sans-serif" font-size="24" fill="#fff">${b.label}</text>` : ""}
   </g>`;
 };

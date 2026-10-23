@@ -27,3 +27,15 @@ Also not reachable yet: Route 29's north gate to Route 46, Cherrygrove west road
 
 ## Naming still to do (see CLAUDE.md "World naming")
 Evolved forms of the starters and routes' species, other characters, towns beyond Cherrygrove.
+
+## Added with Route 31 / Violet City (still to do there)
+- Sprout Tower (3 floors, sages, Elder Li's FLASH) [maps/SproutTower1F-3F.asm]; Violet's door is shut with a message.
+- Route 32 (south) and Route 36 (west) are shut with messages; Dark Cave (Route 31) is shut with a message.
+- Violet hidden HYPER TONIC (needs Cut at (36,19)); PP UP and RARE CANDY need Surf (they stand in place, unreachable).
+- Kyle's house (trade system), the Center aide's EGG (eggs), nickname house bird, Center 2F (Communication Center).
+- Route 31: the sleepy man's MAIL quest (needs Mail), Wade's phone number and rematches (needs BuddyGear phone), Mom's worried call.
+- Badges do nothing yet (Gold: ZEPHYRBADGE boosts attack, obeys up to level 20ish, enables FLASH); trainer card shows only the count.
+- FALKNER's prize money and class money values are guesses (read data/trainers/attributes.asm).
+- Kanto-style nickname: nothing.
+- Maps built before tools/goldmap.py (New Bark, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house) use our own layouts, not Gold's real shapes: redo them from the tool when we revisit.
+- Spearlet/Spearhawk, Stinglet (no Kakuna/Beedrill line), Vinebud/Vinewhip (Victreebel needs a LEAF STONE) are partial species lines.

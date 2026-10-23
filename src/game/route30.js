@@ -8,6 +8,7 @@
   const fill = (kind, x0, y0, x1, y1) => { for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) cells[y][x] = kind; };
   fill("T", 0, 0, 31, 1); fill("T", 0, 0, 7, 39); fill("T", 26, 0, 31, 39); fill("T", 0, 39, 31, 39);
   fill("p", 15, 35, 16, 39); // south: Cherrygrove
+  fill("p", 15, 0, 16, 3); // north: Route 31
   fill("g", 8, 24, 13, 30); fill("g", 20, 14, 25, 20); fill("g", 8, 6, 12, 10); fill("g", 20, 34, 25, 37);
   fill("T", 8, 16, 11, 19); fill("T", 21, 25, 25, 28); fill("T", 8, 33, 11, 36);
   put("f", [14, 9], [18, 22], [13, 32], [24, 30], [10, 12], [24, 11]);
@@ -27,7 +28,7 @@
       buildings: [{ x: 14, y: 3, w: 5, h: 4, door: 2, to: "mrbuddy", tx: 2, ty: 6, dir: 1, roof: "#e0a03a" }],
     },
     wild: { rate: 10, morn: MORN, day: DAY, nite: NITE },
-    warps: [15, 16].map((x) => ({ x, y: 39, to: "cherrygrove", tx: x, ty: 1, dir: 0 })),
+    warps: [15, 16].map((x) => ({ x, y: 39, to: "cherrygrove", tx: x, ty: 1, dir: 0 })).concat([15, 16].map((x) => ({ x, y: 0, to: "route31", tx: x + 10, ty: 16, dir: 1 }))),
     npcs: [
       { id: 1, name: "YOUNGSTER", x: 19, y: 30, dir: 2, trainer: trainer("YOUNGSTER", "JOEY", [mon("nibblet", 4)], "I just lost, so I'm trying to find more BUDDYMON. Wait! You look weak! Come on, let's battle!", "Ugh. I don't have any more BUDDYMON.", "I have to have more BUDDYMON for battles. I'm going to catch some more!", "BEAT_JOEY") },
       { id: 2, name: "YOUNGSTER", x: 12, y: 21, dir: 3, trainer: trainer("YOUNGSTER", "MIKEY", [mon("chirplet", 2), mon("nibblet", 4)], "You're a BUDDYMON trainer, right? Then you have to battle!", "That's strange. I won before.", "Becoming a good trainer is really tough. I'm going to battle other people to get better.", "BEAT_MIKEY", 6) },

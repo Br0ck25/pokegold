@@ -40,13 +40,13 @@ Game.battle = async (s, foeMon, opts = {}) => {
     for (;;) {
       const c = await s.menu(["FIGHT", "PACK", "BUDDYMON", "RUN"], 2, "cmd");
       if (c === 0) {
-        const m = me.mon.moves, i = await s.menu(m.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`), 2, "moves");
+        const m = me.mon.moves, i = await s.menu(m.map((x) => `${MOVES[x.id].name}  ${x.pp}/${maxPP(x)}`), 2, "moves");
         if (i < 0) continue;
         if (m[i].pp <= 0) { await s.msg("No PP left for this move!"); continue; }
         return { type: "fight", slot: m[i] };
       }
       if (c === 1) {
-        const ids = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k]);
+        const ids = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && (ITEMS[k].net || ITEMS[k].heal || ITEMS[k].cure));
         if (!ids.length) { await s.msg("Your PACK is empty!"); continue; }
         const i = await s.menu([...ids.map((k) => `${ITEMS[k].name} x${P.bag[k]}`), "CANCEL"], 1, "pack");
         if (i < 0 || i >= ids.length) continue;

@@ -30,9 +30,10 @@ const Game = (() => {
     const warps = [];
     for (const b of w.buildings || []) {
       for (let y = b.y; y < b.y + b.h; y++) for (let x = b.x; x < b.x + b.w; x++) solid[y][x] = "#";
+      if (!(b.door >= 0)) continue; // a building with its doors elsewhere (side doors) draws no front door
       const dx = b.x + b.door, dy = b.y + b.h - 1;
       solid[dy][dx] = ".";
-      warps.push({ x: dx, y: dy, to: b.to, tx: b.tx, ty: b.ty, dir: b.dir ?? 1 });
+      if (b.to) warps.push({ x: dx, y: dy, to: b.to, tx: b.tx, ty: b.ty, dir: b.dir ?? 1 }); // no target: a doorway the map scripts itself
     }
     return { solid: solid.map((r) => r.join("")), warps };
   };
@@ -109,6 +110,22 @@ const Game = (() => {
       if ((await Game.battle(s, makeMon(species, level + bump))) === "lost") await Game.whiteout(s);
     });
   }
+  // Poison on foot (Gold: engine/events/poisonstep.asm): every 4 steps each poisoned buddymon loses 1 HP; at 0 it faints, and if that
+  // leaves nobody usable you black out. Returns true when it started a script (the step's other events wait).
+  G.poisonStep = () => {
+    const P = G.player;
+    P.steps = (P.steps || 0) + 1;
+    if (P.steps % 4 || !P.party.some((m) => m.status === "psn" && m.hp > 0)) return false;
+    G.run(async (s) => {
+      for (const m of P.party) {
+        if (m.status !== "psn" || m.hp <= 0) continue;
+        m.hp--;
+        if (m.hp <= 0) { m.status = null; await s.say(`${m.nick} fainted!`); }
+      }
+      if (!P.party.some((m) => m.hp > 0)) await G.whiteout(s);
+    });
+    return true;
+  };
   // Out of usable buddymon: lose half your money, everyone is healed, and you wake up at home.
   G.whiteout = async (s) => {
     await s.say(`${G.player.name} is out of usable BUDDYMON!`);
@@ -141,6 +158,7 @@ const Game = (() => {
       if (--moving > 0) return;
       const m = here(), w = (m.warps || []).find((g) => g.x === state.x && g.y === state.y);
       if (w) G.warp(w.to, w.tx, w.ty, w.dir);
+      else if (G.poisonStep()) return;
       else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y), t = !c && G.trainerSees(); if (c) G.run(c.script); else if (t) G.run(t.script); else encounter(m); }
       return;
     }

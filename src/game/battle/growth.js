@@ -31,7 +31,8 @@ async function learn(s, mon, id) {
   if (mon.moves.some((m) => m.id === id)) return;
   if (mon.moves.length < 4) { mon.moves.push({ id, pp: MOVES[id].pp }); return s.msg(`${mon.nick} learned ${MOVES[id].name}!`); }
   await s.say(`${mon.nick} wants to learn ${MOVES[id].name}, but it already knows four moves. Forget one?`);
-  const pick = await s.menu([...mon.moves.map((m) => MOVES[m.id].name), `Don't learn it`], 1, "forget");
+  const list = [...mon.moves.map((m) => MOVES[m.id].name), `Don't learn it`];
+  const pick = s.G.state.battle ? await s.menu(list, 1, "forget") : await s.choose(list, { c0: 6, r0: 3, cancel: list.length - 1 }); // TMs and candies teach outside battle too
   if (pick < 0 || pick >= mon.moves.length) return s.say(`${mon.nick} did not learn ${MOVES[id].name}.`);
   await s.say(`${mon.nick} forgot ${MOVES[mon.moves[pick].id].name} and learned ${MOVES[id].name}!`);
   mon.moves[pick] = { id, pp: MOVES[id].pp };

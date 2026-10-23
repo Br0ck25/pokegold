@@ -1,5 +1,7 @@
 // Trainers: an NPC with `trainer: { name, cls, party: [[species, level]...], money, sight, seen, beaten, after, flag }`.
 // They spot you down their line of sight (`sight` cells), shout, walk up, and battle; talking to one you beat gives its `after` line.
+// A party list [[species, level, optional move ids]...] -> mons (moves given = Gold's TRAINERTYPE_MOVES).
+Game.mkParty = (list) => list.map(([species, level, moves]) => { const m = makeMon(species, level); if (moves) m.moves = moves.map((id) => ({ id, pp: MOVES[id].pp })); return m; });
 Game.trainerScript = (n) => async (s) => {
   const t = n.trainer, flags = s.G.player.flags, me = () => s.G.state.objects.find((o) => o.id === n.id);
   if (flags[t.flag]) return s.say(t.after);
@@ -9,7 +11,7 @@ Game.trainerScript = (n) => async (s) => {
   o.dir = o.x === p.x ? (o.y < p.y ? 0 : 1) : o.x < p.x ? 3 : 2;
   await s.approach(n.id, [1, 0, 3, 2][o.dir]);
   await s.say(t.seen);
-  const result = await Game.battle(s, t.party.map(([species, level]) => makeMon(species, level)), { trainer: { name: `${t.cls} ${t.name}`, money: t.money ?? 16, win: t.beaten } });
+  const result = await Game.battle(s, Game.mkParty(t.party), { trainer: { name: `${t.cls} ${t.name}`, money: t.money ?? 16, win: t.beaten } });
   if (result === "lost") return Game.whiteout(s);
   flags[t.flag] = true;
   s.G.state.dialogue = null;

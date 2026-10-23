@@ -4,7 +4,7 @@ Game.cardScreen = async (s) => {
   const mins = Math.floor(P.play / 60), time = `${Math.floor(mins / 60)}:${String(mins % 60).padStart(2, "0")}`;
   await s.panel({
     title: "TRAINER CARD", rows: [],
-    lines: [`NAME  ${P.name}`, `ID NO.  ${String(P.id).padStart(5, "0")}`, `${Game.CURRENCY}  ${P.money}`, `BUDDYDEX  ${owned} caught`, `PLAY TIME  ${time}`, `BADGES  0 / 8`],
+    lines: [`NAME  ${P.name}`, `ID NO.  ${String(P.id).padStart(5, "0")}`, `${Game.CURRENCY}  ${P.money}`, `BUDDYDEX  ${owned} caught`, `PLAY TIME  ${time}`, `BADGES  ${(P.badges || []).length} / 8`],
   });
 };
 

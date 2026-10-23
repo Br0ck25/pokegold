@@ -19,5 +19,9 @@ const MOVES = {
   venom_dart: { name: "VENOM DART", type: "poison", power: 0, acc: 75, pp: 35, status: { kind: "psn", chance: 100 } },
   static_zap: { name: "STATIC ZAP", type: "electric", power: 40, acc: 100, pp: 30, status: { kind: "par", chance: 10 } },
   ember_puff: { name: "EMBER PUFF", type: "fire", power: 40, acc: 100, pp: 25, status: { kind: "brn", chance: 10 } },
+  vine_lash: { name: "VINE LASH", type: "grass", power: 35, acc: 100, pp: 10 },
+  growth: { name: "GROWTH", type: "normal", power: 0, acc: 100, pp: 40, effect: { stat: "spa", stages: 1, target: "self" } },
+  sting_bite: { name: "STING BITE", type: "poison", power: 15, acc: 100, pp: 35, status: { kind: "psn", chance: 30 } },
+  mud_slap: { name: "MUD SLAP", type: "ground", power: 20, acc: 100, pp: 10, effect: { stat: "acc", stages: -1, target: "foe" } },
   leaf_cutter: { name: "LEAF CUTTER", type: "grass", power: 55, acc: 95, pp: 25 },
 };

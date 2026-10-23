@@ -25,6 +25,17 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     }
     return out;
   });
+  // Every warp leads somewhere real: the target map exists and you arrive on a walkable cell.
+  const warps = await page.evaluate(() => {
+    const out = [];
+    for (const [key, m] of Object.entries(Game.maps)) for (const wp of m.warps || []) {
+      const t = Game.maps[wp.to];
+      if (!t) { out.push(`${key}: warp at (${wp.x},${wp.y}) goes to missing map ${wp.to}`); continue; }
+      if (!t.solid[wp.ty] || t.solid[wp.ty][wp.tx] !== ".") out.push(`${key}: warp (${wp.x},${wp.y}) -> ${wp.to} (${wp.tx},${wp.ty}) arrives inside a wall`);
+    }
+    return out;
+  });
+  problems.push(...warps);
   for (const p of problems) console.error("FAIL:", p);
   console.log(problems.length ? "FAILED" : "OK");
   process.exitCode = problems.length ? 1 : 0;

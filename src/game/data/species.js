@@ -24,4 +24,9 @@ const SPECIES = {
   scoutat: { name: "SCOUTAT", female: 0.5, evolve: null, types: ["normal"], base: [85, 76, 64, 90, 45, 55], catchRate: 90, exp: 116, growth: "fast", moves: { 1: ["scratch", "curl_up", "quick_strike"], 22: ["sharp_fang"] } },
   webspinner: { name: "WEBSPINNER", female: 0.5, evolve: null, types: ["bug", "poison"], base: [70, 90, 70, 40, 60, 60], catchRate: 90, exp: 134, growth: "fast", moves: { 1: ["tackle", "string_shot", "venom_dart"], 26: ["sharp_fang"] } },
   owlsage: { name: "OWLSAGE", female: 0.5, evolve: null, types: ["normal", "flying"], base: [100, 50, 50, 70, 76, 96], catchRate: 90, exp: 162, growth: "fast", moves: { 1: ["tackle", "growl", "peck", "lull_song"], 26: ["breeze"] } },
+  vinebud: { name: "VINEBUD", female: 0.5, evolve: { level: 21, to: "vinewhip" }, types: ["grass", "poison"], base: [50, 75, 35, 40, 70, 30], catchRate: 255, exp: 84, growth: "slow", moves: { 1: ["vine_lash"], 6: ["growth"], 15: ["lull_song"], 17: ["venom_dart"] } },
+  vinewhip: { name: "VINEWHIP", female: 0.5, evolve: null, types: ["grass", "poison"], base: [65, 90, 50, 55, 85, 45], catchRate: 120, exp: 151, growth: "slow", moves: { 1: ["vine_lash", "growth"], 6: ["growth"], 15: ["lull_song"], 17: ["venom_dart"], 30: ["leaf_cutter"] } },
+  stinglet: { name: "STINGLET", female: 0.5, evolve: null, types: ["bug", "poison"], base: [40, 35, 30, 50, 20, 20], catchRate: 255, exp: 52, growth: "fast", moves: { 1: ["sting_bite", "string_shot"] } },
+  spearlet: { name: "SPEARLET", female: 0.5, evolve: { level: 20, to: "spearhawk" }, types: ["normal", "flying"], base: [40, 60, 30, 70, 31, 31], catchRate: 255, exp: 58, growth: "fast", moves: { 1: ["peck", "growl"], 9: ["quick_strike"] } },
+  spearhawk: { name: "SPEARHAWK", female: 0.5, evolve: null, types: ["normal", "flying"], base: [65, 90, 65, 100, 61, 61], catchRate: 90, exp: 107, growth: "fast", moves: { 1: ["peck", "growl", "quick_strike"], 25: ["sharp_fang"] } },
 };

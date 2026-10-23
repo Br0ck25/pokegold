@@ -7,6 +7,31 @@ Game.useOn = async (s, key, mon) => {
     mon.status = null; mon.sleep = 0; s.G.player.bag[key]--;
     return s.say(`${mon.nick} was cured!`);
   }
+  if (it.levelup) {
+    if (mon.level >= 100) return s.say("It won't have any effect.");
+    s.G.player.bag[key]--;
+    const before = statsFor(mon).hp;
+    mon.level++; mon.exp = Math.max(mon.exp, growthExp(SPECIES[mon.species].growth, mon.level));
+    mon.hp += statsFor(mon).hp - before;
+    await s.say(`${mon.nick} grew to level ${mon.level}!`);
+    for (const id of SPECIES[mon.species].moves[mon.level] || []) await learn(s, mon, id);
+    await Game.evolve(s, mon);
+    return;
+  }
+  if (it.tm) {
+    if (mon.moves.some((m) => m.id === it.tm)) return s.say(`${mon.nick} already knows ${MOVES[it.tm].name}!`);
+    await learn(s, mon, it.tm);
+    if (mon.moves.some((m) => m.id === it.tm)) s.G.player.bag[key]--; // a TM is used up once it is taught
+    return;
+  }
+  if (it.ppup) {
+    const i = await s.choose([...mon.moves.map((m) => MOVES[m.id].name), "CANCEL"], { c0: 8, r0: 5, cancel: mon.moves.length });
+    if (i >= mon.moves.length) return;
+    const m = mon.moves[i];
+    if ((m.ups || 0) >= 3 || MOVES[m.id].pp < 5) return s.say("It won't have any effect.");
+    m.ups = (m.ups || 0) + 1; s.G.player.bag[key]--;
+    return s.say(`${MOVES[m.id].name}'s max PP rose!`);
+  }
   if (!it.heal || mon.hp <= 0 || mon.hp >= max) return s.say("It won't have any effect.");
   const gain = Math.min(it.heal, max - mon.hp);
   mon.hp += gain;
@@ -18,7 +43,7 @@ Game.statsCard = async (s, m) => {
   const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
   await s.panel({
     title: m.nick, g: m.gender, art: m.species, rows: [],
-    lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}${m.status ? "  ·  " + STATUS_TAG[m.status] : ""}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
+    lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}${m.status ? "  ·  " + STATUS_TAG[m.status] : ""}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${maxPP(x)}`)],
   });
 };
 
@@ -36,7 +61,7 @@ Game.partyScreen = async (s) => {
       const to = await s.panel({ title: `Switch ${mon.nick} with...`, rows: partyRows() }, at);
       if (to.key === "A" && to.i !== at) { [P.party[at], P.party[to.i]] = [P.party[to.i], P.party[at]]; at = to.i; }
     } else if (pick === 2) {
-      const keys = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && (ITEMS[k].heal || ITEMS[k].cure));
+      const keys = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && (ITEMS[k].heal || ITEMS[k].cure || ITEMS[k].levelup || ITEMS[k].ppup || ITEMS[k].tm));
       if (!keys.length) { await s.say("You have nothing to use."); continue; }
       const it = await s.choose([...keys.map((k) => `${ITEMS[k].name} x${P.bag[k]}`), "CANCEL"], { c0: 8, r0: 5, cancel: keys.length });
       if (it < keys.length) await Game.useOn(s, keys[it], mon);
