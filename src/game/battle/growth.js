@@ -5,7 +5,7 @@ const xpBar = (mon) => { const g = SPECIES[mon.species].growth, a = growthExp(g,
 // xpText: "into the level / needed for the next" as numbers, shown beside the bar.
 const xpText = (mon) => { const g = SPECIES[mon.species].growth, a = growthExp(g, mon.level); return `${mon.exp - a} / ${growthExp(g, mon.level + 1) - a}`; };
 
-async function awardExp(s, party, fought, foe, wild, refresh) {
+async function awardExp(s, party, fought, foe, wild, refresh, leveled) {
   const gain = Math.max(1, Math.floor(expGain(foe, wild) / fought.size));
   for (const mon of [...fought]) {
     if (mon.hp <= 0) continue;
@@ -16,7 +16,7 @@ async function awardExp(s, party, fought, foe, wild, refresh) {
     const growth = SPECIES[mon.species].growth;
     while (mon.level < 100 && levelFor(growth, mon.exp) > mon.level) {
       const before = statsFor(mon).hp;
-      mon.level++;
+      mon.level++; leveled?.add(mon);
       mon.hp += statsFor(mon).hp - before;
       refresh();
       await s.msg(`${mon.nick} grew to level ${mon.level}!`);

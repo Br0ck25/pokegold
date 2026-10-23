@@ -103,6 +103,16 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   const bar = await page.evaluate(() => Game.state.battle && Game.state.battle.me.xp);
   if (bar !== null && bar !== undefined && !(bar > 0)) fail("the EXP bar fills after a win", bar);
 
+  // Panels: the stats card (picture + 7 lines + Back) must fit, over the room scene.
+  for (const where of ["room"]) {
+    if (where === "room") await page.evaluate(() => { Game.run(async (s) => { await s.panel({ title: "BANDIT", g: "F", art: "bandit", rows: [], lines: ["Lv 8", "HP 26/26", "SP", "EXP", "a", "b", "c"] }); }); });
+    await page.waitForSelector(".panel-ui:not([hidden]) .pn-back", { timeout: 5000 });
+    await page.waitForTimeout(300);
+    const fit = await page.evaluate(() => { const p = document.querySelector(".panel-ui").getBoundingClientRect(), b = document.querySelector(".pn-back").getBoundingClientRect(), hero = document.querySelector(".pn-hero").getBoundingClientRect(); return { backInside: b.bottom <= p.bottom + 1, hero: hero.height }; });
+    if (!fit.backInside || fit.hero < 80) fail(`the stats card fits (${where})`, fit);
+    await page.evaluate(() => { Game.pick(-1); });
+    await page.waitForTimeout(300);
+  }
   console.log(failed ? "FAILED" : "OK");
   await browser.close();
   process.exitCode = failed ? 1 : 0;

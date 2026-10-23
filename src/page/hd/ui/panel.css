@@ -3,10 +3,10 @@
   background:linear-gradient(rgba(18,32,82,.97),rgba(8,14,40,.98)); border:.7cqw solid var(--gold); box-shadow:0 0 0 .5cqw var(--ink), 0 2cqw 6cqw rgba(0,0,0,.6); overflow:hidden; }
 #hd .panel-ui[hidden] { display:none; }
 #hd .panel-ui h2 { margin:0; font:400 6.4cqw 'Lilita One','Fredoka',sans-serif; letter-spacing:.2cqw; color:var(--gold); }
-#hd .pn-hero { width:42%; align-self:center; } #hd .pn-hero svg { width:100%; display:block; }
+#hd .pn-hero { flex:1 1 0; min-height:0; width:42%; align-self:center; } #hd .pn-hero svg { width:100%; height:100%; display:block; } /* the picture takes whatever height is left, so the lines and Back always fit */
 #hd .pn-tabs { display:flex; gap:1.6cqw; } #hd .pn-tabs span { flex:1; text-align:center; padding:1.6cqw 0; font-size:4cqw; font-weight:600; border-radius:2.6cqw; background:rgba(255,246,220,.08); }
 #hd .pn-tabs span.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); }
-#hd .pn-line { margin:0; font-size:4.6cqw; line-height:1.3; }
+#hd .pn-line { flex:none; margin:0; font-size:4.6cqw; line-height:1.3; }
 #hd .panel-ui ul { margin:0; padding:0; list-style:none; flex:1; min-height:0; overflow:auto; display:flex; flex-direction:column; gap:1.6cqw; }
 #hd .panel-ui li { display:flex; align-items:center; gap:3cqw; padding:2.2cqw 3cqw; border-radius:3.4cqw; background:rgba(255,246,220,.08); font-size:4.8cqw; min-height:12cqw; }
 #hd .panel-ui li.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); }
@@ -18,7 +18,7 @@
 #hd .pn-bar i { display:block; height:100%; border-radius:2cqw; background:#46c26f; } #hd .pn-bar i[data-level=warn] { background:#ffc93c; } #hd .pn-bar i[data-level=low] { background:#ff6b5e; }
 #hd .panel-ui li em { font-style:normal; font-size:4cqw; white-space:nowrap; opacity:.9; }
 #hd .pn-hint { margin:0; font-size:3.6cqw; opacity:.8; }
-#hd .pn-back { align-self:flex-end; min-height:11cqw; padding:0 7cqw; font:inherit; font-weight:700; font-size:4.6cqw; color:var(--cream); border-radius:4cqw; background:rgba(255,246,220,.12); border:.5cqw solid rgba(255,246,220,.35); }
+#hd .pn-back { flex:none; align-self:flex-end; min-height:11cqw; padding:0 7cqw; font:inherit; font-weight:700; font-size:4.6cqw; color:var(--cream); border-radius:4cqw; background:rgba(255,246,220,.12); border:.5cqw solid rgba(255,246,220,.35); }
 
 #hd .gender { margin-left:1.4cqw; font-weight:700; } #hd .gender.m { color:#4aa3e8; } #hd .gender.f { color:#ff7aa8; }
 #hd .panel-ui li.sel .gender { color:var(--ink); }

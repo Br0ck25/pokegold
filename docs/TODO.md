@@ -10,7 +10,8 @@ Keep this current. Add an item the moment you notice a gap; delete it (and say s
 - Credits screen text is still the old ROM-era wording (if it exists in the native engine; check).
 
 ## Systems missing vs Gold
-- Evolutions (level, stone, happiness, trade) [engine/pokemon/evolve.asm, data/pokemon/evos_attacks.asm].
+- Evolutions: level evolutions are in (`menu`-less, battle/evolve.js). Still missing: stones, happiness, trade, Gold's exact levels for every line, and evolve-time move learning [data/pokemon/evos_attacks.asm].
+- Evolved forms (FLUTTERBY, BRAMBLEAF, THORNKING, RAIDER, OUTLAW, CHOMPJAW, GATORMAW, SWOOPLET, SKYHAWK, GNAWLER, SCOUTAT, WEBSPINNER, OWLSAGE) use the procedural placeholder art and rough base stats; draw them and tune stats.
 - PC storage in the Center (boxes already collect overflow catches, but nothing opens them) [engine/pc/bills_pc.asm].
 - BuddyGear map screen and phone calls / trainer rematches [engine/pokegear/].
 - Overworld status effects (see polish), Repel, bike, Surf and other field moves, HMs.

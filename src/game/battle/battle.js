@@ -10,7 +10,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const side = (mon, label) => ({ mon, label, stats: statsFor(mon), stages: fresh() });
   const alive = () => P.party.filter((m) => m.hp > 0);
   const speed = (x) => x.stats.spe * stageMult(x.stages.spe) * (x.mon.status === "par" ? 0.25 : 1);
-  const fought = new Set();
+  const fought = new Set(), leveled = new Set();
   const foeLabel = (mon) => (trainer ? `${trainer.name}'s ${SPECIES[mon.species].name}` : `Wild ${SPECIES[mon.species].name}`);
   let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
@@ -61,7 +61,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const settle = async () => {
     if (them.mon.hp <= 0) {
       await s.msg(`${them.label} fainted!`);
-      await awardExp(s, P.party, fought, them.mon, !trainer, refresh);
+      await awardExp(s, P.party, fought, them.mon, !trainer, refresh, leveled);
       const next = foes[foes.indexOf(them.mon) + 1];
       if (!next) ended = "won";
       else {
@@ -155,5 +155,6 @@ Game.battle = async (s, foeMon, opts = {}) => {
     await s.say(`${P.name} got ${prize} ${Game.CURRENCY} for winning!`);
   }
   state.screen = null; state.battle = null; state.dialogue = null;
+  if (ended !== "lost") for (const m of P.party) if (leveled.has(m)) await Game.evolve(s, m);
   return ended;
 };

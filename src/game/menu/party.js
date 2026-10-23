@@ -20,7 +20,7 @@ Game.partyScreen = async (s) => {
     const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
     await s.panel({
       title: m.nick, g: m.gender, art: m.species, rows: [],
-      lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
+      lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}${m.status ? "  ·  " + STATUS_TAG[m.status] : ""}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
     });
   };
   let at = 0;

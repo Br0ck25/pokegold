@@ -32,7 +32,7 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
 - `npm run deploy`. KV namespace `SAVES` is the only binding.
 
 ## Naming (game text)
-Buddymon / BUDDYDEX / BUDDYGEAR / buddy nets; PROF. WILLOW; starters BRAMBLET / BANDIT (the tuxedo cat, the author's own cat) / CHOMPLET; Route 29 species CHIRPLET / NIBBLET / PEEKAT / HOOTLING.
+Buddymon / BUDDYDEX / BUDDYGEAR / buddy nets; PROF. WILLOW; starters BRAMBLET / BANDIT (the tuxedo cat, the author's own cat) / CHOMPLET; Route 29 species CHIRPLET / NIBBLET / PEEKAT / HOOTLING. Evolved forms: BRAMBLEAF, THORNKING, RAIDER, OUTLAW, CHOMPJAW, GATORMAW, SWOOPLET, SKYHAWK, GNAWLER, SCOUTAT, WEBSPINNER, OWLSAGE, FLUTTERBY.
 Original names for everything else as it is built; no real Pokemon/Nintendo names or text.
 
 ## Save tokens
@@ -48,4 +48,5 @@ Status conditions are in (sleep, poison, burn, paralysis, freeze; REMEDY cures).
 ## Layout rules (tested by `test/layout.js`)
 - Every outdoor exit is a dirt path ("p") that runs to the map edge and on out of the map; never a bare gap in trees.
 - Routes follow Gold: the way forward crosses tall grass; ledges (down-only) give a grass-free way back. Route 29 is the model.
+- Panels (party, stats, pack, dex) must fit: every line and the Back button inside the panel at phone size, in the tallest case (stats card).
 - Nothing on the battle screen may overlap (sprites, platforms, HUD cards, menu, message box).

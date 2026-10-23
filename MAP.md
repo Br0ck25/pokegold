@@ -4,8 +4,9 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 160 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/battle.js` | 161 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
 | `src/game/battle/calc.js` | 74 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
+| `src/game/battle/evolve.js` | 24 | Evolution after a battle (Gold: engine/pokemon/evolve.asm): a buddymon that levelled up and reached its species' evolve level changes form, |
 | `src/game/battle/growth.js` | 39 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 71 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
 | `src/game/cherrygrove.js` | 111 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
@@ -13,7 +14,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/core.js` | 178 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/data/items.js` | 10 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
 | `src/game/data/moves.js` | 24 | Moves. status: { kind: slp|psn|brn|par|frz, chance } inflicts a condition on the foe (chance in % for damaging moves; status moves use 100 and their acc). power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
-| `src/game/data/species.js` | 15 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level, female (chance 0-1 of a female; 1 = always). |
+| `src/game/data/species.js` | 28 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level, female (chance 0-1 of a female; 1 = always). |
 | `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
 | `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/lib/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
