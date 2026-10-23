@@ -1,6 +1,7 @@
 // The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw.
 // Map module: { room: {art, cols, rows, label}, solid: [rows of "#"/"."], warps: [{x,y,to,tx,ty,dir}],
-//   npcs: [{id, name, x, y, dir, script}], signs: [{x, y, script}], enter: async (s) => {} }
+//   npcs: [{id, name, x, y, dir, script, hideIf}], signs: [{x, y, script}], coords: [{x, y, script}] (run when stepped on), enter: async (s) => {} }
+// Outdoor maps give `world: {label, cols, rows, cells, buildings}` instead of `room`; buildings carry their door's warp (to, tx, ty).
 const Game = (() => {
   const STEP = 16, TURN = 6; // frames per step (~0.27s at 60 fps), frames spent turning on the spot
   const DX = [0, 0, -1, 1], DY = [1, -1, 0, 0]; // down, up, left, right
@@ -18,9 +19,26 @@ const Game = (() => {
     return x < 0 || y < 0 || y >= m.solid.length || x >= m.solid[0].length || m.solid[y][x] === "#" || !!npcAt(x, y);
   };
 
+  // Outdoor maps give `world` (see art/world.js); solid cells and building doors are derived from it.
+  const BLOCKING = "TcrwSv";
+  const fromWorld = (w) => {
+    const solid = w.cells.map((row) => [...row].map((k) => (BLOCKING.includes(k) ? "#" : ".")));
+    const warps = [];
+    for (const b of w.buildings || []) {
+      for (let y = b.y; y < b.y + b.h; y++) for (let x = b.x; x < b.x + b.w; x++) solid[y][x] = "#";
+      const dx = b.x + b.door, dy = b.y + b.h - 1;
+      solid[dy][dx] = ".";
+      warps.push({ x: dx, y: dy, to: b.to, tx: b.tx, ty: b.ty, dir: b.dir ?? 1 });
+    }
+    return { solid: solid.map((r) => r.join("")), warps };
+  };
+  G.newPlayer = () => ({ name: "", flags: {}, bag: {}, party: [] });
   G.register = (key, def) => {
+    if (def.world) {
+      Object.assign(def, fromWorld(def.world), { warps: [...fromWorld(def.world).warps, ...(def.warps || [])] });
+      WORLDS[key] = def.world;
+    } else ROOMS[key] = def.room;
     maps[key] = def;
-    ROOMS[key] = def.room;
   };
 
   G.step = (a, d) => { a.x += DX[d]; a.y += DY[d]; };
@@ -58,6 +76,7 @@ const Game = (() => {
       if (--moving > 0) return;
       const m = here(), w = (m.warps || []).find((g) => g.x === state.x && g.y === state.y);
       if (w) G.warp(w.to, w.tx, w.ty, w.dir);
+      else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y); if (c) G.run(c.script); }
       return;
     }
     if (Input.pressed("A")) return interact();

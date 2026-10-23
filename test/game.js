@@ -65,6 +65,51 @@ const out = process.argv[3] || "test/out";
   s = await st();
   if (!s.flags.GOT_BUDDYGEAR || s.say) fail("Mom's scene should finish and set GOT_BUDDYGEAR", s);
 
+  // Out the front door, across New Bark Town, into Willow's lab, and pick the grass buddymon.
+  const goTo = async (tx, ty) => {
+    const path = await page.evaluate(([tx, ty]) => {
+      const m = Game.maps[Game.state.map.key], key = (x, y) => `${x},${y}`;
+      const free = (x, y) => y >= 0 && y < m.solid.length && x >= 0 && x < m.solid[0].length && m.solid[y][x] !== "#" && !Game.state.objects.some((o) => o.x === x && o.y === y);
+      const D = [[0, 1], [0, -1], [-1, 0], [1, 0]], from = new Map([[key(Game.state.x, Game.state.y), null]]), q = [[Game.state.x, Game.state.y]];
+      while (q.length) {
+        const [x, y] = q.shift();
+        if (x === tx && y === ty) break;
+        D.forEach(([dx, dy], d) => { if (free(x + dx, y + dy) && !from.has(key(x + dx, y + dy))) { from.set(key(x + dx, y + dy), [x, y, d]); q.push([x + dx, y + dy]); } });
+      }
+      const out = []; for (let at = from.get(key(tx, ty)); at; at = from.get(key(at[0], at[1]))) out.unshift(at[2]);
+      return out;
+    }, [tx, ty]);
+    const names = ["DOWN", "UP", "LEFT", "RIGHT"];
+    for (const d of path) {
+      const before = await page.evaluate(() => [Game.state.map.key, Game.state.x, Game.state.y].join());
+      await page.evaluate((k) => setKey(k, true), names[d]);
+      await page.waitForFunction((b) => [Game.state.map.key, Game.state.x, Game.state.y].join() !== b, before, { timeout: 3000 }).catch(() => {});
+      await page.evaluate((k) => setKey(k, false), names[d]);
+      await page.waitForTimeout(380);
+    }
+  };
+  await goTo(7, 7);
+  await until(() => HD.last.map.key === "newbark", 5000);
+  await page.screenshot({ path: `${out}/7-newbark.png` });
+  await goTo(0, 8);
+  await until(() => HD.last.dialogue, 4000);
+  s = await st();
+  if (!/WILLOW/.test(s.say || "")) fail("the road west should be blocked until you see Willow", s);
+  for (let i = 0; i < 3; i++) await tapA();
+  await goTo(11, 13);
+  await until(() => HD.last.map.key === "willowlab", 5000);
+  for (let i = 0; i < 5; i++) await tapA();
+  await page.screenshot({ path: `${out}/8-lab.png` });
+  await goTo(6, 4);
+  await hold("UP", () => false, 500);
+  await tapA();
+  await page.waitForTimeout(300);
+  await tapA(); // YES is the first choice
+  for (let i = 0; i < 8; i++) await tapA();
+  const party = await page.evaluate(() => ({ party: Game.player.party, nets: Game.player.bag.buddy_net, got: Game.player.flags.GOT_STARTER }));
+  if (!party.got || party.party[0]?.species !== "bramblet" || party.nets !== 5) fail("choosing the grass buddymon should give it plus 5 nets", party);
+  await page.screenshot({ path: `${out}/9-starter.png` });
+
   // The game saved itself: a reload offers Continue and resumes in the living room.
   await page.evaluate(() => Game.save());
   await page.reload();
@@ -75,7 +120,7 @@ const out = process.argv[3] || "test/out";
   const labels = await page.evaluate(() => HD.last.menu.items.map((i) => i.label));
   if (labels[0] !== "Continue") fail("menu should offer Continue", labels);
   await tapA();
-  await until(() => HD.last && HD.last.map.key === "livingroom", 5000).catch(() => fail("Continue should resume in the living room", {}));
+  await until(() => HD.last && HD.last.map.key === "willowlab", 5000).catch(() => fail("Continue should resume in the lab", {}));
 
   console.log(failed ? "FAILED" : "OK");
   process.exitCode = failed ? 1 : 0;

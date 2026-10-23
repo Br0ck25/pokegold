@@ -46,7 +46,7 @@ Game.flow = (() => {
     const items = [{ id: "new", label: "New Game" }];
     if (saved) items.unshift({ id: "continue", label: "Continue", info: `${saved.player.name}` });
     if ((await menu(items)) === "continue") return saved;
-    Game.player = { name: "", flags: {}, bag: {} };
+    Game.player = Game.newPlayer();
     await Game.run(welcome);
     return null;
   };

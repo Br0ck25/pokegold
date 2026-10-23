@@ -20,7 +20,7 @@ Game.loadSave = async () => {
 };
 Game.boot = async (root) => {
   const saved = await Game.loadSave();
-  Game.start(root, saved ? saved.player : { name: "", flags: {}, bag: {} });
+  Game.start(root, saved ? { ...Game.newPlayer(), ...saved.player } : Game.newPlayer());
   const resume = await Game.flow(saved);
   setInterval(Game.save, 5000);
   addEventListener("pagehide", () => { lastCloud = 0; Game.save(); });

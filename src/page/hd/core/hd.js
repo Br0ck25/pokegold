@@ -3,7 +3,7 @@
 const HD = (() => {
   let root, scenes, current = null, currentId = null;
 
-  const pick = (state) => state.screen || (ROOMS[state.map.key] ? "room" : null);
+  const pick = (state) => state.screen || (ROOMS[state.map.key] ? "room" : WORLDS[state.map.key] ? "world" : null);
 
   function show(id) {
     if (id === currentId) return;

@@ -25,7 +25,7 @@
   Game.register("livingroom", {
     room: { art: "room1F", cols: 10, rows: 8, label: "Home · Living Room" },
     solid: solidGrid(10, 8, new Set([...rect(0, 0, 9, 0), ...rect(0, 1, 5, 1), ...rect(3, 2, 3, 3), ...rect(5, 3, 6, 4)])),
-    warps: [{ x: 9, y: 0, to: "bedroom", tx: 7, ty: 1, dir: 0 }],
+    warps: [{ x: 9, y: 0, to: "bedroom", tx: 7, ty: 1, dir: 0 }, { x: 6, y: 7, to: "newbark", tx: 5, ty: 7, dir: 0 }, { x: 7, y: 7, to: "newbark", tx: 5, ty: 7, dir: 0 }],
     npcs: [{
       id: 1, name: "MOM", x: 7, y: 3, dir: 2,
       script: async (s) => {

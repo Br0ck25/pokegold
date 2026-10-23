@@ -45,7 +45,9 @@ function scriptApi(G) {
     turn(who, d) { actor(who).dir = d; },
     wait: async (frames) => { for (let i = 0; i < frames; i++) await frame(); },
     warp: (map, x, y, dir) => G.warp(map, x, y, dir),
-    give(item) { G.player.bag[item] = (G.player.bag[item] || 0) + 1; },
+    give(item, n = 1) { G.player.bag[item] = (G.player.bag[item] || 0) + n; },
+    addBuddy(species, level) { G.player.party.push({ species, level, nick: species.toUpperCase() }); },
+    hide(id) { G.state.objects = G.state.objects.filter((o) => o.id !== id); },
   };
   return s;
 }

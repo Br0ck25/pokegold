@@ -60,6 +60,6 @@ the same player code, so registering keeps the guest's progress and logging in e
 ## Build order (each step playable)
 1. Engine core (done): loop, input, grid movement, collision, turn-first, warps, actors, flags, JSON save (`src/game/`).
 2. Start-up flow (done): splash, intro, title, menu, Willow's talk, typed name. Scene 1 (done): bedroom, living room, Mom.
-3. New Bark Town (outdoor map renderer) + Willow's lab + starter choice.
+3. New Bark Town (done: outdoor map renderer, neighbor, Willow's lab, starter choice + 5 nets).
 4. Route 29 + wild encounters + battle with buddy nets. 5. Cherrygrove, then onward.
 Persistence: save = JSON of flags, party, bag, map, position (device + KV through `/api/save`).

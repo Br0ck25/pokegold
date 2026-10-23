@@ -4,16 +4,20 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/core.js` | 91 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/core.js` | 110 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/home.js` | 53 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
-| `src/game/script.js` | 52 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/neighbor.js` | 16 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). |
+| `src/game/newbark.js` | 38 | New Bark Town (outdoors): your house, the neighbor's house, Willow's lab, a pond, and the road west to Route 29. 22 x 16 cells, original layout. |
+| `src/game/script.js` | 54 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/start.js` | 31 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
+| `src/game/willowlab.js` | 47 | Willow's lab: meet the professor, then pick your first buddymon from the three on the table (cells match art/willowLab.js). |
 | `src/page/app.js` | 46 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |
 | `src/page/hd/art/badger.js` | 23 | Brock Family emblem: a badger (brock = badger) in a gold-ringed crest. |
 | `src/page/hd/art/bramblet.js` | 27 | BRAMBLET: leaf-spined hedgehog (grass starter) |
+| `src/page/hd/art/buildings.js` | 20 | A building for the world scene, w x h cells (100 units each) drawn at (x, y): roof on top, wall below with windows, door on the bottom row. |
 | `src/page/hd/art/chirplet.js` | 21 | CHIRPLET (was Pidgey): fluffy chick-bird with a three-feather crest. |
 | `src/page/hd/art/chomplet.js` | 25 | CHOMPLET: shark pup (water starter), after the supplied reference style |
 | `src/page/hd/art/creature.js` | 7 | Art for a species id (as the game numbers them): hand-drawn where we have it, procedural otherwise. |
@@ -25,15 +29,19 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/introSea.js` | 16 | Intro act 1 backdrop: sunlit deep water, light rays, kelp (portrait, slice). |
 | `src/page/hd/art/logo.js` | 20 | The Buddymon Gold title logo (wordmark with badge), used by the title and menu scenes. |
 | `src/page/hd/art/looks.js` | 24 | Who is who: looks for Art.person. NPC keys are SPRITE_* names (see constants/sprite_constants.asm). |
+| `src/page/hd/art/neighborHouse.js` | 7 | The neighbor's house, 8 x 8 cells: shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4), plants (0,6) (7,6), door (2..3,7). |
 | `src/page/hd/art/nibblet.js` | 22 | NIBBLET (was Rattata): round purple mouse with big front teeth and a curly tail. |
 | `src/page/hd/art/peekat.js` | 22 | PEEKAT (was Sentret): meerkat standing tall on its tail, always keeping watch. |
 | `src/page/hd/art/person.js` | 31 | Overworld person, dir: 0 down, 1 up, 2 left, 3 right (viewBox 60 x 80). Look `o` comes from Art.looks: |
 | `src/page/hd/art/professor.js` | 30 | Friendly professor, bust portrait (viewBox 300 x 380) |
-| `src/page/hd/art/props.js` | 6 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are SPRITE_* names. |
+| `src/page/hd/art/props.js` | 9 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are the names maps give their objects. |
 | `src/page/hd/art/room.js` | 69 | The player's bedroom: an 8 x 6 grid, one cell = 100 units. Layout mirrors the |
 | `src/page/hd/art/room1F.js` | 46 | Player's house, ground floor: 10 x 8 cells of 100 units. Blocked cells (from the game's collision data): |
 | `src/page/hd/art/sky.js` | 30 | Night sky with a big golden moon and layered hills. `dim` darkens it for menus. |
 | `src/page/hd/art/sparkit.js` | 28 | SPARKIT: ember fox (fire starter) |
+| `src/page/hd/art/terrain.js` | 59 | Outdoor terrain for the world scene, drawn per cell (100 x 100 units): ground, tall grass, trees, rocks, water, ledges, signs, flowers, doors. |
+| `src/page/hd/art/willowLab.js` | 10 | Willow's lab, 10 x 12 cells: machine + counters (0..3,1..2), shelves (6..9,1), ball table (6..9,3), divider wall + shelves (rows 6-7), door (4..5,11). |
+| `src/page/hd/art/world.js` | 22 | A whole outdoor map as one SVG (cell = 100 units): terrain per cell, buildings on top, then `margin` cells of forest all round. |
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 30 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |
@@ -49,6 +57,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
 | `src/page/hd/scenes/title.css` | 17 | title |
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
+| `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
+| `src/page/hd/scenes/world.js` | 36 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
 | `src/page/hd/ui/actors.js` | 43 | The hero and other people drawn over a room or world, kept in step with game state. |
 | `src/page/hd/ui/dialogue.css` | 17 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 19 | Bottom text box fed by state.dialogue (see core/engine.js). |
