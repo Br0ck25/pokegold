@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, interactive-widget=resizes-content">
+<title>Buddymon Gold</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div id="stage">
+    <div id="hd"></div>
+    <div id="start"><button id="play">Play</button></div>
+  </div>
+
+  <div id="pad" hidden>
+    <div id="dpad" aria-label="Directional pad"><i class="u"></i><i class="d"></i><i class="l"></i><i class="r"></i></div>
+    <div class="center">
+      <button data-key="SELECT">Select</button>
+      <button data-key="START">Start</button>
+    </div>
+    <div class="ab">
+      <button data-key="B">B</button>
+      <button data-key="A">A</button>
+    </div>
+  </div>
+
+  <section id="cloud">
+    <span id="status">Tap Play to start</span>
+    <button id="controls" title="Controls: on-screen pad or screen gestures">Pad</button>
+    <button id="account-btn" title="Account (optional): keep your game on any device">Account</button>
+  </section>
+  <p class="hint">Keys: arrows, Z = B, X = A, Enter = Start. Your game saves automatically.</p>
+</main>
+<dialog id="account">
+  <form method="dialog">
+    <h2>Account</h2>
+    <p id="account-note">Optional. Make one to keep your game on any device.</p>
+    <div id="account-form">
+      <input id="acct-user" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Username" maxlength="20">
+      <input id="acct-pass" type="password" autocomplete="current-password" placeholder="Password (6+ characters)">
+      <div class="row"><button type="button" id="acct-login">Sign in</button><button type="button" id="acct-register">Create account</button></div>
+    </div>
+    <div id="account-in" hidden><button type="button" id="acct-logout">Sign out</button></div>
+    <p id="acct-msg" role="status"></p>
+    <button value="close">Close</button>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>

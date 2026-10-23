@@ -1,0 +1,16 @@
+/* dialogue */
+#hd .dlg { position:absolute; left:3.5%; right:3.5%; bottom:3.5%; height:27%; padding:3.8cqw 5cqw 2cqw; border-radius:4cqw;
+  background:linear-gradient(rgba(18,32,82,.94),rgba(10,18,50,.96)); border:.7cqw solid var(--gold); box-shadow:0 0 0 .5cqw var(--ink), 0 1.6cqw 4cqw rgba(0,0,0,.5); }
+#hd .dlg[hidden] { display:none; }
+#hd .dlg p { margin:0; font-size:5.6cqw; line-height:1.28; font-weight:500; min-height:7.2cqw; text-shadow:0 .3cqw 0 rgba(0,0,0,.35); }
+#hd .dlg-tag { position:absolute; left:4cqw; top:-3.6cqw; padding:.5cqw 3cqw; font-size:3.4cqw; font-weight:700; color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); border:.5cqw solid var(--ink); border-radius:3cqw; }
+#hd .more { position:absolute; right:4cqw; bottom:2cqw; font-size:4cqw; color:var(--gold); animation:nudge .9s ease-in-out infinite; }
+@keyframes nudge { 50% { transform:translateY(.8cqw); } }
+
+
+/* text entry: the phone's own keyboard on a real input */
+#hd .ask { pointer-events:auto; position:absolute; left:8%; right:8%; top:30%; display:flex; flex-direction:column; gap:3cqw; padding:5cqw; border-radius:4cqw; z-index:5;
+  background:linear-gradient(#18224f,#0e1536); border:.7cqw solid var(--accent,#ffc93c); }
+#hd .ask label { font-size:5cqw; font-weight:600; }
+#hd .ask input { min-height:12cqw; padding:0 4cqw; font:inherit; font-size:6cqw; color:inherit; background:#0b1022; border:.4cqw solid #3a4680; border-radius:3cqw; }
+#hd .ask button { min-height:12cqw; font-size:5cqw; }
