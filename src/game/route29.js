@@ -1,4 +1,5 @@
 // Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item,
+// Gold: Route29.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // a berry tree, a gate north to Route 46, and travellers to talk to. 56 x 16 cells, original layout.
 (() => {
   const cols = 56, rows = 16;

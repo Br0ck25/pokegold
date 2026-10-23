@@ -1,4 +1,5 @@
 // The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home.
+// Gold: PlayersNeighborsHouse.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 (() => {
   const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };
   const blocked = new Set([...rect(0, 0, 7, 0), ...rect(0, 1, 2, 1), ...rect(7, 1, 7, 1), ...rect(3, 3, 4, 4), ...rect(0, 6, 0, 7), ...rect(7, 6, 7, 7)]);

@@ -14,7 +14,8 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
 
 5. **Study Gold before building a scene.** Read that area's map script and data first (`git show claude/fervent-brahmagupta-2v8nau:maps/<Name>.asm`,
    also `engine/` for mechanics) and reproduce its beats: who walks where, what faces what, which objects exist, what each cell does. Then redraw it with
-   original layout, text and art. Check every object has art (an unknown name draws as a plain villager) and every sign/trigger cell matches the art.
+   original layout, text and art. **Enforced:** every map file starts with a `// Gold: <Map>.asm` line (build.js fails without it); that line is your
+   promise that you read the asm (objects, connections, warps, terrain from the `.blk`) and kept its landmarks (e.g. Cherrygrove: big sea, fisher across it). Check every object has art (an unknown name draws as a plain villager) and every sign/trigger cell matches the art.
 
 ## Layout (read `MAP.md` first: generated index of every file, its size and purpose)
 - `build.js` builds `worker.js` (the page is embedded) and regenerates `MAP.md`. **Commit `worker.js` with every push** (the user pastes it

@@ -1,4 +1,5 @@
 // New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29.
+// Gold: NewBarkTown.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // Same beats as Gold's town: a teacher who stops you leaving without a buddymon, a villager who paces, and a rival lurking by the lab.
 // 22 x 18 cells, original layout.
 (() => {

@@ -8,14 +8,14 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/battle/calc.js` | 71 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/cherrygrove.js` | 110 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
-| `src/game/cherryhouses.js` | 61 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
+| `src/game/cherrygrove.js` | 111 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
+| `src/game/cherryhouses.js` | 62 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
 | `src/game/core.js` | 178 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/data/items.js` | 9 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
 | `src/game/data/moves.js` | 20 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
 | `src/game/data/species.js` | 15 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level, female (chance 0-1 of a female; 1 = always). |
 | `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
-| `src/game/home.js` | 54 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
+| `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/lib/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/lib/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/lib/rival.js` | 4 | Your rival: his starter counters yours (original pairing), and his name stays "???" until you give it to the officer in Willow's lab. |
@@ -31,13 +31,13 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/menu/shop.js` | 55 | Marts: Game.shop(s, stock) where stock is a list of item keys. BUY / SELL / QUIT like Gold's clerk, quantity picked with left/right. |
 | `src/game/menu/startmenu.js` | 23 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
 | `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |
-| `src/game/mrbuddymon.js` | 74 | Mr. Buddymon's house: Willow's errand. He hands you the MYSTERY EGG, PROF. ASPEN drops in and gives you the BUDDYDEX, and your |
-| `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
-| `src/game/newbark.js` | 74 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
-| `src/game/route29.js` | 84 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
-| `src/game/route30.js` | 48 | Route 30: the road north from Cherrygrove to Mr. Buddymon's house. Three trainers watch the road, grass with Gold's wild table, |
-| `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
-| `src/game/willowlab.js` | 163 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
+| `src/game/mrbuddymon.js` | 75 | Mr. Buddymon's house: Willow's errand. He hands you the MYSTERY EGG, PROF. ASPEN drops in and gives you the BUDDYDEX, and your |
+| `src/game/neighbor.js` | 28 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
+| `src/game/newbark.js` | 75 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
+| `src/game/route29.js` | 85 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
+| `src/game/route30.js` | 49 | Route 30: the road north from Cherrygrove to Mr. Buddymon's house. Three trainers watch the road, grass with Gold's wild table, |
+| `src/game/willowhouse.js` | 22 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
+| `src/game/willowlab.js` | 164 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
 | `src/page/app.js` | 53 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |
 | `src/page/hd/art/badger.js` | 23 | Brock Family emblem: a badger (brock = badger) in a gold-ringed crest. |

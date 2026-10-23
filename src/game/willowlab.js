@@ -1,4 +1,5 @@
 // Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one
+// Gold: ElmsLab.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // (big picture first), he explains the machine and Mr. Buddymon, and his aide hands you a tonic as you head for the door.
 // Cells match art/willowLab.js. 10 x 12.
 (() => {

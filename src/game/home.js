@@ -1,4 +1,5 @@
 // Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start.
+// Gold: PlayersHouse1F.asm, PlayersHouse2F.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // Cells match the art in art/room.js and art/room1F.js.
 (() => {
   const solidGrid = (w, h, blocked) => Array.from({ length: h }, (_, y) => Array.from({ length: w }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join(""));

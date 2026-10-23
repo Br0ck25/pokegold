@@ -1,4 +1,5 @@
 // Mr. Buddymon's house: Willow's errand. He hands you the MYSTERY EGG, PROF. ASPEN drops in and gives you the BUDDYDEX, and your
+// Gold: MrPokemonsHouse.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // buddymon get a rest. Then BuddyGear rings: someone broke into the lab. (Same beats as Gold; the rival "steals" the starter you didn't pick.)
 (() => {
   const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };

@@ -1,4 +1,5 @@
 // Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout.
+// Gold: CherrygroveCity.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // Gold's beats: the Guide Gent shows you around (and gives a MAP CARD), your rival jumps you at the entrance, and you can't leave west or north yet.
 (() => {
   const cols = 36, rows = 18;
@@ -10,10 +11,10 @@
   for (let x = 28; x < cols; x++) put("p", [x, 9], [x, 10]); // dirt road east to Route 29
   for (let x = 0; x <= 5; x++) put("p", [x, 9], [x, 10]); // dirt road west (Route 31, not open yet)
   for (let y = 0; y <= 6; y++) put("p", [15, y], [16, y]); // dirt road north to Route 30
-  fill("w", 1, 13, 13, 16); fill("w", 14, 15, 17, 16); // the sea front
+  fill("w", 5, 12, 17, 16); // the sea: wide, with a west bank across it where the fisher stands (Gold puts him on the far shore)
   put("f", [12, 9], [14, 4], [33, 5], [2, 8], [26, 16], [4, 11]);
   put("S", [17, 9], [23, 7], [23, 15], [27, 7]);
-  put("T", [3, 3], [4, 3], [3, 2], [11, 12], [12, 11], [33, 13], [34, 13], [33, 14]);
+  put("T", [3, 3], [4, 3], [3, 2], [33, 13], [34, 13], [33, 14]);
 
   const talk = Game.talk;
   const G = Game;
@@ -33,7 +34,7 @@
     await s.follow(GENT, at(16, 3));
     s.turn("player", 1);
     await s.say("ROUTE 30 is out this way. Trainers will be battling their prized BUDDYMON there.");
-    await s.follow(GENT, at(12, 12));
+    await s.follow(GENT, at(12, 11));
     s.turn("player", 2);
     await s.say("This is the sea, as you can see. Some BUDDYMON are found only in water.");
     await s.follow(GENT, at(22, 15));
@@ -89,7 +90,7 @@
       { id: 2, name: "TEACHER", x: 26, y: 12, dir: 2, wander: "horizontal", script: talk((s) => (s.flag("GOT_MAP_CARD") ? "Did you get a MAP CARD? It makes finding your way around much easier." : "Did you meet the old man? He's a bit of a talker, but he knows the town.")) },
       { id: 3, name: "YOUNGSTER", x: 22, y: 9, dir: 3, wander: "horizontal", script: talk((s) => (s.flag("GOT_BUDDYDEX") ? "I see you have a BUDDYDEX. You must be good!" : "I'm going to be a great trainer! I just need a BUDDYDEX first, they say.")) },
       {
-        id: 4, name: "FISHER", x: 15, y: 12, dir: 2,
+        id: 4, name: "FISHER", x: 3, y: 13, dir: 3,
         script: async (s) => {
           if (s.flag("GOT_TIDE_CHARM")) return s.say("That TIDE CHARM is a keepsake from the sea. Water BUDDYMON love it.");
           await s.say("You're a trainer too? Collecting them, eh? I like your style! Here, take this. It's a TIDE CHARM from the deep sea.");

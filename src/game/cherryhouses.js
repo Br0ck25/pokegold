@@ -1,4 +1,5 @@
 // Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses.
+// Gold: CherrygroveMart.asm, CherrygrovePokecenter1F.asm, GuideGentsHouse.asm, CherrygroveGymSpeechHouse.asm, CherrygroveEvolutionSpeechHouse.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // Counter cells act as the clerk/nurse: face them and press A, as in Gold.
 (() => {
   const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };

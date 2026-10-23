@@ -1,4 +1,5 @@
 // Route 30: the road north from Cherrygrove to Mr. Buddymon's house. Three trainers watch the road, grass with Gold's wild table,
+// Gold: Route30.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // berry trees and a hidden tonic. 32 x 40 cells, original layout.
 (() => {
   const cols = 32, rows = 40;
