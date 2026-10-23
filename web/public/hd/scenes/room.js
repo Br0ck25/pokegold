@@ -7,6 +7,10 @@ const ROOMS = {
   "24:9": { art: "elmsHouse", cols: 8, rows: 8, label: "New Bark Town · Willow's House" }, // ELMS_HOUSE
   "26:4": { art: "cherrygroveMart", cols: 12, rows: 8, label: "Cherrygrove · Mart" }, // CHERRYGROVE_MART
   "26:5": { art: "pokecenter", cols: 10, rows: 8, label: "Cherrygrove · Pokécenter" }, // CHERRYGROVE_POKECENTER_1F
+  "26:6": { art: "neighborHouse", cols: 8, rows: 8, label: "Cherrygrove · Gym Talk House" }, // CHERRYGROVE_GYM_SPEECH_HOUSE
+  "26:7": { art: "neighborHouse", cols: 8, rows: 8, label: "Cherrygrove · Guide Gent's House" }, // GUIDE_GENTS_HOUSE
+  "26:8": { art: "neighborHouse", cols: 8, rows: 8, label: "Cherrygrove · Evolution Talk House" }, // CHERRYGROVE_EVOLUTION_SPEECH_HOUSE
+  "24:13": { art: "gate", cols: 10, rows: 8, label: "Route 29 · Gate" }, // ROUTE_29_ROUTE_46_GATE
 };
 
 Scenes.room = function (root) {

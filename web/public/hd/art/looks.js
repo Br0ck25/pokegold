@@ -14,6 +14,10 @@ Art.looks = {
   GENTLEMAN: { hair: "#c9c9d6", dress: true, top: "#3a3f52", legs: "#2a2f45" },
   YOUNGSTER: { hat: "#4aa3e8", hair: "#3a2418", top: "#ffb62e", legs: "#6b4a2a" },
   COOLTRAINER_M: { hair: "#3a2418", top: "#e8e8f0", legs: "#2a2f45" },
+  GRAMPS: { hair: "#e8e8ee", dress: true, top: "#8a6a3a", legs: "#5a4a2a" },
+  POKEFAN_M: { hat: "#e8943a", hair: "#6b4a2a", top: "#5aa860", legs: "#4a4a6a" },
+  LASS: { hair: "#7a4a2a", dress: true, top: "#ffa0d0", legs: "#f4c397" },
+  OFFICER: { hat: "#2a3a8a", hair: "#3a2418", top: "#3a56b0", legs: "#2a3a6a" },
   OTHER: { hair: "#555a6e", top: "#9aa4c8", legs: "#5a5f7a" }, // anyone without a look yet
 };
 Art.heroSprite = (dir) => Art.person(dir, Art.looks.HERO);
