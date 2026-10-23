@@ -1,6 +1,6 @@
 /* room */
 #hd .room { background:radial-gradient(90% 80% at 50% 45%, #25407a 0%, #0c1636 100%); }
-#hd .room-wrap { position:absolute; left:50%; top:44%; width:98%; transform:translate(-50%,-50%); transition:top .27s linear; filter:drop-shadow(0 2cqw 3cqw rgba(0,0,0,.5)); }
+#hd .room-wrap { position:absolute; left:50%; top:44%; width:98%; transform:translate(-50%,-50%); transition:top .27s linear, left .27s linear; filter:drop-shadow(0 2cqw 3cqw rgba(0,0,0,.5)); }
 #hd .room-svg { width:100%; display:block; }
 #hd .actor { position:absolute; width:14%; aspect-ratio:60/80; transform:translate(-50%,-100%); transition:left .27s linear, top .27s linear; }
 #hd .actor svg { width:100%; height:100%; display:block; overflow:visible; }
