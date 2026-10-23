@@ -16,13 +16,15 @@ Art.person = function (dir, o) {
   const body = o.dress
     ? `<path fill="${o.top}" d="M14 64 C12 48 18 40 30 40 C42 40 48 48 46 64 Z"/>${o.apron && dir !== 1 ? `<path fill="${o.apron}" d="M22 64 C22 52 24 46 30 46 C36 46 38 52 38 64 Z"/>` : ""}`
     : `<path fill="${o.top}" d="M16 56 C14 44 20 40 30 40 C40 40 46 44 44 56 Z"/>`;
+  const tail = (x, d) => `<path fill="${o.hair}" d="M${x} 22 C${x + 7 * d} 28 ${x + 8 * d} 42 ${x + 3 * d} 48 C${x - 3 * d} 44 ${x - 4 * d} 32 ${x - 2 * d} 24 Z"/>`;
+  const tails = !o.pigtails ? "" : dir === 2 ? tail(44, 1) : dir === 3 ? tail(16, -1) : tail(14, -1) + tail(46, 1);
   const top = o.dress ? 60 : 56;
   return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="30" cy="74" rx="18" ry="5" fill="#000" opacity=".25"/>
 <g stroke="${INK}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
 <path class="leg l" fill="${o.legs}" d="M20 ${top} L28 ${top} L28 70 L18 70 Z"/><path class="leg r" fill="${o.legs}" d="M32 ${top} L40 ${top} L42 70 L32 70 Z"/>
 ${body}
-<circle cx="30" cy="28" r="15" fill="${skin}"/>
+${tails}<circle cx="30" cy="28" r="15" fill="${skin}"/>
 ${hair}
 </g>
 ${eyes}${specs}${visor}

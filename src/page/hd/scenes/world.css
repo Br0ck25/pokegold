@@ -4,3 +4,5 @@
 #hd .world-map { position:absolute; left:0; top:0; transition:transform .27s linear; will-change:transform; }
 #hd .world-svg { width:100%; display:block; }
 #hd .world .loc { z-index:2; }
+#hd .world { --cell:10cqw; }
+@container (min-aspect-ratio: 11/10) { #hd .world { --cell:8cqw; } }

@@ -1,6 +1,6 @@
 // Player portrait: the kid in the cap (viewBox 300 x 380); girl = 1 gives a blue jacket, white cap and long hair.
 Art.hero = function (girl) {
-  const cap = girl ? ["#ffffff", "#d9dff0"] : ["#ff6b5e", "#c9322a"], jacket = girl ? ["#6fb4ff", "#2f6fd0"] : ["#ffb62e", "#e57d12"];
+  const cap = girl ? ["#ff6fae", "#d93a80"] : ["#ff6b5e", "#c9322a"], jacket = girl ? ["#ff9fcb", "#e0508e"] : ["#ffb62e", "#e57d12"];
   const pigtails = girl ? `<g stroke="${INK}" stroke-width="6" stroke-linejoin="round"><path fill="#7a3a1e" d="M84 140 C58 160 56 214 80 236 C96 220 92 170 92 148 Z"/><path fill="#7a3a1e" d="M216 140 C242 160 244 214 220 236 C204 220 208 170 208 148 Z"/></g>` : "";
   return `<svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
 <defs>

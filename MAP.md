@@ -21,7 +21,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/lib/flow.js` | 57 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/lib/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/lib/rival.js` | 4 | Your rival: his starter counters yours (original pairing), and his name stays "???" until you give it to the officer in Willow's lab. |
-| `src/game/lib/script.js` | 102 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/lib/script.js` | 125 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/lib/shared.js` | 15 | Small scripts maps share: berry trees (one berry a day) and hidden items (found once). |
 | `src/game/lib/start.js` | 36 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/lib/trainer.js` | 35 | Trainers: an NPC with `trainer: { name, cls, party: [[species, level]...], money, sight, seen, beaten, after, flag }`. |
@@ -67,7 +67,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/neighborHouse.js` | 7 | The neighbor's house, 8 x 8 cells: shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4), plants (0,6) (7,6), door (2..3,7). |
 | `src/page/hd/art/nibblet.js` | 22 | NIBBLET (was Rattata): round purple mouse with big front teeth and a curly tail. |
 | `src/page/hd/art/peekat.js` | 22 | PEEKAT (was Sentret): meerkat standing tall on its tail, always keeping watch. |
-| `src/page/hd/art/person.js` | 31 | Overworld person, dir: 0 down, 1 up, 2 left, 3 right (viewBox 60 x 80). Look `o` comes from Art.looks: |
+| `src/page/hd/art/person.js` | 33 | Overworld person, dir: 0 down, 1 up, 2 left, 3 right (viewBox 60 x 80). Look `o` comes from Art.looks: |
 | `src/page/hd/art/pokecenter.js` | 8 | Pokecenter 1F, 10 x 8 cells: counter (0..5,2), healing machine (5,1), PC (9,1), sofas (7..8,5) (7..8,7), stairs (0,7), door (3..4,7). |
 | `src/page/hd/art/professor.js` | 30 | Friendly professor, bust portrait (viewBox 300 x 380) |
 | `src/page/hd/art/props.js` | 25 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are the names maps give their objects. |
@@ -92,15 +92,15 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/prof.css` | 4 | professor intro |
 | `src/page/hd/scenes/prof.js` | 32 | Professor Willow's welcome talk. state.prof = { who: "professor" | "hero", species?: number }; text comes from state.dialogue. |
 | `src/page/hd/scenes/room.css` | 19 | room |
-| `src/page/hd/scenes/room.js` | 41 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
+| `src/page/hd/scenes/room.js` | 50 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
 | `src/page/hd/scenes/splash.css` | 25 | studio splash |
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
 | `src/page/hd/scenes/title.css` | 17 | title |
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
-| `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
-| `src/page/hd/scenes/world.js` | 40 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
+| `src/page/hd/scenes/world.css` | 9 | Outdoor scene styles. |
+| `src/page/hd/scenes/world.js` | 40 | Outdoor maps (WORLDS, filled by Game.register). One cell = var(--cell) (10cqw, 8cqw on a wide stage); the camera keeps the hero centred. |
 | `src/page/hd/ui/actors.js` | 46 | The hero and other people drawn over a room or world, kept in step with game state. |
-| `src/page/hd/ui/dialogue.css` | 17 | dialogue |
+| `src/page/hd/ui/dialogue.css` | 27 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 20 | Bottom text box fed by state.dialogue (see core/engine.js). |
 | `src/page/hd/ui/dom.js` | 10 | DOM helpers shared by scenes. |
 | `src/page/hd/ui/panel.css` | 25 | list screens (party, pack, trainer card, ...) |
@@ -112,7 +112,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/ui/portrait.css` | 4 | portrait (shared by prof, names, naming) |
 | `src/page/index.html` | 65 | <!doctype html> |
 | `src/page/pad.js` | 115 | Touch input: on-screen pad and gesture mode. Needs $ and setStatus from app.js (loaded after this file). |
-| `src/page/style.css` | 63 | App shell, tuned for a phone (target: Pixel 9, 412x924). Rules: docs/UI.md |
+| `src/page/style.css` | 66 | App shell, tuned for a phone (target: Pixel 9, 412x924). Rules: docs/UI.md |
 | `src/page/sw.js` | 22 | Service worker: keeps the game shell (page, scripts, icons) so Buddymon opens and plays offline once installed. |
 | `src/worker/index.js` | 145 | Cloudflare Worker: serves the game page (embedded by build.js) and stores each player's save in KV. |
 | `src/page/manifest.json` | - | PWA manifest (name, icons, standalone display) |

@@ -1,5 +1,23 @@
 // Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps).
 // Only one script runs at a time; the player cannot move while it does.
+// Splits text into pages of at most `max` characters, breaking after a sentence when it can, else at a space.
+function pages(text, max = 84) {
+  const out = [];
+  let cur = "";
+  for (const sentence of text.match(/[^.!?]+[.!?]+["')]*\s*|[^.!?]+$/g) || [text]) {
+    if (cur && (cur + sentence).trim().length > max) { out.push(cur.trim()); cur = ""; }
+    let rest = sentence;
+    while ((cur + rest).trim().length > max) {
+      const cut = (cur + rest).lastIndexOf(" ", max);
+      if (cut <= cur.length) break;
+      const take = (cur + rest).slice(0, cut);
+      out.push(take.trim()); rest = (cur + rest).slice(cut + 1); cur = "";
+    }
+    cur += rest;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+}
 function scriptApi(G) {
   const frame = () => new Promise((ok) => requestAnimationFrame(ok));
   const press = async (k) => { Input.clear(); while (!Input.pressed(k)) { Input.poll(); await frame(); } };
@@ -37,15 +55,20 @@ function scriptApi(G) {
       B.menu = null;
       return i;
     },
+    // Long text is shown a page (about two lines) at a time; A turns the page.
     async say(text) {
-      G.state.dialogue = { text, more: true };
-      await press("A");
-      G.state.dialogue = { text, more: false };
+      const ps = pages(text);
+      for (let i = 0; i < ps.length; i++) {
+        G.state.dialogue = { text: ps[i], more: true };
+        await press("A");
+        G.state.dialogue = { text: ps[i], more: false };
+      }
     },
     // Yes/No over a question; resolves 0 for yes, like ask(), but with the question shown in the box.
     async confirm(text) { G.state.dialogue = { text, more: false }; return s.ask(); },
     // Opens the phone's own keyboard on a real input.
     prompt(label, max = 10) {
+      G.state.dialogue = null; // the question is on the form
       return new Promise((ok) => {
         const box = h(`<form class="ask"><label>${label}</label><input maxlength="${max}" autocomplete="off" autocapitalize="words" spellcheck="false"><button>OK</button></form>`);
         G.root.appendChild(box);

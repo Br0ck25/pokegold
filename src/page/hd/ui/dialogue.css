@@ -14,3 +14,13 @@
 #hd .ask label { font-size:5cqw; font-weight:600; }
 #hd .ask input { min-height:12cqw; padding:0 4cqw; font:inherit; font-size:6cqw; color:inherit; background:#0b1022; border:.4cqw solid #3a4680; border-radius:3cqw; }
 #hd .ask button { min-height:12cqw; font-size:5cqw; }
+
+/* wide stage: a shorter box, sized by the height */
+@container (min-aspect-ratio: 11/10) {
+  #hd .dlg { left:8%; right:8%; bottom:3cqh; min-height:0; padding:2.2cqh 8cqh 1.8cqh 3cqw; border-radius:3.4cqh; border-width:.7cqh; }
+  #hd .dlg p { font-size:4.9cqh; min-height:6.2cqh; }
+  #hd .dlg-tag { top:-4.2cqh; font-size:4.2cqh; padding:.4cqh 2.2cqw; border-width:.5cqh; border-radius:3cqh; }
+  #hd .more { font-size:4cqh; right:3cqw; bottom:2cqh; }
+  #hd .ask { left:20%; right:20%; top:8%; padding:3cqh 3cqw; gap:2cqh; border-radius:3cqh; }
+  #hd .ask label { font-size:6cqh; } #hd .ask input { min-height:13cqh; font-size:7cqh; border-radius:2.4cqh; } #hd .ask button { min-height:13cqh; font-size:6cqh; }
+}

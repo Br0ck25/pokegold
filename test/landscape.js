@@ -38,7 +38,31 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   for (const [p, q] of [["a", "b"], ["a", "start"], ["b", "start"], ["b", "select"], ["dpad", "cloud"], ["dpad", "select"]]) if (hit(g[p], g[q])) fail(`${p} overlaps ${q}`, { p: g[p], q: g[q] });
   if (g.dpad.x > g.stage.x || g.a.x < g.stage.r) fail("d-pad left of the stage, A right of it");
   await page.screenshot({ path: "test/out/landscape-world.png" });
+  const hero = await page.evaluate(() => { const h = document.querySelector("#hd .actor.hero").getBoundingClientRect(), s = document.querySelector("#stage").getBoundingClientRect(); return { inside: h.x > s.x && h.right < s.right && h.y > s.y && h.bottom < s.bottom, h: h.height, rows: s.height / (h.height / 1.0) }; });
+  if (!hero.inside) fail("the hero is on screen in the world", hero);
 
+  // Rooms fit the wide stage; long text comes a page at a time in a short box; the name form never sits behind the message box.
+  await page.evaluate(() => Game.warp("bedroom", 3, 3, 0));
+  await page.waitForFunction(() => HD.last.map.key === "bedroom");
+  await page.waitForTimeout(600);
+  const room = await page.evaluate(() => {
+    const st = document.querySelector("#hd").getBoundingClientRect(), r = document.querySelector("#hd .room-svg").getBoundingClientRect();
+    return { top: r.y - st.y, bottom: st.bottom - r.bottom, left: r.x - st.x, right: st.right - r.right };
+  });
+  if (room.top < -1 || room.bottom < -1 || room.left < -1 || room.right < -1) fail("the room fits inside the wide stage", room);
+  if (room.top > 60 && room.bottom > 60 && Math.abs(room.top - room.bottom) > 40) fail("the room is centred", room);
+  await page.screenshot({ path: "test/out/landscape-room.png" });
+  await page.evaluate(() => { Game.run(async (s) => { await s.say("Jayda! Your very own BUDDYMON story is about to unfold. A world of dreams and adventure is waiting. Let's go!"); }); });
+  await page.waitForFunction(() => HD.last.dialogue);
+  await page.waitForTimeout(300);
+  const dlg = await page.evaluate(() => ({ h: document.querySelector("#hd .dlg").getBoundingClientRect().height, stage: document.querySelector("#hd").getBoundingClientRect().height, text: HD.last.dialogue.text }));
+  if (dlg.h > dlg.stage * 0.28) fail("the message box is short on a wide stage", dlg);
+  if (/world of dreams/.test(dlg.text)) fail("long text shows one page first", dlg);
+  await page.screenshot({ path: "test/out/landscape-dialogue.png" });
+  await tapA(); await page.waitForTimeout(300); await tapA(); await page.waitForTimeout(300);
+  await page.evaluate(() => Game.warp("route29", 54, 9, 2));
+  await page.waitForFunction(() => HD.last.map.key === "route29");
+  await page.evaluate(() => { Game.state.dialogue = null; });
   await page.evaluate(() => { Game.msgMs = 60; Game.run(async (s) => { await Game.battle(s, makeMon("nibblet", 5)); }); });
   await page.waitForSelector(".bt-menu:not([hidden]) button", { timeout: 8000 });
   await page.screenshot({ path: "test/out/landscape-battle.png" });

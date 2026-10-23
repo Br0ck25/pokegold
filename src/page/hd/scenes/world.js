@@ -1,4 +1,4 @@
-// Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred.
+// Outdoor maps (WORLDS, filled by Game.register). One cell = var(--cell) (10cqw, 8cqw on a wide stage); the camera keeps the hero centred.
 const WORLDS = {};
 const WORLD_MARGIN = 6; // cells of forest drawn around the map
 
@@ -16,7 +16,7 @@ Scenes.world = function (root) {
     const w = WORLDS[key];
     map = key;
     view.innerHTML = Art.world(w, WORLD_MARGIN);
-    view.style.width = `${(w.cols + WORLD_MARGIN * 2) * 10}cqw`;
+    view.style.width = `calc(${w.cols + WORLD_MARGIN * 2} * var(--cell))`;
     loc.textContent = w.label;
     const edge = WORLD_MARGIN * 100;
     people = actorLayer(view, { w: (w.cols + WORLD_MARGIN * 2) * 100, h: (w.rows + WORLD_MARGIN * 2) * 100, ox: edge, oy: edge });
@@ -27,8 +27,8 @@ Scenes.world = function (root) {
   return {
     update(state) {
       if (state.map.key !== map) build(state.map.key);
-      const cell = (n) => (n + WORLD_MARGIN + 0.5) * 10; // cell centre, in cqw from the map's top-left
-      view.style.transform = `translate(calc(50cqw - ${cell(state.x)}cqw), calc(44cqh - ${cell(state.y)}cqw))`;
+      const cell = (n) => n + WORLD_MARGIN + 0.5; // cell centre, in cells from the map's top-left
+      view.style.transform = `translate(calc(50cqw - ${cell(state.x)} * var(--cell)), calc(44cqh - ${cell(state.y)} * var(--cell)))`;
       people.update(state);
       dlg.update(state.dialogue);
       menus.update(state.boxes);

@@ -24,8 +24,17 @@ Scenes.room = function (root) {
     update(state) {
       if (state.map.key !== map) build(state.map.key);
       people.update(state);
+      const stageH = el.clientHeight, stageW = el.clientWidth, room = ROOMS[map];
+      // A wide stage fits the whole room to its height, centred; a tall one fills the width and scrolls if the room is taller.
+      if (stageW > stageH * 1.1) {
+        wrap.style.width = `${Math.min(stageW * 0.98, stageH * 0.9 * (room.cols * 100 + 40) / (room.rows * 100 + 40))}px`;
+        wrap.style.transform = ""; wrap.style.top = "50%";
+        dlg.update(state.dialogue); menus.update(state.boxes); pic.update(state.pic); panel.update(state.panel);
+        return;
+      }
+      wrap.style.width = "";
+      const roomH = wrap.offsetHeight, view = stageH * 0.68;
       // Rooms taller than the stage scroll to keep the hero in view.
-      const stageH = el.clientHeight, roomH = wrap.offsetHeight, view = stageH * 0.68;
       if (roomH > view) {
         const heroY = (parseFloat(people.hero.style.top) / 100) * roomH;
         wrap.style.transform = "translateX(-50%)";
