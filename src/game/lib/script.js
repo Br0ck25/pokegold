@@ -78,6 +78,8 @@ function scriptApi(G) {
         await s.wait(16);
       }
     },
+    // A "!" over someone's head for a moment.
+    async emote(who) { const a = actor(who); a.emote = true; await s.wait(36); a.emote = false; },
     // Send someone to stand next to the player (on the given side: 0 below, 1 above, 2 left, 3 right).
     approach: (who, side = 3) => {
       const a = actor(who), p = G.state, off = [[0, 1], [0, -1], [-1, 0], [1, 0]][side];
@@ -92,7 +94,7 @@ function scriptApi(G) {
     wait: async (frames) => { for (let i = 0; i < frames; i++) await frame(); },
     warp: (map, x, y, dir) => G.warp(map, x, y, dir),
     give(item, n = 1) { G.player.bag[item] = (G.player.bag[item] || 0) + n; },
-    addBuddy(species, level) { G.player.party.push(makeMon(species, level)); },
+    addBuddy(species, level) { G.player.party.push(makeMon(species, level)); (G.player.dex ||= {})[species] = "caught"; },
     hide(id) { G.state.objects = G.state.objects.filter((o) => o.id !== id); },
   };
   return Object.assign(s, menuVerbs(G, s));

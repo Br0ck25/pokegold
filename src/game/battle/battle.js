@@ -1,5 +1,6 @@
 // A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed,
 // catching with buddy nets (wild only), experience. Game.battle(s, foe, opts) -> "won" | "lost" | "ran" | "caught". Run it inside a script.
+// opts.tutorial = { lines } is Gold's catching lesson: a scripted fight then net, the foe never attacks and nothing is kept.
 // foe is a mon (wild) or, with opts.trainer = { name, money, win }, a list of mons: no nets, no running, prize money on a win.
 Game.battle = async (s, foeMon, opts = {}) => {
   const trainer = opts.trainer, foes = [].concat(foeMon);
@@ -14,7 +15,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
-  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, level: x.mon.level, hp: x.mon.hp, max: x.stats.hp });
+  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: x.stats.hp });
   const refresh = () => { state.battle.foe = info(them); state.battle.me = info(me); };
   const partyMenu = async (forced) => {
     for (;;) {
@@ -28,7 +29,14 @@ Game.battle = async (s, foeMon, opts = {}) => {
   };
   const sendOut = async (mon) => { me = side(mon, mon.nick); fought.add(mon); refresh(); await s.msg(`Go! ${mon.nick}!`); };
 
+  const lesson = opts.tutorial ? [{ type: "fight", slot: null }, { type: "item", id: "buddy_net" }] : null;
   const choose = async () => {
+    if (lesson) {
+      const step = lesson.shift();
+      await s.say(opts.tutorial.lines[step.type === "fight" ? 0 : 1]);
+      if (step.type === "fight") step.slot = me.mon.moves[0];
+      return step;
+    }
     for (;;) {
       const c = await s.menu(["FIGHT", "PACK", "BUDDYMON", "RUN"], 2, "cmd");
       if (c === 0) {
@@ -73,20 +81,24 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const foeSlot = () => { const u = them.mon.moves.filter((m) => m.pp > 0); return u.length ? u[rand(u.length)] : { id: "tackle", pp: 1 }; };
 
   const useNet = async (id) => {
-    P.bag[id]--;
-    await s.msg(`${P.name} threw a ${ITEMS[id].name}!`);
-    const rate = catchRate(them.mon, them.stats.hp, ITEMS[id].net), { caught, shakes } = throwNet(rate);
+    if (!opts.tutorial) P.bag[id]--;
+    await s.msg(`${opts.tutorial ? "DUDE" : P.name} threw a ${ITEMS[id].name}!`);
+    const rate = catchRate(them.mon, them.stats.hp, ITEMS[id].net), { caught, shakes } = opts.tutorial ? { caught: true, shakes: 3 } : throwNet(rate);
     state.battle.net = { shakes, caught };
     await s.wait(40 + 30 * shakes);
     state.battle.net = null;
     if (!caught) return s.msg(["Oh no! It broke free!", "Aww! It appeared to be caught!", "Aargh! Almost had it!", "Shoot! It was so close too!"][shakes]);
     await s.msg(`Gotcha! ${them.label.replace("Wild ", "")} was caught!`);
+    if (opts.tutorial) return (ended = "caught");
     const mon = them.mon;
     if ((await s.confirm(`Give a nickname to ${mon.nick}?`)) === 0) mon.nick = await s.prompt(`Nickname for ${mon.nick}?`, 10);
     (P.party.length < 6 ? P.party : (P.box ||= [])).push(mon);
+    dex[mon.species] = "caught";
     ended = "caught";
   };
 
+  const dex = (P.dex ||= {});
+  for (const f of foes) dex[f.species] ||= "seen";
   state.screen = "battle";
   state.battle = { foe: null, me: null, menu: null, net: null };
   refresh();
@@ -101,6 +113,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
     if (act.type === "fight") {
       const mp = MOVES[act.slot.id].priority || 0, fs = foeSlot(), fp = MOVES[fs.id].priority || 0;
       const meFirst = mp !== fp ? mp > fp : speed(me) !== speed(them) ? speed(me) > speed(them) : rand(2) === 0;
+      if (opts.tutorial) { if (await attack(me, them, act.slot)) break; continue; }
       if (meFirst) { if (await attack(me, them, act.slot)) break; if (await attack(them, me, fs)) break; }
       else { if (await attack(them, me, fs)) break; if (await attack(me, them, act.slot)) break; }
     } else {
@@ -121,6 +134,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
         await s.msg("Can't escape!");
       }
       if (ended) break;
+      if (opts.tutorial) continue;
       if (await attack(them, me, foeSlot())) break;
     }
   }

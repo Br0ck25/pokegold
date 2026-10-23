@@ -23,7 +23,7 @@ const out = process.argv[3] || "test/out";
   await page.goto(base);
   await page.evaluate(() => {
     localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route29", x: 1, y: 9, dir: 2,
-      player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true }, bag: { tonic: 1 }, party: [makeMon("bramblet", 8)] } }));
+      player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true, GOT_EGG: true }, bag: { tonic: 1 }, party: [makeMon("bramblet", 8)] } }));
   });
   await page.reload();
   await page.tap("#play");

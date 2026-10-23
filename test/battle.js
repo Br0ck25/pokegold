@@ -32,6 +32,11 @@ const out = process.argv[3] || "test/out";
   await page.waitForFunction(() => HD.last.map.key === "route29", null, { timeout: 8000 });
   await page.evaluate(() => { Game.msgMs = 80; });
 
+  // Genders: Bandit is always female; the starters are mostly male.
+  const genders = await page.evaluate(() => ({ bandit: Array.from({ length: 20 }, () => makeMon("bandit", 5).gender).join(""), bramblet: Array.from({ length: 200 }, () => makeMon("bramblet", 5).gender).filter((g) => g === "F").length }));
+  if (/M/.test(genders.bandit)) fail("Bandit is always female", genders);
+  if (genders.bramblet < 5 || genders.bramblet > 60) fail("about one starter in eight is female", genders);
+
   // Ledge: hopping down from the north side of the road lands two cells on (and never back up).
   await page.evaluate(() => Game.warp("route29", 33, 7, 0));
   await page.evaluate(() => setKey("DOWN", true));

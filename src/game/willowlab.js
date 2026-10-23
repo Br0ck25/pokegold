@@ -6,7 +6,7 @@
   const blocked = new Set([...rect(0, 0, 9, 0), ...rect(0, 1, 3, 1), ...rect(0, 2, 1, 2), ...rect(6, 1, 9, 1), ...rect(6, 3, 9, 3), ...rect(0, 6, 3, 7), ...rect(6, 6, 9, 7)]);
   const solid = Array.from({ length: 12 }, (_, y) => Array.from({ length: 10 }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join(""));
   const WILLOW = 1, AIDE = 2;
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
   const tip = (n, text) => talk((s) => `${s.name} opened a book.`, `Travel Tip ${n}: ${text}`);
 
   const STARTERS = [
@@ -40,20 +40,58 @@
     s.flag("GOT_WILLOW_NUMBER", true);
   };
 
-  // The aide walks over to hand you a tonic when you head for the door with your first buddymon.
+  // The aide walks over to hand you something as you head for the door: a tonic after your first buddymon, five nets after the egg errand.
   const aide = async (s) => {
-    if (!s.flag("GOT_STARTER") || s.flag("GOT_TONIC")) return;
+    const first = s.flag("GOT_STARTER") && !s.flag("GOT_TONIC"), second = s.flag("GAVE_EGG") && !s.flag("GOT_NETS");
+    if (!first && !second) return;
     const x = s.G.state.x; // the aide stands at (2,9) and walks right until he is just below the player
     await s.move(AIDE, Array(x - 2).fill(3));
     s.turn(AIDE, 1);
     s.turn("player", 0);
-    await s.say(`${s.name}, I want you to have this for your errand.`);
-    s.give("tonic");
-    s.flag("GOT_TONIC", true);
-    await s.say(`${s.name} got a TONIC!`);
-    await s.say("There are only two of us, so we're always busy.");
+    if (first) {
+      await s.say(`${s.name}, I want you to have this for your errand.`);
+      s.give("tonic");
+      s.flag("GOT_TONIC", true);
+      await s.say(`${s.name} got a TONIC!`);
+      await s.say("There are only two of us, so we're always busy.");
+    } else {
+      await s.say(`${s.name}! Use these on your BUDDYDEX quest!`);
+      s.give("buddy_net", 5);
+      s.flag("GOT_NETS", true);
+      await s.say(`${s.name} received 5 BUDDY NETS!`);
+      await s.say("To add to your BUDDYDEX, you have to catch BUDDYMON. Throw BUDDY NETS at wild BUDDYMON to get them.");
+    }
     await s.move(AIDE, Array(x - 2).fill(2));
     s.turn(AIDE, 0);
+  };
+
+  // The officer is here about the theft; he asks for your rival's name (typed on your phone's keyboard) and leaves.
+  const officer = async (s) => {
+    if (!s.flag("COP_IN_LAB") || s.flag("COP_GONE")) return;
+    const COP = 3, x = s.G.state.x;
+    await s.move("player", x === 4 ? [1, 1] : [2, 1, 1]);
+    s.turn("player", 3);
+    s.turn(COP, 2);
+    await s.say("I heard a BUDDYMON was stolen here... I was just getting some information from PROF. WILLOW. Apparently, it was a young male with long, red hair...");
+    await s.say("What? You battled a trainer like that? Did you happen to get his name?");
+    s.G.player.rival = await s.prompt("What was his name?", 7);
+    await s.say(`OK! So ${s.G.player.rival} was his name. Thanks for helping my investigation!`);
+    await s.move(COP, [0, 0, 0, 0, 0]);
+    s.hide(COP);
+    s.flag("COP_GONE", true);
+  };
+
+  // Willow with the egg: he takes it, is amazed by the BUDDYDEX, and sends you off to see your mom.
+  const afterTheft = async (s) => {
+    await s.say(`WILLOW: ${s.name}, this is terrible... Oh, yes, what was MR. BUDDYMON's big discovery?`);
+    if (!s.G.player.bag.mystery_egg) return;
+    s.G.player.bag.mystery_egg--;
+    await s.say(`${s.name} handed the MYSTERY EGG to PROF. WILLOW.`);
+    await s.say("WILLOW: This? But... Is it a BUDDYMON EGG? If it is, it is a great discovery!");
+    await s.say(`WILLOW: What?! PROF. ASPEN gave you a BUDDYDEX? ${s.name}, is that true? Th-that's incredible! He is superb at seeing the potential of people as trainers.`);
+    await s.say(`WILLOW: Wow, ${s.name}. You may have what it takes to become the CHAMPION. You seem to be getting on great with BUDDYMON too. You should take the BUDDYMON GYM challenge. The closest GYM would be the one in VIOLET CITY.`);
+    s.flag("GAVE_EGG", true);
+    await s.say(`WILLOW: ...${s.name}. The road to the championship will be a long one. Before you leave, make sure that you talk to your mom.`);
   };
 
   Game.register("willowlab", {
@@ -65,6 +103,8 @@
         id: WILLOW, name: "WILLOW", x: 5, y: 2, dir: 0,
         script: async (s) => {
           if (!s.flag("GOT_STARTER")) return s.say("WILLOW: If a wild BUDDYMON appears, let your BUDDYMON battle it!");
+          if (s.flag("GAVE_EGG")) return s.say("WILLOW: Don't give up! I'll call if I learn anything about that EGG!");
+          if (s.flag("GOT_EGG")) return afterTheft(s);
           await s.say("WILLOW: MR. BUDDYMON goes everywhere and finds rarities. Too bad they're usually rare and not very useful... " + s.name + ", I'm counting on you!");
         },
       },
@@ -72,6 +112,7 @@
         id: AIDE, name: "SCIENTIST", x: 2, y: 9, dir: 0, wander: "spin", 
         script: talk("There are only two of us, so we're always busy."),
       },
+      { id: 3, name: "OFFICER", x: 5, y: 3, dir: 1, showIf: "COP_IN_LAB", hideIf: "COP_GONE", script: talk("I'm investigating the break-in. Please don't touch anything.") },
       ...STARTERS.map((st) => ({ id: st.id, name: "BUDDY_NET", x: st.x, y: 3, dir: 0, faces: false, hideIf: `TOOK_${st.species}`, script: choose(st) })),
     ],
     signs: [
@@ -102,6 +143,7 @@
         },
       })),
       ...[4, 5].map((x) => ({ x, y: 8, script: aide })),
+      ...[4, 5].map((x) => ({ x, y: 5, script: officer })),
     ],
     // Like Gold: the first time in, you walk straight up to the professor and he explains the favor.
     enter: async (s) => {

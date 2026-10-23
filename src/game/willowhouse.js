@@ -2,7 +2,7 @@
 (() => {
   const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };
   const blocked = new Set([...rect(0, 0, 7, 0), ...rect(0, 1, 0, 1), ...rect(4, 1, 5, 1), ...rect(6, 1, 7, 1), ...rect(3, 3, 4, 4)]);
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(l); };
+  const talk = Game.talk;
   Game.register("willowhouse", {
     room: { art: "willowHouse", cols: 8, rows: 8, label: "New Bark Town · Willow's House" },
     solid: Array.from({ length: 8 }, (_, y) => Array.from({ length: 8 }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join("")),

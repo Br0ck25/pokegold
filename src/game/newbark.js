@@ -12,7 +12,7 @@
   put("S", [10, 9], [8, 7], [12, 5], [13, 14], [8, 14]); // signs stand beside buildings, never in front of a door: town, your house, lab, Willow's house, neighbors'
   put("T", [1, 14], [2, 14], [1, 13]);
 
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
   const hasMon = (s) => s.flag("GOT_STARTER");
 
   // Without a buddymon the teacher runs over, scolds you, and walks you back into town.
@@ -55,7 +55,7 @@
         script: async (s) => { await s.say(hasMon(s) ? "Oh! Your BUDDYMON is adorable! I wish I had one!" : "Wow, your BUDDYGEAR is impressive! Did your mom get it for you?"); },
       },
       { id: 2, name: "FISHER", x: 11, y: 9, dir: 0, wander: "vertical", script: talk((s) => `Yo, ${s.name}! I hear PROF. WILLOW discovered some new BUDDYMON.`) },
-      { id: 3, name: "RIVAL", x: 12, y: 4, dir: 3, script: rival },
+      { id: 3, name: "RIVAL", x: 12, y: 4, dir: 3, hideIf: "RIVAL_NEWBARK_GONE", script: rival },
     ],
     signs: [
       { x: 10, y: 9, script: talk("NEW BARK TOWN. The town where the winds of a new beginning blow.") },

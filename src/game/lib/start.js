@@ -20,7 +20,9 @@ Game.loadSave = async () => {
 };
 Game.boot = async (root) => {
   const saved = await Game.loadSave();
-  Game.start(root, saved ? { ...Game.newPlayer(), ...saved.player } : Game.newPlayer());
+  const player = saved ? { ...Game.newPlayer(), ...saved.player } : Game.newPlayer();
+  for (const m of [...player.party, ...player.box]) m.gender ||= rollGender(m.species); // saves from before genders
+  Game.start(root, player);
   const resume = await Game.flow(saved);
   setInterval(Game.save, 5000);
   setInterval(() => { if (!Game.state.screen && Game.state.map.key) Game.player.play++; }, 1000); // play time, in seconds

@@ -13,7 +13,7 @@ function popups(parent) {
       el.innerHTML = boxes.map((b) => {
         const low = b.pos === "low", right = b.c0 >= 7;
         return `<ul class="popup ${low ? "low" : "top"} ${right ? "right" : "left"}">${b.rows.map((r, n) =>
-          `<li data-i="${n}" class="${r.selected ? "sel" : ""}">${r.text}</li>`).join("")}</ul>`;
+          `<li data-i="${n}" class="${r.selected ? "sel" : ""}">${esc(r.text)}</li>`).join("")}</ul>`;
       }).join("");
     },
   };

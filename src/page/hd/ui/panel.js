@@ -11,8 +11,8 @@ function panelLayer(parent) {
   });
   const row = (r, n, sel) => `<li data-i="${n}" class="${n === sel ? "sel" : ""} ${r.dim ? "dim" : ""}">
     ${r.art ? `<span class="pn-art">${Art.creature(r.art)}</span>` : ""}
-    <span class="pn-main"><b>${r.label}</b>${r.sub ? `<small>${r.sub}</small>` : ""}${r.bar !== undefined ? `<i class="pn-bar"><i data-level="${r.bar > 0.5 ? "ok" : r.bar > 0.2 ? "warn" : "low"}" style="width:${Math.round(r.bar * 100)}%"></i></i>` : ""}</span>
-    ${r.right ? `<em>${r.right}</em>` : ""}</li>`;
+    <span class="pn-main"><b>${esc(r.label)}${genderTag(r.g)}</b>${r.sub ? `<small>${esc(r.sub)}</small>` : ""}${r.bar !== undefined ? `<i class="pn-bar"><i data-level="${r.bar > 0.5 ? "ok" : r.bar > 0.2 ? "warn" : "low"}" style="width:${Math.round(r.bar * 100)}%"></i></i>` : ""}</span>
+    ${r.right ? `<em>${esc(r.right)}</em>` : ""}</li>`;
   return {
     update(p) {
       const key = JSON.stringify(p);
@@ -20,7 +20,7 @@ function panelLayer(parent) {
       last = key;
       el.hidden = !p;
       if (!p) { el.innerHTML = ""; return; }
-      el.innerHTML = `<h2>${p.title}</h2>
+      el.innerHTML = `<h2>${esc(p.title)}${genderTag(p.g)}</h2>
         ${p.art ? `<div class="pn-hero">${Art.creature(p.art)}</div>` : ""}
         ${p.tabs ? `<div class="pn-tabs">${p.tabs.map((t) => `<span class="${t.sel ? "sel" : ""}">${t.label}</span>`).join("")}</div>` : ""}
         ${(p.lines || []).map((l) => `<p class="pn-line">${l}</p>`).join("")}

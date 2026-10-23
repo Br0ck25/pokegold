@@ -39,3 +39,4 @@
   background:rgba(10,18,50,.94); border:.5cqw solid rgba(255,246,220,.35); text-transform:none; }
 #hd .bt-menu button.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); border-color:var(--ink); box-shadow:0 .8cqw 0 var(--gold2); }
 #hd .bt-menu.cmd { left:36%; }
+#hd .bt-card .nm { display:inline-block; max-width:70%; vertical-align:bottom; } #hd .bt-card .gd { font-style:normal; font-weight:700; margin-left:1.4cqw; font-size:4.6cqw; }

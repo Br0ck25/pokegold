@@ -24,7 +24,7 @@ const out = process.argv[3] || "test/out";
   await page.evaluate(() => {
     const mon = makeMon("bramblet", 5); mon.hp = 5;
     localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route29", x: 54, y: 9, dir: 2,
-      player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true }, bag: { tonic: 2, berry: 1, buddy_net: 3 }, party: [mon] } }));
+      player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true, GOT_BUDDYDEX: true }, bag: { tonic: 2, berry: 1, buddy_net: 3 }, party: [mon] } }));
   });
   await page.reload();
   await page.tap("#play");
@@ -35,11 +35,11 @@ const out = process.argv[3] || "test/out";
   const max = await page.evaluate(() => statsFor(Game.player.party[0]).hp);
   await key("START");
   let b = await box();
-  if (b?.join() !== "BUDDYMON,PACK,BUDDYGEAR,Ash,SAVE,OPTION,EXIT") fail("Start menu entries", b);
+  if (b?.join() !== "BUDDYDEX,BUDDYMON,PACK,BUDDYGEAR,Ash,SAVE,OPTION,EXIT") fail("Start menu entries", b);
   await page.screenshot({ path: `${out}/m1-start.png` });
 
   // Party: use a tonic on the hurt buddymon.
-  await pick(0);
+  await pick(1);
   let p = await panel();
   if (p?.title !== "BUDDYMON" || !new RegExp(`5/${max}`).test(p.rows[0])) fail(`party screen should list Bramblet 5/${max}`, p);
   await page.screenshot({ path: `${out}/m2-party.png` });
@@ -55,7 +55,7 @@ const out = process.argv[3] || "test/out";
   if ((await panel())) fail("B from the party list returns to the Start menu");
 
   // Pack: pockets.
-  await pick(1);
+  await pick(2);
   p = await panel();
   if (p?.rows.join() !== "TONIC x1,SWEET BERRY x1") fail("pack items", p);
   await key("RIGHT");
@@ -64,25 +64,25 @@ const out = process.argv[3] || "test/out";
   await key("B");
 
   // Trainer card, BuddyGear.
-  await pick(3);
+  await pick(4);
   p = await panel();
   if (!p.lines.some((l) => /3000/.test(l)) || !p.lines.some((l) => /BUDS/.test(l))) fail("trainer card shows BUDS", p);
   await page.screenshot({ path: `${out}/m4-card.png` });
   await key("B");
-  await pick(2);
+  await pick(3);
   p = await panel();
   if (p?.title !== "BUDDYGEAR") fail("buddygear screen", p);
   await key("B");
 
   // Options: text speed.
-  await pick(5);
+  await pick(6);
   const before = await page.evaluate(() => Game.msgMs);
   await key("RIGHT");
   if ((await page.evaluate(() => Game.msgMs)) === before) fail("changing text speed should change message time");
   await key("B");
 
   // Save writes the device save.
-  await pick(4); // SAVE
+  await pick(5); // SAVE
   await pick(0); // YES
   if (!/saved the game/.test((await say()) || "")) fail("save message", await say());
   await key("A");
@@ -90,7 +90,7 @@ const out = process.argv[3] || "test/out";
   if (at <= 1) fail("saving should write the save", at);
 
   // Exit closes the menu and you can walk again.
-  await pick(6);
+  await pick(7);
   if ((await box()) || (await panel()) || (await page.evaluate(() => !!Game.script))) fail("EXIT should close the menu");
 
   console.log(failed ? "FAILED" : "OK");

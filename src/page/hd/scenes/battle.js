@@ -5,8 +5,8 @@ Scenes.battle = function (root) {
     <div class="bt-bg"></div>
     <div class="bt-side foe"><i class="plat"></i><div class="mon"></div><div class="bt-net" hidden>${Art.net()}</div></div>
     <div class="bt-side me"><i class="plat"></i><div class="mon"></div></div>
-    <div class="bt-card foe"><b class="nm"></b><span class="lv"></span><div class="hp"><i></i></div></div>
-    <div class="bt-card me"><b class="nm"></b><span class="lv"></span><div class="hp"><i></i></div><span class="num"></span></div>
+    <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div></div>
+    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div><span class="num"></span></div>
     <div class="bt-menu" hidden></div>
   </div>`);
   root.appendChild(el);
@@ -29,6 +29,9 @@ Scenes.battle = function (root) {
     s.hp = mon.hp;
     s.mon.classList.toggle("faint", mon.hp === 0);
     s.card.querySelector(".nm").textContent = mon.name;
+    const gd = s.card.querySelector(".gd");
+    gd.textContent = mon.gender === "F" ? "♀" : mon.gender === "M" ? "♂" : "";
+    gd.className = `gd ${mon.gender === "F" ? "f" : "m"}`;
     s.card.querySelector(".lv").textContent = `Lv ${mon.level}`;
     const pct = mon.max ? Math.round((mon.hp / mon.max) * 100) : 0, bar = s.card.querySelector(".hp i");
     bar.style.width = `${pct}%`;
@@ -58,7 +61,7 @@ Scenes.battle = function (root) {
       menu.hidden = !b.menu;
       if (b.menu) {
         menu.className = `bt-menu ${b.menu.kind} cols${b.menu.cols}`;
-        menu.innerHTML = b.menu.items.map((i, n) => `<button data-i="${n}" class="${i.sel ? "sel" : ""}">${i.label}</button>`).join("");
+        menu.innerHTML = b.menu.items.map((i, n) => `<button data-i="${n}" class="${i.sel ? "sel" : ""}">${esc(i.label)}</button>`).join("");
       }
     },
   };

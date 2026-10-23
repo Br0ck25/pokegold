@@ -9,8 +9,9 @@ const MAX_LINES = 2000;
 const src = path.join(__dirname, "src");
 const read = (f) => fs.readFileSync(path.join(src, f), "utf8");
 
-// Page bundle order: registry (globals) first, then shared UI, art, scenes, the HD core, then the game engine and maps.
-const hdOrder = ["page/hd/core/registry.js", "page/hd/ui", "page/hd/art", "page/hd/scenes", "page/hd/core", "game/core.js", "game"];
+// Page bundle order: registry (globals) first, then shared UI, art, scenes, the HD core, then the game engine (core, lib, data, battle,
+// menus) and last the map files, which register themselves with Game and may use anything loaded before them.
+const hdOrder = ["page/hd/core/registry.js", "page/hd/ui", "page/hd/art", "page/hd/scenes", "page/hd/core", "game/core.js", "game/lib", "game/data", "game/battle", "game/menu", "game"];
 const walk = (rel, ext, seen) => {
   const abs = path.join(src, rel);
   if (!fs.existsSync(abs)) return [];

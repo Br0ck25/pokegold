@@ -8,6 +8,7 @@ Game.startMenu = async (s) => {
   };
   for (;;) {
     const entries = [];
+    if (s.flag("GOT_BUDDYDEX")) entries.push(["BUDDYDEX", Game.dexScreen]);
     if (P.party.length) entries.push(["BUDDYMON", Game.partyScreen]);
     entries.push(["PACK", Game.packScreen]);
     if (s.flag("GOT_BUDDYGEAR")) entries.push(["BUDDYGEAR", Game.gearScreen]);

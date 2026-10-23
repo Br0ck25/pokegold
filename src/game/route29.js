@@ -13,10 +13,27 @@
   put("f", [8, 9], [20, 8], [42, 9], [53, 7], [2, 11], [28, 7]);
   put("S", [52, 8], [3, 8]);
 
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
   const wild = (a, b, c, d, e, f, g) => [a, b, c, d, e, f, g];
   const MORN = wild([2, "chirplet"], [3, "peekat"], [3, "chirplet"], [2, "peekat"], [4, "nibblet"], [4, "chirplet"], [4, "chirplet"]);
   const NITE = wild([2, "hootling"], [3, "hootling"], [3, "hootling"], [2, "nibblet"], [4, "nibblet"], [4, "hootling"], [4, "hootling"]);
+
+  // Gold's catching lesson: after the egg errand the dude at the New Bark end walks over and shows you how, in a scripted battle.
+  const lesson = async (s) => {
+    if (!s.flag("GAVE_EGG") || s.flag("LEARNED_TO_CATCH")) return;
+    const DUDE = 1, dude = () => s.G.state.objects.find((o) => o.id === DUDE);
+    await s.emote(DUDE);
+    await s.approach(DUDE, 1);
+    s.turn("player", 1);
+    await s.say("I've seen you a couple times. How many BUDDYMON have you caught? Would you like me to show you how to catch BUDDYMON?");
+    if ((await s.ask()) !== 0) return s.say("Oh. Fine, then. Anyway, if you want to catch BUDDYMON, you have to walk a lot.");
+    await s.say("OK, watch closely! Follow me.");
+    await s.follow(DUDE, s.G.path(dude().x, dude().y, 46, 6));
+    await Game.battle(s, makeMon("nibblet", 5), { tutorial: { lines: ["DUDE: First, weaken the BUDDYMON by battling it. A weak BUDDYMON is easier to catch.", "DUDE: Now! Throw a BUDDY NET at it!"] } });
+    s.turn(DUDE, 1);
+    await s.say("That's how you do it. If you weaken them first, BUDDYMON are easier to catch.");
+    s.flag("LEARNED_TO_CATCH", true);
+  };
 
   Game.register("route29", {
     world: {
@@ -25,20 +42,12 @@
     },
     wild: { rate: 10, morn: MORN, day: MORN, nite: NITE }, // Gold's Route 29 table: day is the same as morning
     warps: [9, 10].map((y) => ({ x: 55, y, to: "newbark", tx: 1, ty: y, dir: 3 })).concat([9, 10].map((y) => ({ x: 0, y, to: "cherrygrove", tx: 34, ty: y, dir: 2 }))),
+    coords: [9, 10].map((y) => ({ x: 53, y, script: lesson })),
     npcs: [
-      { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: talk("BUDDYMON hide in the grass. Who knows when they'll pop out...") },
+      { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: async (s) => { if (s.flag("GAVE_EGG") && !s.flag("LEARNED_TO_CATCH")) return lesson(s); await s.say("BUDDYMON hide in the grass. Who knows when they'll pop out..."); } },
       { id: 2, name: "YOUNGSTER", x: 27, y: 11, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
       { id: 3, name: "TEACHER", x: 17, y: 9, dir: 3, wander: "horizontal", script: talk("See those ledges? It's scary to jump off them. But you can get back to NEW BARK without walking through the grass.") },
-      {
-        id: 4, name: "FRUIT_TREE", x: 12, y: 3, dir: 0, faces: false,
-        script: async (s) => {
-          const today = new Date().toDateString(), flags = s.G.player.flags;
-          if (flags.TREE_R29 === today) return s.say("The tree has no more berries today.");
-          flags.TREE_R29 = today;
-          s.give("berry");
-          await s.say(`${s.name} picked a SWEET BERRY from the tree!`);
-        },
-      },
+      { id: 4, name: "FRUIT_TREE", x: 12, y: 3, dir: 0, faces: false, script: Game.berryTree("TREE_R29") },
       { id: 5, name: "FISHER", x: 29, y: 5, dir: 1, script: talk("I wanted to take a break, so I saved my game to record my progress.") },
       {
         id: 6, name: "COOLTRAINER_M", x: 13, y: 7, dir: 0,

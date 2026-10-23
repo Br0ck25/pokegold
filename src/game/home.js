@@ -3,7 +3,7 @@
 (() => {
   const solidGrid = (w, h, blocked) => Array.from({ length: h }, (_, y) => Array.from({ length: w }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join(""));
   const rect = (x0, y0, x1, y1) => { const out = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) out.push(`${x},${y}`); return out; };
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
 
   Game.register("bedroom", {
     room: { art: "room", cols: 8, rows: 6, label: "Home · Your Room" },

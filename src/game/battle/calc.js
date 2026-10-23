@@ -55,13 +55,16 @@ const throwNet = (rate) => {
 // Which period of the day the device clock is in (Gold: morning 4-10, day 10-18, night otherwise).
 const timeOfDay = () => { const h = new Date().getHours(); return h >= 4 && h < 10 ? "morn" : h < 18 && h >= 10 ? "day" : "nite"; };
 
+const rollGender = (species) => (Math.random() < SPECIES[species].female ? "F" : "M");
+const genderMark = (mon) => (mon.gender === "F" ? "♀" : "♂");
+
 // A fresh buddymon of `species` at `level`: random individual values, full HP, the last four moves it would know.
 const makeMon = (species, level) => {
   const dv = { atk: rand(16), def: rand(16), spe: rand(16), spa: rand(16) };
   const sp = SPECIES[species], learned = [];
   for (const [lv, list] of Object.entries(sp.moves)) if (+lv <= level) learned.push(...list);
   const moves = learned.slice(-4).map((id) => ({ id, pp: MOVES[id].pp }));
-  const mon = { species, nick: sp.name, level, dv, exp: growthExp(sp.growth, level), moves, status: null };
+  const mon = { species, nick: sp.name, gender: rollGender(species), level, dv, exp: growthExp(sp.growth, level), moves, status: null };
   mon.hp = statsFor(mon).hp;
   return mon;
 };

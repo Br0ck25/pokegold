@@ -21,7 +21,7 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
   into Cloudflare). **Never Read `worker.js`** (blocked in `.claude/settings.json`); read the sources in `src/`.
 - Game data (`src/game/data/`: species, moves, items, types) and battle code (`src/game/battle/`: formulas in `calc.js`, flow in `battle.js`). Currency is BUDS (start 3000).
 - `src/worker/` the Worker: saves + accounts in KV. `src/page/` the page: `app.js`, `pad.js` (touch), `style.css`, `hd/` the renderer
-  (`art/` SVG art, `scenes/` one screen each, `ui/` shared bits, `core/` registry + loop). `src/game/` the engine, flow and one map file per area.
+  (`art/` SVG art, `scenes/` one screen each, `ui/` shared bits, `core/` registry + loop). `src/game/` the engine: `core.js`, `lib/` (input, script verbs, flow, boot/saves, trainers, helpers), `data/`, `battle/`, `menu/`, and one map file per area (loaded last).
 - Every source file: header comment on line 1 (feeds `MAP.md`), under 2000 lines (build fails otherwise), aim for ~150. Split by scene/creature.
 - Docs: `docs/UI.md` (UI/UX/art rules), `docs/ENGINE.md` (Gold mechanics and our build order).
 
@@ -37,3 +37,9 @@ Original names for everything else as it is built; no real Pokemon/Nintendo name
 ## Save tokens
 - Use `MAP.md` + Grep before reading; Read with offset/limit. Don't restate big files in replies; refer to `path:line`.
 - Don't commit test output (`test/out`). `worker.js` is the one generated file that is committed.
+
+## Status
+Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, the egg errand
+(egg -> Willow -> aide nets -> BUDDYDEX), trainers, genders (BANDIT always female; `SPECIES[x].female` = female share), BUDDYDEX screen.
+Rival is named by the player at the officer; his starter is the one that beats yours. Dialogue uses the shared `Game.talk(...)`.
+Missing vs Gold: status conditions, PC storage, BuddyGear map/phone, evolutions, Route 31+, gyms.

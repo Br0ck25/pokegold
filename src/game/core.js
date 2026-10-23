@@ -44,8 +44,12 @@ const Game = (() => {
       Object.assign(def, fromWorld(def.world), { warps: [...fromWorld(def.world).warps, ...(def.warps || [])] });
       WORLDS[key] = def.world;
     } else ROOMS[key] = def.room;
+    for (const n of def.npcs || []) if (n.trainer && !n.script) n.script = G.trainerScript(n);
     maps[key] = def;
   };
+
+  // A script that says each line in turn (a line may be a function of the script API, e.g. to use the player's name).
+  G.talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
 
   G.step = (a, d) => { a.x += DX[d]; a.y += DY[d]; };
 
@@ -82,7 +86,7 @@ const Game = (() => {
 
   G.warp = async (key, x, y, dir) => {
     const def = maps[key];
-    Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => !n.hideIf || !G.player.flags[n.hideIf]).map((n) => ({ ...n })) });
+    Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => (!n.hideIf || !G.player.flags[n.hideIf]) && (!n.showIf || G.player.flags[n.showIf])).map((n) => ({ ...n })) });
     moving = turning = 0;
     if (def.enter) await G.run(def.enter);
   };
@@ -137,7 +141,7 @@ const Game = (() => {
       if (--moving > 0) return;
       const m = here(), w = (m.warps || []).find((g) => g.x === state.x && g.y === state.y);
       if (w) G.warp(w.to, w.tx, w.ty, w.dir);
-      else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y); if (c) G.run(c.script); else encounter(m); }
+      else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y), t = !c && G.trainerSees(); if (c) G.run(c.script); else if (t) G.run(t.script); else encounter(m); }
       return;
     }
     if (Input.pressed("START")) return G.run(Game.startMenu);

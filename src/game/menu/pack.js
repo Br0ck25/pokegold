@@ -2,8 +2,13 @@
 Game.packScreen = async (s) => {
   const P = s.G.player, POCKETS = ["items", "nets", "key"], LABELS = ["ITEMS", "NETS", "KEY ITEMS"];
   let tab = 0, at = 0;
+  const keyItems = () => [
+    ...(s.flag("GOT_BUDDYGEAR") ? [{ key: "buddygear", name: "BUDDYGEAR", count: 0 }] : []),
+    ...(s.flag("GOT_MAP_CARD") ? [{ key: "mapcard", name: "MAP CARD", count: 0 }] : []),
+    ...Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && ITEMS[k].pocket === "key").map((k) => ({ key: k, name: ITEMS[k].name, count: 0 })),
+  ];
   const entries = (pocket) => (pocket === "key"
-    ? (s.flag("GOT_BUDDYGEAR") ? [{ key: "buddygear", name: "BUDDYGEAR", count: 0 }] : [])
+    ? keyItems()
     : Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && ITEMS[k].pocket === pocket).map((k) => ({ key: k, name: ITEMS[k].name, count: P.bag[k] })));
   for (;;) {
     const list = entries(POCKETS[tab]);
@@ -17,9 +22,10 @@ Game.packScreen = async (s) => {
     const item = list[r.i];
     if ((await s.choose(["USE", "CANCEL"], { c0: 13, r0: 5, cancel: 1 })) !== 0) continue;
     if (item.key === "buddygear") await Game.gearScreen(s);
+    else if (item.key === "mapcard" || ITEMS[item.key].pocket === "key") await s.say("It can't be used here.");
     else if (ITEMS[item.key].net) await s.say("Nets are for throwing at wild BUDDYMON in battle.");
     else {
-      const who = await s.panel({ title: `Use ${ITEMS[item.key].name} on...`, rows: P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species }; }) });
+      const who = await s.panel({ title: `Use ${ITEMS[item.key].name} on...`, rows: P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species }; }) });
       if (who.key === "A") await Game.useOn(s, item.key, P.party[who.i]);
     }
   }

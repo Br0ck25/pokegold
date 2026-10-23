@@ -13,7 +13,7 @@
   put("S", [17, 9], [23, 7], [23, 15], [27, 7]);
   put("T", [3, 3], [4, 3], [3, 2], [11, 12], [12, 11], [33, 13], [34, 13], [33, 14]);
 
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
   const G = Game;
 
   // The Guide Gent walks you around town, then gives you a MAP CARD and goes home.
@@ -48,17 +48,16 @@
 
   // Your rival ambushes you at the east entrance with his own starter, then shoves past.
   const RIVAL = 6;
-  const rivalMon = (s) => ({ bramblet: "bandit", bandit: "chomplet", chomplet: "bramblet" })[s.G.player.party[0].species] || "bandit";
-  const rival = async (s) => {
-    if (!s.flag("GOT_STARTER") || s.flag("RIVAL_CHERRYGROVE_DONE")) return;
+    const rival = async (s) => {
+    if (!s.flag("GOT_EGG") || s.flag("RIVAL_CHERRYGROVE_DONE")) return; // he waits for you on the way back from the errand
     s.G.state.objects.push({ id: RIVAL, name: "RIVAL", x: 35, y: s.G.state.y, dir: 2 });
     s.turn("player", 3);
     await s.approach(RIVAL, 3);
-    await s.say("???: ...Hold it. You got a BUDDYMON at the LAB. What a waste. A wimp like you with a BUDDYMON? ...Let's see how good you are.");
-    const result = await Game.battle(s, makeMon(rivalMon(s), 5), { trainer: { name: "???", money: 60, win: "???: ...Humph. You got lucky. Don't get cocky." } });
+    await s.say(`${Game.rivalName(s.G.player)}: ...Hold it. You got a BUDDYMON at the LAB. What a waste. A wimp like you with a BUDDYMON? ...Let's see how good you are.`);
+    const result = await Game.battle(s, makeMon(Game.rivalSpecies(s.G.player), 6), { trainer: { name: Game.rivalName(s.G.player), money: 60, win: "...Humph. You got lucky. Don't get cocky." } });
     if (result === "lost") {
       for (const m of s.G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
-      await s.say("???: Ha! I knew it. Weaklings like you don't deserve BUDDYMON.");
+      await s.say(`${Game.rivalName(s.G.player)}: Ha! I knew it. Weaklings like you don't deserve BUDDYMON.`);
     }
     for (const m of s.G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
     await s.move("player", [1], 3); // he barges past, shoving you aside, and walks off into town
@@ -78,10 +77,9 @@
         { x: 28, y: 11, w: 5, h: 4, door: 2, to: "cgevo", tx: 2, ty: 6, dir: 1, roof: "#5aa860" },
       ],
     },
-    warps: [9, 10].map((y) => ({ x: 35, y, to: "route29", tx: 1, ty: y, dir: 2 })),
+    warps: [9, 10].map((y) => ({ x: 35, y, to: "route29", tx: 1, ty: y, dir: 2 })).concat([15, 16].map((x) => ({ x, y: 0, to: "route30", tx: x, ty: 38, dir: 1 }))),
     coords: [
       ...[9, 10].map((y) => ({ x: 33, y, script: rival })),
-      ...[15, 16].map((x) => ({ x, y: 0, script: async (s) => { await s.say("ROUTE 30 is not open yet. Come back soon!"); await s.move("player", [0]); } })),
       ...[9, 10].map((y) => ({ x: 0, y, script: async (s) => { await s.say("ROUTE 31 is not open yet. Come back soon!"); await s.move("player", [3]); } })),
     ],
     npcs: [

@@ -10,11 +10,11 @@ Game.useOn = async (s, key, mon) => {
 };
 
 Game.partyScreen = async (s) => {
-  const P = s.G.player, partyRows = () => P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species, dim: m.hp <= 0 }; });
+  const P = s.G.player, partyRows = () => P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species, dim: m.hp <= 0 }; });
   const summary = async (m) => {
     const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
     await s.panel({
-      title: m.nick, art: m.species, rows: [],
+      title: m.nick, g: m.gender, art: m.species, rows: [],
       lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
     });
   };

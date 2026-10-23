@@ -4,34 +4,40 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 136 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
-| `src/game/battle/calc.js` | 68 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
+| `src/game/battle/battle.js` | 150 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/calc.js` | 71 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/cherrygrove.js` | 110 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
+| `src/game/cherrygrove.js` | 108 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
 | `src/game/cherryhouses.js` | 61 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
-| `src/game/core.js` | 174 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
-| `src/game/data/items.js` | 8 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
-| `src/game/data/moves.js` | 18 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
-| `src/game/data/species.js` | 12 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level. |
+| `src/game/core.js` | 178 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/data/items.js` | 9 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
+| `src/game/data/moves.js` | 20 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
+| `src/game/data/species.js` | 15 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level, female (chance 0-1 of a female; 1 = always). |
 | `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
-| `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/home.js` | 54 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
-| `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
+| `src/game/lib/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
+| `src/game/lib/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
+| `src/game/lib/rival.js` | 4 | Your rival: his starter counters yours (original pairing), and his name stays "???" until you give it to the officer in Willow's lab. |
+| `src/game/lib/script.js` | 102 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/lib/shared.js` | 15 | Small scripts maps share: berry trees (one berry a day) and hidden items (found once). |
+| `src/game/lib/start.js` | 35 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
+| `src/game/lib/trainer.js` | 33 | Trainers: an NPC with `trainer: { name, cls, party: [[species, level]...], money, sight, seen, beaten, after, flag }`. |
 | `src/game/menu/card.js` | 33 | Trainer card, BuddyGear (the clock) and Options. |
 | `src/game/menu/center.js` | 13 | The Buddymon Center nurse: heals the whole party and makes this the place you wake up after a whiteout. |
-| `src/game/menu/pack.js` | 27 | Pack screen: three pockets (Items, Nets, Key items) switched with left/right or the tabs; a chosen item offers USE. |
+| `src/game/menu/dex.js` | 18 | BUDDYDEX: every species in order, "-----" until you have seen it; a dot for seen, a ball of net for caught. |
+| `src/game/menu/pack.js` | 33 | Pack screen: three pockets (Items, Nets, Key items) switched with left/right or the tabs; a chosen item offers USE. |
 | `src/game/menu/party.js` | 40 | Party screen: the list with HP bars; a chosen buddymon offers STATS, SWITCH, ITEM, CANCEL (as in Gold). |
 | `src/game/menu/shop.js` | 55 | Marts: Game.shop(s, stock) where stock is a list of item keys. BUY / SELL / QUIT like Gold's clerk, quantity picked with left/right. |
-| `src/game/menu/startmenu.js` | 22 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
+| `src/game/menu/startmenu.js` | 23 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
 | `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |
+| `src/game/mrbuddymon.js` | 74 | Mr. Buddymon's house: Willow's errand. He hands you the MYSTERY EGG, PROF. ASPEN drops in and gives you the BUDDYDEX, and your |
 | `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
 | `src/game/newbark.js` | 73 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
-| `src/game/route29.js` | 71 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
-| `src/game/script.js` | 100 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
-| `src/game/start.js` | 33 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
+| `src/game/route29.js` | 80 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
+| `src/game/route30.js` | 48 | Route 30: the road north from Cherrygrove to Mr. Buddymon's house. Three trainers watch the road, grass with Gold's wild table, |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
-| `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
+| `src/game/willowlab.js` | 163 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
 | `src/page/app.js` | 53 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |
 | `src/page/hd/art/badger.js` | 23 | Brock Family emblem: a badger (brock = badger) in a gold-ringed crest. |
@@ -50,7 +56,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/introMeadow.js` | 19 | Intro act 2 backdrop: morning meadow with rolling hills and flowers (portrait, slice). |
 | `src/page/hd/art/introSea.js` | 16 | Intro act 1 backdrop: sunlit deep water, light rays, kelp (portrait, slice). |
 | `src/page/hd/art/logo.js` | 20 | The Buddymon Gold title logo (wordmark with badge), used by the title and menu scenes. |
-| `src/page/hd/art/looks.js` | 24 | Who is who: looks for Art.person. NPC keys are SPRITE_* names (see constants/sprite_constants.asm). |
+| `src/page/hd/art/looks.js` | 25 | Who is who: looks for Art.person. NPC keys are SPRITE_* names (see constants/sprite_constants.asm). |
+| `src/page/hd/art/mrBuddymonHouse.js` | 9 | Mr. Buddymon's house, 8 x 8 cells: magazines (0..1,1), broken computer (6..7,1), table (4..5,3..4), strange coins (6..7,3), door (2..3,7). |
 | `src/page/hd/art/neighborHouse.js` | 7 | The neighbor's house, 8 x 8 cells: shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4), plants (0,6) (7,6), door (2..3,7). |
 | `src/page/hd/art/nibblet.js` | 22 | NIBBLET (was Rattata): round purple mouse with big front teeth and a curly tail. |
 | `src/page/hd/art/peekat.js` | 22 | PEEKAT (was Sentret): meerkat standing tall on its tail, always keeping watch. |
@@ -68,15 +75,15 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 30 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |
-| `src/page/hd/scenes/battle.css` | 42 | battle |
-| `src/page/hd/scenes/battle.js` | 66 | Battle screen. state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }. |
+| `src/page/hd/scenes/battle.css` | 43 | battle |
+| `src/page/hd/scenes/battle.js` | 69 | Battle screen. state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }. |
 | `src/page/hd/scenes/intro.css` | 50 | opening cinematic: act i starts at i*6s (--t) |
 | `src/page/hd/scenes/intro.js` | 26 | Opening cinematic: four 6s acts (sea, meadow, night, finale) timed by CSS from mount. |
 | `src/page/hd/scenes/menu.css` | 10 | menu |
 | `src/page/hd/scenes/menu.js` | 23 | Title menu: New Game / Continue. state.menu = { items: [{label, selected}], info }. |
 | `src/page/hd/scenes/prof.css` | 4 | professor intro |
 | `src/page/hd/scenes/prof.js` | 30 | Professor Willow's welcome talk. state.prof = { who: "professor" | "hero", species?: number }; text comes from state.dialogue. |
-| `src/page/hd/scenes/room.css` | 16 | room |
+| `src/page/hd/scenes/room.css` | 19 | room |
 | `src/page/hd/scenes/room.js` | 41 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
 | `src/page/hd/scenes/splash.css` | 25 | studio splash |
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
@@ -84,11 +91,11 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
 | `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
 | `src/page/hd/scenes/world.js` | 40 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
-| `src/page/hd/ui/actors.js` | 44 | The hero and other people drawn over a room or world, kept in step with game state. |
+| `src/page/hd/ui/actors.js` | 46 | The hero and other people drawn over a room or world, kept in step with game state. |
 | `src/page/hd/ui/dialogue.css` | 17 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 20 | Bottom text box fed by state.dialogue (see core/engine.js). |
-| `src/page/hd/ui/dom.js` | 6 | DOM helpers shared by scenes. |
-| `src/page/hd/ui/panel.css` | 22 | list screens (party, pack, trainer card, ...) |
+| `src/page/hd/ui/dom.js` | 10 | DOM helpers shared by scenes. |
+| `src/page/hd/ui/panel.css` | 25 | list screens (party, pack, trainer card, ...) |
 | `src/page/hd/ui/panel.js` | 35 | A full-height list screen over the current scene (state.panel, see game/menu/verbs.js): title, optional big picture, tabs, |
 | `src/page/hd/ui/pic.css` | 8 | big buddymon picture: kept to the left so it never sits under the right-hand Yes/No box |
 | `src/page/hd/ui/pic.js` | 15 | The big buddymon picture shown while the game introduces one (state.pic = species name), like Gold's pokepic. |

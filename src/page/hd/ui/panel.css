@@ -19,3 +19,6 @@
 #hd .panel-ui li em { font-style:normal; font-size:4cqw; white-space:nowrap; opacity:.9; }
 #hd .pn-hint { margin:0; font-size:3.6cqw; opacity:.8; }
 #hd .pn-back { align-self:flex-end; min-height:11cqw; padding:0 7cqw; font:inherit; font-weight:700; font-size:4.6cqw; color:var(--cream); border-radius:4cqw; background:rgba(255,246,220,.12); border:.5cqw solid rgba(255,246,220,.35); }
+
+#hd .gender { margin-left:1.4cqw; font-weight:700; } #hd .gender.m { color:#4aa3e8; } #hd .gender.f { color:#ff7aa8; }
+#hd .panel-ui li.sel .gender { color:var(--ink); }

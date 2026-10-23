@@ -3,7 +3,7 @@
 (() => {
   const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };
   const grid = (w, h, blocked) => Array.from({ length: h }, (_, y) => Array.from({ length: w }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join(""));
-  const talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
+  const talk = Game.talk;
   const exit = (xs, to, tx, ty, y = 7) => xs.map((x) => ({ x, y, to, tx, ty, dir: 0 }));
 
   // --- Mart (12 x 8): shelves along the back wall, counter at (0..2,4), clerk behind it

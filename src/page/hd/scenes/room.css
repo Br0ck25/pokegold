@@ -13,3 +13,6 @@
 @keyframes bob-step { from { transform:translateY(0); } to { transform:translateY(-3%); } }
 #hd .loc { position:absolute; left:4%; top:3%; padding:1cqw 3cqw; font-size:3cqw; border-radius:3cqw; background:rgba(10,18,50,.7); border:.4cqw solid rgba(255,246,220,.25); }
 
+
+#hd .actor .emote { position:absolute; left:50%; top:-8%; transform:translateX(-50%) scale(0); font:400 7cqw 'Lilita One',sans-serif; font-style:normal; color:#fff; background:#e04a5a; border:.6cqw solid var(--ink); border-radius:50%; width:9cqw; height:9cqw; display:grid; place-items:center; transition:transform .12s; }
+#hd .actor.shout .emote { transform:translateX(-50%) scale(1); }
