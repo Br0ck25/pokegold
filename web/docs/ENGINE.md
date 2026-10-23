@@ -45,10 +45,17 @@ givepoke, loadwildmon/startbattle, special (named hooks). Ours: async JS functio
   catch if a random byte <= rate; otherwise the ball wobbles 0-3 times by how close the roll was (data/battle/wobble_probabilities.asm).
   Master ball always catches. Party full sends the catch to the box.
 
-## Our twist: nets (replaces balls)
-Same math, different dress: BUDDY NET (x1), FINE NET (x1.5), STRONG NET (x2), ULTRA NET (x3), plus special nets (Dive net for water,
-Night net after dark, Quick net on the first turn). A throw is an arc across the screen, the buddymon is tangled, the net shakes up to
-3 times, then holds or tears. Weakening and status still help. Nets are found/bought like balls; the item data is ours.
+## Our twist: buddy nets (replace balls 1:1)
+Same math and same tiers as balls, renamed: BUDDY NET (Poke Ball), GREAT NET, ULTRA NET, MASTER NET; the special balls become
+specials the same way later. A throw is an arc, the net tangles the buddymon, shakes up to 3 times, then holds or tears.
+
+## Phone-first input
+Designed for a phone (Pixel 9). Anywhere the player types (name, nickname, account) we open the device keyboard on a real
+`<input>`; no on-screen letter grid. Everything else is touch: pad or gestures, big targets.
+
+## Accounts (optional)
+Playing never needs one (a guest cookie holds the save). A username + password (PBKDF2 in the Worker, KV `user:<name>`) just points at
+the same player code, so registering keeps the guest's progress and logging in elsewhere brings it along. See `web/src/worker.js`.
 
 ## Build order (each step playable, old ROM path deleted when its scene is replaced)
 1. Engine core: loop, input (existing pad/gestures), grid movement, collision, turn-first, bump, warps, actors, flags, save.

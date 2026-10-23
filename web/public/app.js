@@ -161,14 +161,24 @@ async function start() {
 $("play").addEventListener("click", start);
 syncBtn.addEventListener("click", () => pushToCloud({ force: true }));
 
-$("code").addEventListener("click", async () => {
-  const code = await ensurePlayer();
-  const entered = prompt(
-    "Your recovery code (keep it private). Paste a code from another device here to switch to that player's saves:",
-    code
-  );
-  if (entered && entered.trim() !== code) {
-    const res = await api("/api/me", { method: "POST", body: JSON.stringify({ code: entered.trim() }) });
-    setStatus(res.ok ? "Switched player; reload to load their save" : "Invalid code");
-  }
-});
+// Optional account: a username + password that points at the same cloud player as the guest cookie.
+const acct = { dlg: $("account"), msg: $("acct-msg") };
+async function showAccount() {
+  const me = await (await api("/api/me")).json();
+  $("account-form").hidden = !!me.username;
+  $("account-in").hidden = !me.username;
+  $("account-note").textContent = me.username ? `Signed in as ${me.username}. Your game follows you to any device.` : "Optional. Make one to keep your game on any device.";
+  acct.msg.textContent = "";
+}
+async function submitAccount(action) {
+  const res = await api(`/api/${action}`, { method: "POST", body: JSON.stringify({ username: $("acct-user").value, password: $("acct-pass").value }) });
+  const body = await res.json();
+  if (!res.ok) { acct.msg.textContent = body.error; return; }
+  $("acct-pass").value = "";
+  await showAccount();
+  acct.msg.textContent = action === "login" ? "Signed in. Reload to load your saved game." : "Account created.";
+}
+$("account-btn").addEventListener("click", async () => { await showAccount(); acct.dlg.showModal(); });
+$("acct-login").addEventListener("click", () => submitAccount("login"));
+$("acct-register").addEventListener("click", () => submitAccount("register"));
+$("acct-logout").addEventListener("click", async () => { await api("/api/logout", { method: "POST" }); await showAccount(); acct.msg.textContent = "Signed out. Reload to start as a guest."; });

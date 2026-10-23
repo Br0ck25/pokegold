@@ -41,11 +41,25 @@
     <span id="status">Not playing</span>
     <button id="controls" title="Controls: on-screen pad or screen gestures">Pad</button>
     <button id="sync" disabled title="Save to cloud">Save</button>
-    <button id="code" title="Recovery code">Code</button>
+    <button id="account-btn" title="Account (optional): keep your game on any device">Account</button>
   </section>
   <p class="hint">Keys: arrows, Z = B, X = A, Enter = Start, Shift = Select.
     Use the in-game SAVE menu; it syncs to the cloud automatically.</p>
 </main>
+<dialog id="account">
+  <form method="dialog">
+    <h2>Account</h2>
+    <p id="account-note">Optional. Make one to keep your game on any device.</p>
+    <div id="account-form">
+      <input id="acct-user" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Username" maxlength="20">
+      <input id="acct-pass" type="password" autocomplete="current-password" placeholder="Password (6+ characters)">
+      <div class="row"><button type="button" id="acct-login">Sign in</button><button type="button" id="acct-register">Create account</button></div>
+    </div>
+    <div id="account-in" hidden><button type="button" id="acct-logout">Sign out</button></div>
+    <p id="acct-msg" role="status"></p>
+    <button value="close">Close</button>
+  </form>
+</dialog>
 <script src="vendor/wasmboy.wasm.iife.js"></script>
 <script src="hd.bundle.js"></script>
 <script src="app.js"></script>

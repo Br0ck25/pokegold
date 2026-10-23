@@ -39,3 +39,10 @@ body.gestures #screen-wrap { touch-action:none; user-select:none; -webkit-user-s
 #cloud button { min-height:44px; padding:0 14px; font-size:14px; }
 .hint { display:none; margin:0; opacity:.6; font-size:13px; text-align:center; }
 @media (hover:hover) and (pointer:fine) { #pad { display:none !important; } .hint { display:block; } main { height:min(100dvh, 900px); } }
+
+dialog#account { width:min(92vw,380px); padding:20px; color:var(--fg); background:var(--panel); border:1px solid #3a4680; border-radius:18px; }
+dialog#account::backdrop { background:#000b; }
+#account h2 { margin:0 0 4px; } #account p { margin:6px 0 12px; font-size:14px; opacity:.8; }
+#account input { width:100%; min-height:48px; margin-bottom:10px; padding:0 14px; font:inherit; color:var(--fg); background:var(--bg); border:1px solid #3a4680; border-radius:12px; }
+#account .row { display:flex; gap:8px; } #account .row button { flex:1; padding:0 8px; } #account form > button, #acct-logout { width:100%; margin-top:6px; }
+#acct-msg { min-height:1.2em; color:var(--accent); }

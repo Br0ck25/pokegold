@@ -4,16 +4,19 @@
 //   GET    /api/save/:game   -> raw save bytes, 404 if none
 //   PUT    /api/save/:game   -> store raw save bytes
 //   DELETE /api/save/:game
-//   GET    /api/me           -> { code }   the player's recovery code
-//   POST   /api/me           -> { code }   adopt a recovery code (new device)
+//   GET    /api/me           -> { code, username }   username is null for guests
+//   POST   /api/register     -> { username }   {username, password}; the account keeps the guest's saves
+//   POST   /api/login        -> { username }   {username, password}; switches to the account's saves
+//   POST   /api/logout       -> {}             back to a fresh guest
 //
-// A player is identified by a random 128-bit code kept in an HttpOnly cookie.
-// Anyone holding the code can read and write that player's saves.
+// A player is identified by a random 128-bit code kept in an HttpOnly cookie, so playing needs no account.
+// An account is just a username + password that points at one such code, so it works from any device.
 
 const GAMES = new Set(["gold", "silver"]);
 const SAVE_SIZE = 0x8000; // MBC3 + 32 KB SRAM, see rgbfix -r 3
 const COOKIE = "player";
 const CODE_RE = /^[0-9a-f]{32}$/;
+const USER_RE = /^[a-z0-9_]{3,20}$/;
 
 export default {
   async fetch(request, env) {
@@ -32,15 +35,36 @@ async function handleApi(request, env, url) {
   const headers = new Headers();
 
   if (url.pathname === "/api/me") {
-    if (request.method === "POST") {
-      const body = await request.json().catch(() => ({}));
-      const wanted = String(body.code || "").trim().toLowerCase();
-      if (!CODE_RE.test(wanted)) return json({ error: "Invalid code" }, 400);
-      code = wanted;
-    }
     if (!code) code = newCode();
     setCookie(headers, code);
-    return json({ code }, 200, headers);
+    return json({ code, username: await env.SAVES.get(`acct:${code}`) }, 200, headers);
+  }
+
+  if (request.method === "POST" && /^\/api\/(register|login|logout)$/.test(url.pathname)) {
+    const action = url.pathname.slice(5);
+    if (action === "logout") {
+      setCookie(headers, newCode());
+      return json({}, 200, headers);
+    }
+    const body = await request.json().catch(() => ({}));
+    const username = String(body.username || "").trim().toLowerCase();
+    const password = String(body.password || "");
+    if (!USER_RE.test(username)) return json({ error: "Username: 3-20 letters, numbers or _" }, 400);
+    const record = JSON.parse((await env.SAVES.get(`user:${username}`)) || "null");
+    if (action === "login") {
+      if (!record || !(await passwordOk(password, record))) return json({ error: "Wrong username or password" }, 401);
+      setCookie(headers, record.code);
+      return json({ username }, 200, headers);
+    }
+    if (password.length < 6) return json({ error: "Password needs at least 6 characters" }, 400);
+    if (record) return json({ error: "That username is taken" }, 409);
+    if (code && (await env.SAVES.get(`acct:${code}`))) return json({ error: "Already signed in" }, 409);
+    code ||= newCode();
+    const salt = newCode();
+    await env.SAVES.put(`user:${username}`, JSON.stringify({ salt, hash: await hashPassword(password, salt), code }));
+    await env.SAVES.put(`acct:${code}`, username);
+    setCookie(headers, code);
+    return json({ username }, 200, headers);
   }
 
   const match = url.pathname.match(/^\/api\/save\/([a-z]+)$/);
@@ -68,6 +92,16 @@ async function handleApi(request, env, url) {
     default:
       return json({ error: "Method not allowed" }, 405);
   }
+}
+
+async function hashPassword(password, salt) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: new TextEncoder().encode(salt), iterations: 100000 }, key, 256);
+  return [...new Uint8Array(bits)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function passwordOk(password, record) {
+  return (await hashPassword(password, record.salt)) === record.hash;
 }
 
 function newCode() {
