@@ -64,5 +64,6 @@ the same player code, so registering keeps the guest's progress and logging in e
 4. Route 29 (done: grass, Gold's wild table, ledge, item, berry tree, gate) + wild battles with buddy nets (done: fight, pack, switch, run, catch, exp, level-up, whiteout). Still to do there: the catching tutorial and the egg errand that unlocks nets, trainers, status conditions.
 5. Cherrygrove, then onward.
 
+The Start menu (Buddymon, Pack, BuddyGear, name card, Save, Option, Exit) is in `src/game/menu/`.
 Money is BUDS (3000 at the start, as in Gold). Battle code: `src/game/battle/`, data in `src/game/data/`.
 Persistence: save = JSON of flags, party, bag, map, position (device + KV through `/api/save`).

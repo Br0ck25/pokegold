@@ -5,11 +5,11 @@ const saveText = () => {
   return JSON.stringify({ at: Date.now(), player, map: state.map.key, x: state.x, y: state.y, dir: state.dir });
 };
 let lastCloud = 0;
-Game.save = () => {
+Game.save = (force) => {
   if (Game.state.screen || !Game.state.map.key) return;
   const text = saveText();
   try { localStorage.setItem(Game.SAVE_KEY, text); } catch {}
-  if (Date.now() - lastCloud > 15000) { lastCloud = Date.now(); api("/api/save", { method: "PUT", body: text }).catch(() => {}); }
+  if (force || Date.now() - lastCloud > 15000) { lastCloud = Date.now(); api("/api/save", { method: "PUT", body: text }).catch(() => {}); }
 };
 // The newer of the device save and the cloud save.
 Game.loadSave = async () => {
@@ -23,6 +23,8 @@ Game.boot = async (root) => {
   Game.start(root, saved ? { ...Game.newPlayer(), ...saved.player } : Game.newPlayer());
   const resume = await Game.flow(saved);
   setInterval(Game.save, 5000);
+  setInterval(() => { if (!Game.state.screen && Game.state.map.key) Game.player.play++; }, 1000); // play time, in seconds
+  Game.applyOptions();
   addEventListener("pagehide", () => { lastCloud = 0; Game.save(); });
   Game.state.screen = null;
   if (resume) return Game.warp(resume.map, resume.x, resume.y, resume.dir);

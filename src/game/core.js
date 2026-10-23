@@ -8,7 +8,7 @@ const Game = (() => {
   const maps = {};
   const G = {
     maps, root: null, running: false, player: null, script: null,
-    state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null, pic: null },
+    state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null, pic: null, panel: null },
   };
   let moving = 0, turning = 0;
   G.msgMs = 900; // how long battle messages stay up (tests shorten it)
@@ -38,7 +38,7 @@ const Game = (() => {
   };
   // Money is "BUDS" (Gold starts you with 3000, so do we).
   G.CURRENCY = "BUDS";
-  G.newPlayer = () => ({ name: "", money: 3000, flags: {}, bag: {}, party: [] });
+  G.newPlayer = () => ({ name: "", id: 10000 + rand(90000), money: 3000, play: 0, options: { speed: "mid" }, flags: {}, bag: {}, party: [], box: [] });
   G.register = (key, def) => {
     if (def.world) {
       Object.assign(def, fromWorld(def.world), { warps: [...fromWorld(def.world).warps, ...(def.warps || [])] });
@@ -139,6 +139,7 @@ const Game = (() => {
       else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y); if (c) G.run(c.script); else encounter(m); }
       return;
     }
+    if (Input.pressed("START")) return G.run(Game.startMenu);
     if (Input.pressed("A")) return interact();
     const d = Input.dir();
     if (d === null) return;

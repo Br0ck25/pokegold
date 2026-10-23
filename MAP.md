@@ -8,7 +8,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/battle/calc.js` | 68 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/core.js` | 172 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/core.js` | 173 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/data/items.js` | 7 | Items. nets: catch multiplier of a buddy net. tonic restores HP. |
 | `src/game/data/moves.js` | 18 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
 | `src/game/data/species.js` | 12 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level. |
@@ -16,11 +16,16 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
+| `src/game/menu/card.js` | 33 | Trainer card, BuddyGear (the clock) and Options. |
+| `src/game/menu/pack.js` | 27 | Pack screen: three pockets (Items, Nets, Key items) switched with left/right or the tabs; a chosen item offers USE. |
+| `src/game/menu/party.js` | 40 | Party screen: the list with HP bars; a chosen buddymon offers STATS, SWITCH, ITEM, CANCEL (as in Gold). |
+| `src/game/menu/startmenu.js` | 22 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
+| `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |
 | `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
 | `src/game/newbark.js` | 73 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
 | `src/game/route29.js` | 72 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
-| `src/game/script.js` | 103 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
-| `src/game/start.js` | 31 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
+| `src/game/script.js` | 89 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/start.js` | 33 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
 | `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
 | `src/page/app.js` | 46 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
@@ -66,21 +71,23 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/prof.css` | 4 | professor intro |
 | `src/page/hd/scenes/prof.js` | 30 | Professor Willow's welcome talk. state.prof = { who: "professor" | "hero", species?: number }; text comes from state.dialogue. |
 | `src/page/hd/scenes/room.css` | 16 | room |
-| `src/page/hd/scenes/room.js` | 39 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
+| `src/page/hd/scenes/room.js` | 41 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
 | `src/page/hd/scenes/splash.css` | 25 | studio splash |
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
 | `src/page/hd/scenes/title.css` | 17 | title |
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
 | `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
-| `src/page/hd/scenes/world.js` | 38 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
+| `src/page/hd/scenes/world.js` | 40 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
 | `src/page/hd/ui/actors.js` | 43 | The hero and other people drawn over a room or world, kept in step with game state. |
 | `src/page/hd/ui/dialogue.css` | 17 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 20 | Bottom text box fed by state.dialogue (see core/engine.js). |
 | `src/page/hd/ui/dom.js` | 6 | DOM helpers shared by scenes. |
+| `src/page/hd/ui/panel.css` | 22 | list screens (party, pack, trainer card, ...) |
+| `src/page/hd/ui/panel.js` | 35 | A full-height list screen over the current scene (state.panel, see game/menu/verbs.js): title, optional big picture, tabs, |
 | `src/page/hd/ui/pic.css` | 8 | big buddymon picture |
 | `src/page/hd/ui/pic.js` | 15 | The big buddymon picture shown while the game introduces one (state.pic = species name), like Gold's pokepic. |
-| `src/page/hd/ui/popup.css` | 8 | popup menus |
-| `src/page/hd/ui/popup.js` | 20 | Menu boxes (Start menu, Yes/No) read from the tilemap, drawn as HD panels over a scene. |
+| `src/page/hd/ui/popup.css` | 9 | popup menus |
+| `src/page/hd/ui/popup.js` | 21 | List boxes (Start menu, Yes/No, submenus) drawn over a scene from state.boxes; tap a row to answer. |
 | `src/page/hd/ui/portrait.css` | 4 | portrait (shared by prof, names, naming) |
 | `src/page/index.html` | 56 | <!doctype html> |
 | `src/page/pad.js` | 115 | Touch input: on-screen pad and gesture mode. Needs $ and setStatus from app.js (loaded after this file). |

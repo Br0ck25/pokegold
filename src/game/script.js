@@ -42,20 +42,6 @@ function scriptApi(G) {
       await press("A");
       G.state.dialogue = { text, more: false };
     },
-    async ask(options = ["YES", "NO"]) {
-      let i = 0;
-      const show = () => (G.state.boxes = [{ c0: 14, r0: 6, c1: 19, r1: 6 + options.length * 2 + 1, rows: options.map((text, n) => ({ text, selected: n === i })) }]);
-      show();
-      for (Input.clear(); ;) {
-        Input.poll();
-        if (Input.pressed("UP")) { i = (i + options.length - 1) % options.length; show(); }
-        if (Input.pressed("DOWN")) { i = (i + 1) % options.length; show(); }
-        if (Input.pressed("A")) break;
-        await frame();
-      }
-      G.state.boxes = [];
-      return i;
-    },
     // Yes/No over a question; resolves 0 for yes, like ask(), but with the question shown in the box.
     async confirm(text) { G.state.dialogue = { text, more: false }; return s.ask(); },
     // Opens the phone's own keyboard on a real input.
@@ -98,5 +84,5 @@ function scriptApi(G) {
     addBuddy(species, level) { G.player.party.push(makeMon(species, level)); },
     hide(id) { G.state.objects = G.state.objects.filter((o) => o.id !== id); },
   };
-  return s;
+  return Object.assign(s, menuVerbs(G, s));
 }

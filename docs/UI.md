@@ -42,6 +42,13 @@ Follow these for every screen, control and piece of art. Change a rule here firs
 - People: a look per name in `art/looks.js`; non-people in `art/props.js`. Unlisted names draw as a plain villager.
 - Rooms taller than the stage scroll to keep the hero in view.
 
+## Menus
+- Start menu = a `choose()` list box at the top right (`game/menu/startmenu.js`); Yes/No and submenus are `choose()` boxes above the message box.
+- Full-height list screens (party, pack, trainer card, BuddyGear, options) are `panel()` specs (`ui/panel.js`): title, optional big picture, tabs,
+  text lines, rows with HP bars. Arrows + A/B, left/right for tabs and values, or tap a row / Back. Never overlap one menu on another:
+  a submenu opens over the screen it belongs to, and the message box always sits below everything.
+- Add a screen: write a `Game.<x>Screen = async (s) => {...}` in `game/menu/` that loops on `s.panel(...)`, and list it in the Start menu.
+
 ## Add a screen (checklist)
 1. `scenes/<name>.js` + css, state fields documented at the top of the file.
 2. Drive it from `game/flow.js` or a map script (`s.screen("name", {...})`).

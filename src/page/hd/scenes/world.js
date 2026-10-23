@@ -9,6 +9,7 @@ Scenes.world = function (root) {
   const dlg = dialogue(el);
   const menus = popups(el);
   const pic = picLayer(el);
+  const panel = panelLayer(el);
   let map = null, people = null;
 
   const build = (key) => {
@@ -32,6 +33,7 @@ Scenes.world = function (root) {
       dlg.update(state.dialogue);
       menus.update(state.boxes);
       pic.update(state.pic);
+      panel.update(state.panel);
     },
   };
 };
