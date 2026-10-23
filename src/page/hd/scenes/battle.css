@@ -4,8 +4,8 @@
   radial-gradient(130% 42% at 50% 100%, #46b05a 0 60%, transparent 61%) 0 52%/100% 60% no-repeat,
   linear-gradient(#6fc4ff 0%, #d9f2ff 46%, #9be37a 46.2%, #5cc255 100%); }
 #hd .bt-side { position:absolute; }
-#hd .bt-side.foe { right:4cqw; top:13%; width:44cqw; }
-#hd .bt-side.me { left:3cqw; top:36%; width:46cqw; }
+#hd .bt-side.foe { right:4cqw; top:9%; width:min(44cqw, 27cqh); } /* sizes follow the shorter of width and height so a phone with browser bars still fits */
+#hd .bt-side.me { left:3cqw; top:38%; width:min(46cqw, 28cqh); }
 #hd .bt-side .plat { position:absolute; left:-6%; right:-6%; bottom:-4%; height:28%; border-radius:50%; background:radial-gradient(#8de27a, #4fae57); border:.6cqw solid var(--ink); }
 #hd .bt-side .mon { position:relative; }
 #hd .bt-side .mon svg { width:100%; display:block; }
@@ -23,8 +23,8 @@
 @keyframes net-drop { from { transform:translateY(-30cqw) scale(1.4); opacity:0; } to { transform:none; opacity:1; } }
 @keyframes net-shake { 0%,100% { transform:rotate(0); } 25% { transform:rotate(-12deg); } 75% { transform:rotate(12deg); } }
 #hd .bt-card { position:absolute; padding:2cqw 3cqw; border-radius:3.6cqw; background:rgba(10,18,50,.88); border:.5cqw solid rgba(255,246,220,.35); }
-#hd .bt-card.foe { left:4cqw; top:4%; width:46cqw; }
-#hd .bt-card.me { right:4cqw; top:46%; width:42cqw; }
+#hd .bt-card.foe { left:4cqw; top:3%; width:46cqw; }
+#hd .bt-card.me { right:4cqw; top:44%; width:42cqw; }
 #hd .bt-card .nm { display:block; font-size:4.6cqw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 #hd .bt-card .lv { position:absolute; right:3cqw; top:2.4cqw; font-size:3.4cqw; opacity:.85; }
 #hd .bt-card .hp { height:2.6cqw; margin-top:1.4cqw; border-radius:2cqw; background:rgba(255,246,220,.18); overflow:hidden; }

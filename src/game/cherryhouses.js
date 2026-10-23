@@ -12,7 +12,7 @@
   Game.register("cgmart", {
     room: { art: "cherrygroveMart", cols: 12, rows: 8, label: "Cherrygrove · Mart" },
     solid: grid(12, 8, new Set([...rect(0, 0, 11, 0), ...rect(3, 1, 11, 1), ...rect(0, 4, 2, 4)])),
-    warps: exit([2, 3], "cherrygrove", 22, 7),
+    warps: exit([2, 3], "cherrygrove", 23, 4),
     npcs: [
       { id: 1, name: "CLERK", x: 1, y: 3, dir: 0, faces: false, script: clerk },
       { id: 2, name: "COOLTRAINER_M", x: 7, y: 6, dir: 2, wander: "horizontal", script: talk((s) => (s.flag("GAVE_EGG") ? "BUDDY NETS are in stock! Now I can catch BUDDYMON!" : "They're fresh out of BUDDY NETS! When will they get more of them?")) },
@@ -26,7 +26,7 @@
   Game.register("cgcenter", {
     room: { art: "pokecenter", cols: 10, rows: 8, label: "Cherrygrove · Buddymon Center" },
     solid: grid(10, 8, new Set([...rect(0, 0, 9, 0), ...rect(0, 1, 2, 1), ...rect(5, 1, 5, 1), ...rect(9, 1, 9, 1), ...rect(0, 2, 5, 2), ...rect(7, 5, 8, 5), ...rect(7, 7, 8, 7)])),
-    warps: exit([3, 4], "cherrygrove", 29, 7),
+    warps: exit([3, 4], "cherrygrove", 29, 4),
     npcs: [
       { id: 1, name: "NURSE", x: 3, y: 1, dir: 0, faces: false, script: nurse },
       { id: 2, name: "FISHER", x: 2, y: 3, dir: 1, script: talk("It's great. I can store any number of BUDDYMON, and it's all free.") },
@@ -47,14 +47,14 @@
     npcs,
     signs: [0, 1].map((x) => ({ x, y: 1, script: talk("A shelf of BUDDYMON books and magazines.") })).concat(signs),
   });
-  house("cggent", [21, 15], "Guide Gent's House", [
+  house("cggent", [25, 10], "Guide Gent's House", [
     { id: 1, name: "GRAMPS", x: 2, y: 3, dir: 3, script: talk("When I was a wee lad, I was a hotshot trainer! Here's a word of advice: Catch lots of BUDDYMON! Treat them all with kindness!") },
   ]);
-  house("cggym", [8, 8], "Gym Talk House", [
+  house("cggym", [17, 8], "Gym Talk House", [
     { id: 1, name: "POKEFAN_M", x: 2, y: 3, dir: 0, script: talk("You're trying to see how good you are as a BUDDYMON trainer? You better visit the BUDDYMON GYMS all over JOHTO and collect BADGES.") },
     { id: 2, name: "BUG_CATCHER", x: 5, y: 5, dir: 2, wander: "horizontal", script: talk("When I get older, I'm going to be a GYM LEADER! I make my BUDDYMON battle with my friend's to make them tougher!") },
   ]);
-  house("cgevo", [30, 15], "Evolution Talk House", [
+  house("cgevo", [31, 12], "Evolution Talk House", [
     { id: 1, name: "LASS", x: 3, y: 5, dir: 2, script: talk("BUDDYMON change? I would be shocked if one did that!") },
     { id: 2, name: "YOUNGSTER", x: 2, y: 5, dir: 3, script: talk("BUDDYMON gain experience in battle and change their form.") },
   ]);

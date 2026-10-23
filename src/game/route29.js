@@ -49,7 +49,7 @@
       buildings: [{ x: 24, y: 2, w: 5, h: 3, door: 2, to: "gate29", tx: 4, ty: 6, dir: 1, roof: "#8a6ad9" }],
     },
     wild: { rate: 10, morn: MORN, day: MORN, nite: NITE }, // Gold's Route 29 table: day is the same as morning
-    warps: [9, 10].map((y) => ({ x: 55, y, to: "newbark", tx: 1, ty: y, dir: 3 })).concat([9, 10].map((y) => ({ x: 0, y, to: "cherrygrove", tx: 34, ty: y, dir: 2 }))),
+    warps: [9, 10].map((y) => ({ x: 55, y, to: "newbark", tx: 1, ty: y, dir: 3 })).concat([9, 10].map((y) => ({ x: 0, y, to: "cherrygrove", tx: 38, ty: y - 3, dir: 2 }))),
     coords: [9, 10].map((y) => ({ x: 53, y, script: lesson })),
     npcs: [
       { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: async (s) => { if (s.flag("GAVE_EGG") && !s.flag("LEARNED_TO_CATCH")) return lesson(s); await s.say("BUDDYMON hide in the grass. Who knows when they'll pop out..."); } },

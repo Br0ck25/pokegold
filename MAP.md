@@ -9,9 +9,9 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/battle/evolve.js` | 24 | Evolution after a battle (Gold: engine/pokemon/evolve.asm): a buddymon that levelled up and reached its species' evolve level changes form, |
 | `src/game/battle/growth.js` | 40 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 71 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/cherrygrove.js` | 111 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
+| `src/game/cherrygrove.js` | 115 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses, with the big sea across the west and south. 40 x 18 cells. |
 | `src/game/cherryhouses.js` | 62 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
-| `src/game/core.js` | 196 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/core.js` | 200 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/data/items.js` | 14 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
 | `src/game/data/moves.js` | 28 | Moves. status: { kind: slp|psn|brn|par|frz, chance } inflicts a condition on the foe (chance in % for damaging moves; status moves use 100 and their acc). power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
 | `src/game/data/species.js` | 33 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level, female (chance 0-1 of a female; 1 = always). |

@@ -28,7 +28,7 @@
       buildings: [{ x: 14, y: 3, w: 5, h: 4, door: 2, to: "mrbuddy", tx: 2, ty: 6, dir: 1, roof: "#e0a03a" }],
     },
     wild: { rate: 10, morn: MORN, day: DAY, nite: NITE },
-    warps: [15, 16].map((x) => ({ x, y: 39, to: "cherrygrove", tx: x, ty: 1, dir: 0 })).concat([15, 16].map((x) => ({ x, y: 0, to: "route31", tx: x + 10, ty: 16, dir: 1 }))),
+    warps: [15, 16].map((x) => ({ x, y: 39, to: "cherrygrove", tx: x + 1, ty: 1, dir: 0 })).concat([15, 16].map((x) => ({ x, y: 0, to: "route31", tx: x + 10, ty: 16, dir: 1 }))),
     npcs: [
       { id: 1, name: "YOUNGSTER", x: 19, y: 30, dir: 2, trainer: trainer("YOUNGSTER", "JOEY", [mon("nibblet", 4)], "I just lost, so I'm trying to find more BUDDYMON. Wait! You look weak! Come on, let's battle!", "Ugh. I don't have any more BUDDYMON.", "I have to have more BUDDYMON for battles. I'm going to catch some more!", "BEAT_JOEY") },
       { id: 2, name: "YOUNGSTER", x: 12, y: 21, dir: 3, trainer: trainer("YOUNGSTER", "MIKEY", [mon("chirplet", 2), mon("nibblet", 4)], "You're a BUDDYMON trainer, right? Then you have to battle!", "That's strange. I won before.", "Becoming a good trainer is really tough. I'm going to battle other people to get better.", "BEAT_MIKEY", 6) },

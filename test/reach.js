@@ -21,7 +21,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
       const near = (x, y) => D.some(([dx, dy]) => seen.has(`${x + dx},${y + dy}`));
       for (const wp of m.warps || []) if (!seen.has(`${wp.x},${wp.y}`)) out.push(`${key}: door/exit at (${wp.x},${wp.y}) cannot be reached`);
       for (const sg of m.signs || []) if (!near(sg.x, sg.y)) out.push(`${key}: sign at (${sg.x},${sg.y}) cannot be reached`);
-      for (const n of m.npcs || []) if (!n.hideIf && n.faces !== false && !near(n.x, n.y)) out.push(`${key}: ${n.name} at (${n.x},${n.y}) cannot be reached`);
+      for (const n of m.npcs || []) if (!n.hideIf && !n.surf && n.faces !== false && !near(n.x, n.y)) out.push(`${key}: ${n.name} at (${n.x},${n.y}) cannot be reached`);
     }
     return out;
   });

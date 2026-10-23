@@ -75,7 +75,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   if (!f.GOT_EGG || !after.egg || !after.flags || after.center !== "cgcenter") fail("Mr. Buddymon gives the egg, Aspen the BUDDYDEX, and your home Center changes", after);
 
   // Cherrygrove: the rival is waiting on the way back.
-  await page.evaluate(() => Game.warp("cherrygrove", 34, 9, 2));
+  await page.evaluate(() => Game.warp("cherrygrove", 38, 6, 2));
   await page.waitForTimeout(400);
   await page.evaluate(() => setKey("LEFT", true));
   await page.waitForFunction(() => Game.script, null, { timeout: 4000 }).catch(() => fail("the rival should ambush you after the errand"));

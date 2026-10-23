@@ -37,5 +37,7 @@ Evolved forms of the starters and routes' species, other characters, towns beyon
 - Badges do nothing yet (Gold: ZEPHYRBADGE boosts attack, obeys up to level 20ish, enables FLASH); trainer card shows only the count.
 - FALKNER's prize money and class money values are guesses (read data/trainers/attributes.asm).
 - Kanto-style nickname: nothing.
-- Maps built before tools/goldmap.py (New Bark, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house) use our own layouts, not Gold's real shapes: redo them from the tool when we revisit.
+- Maps built before tools/goldmap.py (New Bark, Route 29, Route 30, Mr. Buddymon's house; Cherrygrove is already redone) use our own layouts, not Gold's real shapes: redo them from the tool when we revisit.
 - Spearlet/Spearhawk, Stinglet (no Kakuna/Beedrill line), Vinebud/Vinewhip (Victreebel needs a LEAF STONE) are partial species lines.
+- Wild encounters: Gold's 5-step cooldown on map entry is in; Repel, cleanse tag, music effects and roaming beasts are not. Cooldown is not reset after a battle (check Gold's reloadmap).
+- Cherrygrove: the Mystic Water fisher is on an island that needs Surf (his TIDE CHARM is unreachable until then).

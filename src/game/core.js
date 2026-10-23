@@ -89,6 +89,7 @@ const Game = (() => {
     const def = maps[key];
     Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => (!n.hideIf || !G.player.flags[n.hideIf]) && (!n.showIf || G.player.flags[n.showIf])).map((n) => ({ ...n })) });
     moving = turning = 0;
+    G.cool = 5;
     if (def.enter) await G.run(def.enter);
   };
 
@@ -101,7 +102,10 @@ const Game = (() => {
   // Wild encounters, as in Gold: on tall grass each step rolls against the map's rate for the time of day; the species comes
   // from 7 slots weighted 30/30/20/10/5/4/1 %, and the level is bumped by 0-4.
   const PROBS = [30, 60, 80, 90, 95, 99, 100];
+  // Gold (engine/overworld/events.asm): entering a map starts a 5-step cooldown; the first 4 steps never roll for an encounter.
+  G.cool = 5;
   function encounter(m) {
+    if (G.cool && --G.cool) return;
     const wild = m.wild;
     if (!wild || kindAt(G.state.x, G.state.y) !== "g" || rand(256) >= Math.floor((wild.rate * 256) / 100)) return;
     const roll = rand(100) + 1, [level, species] = wild[timeOfDay()][PROBS.findIndex((p) => roll <= p)];

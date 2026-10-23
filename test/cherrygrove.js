@@ -37,7 +37,7 @@ const out = process.argv[3] || "test/out";
   await page.waitForFunction(() => Game.state.map.key === "cherrygrove", null, { timeout: 6000 });
   await page.evaluate(() => { setKey("LEFT", false); });
   let s = await here();
-  if (s.map !== "cherrygrove" || s.x > 34) fail("Route 29 should lead to Cherrygrove's east side", s);
+  if (s.map !== "cherrygrove" || s.x < 36) fail("Route 29 should lead to Cherrygrove's east side", s);
   await page.evaluate(() => setKey("LEFT", true));
   await page.waitForFunction(() => Game.script, null, { timeout: 4000 }).catch(() => fail("the rival should ambush you"));
   await page.evaluate(() => setKey("LEFT", false));
@@ -55,7 +55,7 @@ const out = process.argv[3] || "test/out";
   await page.screenshot({ path: `${out}/c1-after-rival.png` });
 
   // The Guide Gent's tour ends with a MAP CARD and him going home.
-  await page.evaluate(() => Game.warp("cherrygrove", 31, 9, 1));
+  await page.evaluate(() => Game.warp("cherrygrove", 32, 7, 1));
   await page.waitForTimeout(400);
   await key("A");
   for (let i = 0; i < 160 && (await running()); i++) { if (await page.evaluate(() => !!Game.state.boxes.length)) await pick(0); else await key("A"); }

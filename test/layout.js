@@ -71,23 +71,30 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await tapA(); await page.waitForFunction(() => HD.last.screen === "title"); await tapA();
   await page.waitForFunction(() => HD.last.screen === "menu"); await tapA();
   await page.waitForFunction(() => HD.last.map.key === "route29");
-  await page.evaluate(() => { Game.msgMs = 80; Game.run(async (s) => { await Game.battle(s, makeMon("hootling", 5)); }); });
+  await page.evaluate(() => { Game.msgMs = 80; Game.run(async (s) => { await Game.battle(s, makeMon("peekat", 2)); }); });
   await page.waitForSelector(".bt-menu:not([hidden]) button", { timeout: 8000 });
   await page.waitForTimeout(900);
-  const boxes = await page.evaluate(() => {
-    const r = (sel) => { const e = document.querySelector(sel); if (!e || e.hidden) return null; const b = e.getBoundingClientRect(); return { x: b.x, y: b.y, w: b.width, h: b.height }; };
-    return { foeMon: r(".bt-side.foe .mon"), foePlat: r(".bt-side.foe .plat"), meMon: r(".bt-side.me .mon"), mePlat: r(".bt-side.me .plat"),
-      foeCard: r(".bt-card.foe"), meCard: r(".bt-card.me"), menu: r(".bt-menu"), dlg: r(".dlg, .dialogue") };
-  });
-  const names = Object.keys(boxes).filter((k) => boxes[k]);
-  const hit = (a, b) => a.x < b.x + b.w - 1 && b.x < a.x + a.w - 1 && a.y < b.y + b.h - 1 && b.y < a.y + a.h - 1;
-  // A platform belongs to its mon (they overlap on purpose); nothing else may touch.
-  const own = new Set(["foeMon,foePlat", "meMon,mePlat"]);
-  for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
-    const a = names[i], b = names[j];
-    if (own.has(`${a},${b}`)) continue;
-    if (hit(boxes[a], boxes[b])) fail(`battle screen: ${a} overlaps ${b}`, [boxes[a], boxes[b]]);
+  // Overlap check at several phone heights (browser bars make the game area much shorter than the screen), with a tall foe and a long name.
+  for (const h of [924, 800, 780, 760]) {
+    await page.setViewportSize({ width: 412, height: h });
+    await page.waitForTimeout(500);
+    const boxes = await page.evaluate(() => {
+      const r = (sel) => { const e = document.querySelector(sel); if (!e || e.hidden) return null; const b = e.getBoundingClientRect(); return { x: b.x, y: b.y, w: b.width, h: b.height }; };
+      return { foeMon: r(".bt-side.foe .mon"), foePlat: r(".bt-side.foe .plat"), meMon: r(".bt-side.me .mon"), mePlat: r(".bt-side.me .plat"),
+        foeCard: r(".bt-card.foe"), meCard: r(".bt-card.me"), menu: r(".bt-menu"), dlg: r(".dlg, .dialogue") };
+    });
+    const names = Object.keys(boxes).filter((k) => boxes[k]);
+    const hit = (a, b) => a.x < b.x + b.w - 1 && b.x < a.x + a.w - 1 && a.y < b.y + b.h - 1 && b.y < a.y + a.h - 1;
+    // A platform belongs to its mon (they overlap on purpose); nothing else may touch.
+    const own = new Set(["foeMon,foePlat", "meMon,mePlat"]);
+    for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
+      const a = names[i], b = names[j];
+      if (own.has(`${a},${b}`)) continue;
+      if (hit(boxes[a], boxes[b])) fail(`battle screen at height ${h}: ${a} overlaps ${b}`, [boxes[a], boxes[b]]);
+    }
+    if (h === 780) await page.screenshot({ path: "test/out/battle-layout-780.png" });
   }
+  await page.setViewportSize({ width: 412, height: 924 });
   await page.screenshot({ path: "test/out/battle-layout.png" });
 
   // Move animation + EXP bar: run from the first fight, then beat a level 2 foe in one hit.
