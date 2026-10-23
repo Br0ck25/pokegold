@@ -1,0 +1,83 @@
+{
+ "name": "VioletNicknameSpeechHouse",
+ "const": "VIOLET_NICKNAME_SPEECH_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "traditional_house",
+ "grid": [
+  "TTTTTTTT",
+  "nbr...TT",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "........",
+  "...DD..."
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 4
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 4
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 2,
+   "y": 3,
+   "sprite": "TEACHER",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletNicknameSpeechHouseTeacherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 6,
+   "y": 4,
+   "sprite": "LASS",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "VioletNicknameSpeechHouseLassScript",
+   "flag": "-1"
+  },
+  {
+   "x": 5,
+   "y": 2,
+   "sprite": "BIRD",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletNicknameSpeechHouseBirdScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 2,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "doors": [
+    [
+     3,
+     7,
+     "VIOLET_CITY"
+    ],
+    [
+     4,
+     7,
+     "VIOLET_CITY"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}

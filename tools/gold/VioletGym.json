@@ -1,0 +1,94 @@
+{
+ "name": "VioletGym",
+ "const": "VIOLET_GYM",
+ "w": 10,
+ "h": 16,
+ "tileset": "elite_four_room",
+ "grid": [
+  "TTTTTTTTTT",
+  "..........",
+  "..TT..TT..",
+  "..........",
+  "..........",
+  "TTTT..TTTT",
+  "TT......TT",
+  "TT..TTTTTT",
+  "TT......TT",
+  "TTTTTT..TT",
+  "TT......TT",
+  "TTTT..TTTT",
+  "TT.T..T.TT",
+  "...T..T...",
+  "TT......TT",
+  "....DD...."
+ ],
+ "warps": [
+  {
+   "x": 4,
+   "y": 15,
+   "to": "VIOLET_CITY",
+   "idx": 2
+  },
+  {
+   "x": 5,
+   "y": 15,
+   "to": "VIOLET_CITY",
+   "idx": 2
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 3,
+   "y": 13,
+   "kind": "BGEVENT_READ",
+   "script": "VioletGymStatue"
+  },
+  {
+   "x": 6,
+   "y": 13,
+   "kind": "BGEVENT_READ",
+   "script": "VioletGymStatue"
+  }
+ ],
+ "objects": [
+  {
+   "x": 5,
+   "y": 1,
+   "sprite": "FALKNER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "VioletGymFalknerScript",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 6,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_LEFT",
+   "type": "TRAINER",
+   "script": "TrainerBirdKeeperRod",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 10,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_RIGHT",
+   "type": "TRAINER",
+   "script": "TrainerBirdKeeperAbe",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 13,
+   "sprite": "GYM_GUIDE",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "VioletGymGuideScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

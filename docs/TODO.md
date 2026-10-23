@@ -41,3 +41,11 @@ Evolved forms of the starters and routes' species, other characters, towns beyon
 - Spearlet/Spearhawk, Stinglet (no Kakuna/Beedrill line), Vinebud/Vinewhip (Victreebel needs a LEAF STONE) are partial species lines.
 - Wild encounters: Gold's 5-step cooldown on map entry is in; Repel, cleanse tag, music effects and roaming beasts are not. Cooldown is not reset after a battle (check Gold's reloadmap).
 - Cherrygrove: the Mystic Water fisher is on an island that needs Surf (his TIDE CHARM is unreachable until then).
+
+## From the Gold audit (all scenes now follow Gold's real maps)
+- Interiors without bespoke art (bedroom, marts, gates, Mr. Buddymon's house, Route 29 gate) are drawn generically from the collision (art/roomGrid.js): props like
+  the Mr. Buddymon desk, gate counters and mart shelves are plain; hand-draw them when we polish.
+- Bedroom: Gold shows the console, dolls and poster only once placed with the decoration system (not built), so the room has none (the player asked for no dolls).
+- Joey's "important battle" scene on Route 30, Tuscany of Tuesday on Route 29, the berry house (Route 30), Route 27/36/32/46 and Dark Cave, Sprout Tower: closed with a message.
+- Hidden items behind Cut/Surf (Violet HYPER TONIC etc.) are placed but unreachable; reach.js skips signs marked `needs`.
+- Wild tables are only checked by hand against data/wild/johto_grass.asm; a generator like terrain.js would stop drift.

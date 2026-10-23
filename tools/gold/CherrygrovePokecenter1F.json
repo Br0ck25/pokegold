@@ -1,0 +1,103 @@
+{
+ "name": "CherrygrovePokecenter1F",
+ "const": "CHERRYGROVE_POKECENTER_1F",
+ "w": 10,
+ "h": 8,
+ "tileset": "pokecenter",
+ "grid": [
+  "TTTTTTTTTT",
+  "TTT..T...P",
+  "kkTkkT....",
+  "..........",
+  "..........",
+  ".......TT.",
+  "..........",
+  "H..DD..TT."
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 2
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 2
+  },
+  {
+   "x": 0,
+   "y": 7,
+   "to": "POKECENTER_2F",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 3,
+   "y": 1,
+   "sprite": "NURSE",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "CherrygrovePokecenter1FNurseScript",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 3,
+   "sprite": "FISHER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "CherrygrovePokecenter1FFisherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 8,
+   "y": 6,
+   "sprite": "GENTLEMAN",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "CherrygrovePokecenter1FGentlemanScript",
+   "flag": "-1"
+  },
+  {
+   "x": 1,
+   "y": 6,
+   "sprite": "TEACHER",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "CherrygrovePokecenter1FTeacherScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 0,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "doors": [
+    [
+     3,
+     7,
+     "CHERRYGROVE_CITY"
+    ],
+    [
+     4,
+     7,
+     "CHERRYGROVE_CITY"
+    ],
+    [
+     0,
+     7,
+     "POKECENTER_2F"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}

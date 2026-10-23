@@ -26,33 +26,12 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   };
   const flags = () => page.evaluate(() => Game.player.flags);
   const where = () => page.evaluate(() => ({ map: Game.state.map.key, x: Game.state.x, y: Game.state.y, dir: Game.state.dir }));
-  const goTo = async (tx, ty) => {
-    const names = ["DOWN", "UP", "LEFT", "RIGHT"];
-    for (let i = 0; i < 200; i++) {
-      await auto();
-      const d = await page.evaluate(([tx, ty]) => {
-        const m = Game.maps[Game.state.map.key], k = (x, y) => `${x},${y}`;
-        if (Game.state.x === tx && Game.state.y === ty) return -1;
-        const free = (x, y) => y >= 0 && y < m.solid.length && x >= 0 && x < m.solid[0].length && m.solid[y][x] !== "#" && !Game.state.objects.some((o) => o.x === x && o.y === y);
-        const D = [[0, 1], [0, -1], [-1, 0], [1, 0]], from = new Map([[k(Game.state.x, Game.state.y), null]]), q = [[Game.state.x, Game.state.y]];
-        while (q.length) { const [x, y] = q.shift(); if (x === tx && y === ty) break; D.forEach(([dx, dy], d) => { if (free(x + dx, y + dy) && !from.has(k(x + dx, y + dy))) { from.set(k(x + dx, y + dy), [x, y, d]); q.push([x + dx, y + dy]); } }); }
-        let first = -2; for (let at = from.get(k(tx, ty)); at; at = from.get(k(at[0], at[1]))) first = at[2];
-        return first;
-      }, [tx, ty]);
-      if (d === -1) return;
-      if (d === -2) { await page.waitForTimeout(300); continue; }
-      const before = await page.evaluate(() => [Game.state.map.key, Game.state.x, Game.state.y].join());
-      await page.evaluate((k) => setKey(k, true), names[d]);
-      await page.waitForFunction((b) => [Game.state.map.key, Game.state.x, Game.state.y].join() !== b || Game.script, before, { timeout: 1500 }).catch(() => {});
-      await page.evaluate((k) => setKey(k, false), names[d]);
-      await page.waitForTimeout(300);
-    }
-  };
+  const goTo = require("./lib").makeGoTo(page, () => auto());
 
   await page.goto(base);
   await page.evaluate(() => {
     const mon = makeMon("bramblet", 14);
-    localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route30", x: 15, y: 38, dir: 1,
+    localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route30", x: 6, y: 52, dir: 1,
       player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true, MET_WILLOW: true, GOT_TONIC: true }, bag: { tonic: 2 }, party: [mon] } }));
   });
   await page.reload();
@@ -62,12 +41,21 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.waitForFunction(() => HD.last.map.key === "route30", null, { timeout: 8000 });
   await page.evaluate(() => { Game.msgMs = 40; Game.player.options.speed = "fast"; });
 
-  // Route 30: the three trainers watch the road.
-  await goTo(16, 7);
-  let f = await flags();
-  if (!f.BEAT_JOEY || !f.BEAT_MIKEY || !f.BEAT_DON) fail("all three Route 30 trainers should have spotted and fought you", { j: f.BEAT_JOEY, m: f.BEAT_MIKEY, d: f.BEAT_DON });
+  // Route 30: trainers fight when you step into their line of sight (Gold's sight: Joey 4 facing left, Mikey 1 facing down).
+  for (const [x, y, flag] of [[2, 30, "BEAT_JOEY"], [5, 25, "BEAT_MIKEY"]]) {
+    await page.evaluate(([x, y]) => Game.warp("route30", x, y, 1), [x, y]);
+    await page.waitForTimeout(300);
+    await page.evaluate(() => setKey("UP", true));
+    await page.waitForFunction(() => Game.script, null, { timeout: 3000 }).catch(() => fail("the trainer should spot you", { x, y }));
+    await page.evaluate(() => setKey("UP", false));
+    await auto(900);
+    if (!(await flags())[flag]) fail("you should have beaten the trainer", flag);
+  }
+  let f;
   await page.evaluate(() => { for (const m of Game.player.party) m.hp = statsFor(m).hp; });
-  await goTo(16, 6);
+  await page.evaluate(() => Game.warp("route30", 6, 52, 1));
+  await goTo(17, 6);
+  await goTo(17, 5);
   await page.waitForFunction(() => HD.last.map.key === "mrbuddy", null, { timeout: 5000 });
   await auto(900);
   f = await flags();
@@ -102,7 +90,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   if (nets !== 5) fail("the aide should give 5 nets", nets);
 
   // Route 29: the dude shows you how to catch; your party is unchanged.
-  await page.evaluate(() => Game.warp("route29", 54, 9, 2));
+  await page.evaluate(() => Game.warp("route29", 58, 8, 2));
   await page.waitForTimeout(400);
   await page.evaluate(() => setKey("LEFT", true));
   await page.waitForFunction(() => Game.script, null, { timeout: 4000 }).catch(() => fail("the dude should offer the lesson"));

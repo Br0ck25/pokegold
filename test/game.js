@@ -68,10 +68,12 @@ const out = process.argv[3] || "test/out";
   s = await st();
   if (!s.flags.GOT_BUDDYGEAR || s.say) fail("Mom's scene should finish and set GOT_BUDDYGEAR", s);
 
-  // The stairs work both ways.
+  // The stairs work both ways (as in Gold you arrive ON the stairs tile, so step off and back on).
+  await hold("DOWN", () => Game.state.y >= 1, 1500);
   await hold("UP", () => Game.state.map.key === "bedroom", 3000);
   s = await page.evaluate(() => Game.state.map.key);
   if (s !== "bedroom") fail("the stairs should lead back up to your room", s);
+  await hold("DOWN", () => Game.state.y >= 1, 1500);
   await hold("UP", () => Game.state.map.key === "livingroom", 3000);
   s = await page.evaluate(() => Game.state.map.key);
   if (s !== "livingroom") fail("and down again", s);
@@ -117,14 +119,14 @@ const out = process.argv[3] || "test/out";
   s = await here();
   if (s.map !== "newbark" || s.x < 4) fail("the teacher should walk you back into town", s);
   // The rival beside the lab shoves you away.
-  await goTo(11, 4);
+  await goTo(2, 2); // the only cell you can talk to him from
   await hold("RIGHT", () => false, 500);
   await tapA();
   await talkOut();
   s = await here();
-  if (s.x >= 11) fail("the rival should shove you away", s);
+  if (s.y < 4) fail("the rival should shove you away (two cells down)", s);
   // Willow's lab: you walk up to the professor by yourself.
-  await goTo(16, 6);
+  await goTo(6, 3);
   await until(() => HD.last.map.key === "willowlab" && HD.last.dialogue, 8000);
   s = await here();
   if (s.x !== 4 || s.y !== 2 || s.dir !== 3) fail("you should have walked up to Willow and be facing him", s);

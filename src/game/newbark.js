@@ -1,74 +1,58 @@
 // New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29.
 // Gold: NewBarkTown.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // Same beats as Gold's town: a teacher who stops you leaving without a buddymon, a villager who paces, and a rival lurking by the lab.
-// 22 x 18 cells, original layout.
+// 20 x 18 cells (Gold's shape).
 (() => {
-  const cols = 22, rows = 18;
-  const cells = Array.from({ length: rows }, () => Array(cols).fill("."));
-  const put = (kind, ...pts) => pts.forEach(([x, y]) => (cells[y][x] = kind));
-  for (let x = 0; x < cols; x++) put("T", [x, 0], [x, 1], [x, rows - 1]);
-  for (let y = 0; y < rows; y++) put("T", [cols - 1, y], [0, y]);
-  for (let y = 13; y <= 15; y++) for (let x = 9; x <= 11; x++) put("w", [x, y]);
-  for (let x = 0; x <= 9; x++) put("p", [x, 9], [x, 10]); // the dirt road west, wide and open to the edge
-  put("f", [2, 7], [9, 5], [20, 9], [18, 13], [12, 16], [6, 3], [1, 15]);
-  put("S", [10, 9], [8, 7], [12, 5], [13, 14], [8, 14]); // signs stand beside buildings, never in front of a door: town, your house, lab, Willow's house, neighbors'
-  put("T", [1, 14], [2, 14], [1, 13]);
-
   const talk = Game.talk;
   const hasMon = (s) => s.flag("GOT_STARTER");
 
-  // Without a buddymon the teacher runs over, scolds you, and walks you back into town.
-  const teacherStops = async (s) => {
+  // Gold's scenes (NewBarkTown.asm). Without a buddymon the teacher runs left to you (4 or 5 steps, from (6,8)), you follow her back 4 or 5 steps right.
+  const teacherStops = (row) => async (s) => {
     if (hasMon(s)) return;
     const t = 1;
+    s.turn(t, 2);
     await s.say("Wait, " + s.name + "!");
-    await s.approach(t, 3);
     s.turn("player", 3);
+    await s.move(t, row === 8 ? [2, 2, 2, 2] : [2, 2, 2, 2, 2], row === 8 ? 2 : 0);
+    if (row === 9) s.turn("player", 1);
     await s.say("What do you think you're doing?");
-    await s.walk([[t, [3, 3, 3, 3]], ["player", [3, 3, 3, 3]]]);
+    await s.follow(t, row === 8 ? [3, 3, 3, 3] : [3, 3, 3, 3, 3]);
     s.turn(t, 2);
     await s.say("It's dangerous to go out without a BUDDYMON! Wild BUDDYMON jump out of the grass on the way to the next town.");
   };
 
-  // The rival lurks beside the lab, grumbles, and shoves you away.
+  // The rival lurks beside the lab at (3,2); you can only talk to him from (2,2). He turns on you, you are pushed back and then shoved out.
   const rival = async (s) => {
-    await s.say("...So this is the famous WILLOW BUDDYMON LAB...");
+    await s.say("<...> So this is the famous WILLOW BUDDYMON LAB...");
     s.turn(3, 2);
     await s.say("...What are you staring at?");
+    await s.move("player", [0], 1); // a step back, still facing him
+    await s.wait(5);
     s.turn(3, 0);
-    const away = [1, 0, 3, 2][s.G.state.dir]; // shoved straight back from where you stood
-    await s.move("player", [away, away], s.G.state.dir);
-    s.turn(3, 3);
+    await s.wait(5);
+    await s.move("player", [0], 1); // the shove
+    await s.move(3, [3]);
+    s.hide(3);
   };
 
-  Game.register("newbark", {
-    world: {
-      label: "New Bark Town", cols, rows, cells: cells.map((r) => r.join("")),
-      buildings: [
-        { x: 13, y: 2, w: 7, h: 5, door: 3, to: "willowlab", tx: 4, ty: 11, dir: 1, roof: "#5aa860", wall: "#eaf3ff", label: "LAB" },
-        { x: 3, y: 5, w: 5, h: 4, door: 2, to: "livingroom", tx: 7, ty: 6, dir: 1 },
-        { x: 3, y: 12, w: 5, h: 4, door: 2, to: "neighbor", tx: 3, ty: 6, dir: 1, roof: "#3a8fd9" },
-        { x: 14, y: 12, w: 5, h: 4, door: 2, to: "willowhouse", tx: 3, ty: 6, dir: 1, roof: "#9a6ad9" },
-      ],
-    },
+  Game.outdoor("newbark", "NewBarkTown", {
+    label: "New Bark Town",
+    style: { "6,3": { roof: "#5aa860", wall: "#eaf3ff", label: "LAB" }, "13,5": { roof: "#d9604c" }, "3,11": { roof: "#3a8fd9" }, "11,13": { roof: "#9a6ad9" } },
+    closed: { Route27: "ROUTE 27 is across the water. You'd need SURF." },
     npcs: [
       {
-        id: 1, name: "TEACHER", x: 7, y: 11, dir: 2, wander: "spin",
+        id: 1, name: "TEACHER", x: 6, y: 8, dir: 0, wander: "spin",
         script: async (s) => { await s.say(hasMon(s) ? "Oh! Your BUDDYMON is adorable! I wish I had one!" : "Wow, your BUDDYGEAR is impressive! Did your mom get it for you?"); },
       },
-      { id: 2, name: "FISHER", x: 11, y: 9, dir: 0, wander: "vertical", script: talk((s) => `Yo, ${s.name}! I hear PROF. WILLOW discovered some new BUDDYMON.`) },
-      { id: 3, name: "RIVAL", x: 12, y: 4, dir: 3, hideIf: "RIVAL_NEWBARK_GONE", script: rival },
+      { id: 2, name: "FISHER", x: 12, y: 9, dir: 0, wander: "vertical", script: talk((s) => `Yo, ${s.name}! I hear PROF. WILLOW discovered some new BUDDYMON.`) },
+      { id: 3, name: "RIVAL", x: 3, y: 2, dir: 3, hideIf: "RIVAL_NEWBARK_GONE", script: rival },
     ],
     signs: [
-      { x: 10, y: 9, script: talk("NEW BARK TOWN. The town where the winds of a new beginning blow.") },
-      { x: 8, y: 7, script: talk((s) => `${s.name}'s house`) },
-      { x: 12, y: 5, script: talk("WILLOW BUDDYMON LAB") },
-      { x: 13, y: 14, script: talk("WILLOW'S HOUSE") },
-      { x: 8, y: 14, script: talk("The neighbors' house") },
+      { x: 8, y: 8, script: talk("NEW BARK TOWN. The town where the winds of a new beginning blow.") },
+      { x: 11, y: 5, script: talk((s) => `${s.name}'s house`) },
+      { x: 3, y: 3, script: talk("WILLOW BUDDYMON LAB") },
+      { x: 9, y: 13, script: talk("WILLOW'S HOUSE") },
     ],
-    coords: [
-      ...[9, 10].map((y) => ({ x: 1, y, script: teacherStops })),
-    ],
-    warps: [9, 10].map((y) => ({ x: 0, y, to: "route29", tx: 54, ty: y, dir: 2 })), // the road west: Route 29
+    coords: [8, 9].map((y) => ({ x: 1, y, script: teacherStops(y) })),
   });
 })();

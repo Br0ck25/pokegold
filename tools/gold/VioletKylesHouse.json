@@ -1,0 +1,74 @@
+{
+ "name": "VioletKylesHouse",
+ "const": "VIOLET_KYLES_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "traditional_house",
+ "grid": [
+  "TTTTTTTT",
+  "nbr...TT",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "........",
+  "...DD..."
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 6
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 6
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 2,
+   "y": 3,
+   "sprite": "POKEFAN_M",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "VioletKylesHousePokefanMScript",
+   "flag": "-1"
+  },
+  {
+   "x": 6,
+   "y": 5,
+   "sprite": "YOUNGSTER",
+   "move": "WALK_UP_DOWN",
+   "type": "SCRIPT",
+   "script": "Kyle",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 2,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "doors": [
+    [
+     3,
+     7,
+     "VIOLET_CITY"
+    ],
+    [
+     4,
+     7,
+     "VIOLET_CITY"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}

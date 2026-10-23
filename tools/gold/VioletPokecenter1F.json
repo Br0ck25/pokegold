@@ -1,0 +1,112 @@
+{
+ "name": "VioletPokecenter1F",
+ "const": "VIOLET_POKECENTER_1F",
+ "w": 10,
+ "h": 8,
+ "tileset": "pokecenter",
+ "grid": [
+  "TTTTTTTTTT",
+  "TTT..T...P",
+  "kkTkkT....",
+  "..........",
+  "..........",
+  ".......TT.",
+  "..........",
+  "H..DD..TT."
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 5
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 5
+  },
+  {
+   "x": 0,
+   "y": 7,
+   "to": "POKECENTER_2F",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 3,
+   "y": 1,
+   "sprite": "NURSE",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "VioletPokecenterNurse",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 6,
+   "sprite": "SUPER_NERD",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletPokecenter1FSuperNerdScript",
+   "flag": "-1"
+  },
+  {
+   "x": 1,
+   "y": 4,
+   "sprite": "GENTLEMAN",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "VioletPokecenter1FGentlemanScript",
+   "flag": "-1"
+  },
+  {
+   "x": 8,
+   "y": 1,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "VioletPokecenter1FYoungsterScript",
+   "flag": "-1"
+  },
+  {
+   "x": 4,
+   "y": 3,
+   "sprite": "SCIENTIST",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "VioletPokecenter1F_ElmsAideScript",
+   "flag": "EVENT_ELMS_AIDE_IN_VIOLET_POKEMON_CENTER"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 0,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "doors": [
+    [
+     3,
+     7,
+     "VIOLET_CITY"
+    ],
+    [
+     4,
+     7,
+     "VIOLET_CITY"
+    ],
+    [
+     0,
+     7,
+     "POKECENTER_2F"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}

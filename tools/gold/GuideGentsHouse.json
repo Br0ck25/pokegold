@@ -1,0 +1,59 @@
+{
+ "name": "GuideGentsHouse",
+ "const": "GUIDE_GENTS_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "house",
+ "grid": [
+  "TTTMTWTT",
+  "bbV....r",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "T......T",
+  "T.DD...T"
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 4
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 4
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "GuideGentsHouseBookshelf"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "GuideGentsHouseBookshelf"
+  }
+ ],
+ "objects": [
+  {
+   "x": 2,
+   "y": 3,
+   "sprite": "GRAMPS",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "GuideGentsHouseGuideGent",
+   "flag": "EVENT_GUIDE_GENT_VISIBLE_IN_CHERRYGROVE"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

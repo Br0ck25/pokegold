@@ -1,0 +1,242 @@
+{
+ "name": "Route30",
+ "const": "ROUTE_30",
+ "w": 20,
+ "h": 54,
+ "tileset": "johto",
+ "grid": [
+  "TTTT....TTTTTTTTTTTT",
+  "TTTT....TTTTTTTTTTTT",
+  "TTTTvv..TTTTTTTTTTTT",
+  "TTTToo..TTTT....TTTT",
+  "TTTT....TT......oooo",
+  "TT......TT.....ooDoo",
+  "gg......c...........",
+  "gg......T...........",
+  "gg.....TTT..........",
+  "gg....TTTT..........",
+  "ggvvvvTTTTTT......TT",
+  "ggooooTTTTTT......TT",
+  "gg....TTTTTT..ggggTT",
+  "gg....TTTTTT..ggggTT",
+  "..gg..TTTTTTggTTgggg",
+  "..gg....TTTTggTTgggg",
+  "TTggvvvvTTTT..TTTTgg",
+  "TTggooooTT....TTTTgg",
+  "TTgg....TTggTTTTgggg",
+  "TTgg....TTggTTTTgggg",
+  "TT......TTggTT....TT",
+  "TT.o....TTggTT....TT",
+  "TT....TTTT..ggggTTTT",
+  "TT....TTTT..ggggTTTT",
+  "TTvvv.TTTTTTgg..TTTT",
+  "TTooo.TTTTTTgg..TTTT",
+  "TT....ggTTTTTT..TTTT",
+  "TT....ggTTTTTT..TTTT",
+  "TT....ggggTT....TTTT",
+  "TT....ggggTT.o..TTTT",
+  "TT................TT",
+  "TT................TT",
+  "TT............ggggTT",
+  "TT............ggggTT",
+  "TT..TTTT..ggggggTTTT",
+  "TT..TTTT..ggggggTTTT",
+  "TTvvTTTTTTTTggggTTTT",
+  "TTooTTTTTTTTggggTTTT",
+  "TT....ooooTTggwwwwTT",
+  "TT....oDooTTggwwwwTT",
+  "TT............wwwwTT",
+  "TT............wwwwTT",
+  "TTTTTT........wwwwTT",
+  "TTTTTT...o....wwwwTT",
+  "TTTTTT........TTTTTT",
+  "TTTTTT........TTTTTT",
+  "TTTTTTvvvvvvggTTTTTT",
+  "TTTTTTooooooggTTTTTT",
+  "TTTTTT..ggggggTTTTTT",
+  "TTTTTT..ggggggTTTTTT",
+  "TTTTTT..TTTTTTTTTTww",
+  "TTTTTT..TTTTTTTTTTww",
+  "TTTTTT..TTTTTTTTTTww",
+  "TTTTTT..TTTTTTTTTTww"
+ ],
+ "warps": [
+  {
+   "x": 7,
+   "y": 39,
+   "to": "ROUTE_30_BERRY_HOUSE",
+   "idx": 1
+  },
+  {
+   "x": 17,
+   "y": 5,
+   "to": "MR_POKEMONS_HOUSE",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 9,
+   "y": 43,
+   "kind": "BGEVENT_READ",
+   "script": "Route30Sign"
+  },
+  {
+   "x": 13,
+   "y": 29,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouseDirectionsSign"
+  },
+  {
+   "x": 15,
+   "y": 5,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouseSign"
+  },
+  {
+   "x": 3,
+   "y": 21,
+   "kind": "BGEVENT_READ",
+   "script": "Route30TrainerTips"
+  },
+  {
+   "x": 14,
+   "y": 9,
+   "kind": "BGEVENT_ITEM",
+   "script": "Route30HiddenPotion"
+  }
+ ],
+ "objects": [
+  {
+   "x": 5,
+   "y": 26,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "YoungsterJoey_ImportantBattleScript",
+   "flag": "EVENT_ROUTE_30_BATTLE"
+  },
+  {
+   "x": 6,
+   "y": 29,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_LEFT",
+   "type": "TRAINER",
+   "script": "TrainerYoungsterJoey",
+   "flag": "EVENT_ROUTE_30_YOUNGSTER_JOEY"
+  },
+  {
+   "x": 5,
+   "y": 23,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_DOWN",
+   "type": "TRAINER",
+   "script": "TrainerYoungsterMikey",
+   "flag": "-1"
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "sprite": "BUG_CATCHER",
+   "move": "SPINRANDOM_FAST",
+   "type": "TRAINER",
+   "script": "TrainerBugCatcherDon",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 31,
+   "sprite": "YOUNGSTER",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "Route30YoungsterScript",
+   "flag": "-1"
+  },
+  {
+   "x": 5,
+   "y": 24,
+   "sprite": "MONSTER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "ObjectEvent",
+   "flag": "EVENT_ROUTE_30_BATTLE"
+  },
+  {
+   "x": 5,
+   "y": 25,
+   "sprite": "MONSTER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "ObjectEvent",
+   "flag": "EVENT_ROUTE_30_BATTLE"
+  },
+  {
+   "x": 5,
+   "y": 39,
+   "sprite": "FRUIT_TREE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "Route30FruitTree1",
+   "flag": "-1"
+  },
+  {
+   "x": 11,
+   "y": 5,
+   "sprite": "FRUIT_TREE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "Route30FruitTree2",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 13,
+   "sprite": "COOLTRAINER_F",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "Route30CooltrainerFScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 6,
+   "y": 38,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     7,
+     39,
+     "ROUTE_30_BERRY_HOUSE"
+    ]
+   ]
+  },
+  {
+   "x": 16,
+   "y": 4,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     17,
+     5,
+     "MR_POKEMONS_HOUSE"
+    ]
+   ]
+  }
+ ],
+ "connections": [
+  [
+   "north",
+   "Route31",
+   "-10"
+  ],
+  [
+   "south",
+   "CherrygroveCity",
+   "-5"
+  ]
+ ]
+}

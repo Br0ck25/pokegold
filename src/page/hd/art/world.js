@@ -20,6 +20,6 @@ Art.world = function (world, margin) {
       uses += `<use href="#${id}" x="${(x + margin) * 100}" y="${(y + margin) * 100}" width="100" height="100"/>`;
     }
   }
-  const buildings = (world.buildings || []).map((b) => Art.building({ ...b, x: b.x + margin, y: b.y + margin })).join("");
+  const buildings = (world.buildings || []).map((b) => Art.building({ ...b, x: b.x + margin, y: b.y + margin, doors: (b.doors || []).map(([x, y]) => [x + margin, y + margin]) })).join("");
   return `<svg class="world-svg" viewBox="0 0 ${W * 100} ${H * 100}" xmlns="http://www.w3.org/2000/svg"><defs>${[...symbols.values()].join("")}</defs>${uses}${buildings}</svg>`;
 };

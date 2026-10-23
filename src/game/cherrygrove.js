@@ -2,27 +2,6 @@
 // Gold: CherrygroveCity.asm (shape from tools/goldmap.py CherrygroveCity; the Mystic Water fisher stands on the island at (7,12), which needs Surf)
 // Gold's beats: the Guide Gent shows you around (and gives a MAP CARD), your rival jumps you at the entrance, 
 (() => {
-  const cols = 40, rows = 18;
-  const cells = [
-    "TTTTTTTTTTTTTTTTppTTTTTTTTTTTTTTTTwwwwTT",
-    "TTTTTTTTTTTTTTTTppTTTTTTTTTTTTTTTTwwwwTT",
-    "TTTTTTTTTTTTTTTTppTTTTTTTTTTTTTTTTT...TT",
-    "TTTTTTTTTTTTTTTTppTTTTTTTTTTTTTTTTTT..TT",
-    "wwTTwwwwTTTT....................TTTTTTTT",
-    "wwTTwwwwTTTT..f.................TTTTTTTT",
-    "wwwTwwwwww......TTTT..f...........pppppp",
-    "wwwTwwwwww......TTTT..............pppppp",
-    "TTTTwwwwww..............TTTT..S...TTTTTT",
-    "TTwwwwwwww.............TTTTT......TTTTTT",
-    "TwwwTTwwwwwwfw................TTTTTTTTTT",
-    "TwwwTTwwwwwwww................TTTTTTTTTT",
-    "Twww....wwwwwwwwTTTTTT............TTTTTT",
-    "Twww....wwwwwwwwTTTTTT........f...TTTTTT",
-    "TwwwwwwwwwwwTTTTwwTTTTTTTTTTTTTTTTTTTTTT",
-    "TwwwwwwwwwwwTwTTwwTTTTTTTTTTTTTTTTTTTTTT",
-    "TTwwTTTTwwwwTwwwwwTTTTTTTTTTTTTTTTTTTTTT",
-    "wTTTTwwTTTTTTwwwwwTTTTTTTTTTTTTTTTTTTTTT",
-  ];
   const talk = Game.talk;
   const G = Game;
 
@@ -76,18 +55,12 @@
     s.flag("RIVAL_CHERRYGROVE_DONE", true);
   };
 
-  Game.register("cherrygrove", {
-    world: {
-      label: "Cherrygrove City", cols, rows, cells,
-      buildings: [
-        { x: 21, y: 0, w: 5, h: 4, door: 2, to: "cgmart", tx: 2, ty: 6, dir: 1, roof: "#3a8fd9", label: "MART" },
-        { x: 27, y: 0, w: 5, h: 4, door: 2, to: "cgcenter", tx: 3, ty: 6, dir: 1, roof: "#e04a5a", label: "HEAL" },
-        { x: 16, y: 6, w: 4, h: 2, door: 1, to: "cggym", tx: 2, ty: 6, dir: 1, roof: "#9a6ad9" },
-        { x: 23, y: 8, w: 5, h: 2, door: 2, to: "cggent", tx: 2, ty: 6, dir: 1, roof: "#d9a03a" },
-        { x: 30, y: 10, w: 4, h: 2, door: 1, to: "cgevo", tx: 2, ty: 6, dir: 1, roof: "#5aa860" },
-      ],
+  Game.outdoor("cherrygrove", "CherrygroveCity", {
+    label: "Cherrygrove City",
+    style: {
+      "23,3": { roof: "#3a8fd9", label: "MART" }, "29,3": { roof: "#e04a5a", label: "HEAL" }, "17,7": { roof: "#9a6ad9" },
+      "25,9": { roof: "#d9a03a" }, "31,11": { roof: "#5aa860" },
     },
-    warps: [6, 7].map((y) => ({ x: 39, y, to: "route29", tx: 1, ty: y + 3, dir: 3 })).concat([16, 17].map((x) => ({ x, y: 0, to: "route30", tx: x - 1, ty: 38, dir: 1 }))),
     coords: [6, 7].map((y) => ({ x: 33, y, script: rival })),
     npcs: [
       { id: 1, name: "GRAMPS", x: 32, y: 6, dir: 0, hideIf: "GENT_GONE_HOME", script: gent },
@@ -106,9 +79,9 @@
     ],
     signs: [
       { x: 30, y: 8, script: talk("CHERRYGROVE CITY. A city of sea breezes and blooming cherries.") },
+      { x: 23, y: 9, script: talk("GUIDE GENT'S HOUSE") },
       { x: 24, y: 3, script: talk("BUDDYMON MART") },
       { x: 30, y: 3, script: talk("BUDDYMON CENTER") },
-      { x: 23, y: 9, script: talk("GUIDE GENT'S HOUSE") },
     ],
   });
 })();

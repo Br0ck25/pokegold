@@ -1,0 +1,67 @@
+{
+ "name": "Route29Route46Gate",
+ "const": "ROUTE_29_ROUTE_46_GATE",
+ "w": 10,
+ "h": 8,
+ "tileset": "gate",
+ "grid": [
+  "TTTTDDTTTT",
+  "..........",
+  "kk......kk",
+  ".k......k.",
+  ".k......k.",
+  "kk......kk",
+  "..........",
+  "....DD...."
+ ],
+ "warps": [
+  {
+   "x": 4,
+   "y": 0,
+   "to": "ROUTE_46",
+   "idx": 1
+  },
+  {
+   "x": 5,
+   "y": 0,
+   "to": "ROUTE_46",
+   "idx": 2
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "ROUTE_29",
+   "idx": 1
+  },
+  {
+   "x": 5,
+   "y": 7,
+   "to": "ROUTE_29",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 0,
+   "y": 4,
+   "sprite": "OFFICER",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "Route29Route46GateOfficerScript",
+   "flag": "-1"
+  },
+  {
+   "x": 6,
+   "y": 4,
+   "sprite": "YOUNGSTER",
+   "move": "WALK_UP_DOWN",
+   "type": "SCRIPT",
+   "script": "Route29Route46GateYoungsterScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

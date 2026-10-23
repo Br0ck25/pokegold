@@ -3,9 +3,6 @@
 // (big picture first), he explains the machine and Mr. Buddymon, and his aide hands you a tonic as you head for the door.
 // Cells match art/willowLab.js. 10 x 12.
 (() => {
-  const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };
-  const blocked = new Set([...rect(0, 0, 9, 0), ...rect(0, 1, 3, 1), ...rect(0, 2, 1, 2), ...rect(6, 1, 9, 1), ...rect(6, 3, 9, 3), ...rect(0, 6, 3, 7), ...rect(6, 6, 9, 7)]);
-  const solid = Array.from({ length: 12 }, (_, y) => Array.from({ length: 10 }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join(""));
   const WILLOW = 1, AIDE = 2;
   const talk = Game.talk;
   const tip = (n, text) => talk((s) => `${s.name} opened a book.`, `Travel Tip ${n}: ${text}`);
@@ -95,10 +92,8 @@
     await s.say(`WILLOW: ...${s.name}. The road to the championship will be a long one. Before you leave, make sure that you talk to your mom.`);
   };
 
-  Game.register("willowlab", {
-    room: { art: "willowLab", cols: 10, rows: 12, label: "New Bark Town · Willow's Lab" },
-    solid,
-    warps: [4, 5].map((x) => ({ x, y: 11, to: "newbark", tx: 16, ty: 7, dir: 0 })),
+  Game.indoor("willowlab", "ElmsLab", {
+    art: "willowLab", label: "New Bark Town · Willow's Lab",
     npcs: [
       {
         id: WILLOW, name: "WILLOW", x: 5, y: 2, dir: 0,

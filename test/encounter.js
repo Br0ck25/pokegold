@@ -22,14 +22,24 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.waitForFunction(() => HD.last.screen === "menu"); await tapA();
   await page.waitForFunction(() => HD.last.map.key === "route29");
 
-  // Route 29's grass corridor starts at (40,10), one cell wide. Enter the map just east of it and walk west with every roll succeeding.
-  await page.evaluate(() => { Math.random = () => 0; Game.warp("route29", 41, 10, 2); });
+  // Find a floor cell on Route 29 followed by five grass cells in a straight line, enter the map there and walk along it with every roll succeeding.
+  const run = await page.evaluate(() => {
+    const c = Game.maps.route29.world.cells, W = c[0].length, H = c.length, D = [[0, 1], [0, -1], [-1, 0], [1, 0]];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (".p".includes(c[y][x])) D.forEach(([dx, dy], d) => {
+      if (window.__run) return;
+      if ([1, 2, 3, 4, 5].every((k) => (c[y + dy * k] || "")[x + dx * k] === "g")) window.__run = { x, y, d, end: [x + dx * 5, y + dy * 5] };
+    });
+    return window.__run;
+  });
+  if (!run) fail("Route 29 has a straight run of five grass cells after a floor cell");
+  await page.evaluate((r) => { Math.random = () => 0; Game.warp("route29", r.x, r.y, r.d); }, run);
   await page.waitForTimeout(300);
-  await page.evaluate(() => setKey("LEFT", true));
+  const key = ["DOWN", "UP", "LEFT", "RIGHT"][run.d];
+  await page.evaluate((k) => setKey(k, true), key);
   await page.waitForFunction(() => Game.state.screen === "battle", null, { timeout: 8000 }).catch(() => fail("an encounter should happen once the cooldown ends"));
-  await page.evaluate(() => setKey("LEFT", false));
-  const x = await page.evaluate(() => Game.state.x);
-  if (x !== 36) fail("the first encounter comes on the 5th step after entering the map (x 41 -> 36)", x);
+  await page.evaluate((k) => setKey(k, false), key);
+  const at = await page.evaluate(() => [Game.state.x, Game.state.y]);
+  if (at.join() !== run.end.join()) fail("the first encounter comes on the 5th step after entering the map", [at, run.end]);
   console.log(failed ? "FAILED" : "OK");
   await browser.close();
   process.exitCode = failed ? 1 : 0;

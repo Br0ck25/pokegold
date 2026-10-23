@@ -2,8 +2,6 @@
 // Gold: MrPokemonsHouse.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
 // buddymon get a rest. Then BuddyGear rings: someone broke into the lab. (Same beats as Gold; the rival "steals" the starter you didn't pick.)
 (() => {
-  const rect = (x0, y0, x1, y1) => { const o = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) o.push(`${x},${y}`); return o; };
-  const blocked = new Set([...rect(0, 0, 7, 0), ...rect(0, 1, 1, 1), ...rect(6, 1, 7, 1), ...rect(4, 3, 7, 3), ...rect(4, 4, 5, 4), ...rect(0, 6, 0, 7)]);
   const talk = Game.talk;
   const MR = 1, ASPEN = 2;
 
@@ -53,10 +51,8 @@
     await s.say(`PROF. WILLOW: ${s.name}, it's WILLOW! Something terrible has happened! Someone broke into the lab and stole a BUDDYMON! I'd like you to come back to the lab as soon as you can.`);
   };
 
-  Game.register("mrbuddy", {
-    room: { art: "mrBuddymonHouse", cols: 8, rows: 8, label: "Route 30 · Mr. Buddymon's House" },
-    solid: Array.from({ length: 8 }, (_, y) => Array.from({ length: 8 }, (_, x) => (blocked.has(`${x},${y}`) ? "#" : ".")).join("")),
-    warps: [2, 3].map((x) => ({ x, y: 7, to: "route30", tx: 16, ty: 7, dir: 0 })),
+  Game.indoor("mrbuddy", "MrPokemonsHouse", {
+    label: "Route 30 · Mr. Buddymon's House",
     npcs: [
       {
         id: MR, name: "GENTLEMAN", x: 3, y: 5, dir: 3,

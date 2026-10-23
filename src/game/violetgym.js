@@ -3,11 +3,6 @@
 // Not built: badge effects (attack boost, obedience, FLASH), the guide's statue text with winning trainers, Willow's aide phone call after the badge.
 (() => {
   const talk = Game.talk;
-  const grid = [
-    "##########", "..........", "..##..##..", "..........", "..........", "####..####", "##......##", "##..######",
-    "##......##", "######..##", "##......##", "####..####", "##.#..#.##", "...#..#...", "##......##", "####..####",
-  ];
-  const solid = grid;
   const trainer = (cls, name, party, seen, beaten, after, flag) => ({ name, cls, party, seen, beaten, after, flag, sight: 3, money: 20 });
 
   const falkner = async (s) => {
@@ -30,10 +25,8 @@
   };
   const statue = async (s) => s.say(s.flag("BEAT_FALKNER") ? `VIOLET CITY BUDDYMON GYM. LEADER: FALKNER. WINNING TRAINERS: ${s.name}` : "VIOLET CITY BUDDYMON GYM");
 
-  Game.register("violetgym", {
-    room: { art: "violetGym", cols: 10, rows: 16, label: "Violet · Gym" },
-    solid,
-    warps: [4, 5].map((x) => ({ x, y: 15, to: "violet", tx: 18, ty: 18, dir: 0 })),
+  Game.indoor("violetgym", "VioletGym", {
+    art: "violetGym", label: "Violet · Gym",
     npcs: [
       { id: 1, name: "FALKNER", x: 5, y: 1, dir: 0, script: falkner },
       { id: 2, name: "BIRD_KEEPER", x: 7, y: 6, dir: 2, trainer: trainer("BIRD KEEPER", "ROD", [["chirplet", 7], ["chirplet", 7]], "The keyword is guts! Those here are training night and day to become bird BUDDYMON masters. Come on!", "Gaaah!", "FALKNER's skills are for real! Don't get cocky just because you beat me!", "BEAT_ROD") },

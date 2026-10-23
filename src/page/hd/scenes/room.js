@@ -15,7 +15,7 @@ Scenes.room = function (root) {
   const build = (key) => {
     const room = ROOMS[key];
     map = key;
-    wrap.innerHTML = Art[room.art]();
+    wrap.innerHTML = Art[room.art](room);
     loc.textContent = room.label;
     people = actorLayer(wrap, { w: room.cols * 100 + 40, h: room.rows * 100 + 40, ox: 20, oy: 20 });
   };

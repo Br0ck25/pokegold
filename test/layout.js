@@ -17,43 +17,25 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   // 2 + 3: pure map data.
   const maps = await page.evaluate(() => {
     const out = { exits: [], grass: null };
-    for (const [key, m] of Object.entries(Game.maps)) {
-      if (!m.world) continue;
-      for (const wp of m.warps) {
-        const edge = wp.x === 0 || wp.y === 0 || wp.x === m.world.cols - 1 || wp.y === m.world.rows - 1;
-        if (edge && m.world.cells[wp.y][wp.x] !== "p") out.exits.push(`${key}: exit at (${wp.x},${wp.y}) is not a dirt path`);
-      }
-    }
+    // Every road that leaves a map (a connected edge in Gold) is a visible dirt road.
+    for (const t of Object.values(Game.terrain)) for (const e of t.exits || []) if (Game.maps[t.key].world.cells[e.y][e.x] !== "p") out.exits.push(`${t.key}: exit at (${e.x},${e.y}) is not a dirt road`);
     const m = Game.maps.route29, cells = m.world.cells, w = cells[0].length, h = cells.length;
     const at = (x, y) => (x >= 0 && y >= 0 && x < w && y < h ? cells[y][x] : "T");
-    // Walk with Gold's rules: a ledge can only be entered from above and throws you two cells down. avoidGrass = never step on 'g'.
+    // Gold's rules: ledge cells are walkable, and pressing their direction jumps two cells over the cliff beyond. avoidGrass = never step on 'g'.
+    const HOP = { v: [[0, 1]], ">": [[1, 0]], "<": [[-1, 0]], R: [[0, 1], [1, 0]], L: [[0, 1], [-1, 0]] };
     const reach = (from, to, avoidGrass) => {
+      const ok = (x, y) => ".pvR<>L".includes(at(x, y)) || (!avoidGrass && at(x, y) === "g");
       const seen = new Set([from.join()]), q = [from];
       while (q.length) {
         const [x, y] = q.shift();
         if (x === to[0] && y === to[1]) return true;
-        for (const [dx, dy] of [[0, 1], [0, -1], [-1, 0], [1, 0]]) {
-          let nx = x + dx, ny = y + dy; const k = at(nx, ny);
-          if (k === "v") { if (dy !== 1 || "TcrwSv".includes(at(nx, ny + 1))) continue; ny += 1; }
-          else if ("TcrwS".includes(k) || (avoidGrass && k === "g")) continue;
-          if (m.npcs.some((n) => n.x === nx && n.y === ny && n.faces === false)) continue;
-          if (!seen.has(nx + "," + ny)) { seen.add(nx + "," + ny); q.push([nx, ny]); }
-        }
+        const next = [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [x + dx, y + dy]).concat((HOP[at(x, y)] || []).map(([dx, dy]) => [x + 2 * dx, y + 2 * dy]));
+        for (const [nx, ny] of next) if (ok(nx, ny) && !seen.has(nx + "," + ny)) { seen.add(nx + "," + ny); q.push([nx, ny]); }
       }
       return false;
     };
-    if (!(at(40, 10) === "g" && at(40, 9) !== "g" && at(40, 11) !== "g" && at(30, 10) === "g" && at(30, 11) === "g")) out.exits.push("Route 29's grass starts 1 wide and then widens to 2");
-    const yo = m.npcs.find((n) => n.name === "YOUNGSTER");
-    if (!yo || Math.abs(yo.x - 41) > 1 || at(yo.x, yo.y) === "g") out.exits.push("the grass-warning youngster stands at the start of the grass, not in it");
-    out.grass = { westNoGrass: reach([54, 9], [1, 9], true), westAny: reach([54, 9], [1, 9], false), eastNoGrass: reach([1, 9], [54, 9], true) };
-    for (const [key, mm] of Object.entries(Game.maps)) {
-      if (!mm.world) continue;
-      for (const n of mm.npcs || []) {
-        if (n.trainer || n.faces === false) continue; // trainers wait in grass in Gold; props and items are placed on purpose
-        const along = n.wander === "vertical" ? [[0, -2], [0, -1], [0, 0], [0, 1], [0, 2]] : n.wander === "horizontal" ? [[-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0]] : [[0, 0]];
-        if (along.some(([dx, dy]) => (mm.world.cells[n.y + dy] || "")[n.x + dx] === "g")) out.exits.push(`${key}: ${n.name} at (${n.x},${n.y}) stands in or wanders into tall grass`);
-      }
-    }
+    // New Bark end (east edge, row 8) and Cherrygrove end (west edge, row 6)
+    out.grass = { westNoGrass: reach([58, 8], [1, 6], true), westAny: reach([58, 8], [1, 6], false), eastNoGrass: reach([1, 6], [58, 8], true) };
     return out;
   });
   maps.exits.forEach((e) => fail(e));

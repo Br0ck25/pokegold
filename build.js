@@ -44,7 +44,7 @@ const rows = all.map((f) => {
   if (lines > MAX_LINES) throw new Error(`${f} has ${lines} lines (max ${MAX_LINES})`);
   const first = text.split("\n").find((l) => l.trim()) || "";
   const note = first.replace(/^\s*(\/\/|\/\*|<!--)\s*/, "").replace(/\s*(\*\/|-->)\s*$/, "");
-  if (/^game\/[a-z0-9]+\.js$/.test(f) && /Game\.register\(/.test(text) && !/^\/\/ Gold: .+\.asm/m.test(text.split("\n").slice(0, 6).join("\n"))) throw new Error(`${f} registers a map but has no "// Gold: <Map>.asm" line in its header: read Gold's map first`);
+  if (/^game\/[a-z0-9]+\.js$/.test(f) && /Game\.(register|outdoor|indoor)\(/.test(text) && !/^\/\/ Gold: .+\.asm/m.test(text.split("\n").slice(0, 6).join("\n"))) throw new Error(`${f} registers a map but has no "// Gold: <Map>.asm" line in its header: read Gold's map first`);
   if (!/^\s*(\/\/|\/\*|<!--)/.test(first) && f !== "page/index.html") throw new Error(`${f} needs a header comment on its first line`);
   return `| \`src/${f}\` | ${lines} | ${note} |`;
 });

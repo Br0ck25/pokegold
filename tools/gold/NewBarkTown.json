@@ -1,0 +1,186 @@
+{
+ "name": "NewBarkTown",
+ "const": "NEW_BARK_TOWN",
+ "w": 20,
+ "h": 18,
+ "tileset": "johto",
+ "grid": [
+  "TTTTooooooTTTTTTTTTT",
+  "TTTTooooooTTTTTTTTTT",
+  "TT..ooooooTTooooTTTT",
+  "TT.oooDoooTTooooTTTT",
+  "TT..........ooooTTTT",
+  "TT.........ooDooTTTT",
+  "TT................ww",
+  "TT................ww",
+  "........o.........ww",
+  "..................ww",
+  "TToooo...........TTT",
+  "TToDoo...........TTT",
+  "..........oooo...TTT",
+  ".........ooDoo...TTT",
+  "TT...............TTT",
+  "TTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTT"
+ ],
+ "warps": [
+  {
+   "x": 6,
+   "y": 3,
+   "to": "ELMS_LAB",
+   "idx": 1
+  },
+  {
+   "x": 13,
+   "y": 5,
+   "to": "PLAYERS_HOUSE_1F",
+   "idx": 1
+  },
+  {
+   "x": 3,
+   "y": 11,
+   "to": "PLAYERS_NEIGHBORS_HOUSE",
+   "idx": 1
+  },
+  {
+   "x": 11,
+   "y": 13,
+   "to": "ELMS_HOUSE",
+   "idx": 1
+  }
+ ],
+ "coords": [
+  {
+   "x": 1,
+   "y": 8,
+   "script": "NewBarkTown_TeacherStopsYouScene1"
+  },
+  {
+   "x": 1,
+   "y": 9,
+   "script": "NewBarkTown_TeacherStopsYouScene2"
+  }
+ ],
+ "signs": [
+  {
+   "x": 8,
+   "y": 8,
+   "kind": "BGEVENT_READ",
+   "script": "NewBarkTownSign"
+  },
+  {
+   "x": 11,
+   "y": 5,
+   "kind": "BGEVENT_READ",
+   "script": "NewBarkTownPlayersHouseSign"
+  },
+  {
+   "x": 3,
+   "y": 3,
+   "kind": "BGEVENT_READ",
+   "script": "NewBarkTownElmsLabSign"
+  },
+  {
+   "x": 9,
+   "y": 13,
+   "kind": "BGEVENT_READ",
+   "script": "NewBarkTownElmsHouseSign"
+  }
+ ],
+ "objects": [
+  {
+   "x": 6,
+   "y": 8,
+   "sprite": "TEACHER",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "NewBarkTownTeacherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 12,
+   "y": 9,
+   "sprite": "FISHER",
+   "move": "WALK_UP_DOWN",
+   "type": "SCRIPT",
+   "script": "NewBarkTownFisherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 3,
+   "y": 2,
+   "sprite": "RIVAL",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "NewBarkTownRivalScript",
+   "flag": "EVENT_RIVAL_NEW_BARK_TOWN"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 4,
+   "y": 0,
+   "w": 6,
+   "h": 4,
+   "doors": [
+    [
+     6,
+     3,
+     "ELMS_LAB"
+    ]
+   ]
+  },
+  {
+   "x": 12,
+   "y": 2,
+   "w": 4,
+   "h": 4,
+   "doors": [
+    [
+     13,
+     5,
+     "PLAYERS_HOUSE_1F"
+    ]
+   ]
+  },
+  {
+   "x": 2,
+   "y": 10,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     3,
+     11,
+     "PLAYERS_NEIGHBORS_HOUSE"
+    ]
+   ]
+  },
+  {
+   "x": 10,
+   "y": 12,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     11,
+     13,
+     "ELMS_HOUSE"
+    ]
+   ]
+  }
+ ],
+ "connections": [
+  [
+   "west",
+   "Route29",
+   "0"
+  ],
+  [
+   "east",
+   "Route27",
+   "0"
+  ]
+ ]
+}

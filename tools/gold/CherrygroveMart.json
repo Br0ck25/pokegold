@@ -1,0 +1,64 @@
+{
+ "name": "CherrygroveMart",
+ "const": "CHERRYGROVE_MART",
+ "w": 12,
+ "h": 8,
+ "tileset": "mart",
+ "grid": [
+  "TTTTTTTTTTTT",
+  "mmkmmmmmmmmm",
+  "..k.........",
+  "..k.........",
+  "TTT.TTTTTT.m",
+  "mm..mmmmmm.m",
+  "...........m",
+  "..DD.......m"
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 1
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 1,
+   "y": 3,
+   "sprite": "CLERK",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "CherrygroveMartClerkScript",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 6,
+   "sprite": "COOLTRAINER_M",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "CherrygroveMartCooltrainerMScript",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 5,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "CherrygroveMartYoungsterScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

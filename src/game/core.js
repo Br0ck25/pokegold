@@ -24,16 +24,13 @@ const Game = (() => {
   };
 
   // Outdoor maps give `world` (see art/world.js); solid cells and building doors are derived from it.
-  const BLOCKING = "TcrwSv";
+  const BLOCKING = "TcrwSC"; // C = cliff face under a ledge; ledge cells themselves are walkable
   const fromWorld = (w) => {
     const solid = w.cells.map((row) => [...row].map((k) => (BLOCKING.includes(k) ? "#" : ".")));
     const warps = [];
     for (const b of w.buildings || []) {
       for (let y = b.y; y < b.y + b.h; y++) for (let x = b.x; x < b.x + b.w; x++) solid[y][x] = "#";
-      if (!(b.door >= 0)) continue; // a building with its doors elsewhere (side doors) draws no front door
-      const dx = b.x + b.door, dy = b.y + b.h - 1;
-      solid[dy][dx] = ".";
-      if (b.to) warps.push({ x: dx, y: dy, to: b.to, tx: b.tx, ty: b.ty, dir: b.dir ?? 1 }); // no target: a doorway the map scripts itself
+      for (const [dx, dy] of b.doors || []) solid[dy][dx] = "."; // door cells; their warps come with the map (Game.outdoor)
     }
     return { solid: solid.map((r) => r.join("")), warps };
   };
@@ -99,6 +96,7 @@ const Game = (() => {
     try { await fn(scriptApi(G)); } finally { G.state.dialogue = null; G.state.boxes = []; G.script = null; Input.clear(); }
   };
 
+  const LEDGES = { v: [0], ">": [3], "<": [2], R: [0, 3], L: [0, 2] }; // directions (0 down, 1 up, 2 left, 3 right) each hop cell can be jumped
   // Wild encounters, as in Gold: on tall grass each step rolls against the map's rate for the time of day; the species comes
   // from 7 slots weighted 30/30/20/10/5/4/1 %, and the level is bumped by 0-4.
   const PROBS = [30, 60, 80, 90, 95, 99, 100];
@@ -150,7 +148,13 @@ const Game = (() => {
       return;
     }
     const sign = (here().signs || []).find((g) => g.x === tx && g.y === ty);
-    if (sign) G.run(sign.script);
+    if (sign) return G.run(sign.script);
+    // Gold's collision types: you can talk across a COUNTER, and a PC tile opens the PC (data/terrain.js kinds: k counter, P PC).
+    const kind = (here().kinds || [])[ty]?.[tx];
+    const across = kind === "k" && npcAt(tx + DX[dir], ty + DY[dir]);
+    if (across && across.script) { if (across.faces !== false) across.dir = [1, 0, 3, 2][dir]; return G.run(across.script); }
+    const tile = (here().tiles || {})[kind];
+    if (tile) G.run(tile);
   }
 
   function tick() {
@@ -173,8 +177,9 @@ const Game = (() => {
     if (d !== state.dir) { state.dir = d; turning = TURN; return; }
     if (turning > 0) { turning--; return; }
     const nx = state.x + DX[d], ny = state.y + DY[d];
-    // A ledge is jumped one way only (down): you land two cells on, past the lip.
-    if (d === 0 && kindAt(nx, ny) === "v" && !blocked(nx, ny + 1)) { state.x = nx; state.y = ny + 1; moving = STEP + 8; return; }
+    // Gold's ledges (player_movement.asm .TryJump): you can stand on a hop cell; pressing its direction jumps two cells, over the cliff cell beyond it.
+    const hop = LEDGES[kindAt(state.x, state.y)];
+    if (hop && hop.includes(d) && !blocked(state.x + 2 * DX[d], state.y + 2 * DY[d])) { state.x += 2 * DX[d]; state.y += 2 * DY[d]; moving = STEP + 8; return; }
     if (blocked(nx, ny)) return;
     G.step(state, d);
     moving = STEP;

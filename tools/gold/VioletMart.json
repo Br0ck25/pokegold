@@ -1,0 +1,64 @@
+{
+ "name": "VioletMart",
+ "const": "VIOLET_MART",
+ "w": 12,
+ "h": 8,
+ "tileset": "mart",
+ "grid": [
+  "TTTTTTTTTTTT",
+  "mmkmmmmmmmmm",
+  "..k.........",
+  "..k.........",
+  "TTT.TTTTTT.m",
+  "mm..mmmmmm.m",
+  "...........m",
+  "..DD.......m"
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 1
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "VIOLET_CITY",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 1,
+   "y": 3,
+   "sprite": "CLERK",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletMartClerkScript",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 6,
+   "sprite": "GRANNY",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletMartGrannyScript",
+   "flag": "-1"
+  },
+  {
+   "x": 5,
+   "y": 2,
+   "sprite": "COOLTRAINER_M",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "VioletMartCooltrainerMScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

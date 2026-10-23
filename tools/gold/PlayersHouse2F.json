@@ -1,0 +1,90 @@
+{
+ "name": "PlayersHouse2F",
+ "const": "PLAYERS_HOUSE_2F",
+ "w": 8,
+ "h": 6,
+ "tileset": "players_room",
+ "grid": [
+  "TTTTTTTH",
+  "..TTVb..",
+  "........",
+  "........",
+  "....TT..",
+  "........"
+ ],
+ "warps": [
+  {
+   "x": 7,
+   "y": 0,
+   "to": "PLAYERS_HOUSE_1F",
+   "idx": 3
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 2,
+   "y": 1,
+   "kind": "BGEVENT_UP",
+   "script": "PlayersHousePCScript"
+  },
+  {
+   "x": 3,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouseRadioScript"
+  },
+  {
+   "x": 5,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouseBookshelfScript"
+  },
+  {
+   "x": 6,
+   "y": 0,
+   "kind": "BGEVENT_IFSET",
+   "script": "PlayersHousePosterScript"
+  }
+ ],
+ "objects": [
+  {
+   "x": 4,
+   "y": 2,
+   "sprite": "CONSOLE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "PlayersHouseGameConsoleScript",
+   "flag": "EVENT_PLAYERS_HOUSE_2F_CONSOLE"
+  },
+  {
+   "x": 4,
+   "y": 4,
+   "sprite": "DOLL_1",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "PlayersHouseDoll1Script",
+   "flag": "EVENT_PLAYERS_HOUSE_2F_DOLL_1"
+  },
+  {
+   "x": 5,
+   "y": 4,
+   "sprite": "DOLL_2",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "PlayersHouseDoll2Script",
+   "flag": "EVENT_PLAYERS_HOUSE_2F_DOLL_2"
+  },
+  {
+   "x": 0,
+   "y": 1,
+   "sprite": "BIG_DOLL",
+   "move": "BIGDOLL",
+   "type": "SCRIPT",
+   "script": "PlayersHouseBigDollScript",
+   "flag": "EVENT_PLAYERS_HOUSE_2F_BIG_DOLL"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

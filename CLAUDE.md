@@ -12,10 +12,19 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
    When new code replaces old, delete the old code, art, data and tests in the same change.
 4. **Goal-driven.** Turn tasks into verifiable goals (bug -> reproduce then fix; feature -> test). Loop until verified.
 
-5. **Study Gold before building a scene.** Read that area's map script and data first (`git show claude/fervent-brahmagupta-2v8nau:maps/<Name>.asm`,
-   also `engine/` for mechanics) and reproduce its beats: who walks where, what faces what, which objects exist, what each cell does. Then redraw it with
-   original layout, text and art. **Use `python3 tools/goldmap.py <MapName>` to print Gold's real cell grid and every warp/sign/object with coordinates; build the map from that.** **Enforced:** every map file starts with a `// Gold: <Map>.asm` line (build.js fails without it); that line is your
-   promise that you read the asm (objects, connections, warps, terrain from the `.blk`) and kept its landmarks (e.g. Cherrygrove: big sea, fisher across it). Check every object has art (an unknown name draws as a plain villager) and every sign/trigger cell matches the art.
+5. **Build every scene from Gold's own data, never from memory or guesses.** The procedure (each step is enforced or has a script):
+   1. `python3 tools/goldmap.py <GoldMapName>` prints the real cell grid, building footprints, signs, people and connections. Read `maps/<Name>.asm` (scripts, text, movement)
+      with `git show claude/fervent-brahmagupta-2v8nau:maps/<Name>.asm`, and `engine/` for mechanics (collision types, ledges, cooldowns...).
+   2. `python3 tools/add-map.py <GoldName> <nativeKey>` snapshots the map into `tools/gold/`, registers it (`tools/gen-terrain.py` BUILT, `test/gold.js` MAPS), regenerates
+      `src/game/data/terrain.js` (**generated, never hand-edited**) and prints a map-file skeleton with everything at Gold's coordinates.
+   3. Write the map with `Game.outdoor(key, gold, {...})` or `Game.indoor(key, gold, {...})` (`src/game/lib/world.js`): terrain, building footprints, doors, arrival cells
+      (you arrive ON the matching door tile, as in Gold, so Gold's scripted walks work unchanged) and map-edge roads come from the terrain data. You supply people, signs,
+      scripts and texts only. The file's line 2 is `// Gold: <Name>.asm ...` (build.js fails without it). Doors to maps we have not built are closed with a message.
+   4. `node test/gold.js` must pass: same size, walls/grass/water/ledges, building footprints, doors, signs and people at the same cells. A deliberate difference goes in
+      `test/gold-allow.json` with a reason (e.g. decoration-system objects, events not built yet); never silence a mismatch without one.
+   5. Run `node tools/audit-maps.js <key>` / `node tools/audit-rooms.js`, **open the pictures and look** (houses on trees, wrong sizes, signs, doors), then `node test/reach.js` + `npm test`.
+   Gold facts the engine follows: ledge cells are walkable and pressing their direction jumps two cells over the cliff (C); you can talk across a COUNTER tile; a PC tile opens
+   the PC; a map entry starts a 5-step wild-encounter cooldown; trainers' sight comes from the object event. Sign cells on a building footprint are its plaque (no sign drawn).
 
 ## Layout (read `MAP.md` first: generated index of every file, its size and purpose)
 - `build.js` builds `worker.js` (the page is embedded) and regenerates `MAP.md`. **Commit `worker.js` with every push** (the user pastes it
@@ -37,7 +46,7 @@ Original names for everything else as it is built; no real Pokemon/Nintendo name
 
 ## Save tokens
 - Use `MAP.md` + Grep before reading; Read with offset/limit. Don't restate big files in replies; refer to `path:line`.
-- Don't commit test output (`test/out`). `worker.js` is the one generated file that is committed.
+- Don't commit test output (`test/out`). The audit pictures are for you to look at, not to commit. `worker.js` is the one generated file that is committed.
 
 ## Status
 Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, the egg errand
@@ -45,8 +54,8 @@ Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route
 Rival is named by the player at the officer; his starter is the one that beats yours. Dialogue uses the shared `Game.talk(...)`.
 Status conditions are in (sleep, poison, burn, paralysis, freeze; REMEDY cures). Everything still missing or half-done is tracked in **`docs/TODO.md`**: add to it whenever you notice a gap, remove items you finish.
 
-## Layout rules (tested by `test/layout.js`)
-- Every outdoor exit is a dirt path ("p") that runs to the map edge and on out of the map; never a bare gap in trees.
-- Routes follow Gold: the way forward crosses tall grass; ledges (down-only) give a grass-free way back. Route 29 is the model.
+## Layout rules (tested by `test/layout.js`, `test/gold.js`)
+- Every outdoor exit is a dirt road ("p") that runs off the map edge (generated from Gold's connections); never a bare gap in trees.
+- Route 29 is the model of Gold's design: west-bound you must cross tall grass, east-bound ledges give a grass-free way back.
 - Panels (party, stats, pack, dex) must fit: every line and the Back button inside the panel at phone size, in the tallest case (stats card).
 - Nothing on the battle screen may overlap (sprites, platforms, HUD cards, menu, message box).

@@ -1,0 +1,65 @@
+{
+ "name": "PlayersNeighborsHouse",
+ "const": "PLAYERS_NEIGHBORS_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "house",
+ "grid": [
+  "TTTMTWTT",
+  "bbV....r",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "T......T",
+  "T.DD...T"
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 3
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 3
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersNeighborsHouseBookshelfScript"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersNeighborsHouseBookshelfScript"
+  },
+  {
+   "x": 7,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersNeighborsHouseRadioScript"
+  }
+ ],
+ "objects": [
+  {
+   "x": 2,
+   "y": 3,
+   "sprite": "COOLTRAINER_F",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "PlayersNeighborsDaughterScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

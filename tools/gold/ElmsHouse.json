@@ -1,0 +1,74 @@
+{
+ "name": "ElmsHouse",
+ "const": "ELMS_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "players_house",
+ "grid": [
+  "TTWTTTTT",
+  "P...VTbb",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "........",
+  "..DD...."
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 4
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 4
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsHousePC"
+  },
+  {
+   "x": 6,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsHouseBookshelf"
+  },
+  {
+   "x": 7,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsHouseBookshelf"
+  }
+ ],
+ "objects": [
+  {
+   "x": 1,
+   "y": 5,
+   "sprite": "TEACHER",
+   "move": "WALK_UP_DOWN",
+   "type": "SCRIPT",
+   "script": "ElmsWife",
+   "flag": "-1"
+  },
+  {
+   "x": 5,
+   "y": 4,
+   "sprite": "BUG_CATCHER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "ElmsSon",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

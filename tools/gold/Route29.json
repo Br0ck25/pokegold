@@ -1,0 +1,167 @@
+{
+ "name": "Route29",
+ "const": "ROUTE_29",
+ "w": 60,
+ "h": 18,
+ "tileset": "johto",
+ "grid": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTooooTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTT...TTTTTTTTTTTToDooTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTT...>o...TTTTT......TTTTTTTTgggggggg...TTTTTTTTTTT",
+  "TTTTTTTTTT....>o......TT......TTTTTTTTggggggggTTTTTTTTTTTTTT",
+  "TT....TTTTv.vvRogggg...T......TTTTgg..ggggggTTTTTTTTTTTTTTTT",
+  "TT.o...TTTo.ooooggggT..........TTTgg..ggggggTTTTTTTTTTTTTTTT",
+  "........o<ggggggggTTT...........ggggggTT..TTTTTTT.....TTTTTT",
+  "........o<ggggggggTTTTT.........ggggggTT..TTTTT....o..TTTTTT",
+  "TTTT....oLv.vv.TTTTTTTT.vvvv.T..TTTTggTTgg>o................",
+  "TTTT....ooo.ooTTTTTTTTTTooooTTcTTTTTggTTgg>o................",
+  "TTTTgg...............TTT....o<..........gg>ogggg......TTTTTT",
+  "TTTTgg...........TTT.c......o<..........gg>ogggg......TTTTTT",
+  "TTTTggggggTTT.vvvvTTTTT.....oLv.vv.TTTvvvvRoggggggggggTTTTTT",
+  "TTTTggggggTTTTooooTTTT......ooo.ooTTTTooooooggggggggggTTTTTT",
+  "TTTTggggTTTTTT....................TTTTggggggggggTTTTTTTTTTTT",
+  "TTTTggggTTTTTT....................TTTTggggggggggTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTT................ggggTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT..............ggggTTTTTTTTTTTTTTTT"
+ ],
+ "warps": [
+  {
+   "x": 27,
+   "y": 1,
+   "to": "ROUTE_29_ROUTE_46_GATE",
+   "idx": 3
+  }
+ ],
+ "coords": [
+  {
+   "x": 53,
+   "y": 8,
+   "script": "Route29Tutorial1"
+  },
+  {
+   "x": 53,
+   "y": 9,
+   "script": "Route29Tutorial2"
+  }
+ ],
+ "signs": [
+  {
+   "x": 51,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "Route29Sign1"
+  },
+  {
+   "x": 3,
+   "y": 5,
+   "kind": "BGEVENT_READ",
+   "script": "Route29Sign2"
+  }
+ ],
+ "objects": [
+  {
+   "x": 50,
+   "y": 12,
+   "sprite": "COOLTRAINER_M",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "CatchingTutorialDudeScript",
+   "flag": "-1"
+  },
+  {
+   "x": 27,
+   "y": 16,
+   "sprite": "YOUNGSTER",
+   "move": "WALK_UP_DOWN",
+   "type": "SCRIPT",
+   "script": "Route29YoungsterScript",
+   "flag": "-1"
+  },
+  {
+   "x": 15,
+   "y": 11,
+   "sprite": "TEACHER",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "Route29TeacherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 12,
+   "y": 2,
+   "sprite": "FRUIT_TREE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "Route29FruitTree",
+   "flag": "-1"
+  },
+  {
+   "x": 25,
+   "y": 3,
+   "sprite": "FISHER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "Route29FisherScript",
+   "flag": "-1"
+  },
+  {
+   "x": 13,
+   "y": 4,
+   "sprite": "COOLTRAINER_M",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "Route29CooltrainerMScript",
+   "flag": "-1"
+  },
+  {
+   "x": 29,
+   "y": 12,
+   "sprite": "TEACHER",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "TuscanyScript",
+   "flag": "EVENT_ROUTE_29_TUSCANY_OF_TUESDAY"
+  },
+  {
+   "x": 48,
+   "y": 2,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "Route29Potion",
+   "flag": "EVENT_ROUTE_29_POTION"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 26,
+   "y": 0,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     27,
+     1,
+     "ROUTE_29_ROUTE_46_GATE"
+    ]
+   ]
+  }
+ ],
+ "connections": [
+  [
+   "north",
+   "Route46",
+   "10"
+  ],
+  [
+   "west",
+   "CherrygroveCity",
+   "0"
+  ],
+  [
+   "east",
+   "NewBarkTown",
+   "0"
+  ]
+ ]
+}

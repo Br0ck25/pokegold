@@ -1,0 +1,77 @@
+{
+ "name": "PlayersHouse1F",
+ "const": "PLAYERS_HOUSE_1F",
+ "w": 10,
+ "h": 8,
+ "tileset": "players_house",
+ "grid": [
+  "TTTTTTTTTH",
+  "TTTTVT....",
+  "...T......",
+  "...T.TT...",
+  ".....TT...",
+  "..........",
+  "..........",
+  "......DD.."
+ ],
+ "warps": [
+  {
+   "x": 6,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 2
+  },
+  {
+   "x": 7,
+   "y": 7,
+   "to": "NEW_BARK_TOWN",
+   "idx": 2
+  },
+  {
+   "x": 9,
+   "y": 0,
+   "to": "PLAYERS_HOUSE_2F",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouse1FStoveScript"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouse1FSinkScript"
+  },
+  {
+   "x": 2,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouse1FFridgeScript"
+  },
+  {
+   "x": 4,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "PlayersHouse1FTVScript"
+  }
+ ],
+ "objects": [
+  {
+   "x": 7,
+   "y": 3,
+   "sprite": "MOM",
+   "move": "STANDING_LEFT",
+   "type": "SCRIPT",
+   "script": "MomScript",
+   "flag": "EVENT_PLAYERS_HOUSE_MOM_1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

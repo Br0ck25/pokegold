@@ -37,17 +37,22 @@ const out = process.argv[3] || "test/out";
   if (/M/.test(genders.bandit)) fail("Bandit is always female", genders);
   if (genders.bramblet < 5 || genders.bramblet > 60) fail("about one starter in eight is female", genders);
 
-  // Ledge: hopping down from the north side of the road lands two cells on (and never back up).
-  await page.evaluate(() => Game.warp("route29", 43, 6, 0));
-  await page.evaluate(() => setKey("DOWN", true));
-  await page.waitForFunction(() => Game.state.y >= 8, null, { timeout: 3000 }).catch(() => {});
-  await page.evaluate(() => setKey("DOWN", false));
-  await page.waitForTimeout(500);
-  if ((await page.evaluate(() => Game.state.y)) !== 8) fail("the ledge should drop you onto the road", await page.evaluate(() => [Game.state.x, Game.state.y]));
-  await page.evaluate(() => setKey("UP", true));
-  await page.waitForTimeout(700);
-  await page.evaluate(() => setKey("UP", false));
-  if ((await page.evaluate(() => Game.state.y)) !== 8) fail("you cannot climb back up a ledge");
+  // Ledge (Gold): stand on a hop cell and press its direction to jump two cells over the cliff; you cannot climb back up.
+  const ledge = await page.evaluate(() => { const w = Game.maps.route29.world.cells; for (let y = 1; y < w.length - 2; y++) for (let x = 0; x < w[0].length; x++) if (w[y][x] === "v" && w[y + 1][x] === "C" && ".gp".includes(w[y + 2][x])) return [x, y]; return null; });
+  if (!ledge) fail("Route 29 has a ledge cell with floor two cells below it");
+  else {
+    await page.evaluate(([x, y]) => Game.warp("route29", x, y, 0), ledge);
+    await page.waitForTimeout(300);
+    await page.evaluate(() => setKey("DOWN", true));
+    await page.waitForFunction((y) => Game.state.y >= y + 2, ledge[1], { timeout: 3000 }).catch(() => {});
+    await page.evaluate(() => setKey("DOWN", false));
+    await page.waitForTimeout(500);
+    if ((await page.evaluate(() => Game.state.y)) !== ledge[1] + 2) fail("the ledge should throw you two cells down", [ledge, await page.evaluate(() => [Game.state.x, Game.state.y])]);
+    await page.evaluate(() => setKey("UP", true));
+    await page.waitForTimeout(700);
+    await page.evaluate(() => setKey("UP", false));
+    if ((await page.evaluate(() => Game.state.y)) !== ledge[1] + 2) fail("you cannot climb back up a ledge");
+  }
   if ((await page.evaluate(() => Game.player.money)) !== 3000) fail("you start with 3000 BUDS");
 
   // Plays a battle by clicking real buttons; `plan(menu)` returns the label to tap for the visible menu.

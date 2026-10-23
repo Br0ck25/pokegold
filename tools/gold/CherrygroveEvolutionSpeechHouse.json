@@ -1,0 +1,68 @@
+{
+ "name": "CherrygroveEvolutionSpeechHouse",
+ "const": "CHERRYGROVE_EVOLUTION_SPEECH_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "house",
+ "grid": [
+  "TTTMTWTT",
+  "bbV....r",
+  "........",
+  "...TT...",
+  "...TT...",
+  "........",
+  "T......T",
+  "T.DD...T"
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 5
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "CHERRYGROVE_CITY",
+   "idx": 5
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "CherrygroveEvolutionSpeechHouseBookshelf"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "CherrygroveEvolutionSpeechHouseBookshelf"
+  }
+ ],
+ "objects": [
+  {
+   "x": 3,
+   "y": 5,
+   "sprite": "LASS",
+   "move": "STANDING_LEFT",
+   "type": "SCRIPT",
+   "script": "CherrygroveEvolutionSpeechHouseLassScript",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 5,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "CherrygroveEvolutionSpeechHouseYoungsterScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

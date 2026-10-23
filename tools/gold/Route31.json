@@ -1,0 +1,159 @@
+{
+ "name": "Route31",
+ "const": "ROUTE_31",
+ "w": 40,
+ "h": 18,
+ "tileset": "johto",
+ "grid": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTo......o",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTo......o",
+  "TTTTTTTTTTTTTTTTwwwwwwTTTTTTTTTTo......o",
+  "TTTTTTTTTTTTTTTTwwwwwwTTTTTTTTTTo......o",
+  "ooooTT.......TTTwwwwwwwwwwTT....o......o",
+  "ooooTT.o.....c..wwwwwwwwwwTT...ooooooooo",
+  "ooooD.......>o......wwwwwwTT..........TT",
+  "ooooD.......>o......wwwwwwTT..........TT",
+  "TTTTTTvvv.vvRo.......................TTT",
+  "TTTTTTooo.oooo.......................TTT",
+  "TTTTTTggggggggTTvvv.vvTTTcTTTTTTgg...TTT",
+  "TTTTTTggggggggTTooo.ooTT..TTTTTTgg..TTTT",
+  "TTTTTTTTgggggg..gg....TT...TTTTTggggTTTT",
+  "TTTTTTTTgggggg..gg....TT...TTTTTggggTTTT",
+  "TTTTTTTTTTgg..gg.....TTT....ggggggTTTTTT",
+  "TTTTTTTTTTgg..gg.....TTT....ggggggTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTT....TTTTTTTTTTTT"
+ ],
+ "warps": [
+  {
+   "x": 4,
+   "y": 6,
+   "to": "ROUTE_31_VIOLET_GATE",
+   "idx": 3
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "to": "ROUTE_31_VIOLET_GATE",
+   "idx": 4
+  },
+  {
+   "x": 34,
+   "y": 5,
+   "to": "DARK_CAVE_VIOLET_ENTRANCE",
+   "idx": 1
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 7,
+   "y": 5,
+   "kind": "BGEVENT_READ",
+   "script": "Route31Sign"
+  },
+  {
+   "x": 31,
+   "y": 5,
+   "kind": "BGEVENT_READ",
+   "script": "DarkCaveSign"
+  }
+ ],
+ "objects": [
+  {
+   "x": 17,
+   "y": 7,
+   "sprite": "FISHER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "Route31MailRecipientScript",
+   "flag": "-1"
+  },
+  {
+   "x": 9,
+   "y": 5,
+   "sprite": "YOUNGSTER",
+   "move": "WANDER",
+   "type": "SCRIPT",
+   "script": "Route31YoungsterScript",
+   "flag": "-1"
+  },
+  {
+   "x": 18,
+   "y": 15,
+   "sprite": "BUG_CATCHER",
+   "move": "STANDING_UP",
+   "type": "TRAINER",
+   "script": "TrainerBugCatcherWade1",
+   "flag": "-1"
+  },
+  {
+   "x": 33,
+   "y": 8,
+   "sprite": "COOLTRAINER_M",
+   "move": "WANDER",
+   "type": "SCRIPT",
+   "script": "Route31CooltrainerMScript",
+   "flag": "-1"
+  },
+  {
+   "x": 16,
+   "y": 7,
+   "sprite": "FRUIT_TREE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "Route31FruitTree",
+   "flag": "-1"
+  },
+  {
+   "x": 29,
+   "y": 5,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "Route31Antidote",
+   "flag": "EVENT_ROUTE_31_ANTIDOTE"
+  },
+  {
+   "x": 21,
+   "y": 13,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "Route31PokeBall",
+   "flag": "EVENT_ROUTE_31_POKE_BALL"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 0,
+   "y": 4,
+   "w": 5,
+   "h": 4,
+   "doors": [
+    [
+     4,
+     6,
+     "ROUTE_31_VIOLET_GATE"
+    ],
+    [
+     4,
+     7,
+     "ROUTE_31_VIOLET_GATE"
+    ]
+   ]
+  }
+ ],
+ "connections": [
+  [
+   "south",
+   "Route30",
+   "10"
+  ],
+  [
+   "west",
+   "VioletCity",
+   "-9"
+  ]
+ ]
+}

@@ -22,7 +22,7 @@ const out = process.argv[3] || "test/out";
 
   await page.goto(base);
   await page.evaluate(() => {
-    localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route29", x: 1, y: 9, dir: 2,
+    localStorage.setItem("buddymon-save", JSON.stringify({ at: 1, map: "route29", x: 1, y: 6, dir: 2,
       player: { name: "Ash", money: 3000, flags: { GOT_STARTER: true, GOT_BUDDYGEAR: true, GOT_EGG: true }, bag: { tonic: 1 }, party: [makeMon("bramblet", 8)] } }));
   });
   await page.reload();
@@ -63,9 +63,9 @@ const out = process.argv[3] || "test/out";
   if (!gent.card || !gent.gone) fail("the tour should give a MAP CARD and the Gent goes home", gent);
 
   // The Mart: buy two tonics. Nets are sold out until the egg errand is done.
-  await page.evaluate(() => Game.warp("cgmart", 1, 5, 1));
+  await page.evaluate(() => Game.warp("cgmart", 3, 3, 2));
   await page.waitForTimeout(300);
-  await key("A"); // counter at (1,4)
+  await key("A"); // facing the counter at (2,3): the clerk is across it
   await key("A"); // welcome
   await pick(0); // BUY
   const rows = await page.evaluate(() => Game.state.panel && Game.state.panel.rows.map((r) => r.label));

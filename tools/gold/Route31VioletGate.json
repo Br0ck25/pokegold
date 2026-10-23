@@ -1,0 +1,67 @@
+{
+ "name": "Route31VioletGate",
+ "const": "ROUTE_31_VIOLET_GATE",
+ "w": 10,
+ "h": 8,
+ "tileset": "gate",
+ "grid": [
+  "TTTTTTTTTT",
+  "TTk....kTT",
+  "..k....k..",
+  "..kkkkkk..",
+  "D........D",
+  "D........D",
+  "..kkkkkk..",
+  "..k....k.."
+ ],
+ "warps": [
+  {
+   "x": 0,
+   "y": 4,
+   "to": "VIOLET_CITY",
+   "idx": 8
+  },
+  {
+   "x": 0,
+   "y": 5,
+   "to": "VIOLET_CITY",
+   "idx": 9
+  },
+  {
+   "x": 9,
+   "y": 4,
+   "to": "ROUTE_31",
+   "idx": 1
+  },
+  {
+   "x": 9,
+   "y": 5,
+   "to": "ROUTE_31",
+   "idx": 2
+  }
+ ],
+ "coords": [],
+ "signs": [],
+ "objects": [
+  {
+   "x": 5,
+   "y": 2,
+   "sprite": "OFFICER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "Route31VioletGateOfficerScript",
+   "flag": "-1"
+  },
+  {
+   "x": 1,
+   "y": 2,
+   "sprite": "COOLTRAINER_F",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "Route31VioletGateCooltrainerFScript",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

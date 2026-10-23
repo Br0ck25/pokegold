@@ -1,0 +1,330 @@
+{
+ "name": "VioletCity",
+ "const": "VIOLET_CITY",
+ "w": 40,
+ "h": 36,
+ "tileset": "johto",
+ "grid": [
+  "TTTT....TTwwwwwwwwTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT....TTwwwwwwwwTTTTooooTTTTTTTTTTTTTT",
+  "TTTTTT....wwwwwwwwTTTTooooTTTTwwww..TTTT",
+  "TTTTTT....wwwwwwwwTTTTooooTTTTwwww..TTTT",
+  "TTTTTTTTTTTTTTwwwwTTTTooooTTTTwwww....TT",
+  "TTTTTTTTTTTTTTwwwwTTTToDooTTTTwwww....TT",
+  "TTTTTTTTTTTTTTwwwwTTTTo.ooTTTTwwww....TT",
+  "TTTTTTTTTTTTTTwwwwTTTT....TTTTwwww....TT",
+  "........TTTTTTwwwwTTTT..o.TTTTwwww....TT",
+  "........TTTTTTwwwwTTTT....TTTTwwww....TT",
+  "TTTTTT..TTTTTTwwwwTTTT....wwwwwwwwTTTTTT",
+  "TTTTTT..TTTTTTwwwwTTTT....wwwwwwwwTTTTTT",
+  "TTTTTT..TTTTTTwwwwTTTT....wwwwwwwwTTTTTT",
+  "TToooo..TTTTTTwwwwTTTT....wwwwwwwwTTTTTT",
+  "TToooo..ooooTTwwoooooo......ooooooTTT.TT",
+  "TToDoo..oooo..wwoooooo......ooooooTTT.TT",
+  "TT......oooo....oooooo......ooooooTTT.TT",
+  "TT......oDoo...oooDooo.....oooDoooTTT.TT",
+  "TTTT............................TTTT..TT",
+  "TTTT............................TTTTcTTT",
+  "TTTTTTTT................o........TTT.TTT",
+  "TTTTTTTTTTTT.........................TTT",
+  "ooooTTTTTTTT......TTTTTTTTv.vvooooTTTTTT",
+  "...oTTTTTTTT..TTTTTTTTTTTTo.ooooooTTTTTT",
+  "...oTTTTTTTT..TTTTTTTTTTTT....ooooTT...D",
+  "ooooTTTTTTTT..TTTTTTTTTTTT....oDoo.....D",
+  "..o.TTTTTTTT..TTTTTTTTTTTT............TT",
+  "....TTTTTTTT..TTTTTToooo..............TT",
+  "..ooooTTTTTT....TTTToooo.............TTT",
+  "..oDooTTTTTT....TTTToDoo.............TTT",
+  "....o.TTTTTT....TTTT............TTTTTTTT",
+  "......TTTTTT....TTTT..........TTTTTTTTTT",
+  "..TTTTTTTTTTTT..TTTTTTTTTTTTTTTTTTTTTTTT",
+  "..TTTTTTTTTTTT..TTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTT..TTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTT..TTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "warps": [
+  {
+   "x": 9,
+   "y": 17,
+   "to": "VIOLET_MART",
+   "idx": 2
+  },
+  {
+   "x": 18,
+   "y": 17,
+   "to": "VIOLET_GYM",
+   "idx": 1
+  },
+  {
+   "x": 30,
+   "y": 17,
+   "to": "EARLS_POKEMON_ACADEMY",
+   "idx": 1
+  },
+  {
+   "x": 3,
+   "y": 15,
+   "to": "VIOLET_NICKNAME_SPEECH_HOUSE",
+   "idx": 1
+  },
+  {
+   "x": 31,
+   "y": 25,
+   "to": "VIOLET_POKECENTER_1F",
+   "idx": 1
+  },
+  {
+   "x": 21,
+   "y": 29,
+   "to": "VIOLET_KYLES_HOUSE",
+   "idx": 1
+  },
+  {
+   "x": 23,
+   "y": 5,
+   "to": "SPROUT_TOWER_1F",
+   "idx": 1
+  },
+  {
+   "x": 39,
+   "y": 24,
+   "to": "ROUTE_31_VIOLET_GATE",
+   "idx": 1
+  },
+  {
+   "x": 39,
+   "y": 25,
+   "to": "ROUTE_31_VIOLET_GATE",
+   "idx": 2
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 24,
+   "y": 20,
+   "kind": "BGEVENT_READ",
+   "script": "VioletCitySign"
+  },
+  {
+   "x": 15,
+   "y": 17,
+   "kind": "BGEVENT_READ",
+   "script": "VioletGymSign"
+  },
+  {
+   "x": 24,
+   "y": 8,
+   "kind": "BGEVENT_READ",
+   "script": "SproutTowerSign"
+  },
+  {
+   "x": 27,
+   "y": 17,
+   "kind": "BGEVENT_READ",
+   "script": "EarlsPokemonAcademySign"
+  },
+  {
+   "x": 32,
+   "y": 25,
+   "kind": "BGEVENT_READ",
+   "script": "VioletCityPokecenterSign"
+  },
+  {
+   "x": 10,
+   "y": 17,
+   "kind": "BGEVENT_READ",
+   "script": "VioletCityMartSign"
+  },
+  {
+   "x": 37,
+   "y": 14,
+   "kind": "BGEVENT_ITEM",
+   "script": "VioletCityHiddenHyperPotion"
+  }
+ ],
+ "objects": [
+  {
+   "x": 13,
+   "y": 16,
+   "sprite": "FISHER",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "VioletCityEarlScript",
+   "flag": "EVENT_VIOLET_CITY_EARL"
+  },
+  {
+   "x": 28,
+   "y": 28,
+   "sprite": "LASS",
+   "move": "WANDER",
+   "type": "SCRIPT",
+   "script": "VioletCityLassScript",
+   "flag": "-1"
+  },
+  {
+   "x": 24,
+   "y": 14,
+   "sprite": "SUPER_NERD",
+   "move": "WANDER",
+   "type": "SCRIPT",
+   "script": "VioletCitySuperNerdScript",
+   "flag": "-1"
+  },
+  {
+   "x": 17,
+   "y": 20,
+   "sprite": "GRAMPS",
+   "move": "WALK_LEFT_RIGHT",
+   "type": "SCRIPT",
+   "script": "VioletCityGrampsScript",
+   "flag": "-1"
+  },
+  {
+   "x": 5,
+   "y": 18,
+   "sprite": "YOUNGSTER",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "VioletCityYoungsterScript",
+   "flag": "-1"
+  },
+  {
+   "x": 14,
+   "y": 29,
+   "sprite": "FRUIT_TREE",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "VioletCityFruitTree",
+   "flag": "-1"
+  },
+  {
+   "x": 4,
+   "y": 1,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "VioletCityPPUp",
+   "flag": "EVENT_VIOLET_CITY_PP_UP"
+  },
+  {
+   "x": 35,
+   "y": 5,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "VioletCityRareCandy",
+   "flag": "EVENT_VIOLET_CITY_RARE_CANDY"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 8,
+   "y": 14,
+   "w": 4,
+   "h": 4,
+   "doors": [
+    [
+     9,
+     17,
+     "VIOLET_MART"
+    ]
+   ]
+  },
+  {
+   "x": 16,
+   "y": 14,
+   "w": 6,
+   "h": 4,
+   "doors": [
+    [
+     18,
+     17,
+     "VIOLET_GYM"
+    ]
+   ]
+  },
+  {
+   "x": 28,
+   "y": 14,
+   "w": 6,
+   "h": 4,
+   "doors": [
+    [
+     30,
+     17,
+     "EARLS_POKEMON_ACADEMY"
+    ]
+   ]
+  },
+  {
+   "x": 2,
+   "y": 14,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     3,
+     15,
+     "VIOLET_NICKNAME_SPEECH_HOUSE"
+    ]
+   ]
+  },
+  {
+   "x": 30,
+   "y": 22,
+   "w": 4,
+   "h": 4,
+   "doors": [
+    [
+     31,
+     25,
+     "VIOLET_POKECENTER_1F"
+    ]
+   ]
+  },
+  {
+   "x": 20,
+   "y": 28,
+   "w": 4,
+   "h": 2,
+   "doors": [
+    [
+     21,
+     29,
+     "VIOLET_KYLES_HOUSE"
+    ]
+   ]
+  },
+  {
+   "x": 22,
+   "y": 2,
+   "w": 4,
+   "h": 4,
+   "doors": [
+    [
+     23,
+     5,
+     "SPROUT_TOWER_1F"
+    ]
+   ]
+  }
+ ],
+ "connections": [
+  [
+   "south",
+   "Route32",
+   "0"
+  ],
+  [
+   "west",
+   "Route36",
+   "0"
+  ],
+  [
+   "east",
+   "Route31",
+   "9"
+  ]
+ ]
+}

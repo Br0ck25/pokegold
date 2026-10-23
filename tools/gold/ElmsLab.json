@@ -1,0 +1,227 @@
+{
+ "name": "ElmsLab",
+ "const": "ELMS_LAB",
+ "w": 10,
+ "h": 12,
+ "tileset": "lab",
+ "grid": [
+  "TTTTWTTTTT",
+  "TTTT..bbbb",
+  "TT........",
+  "......TTTT",
+  "..........",
+  "..........",
+  "TTTT..TTTT",
+  "bbbb..bbbb",
+  "..........",
+  "..........",
+  "..........",
+  "....DD...."
+ ],
+ "warps": [
+  {
+   "x": 4,
+   "y": 11,
+   "to": "NEW_BARK_TOWN",
+   "idx": 1
+  },
+  {
+   "x": 5,
+   "y": 11,
+   "to": "NEW_BARK_TOWN",
+   "idx": 1
+  }
+ ],
+ "coords": [
+  {
+   "x": 4,
+   "y": 6,
+   "script": "LabTryToLeaveScript"
+  },
+  {
+   "x": 5,
+   "y": 6,
+   "script": "LabTryToLeaveScript"
+  },
+  {
+   "x": 4,
+   "y": 5,
+   "script": "MeetCopScript"
+  },
+  {
+   "x": 5,
+   "y": 5,
+   "script": "MeetCopScript2"
+  },
+  {
+   "x": 4,
+   "y": 8,
+   "script": "AideScript_WalkPotion1"
+  },
+  {
+   "x": 5,
+   "y": 8,
+   "script": "AideScript_WalkPotion2"
+  },
+  {
+   "x": 4,
+   "y": 8,
+   "script": "AideScript_WalkBalls1"
+  },
+  {
+   "x": 5,
+   "y": 8,
+   "script": "AideScript_WalkBalls2"
+  }
+ ],
+ "signs": [
+  {
+   "x": 2,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabHealingMachine"
+  },
+  {
+   "x": 6,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 7,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 8,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 9,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 0,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabTravelTip1"
+  },
+  {
+   "x": 1,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabTravelTip2"
+  },
+  {
+   "x": 2,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabTravelTip3"
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabTravelTip4"
+  },
+  {
+   "x": 6,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 7,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 8,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 9,
+   "y": 7,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabBookshelf"
+  },
+  {
+   "x": 9,
+   "y": 3,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabTrashcan"
+  },
+  {
+   "x": 5,
+   "y": 0,
+   "kind": "BGEVENT_READ",
+   "script": "ElmsLabWindow"
+  }
+ ],
+ "objects": [
+  {
+   "x": 5,
+   "y": 2,
+   "sprite": "ELM",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "ProfElmScript",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 9,
+   "sprite": "SCIENTIST",
+   "move": "SPINRANDOM_SLOW",
+   "type": "SCRIPT",
+   "script": "ElmsAideScript",
+   "flag": "EVENT_ELMS_AIDE_IN_LAB"
+  },
+  {
+   "x": 6,
+   "y": 3,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "CyndaquilPokeBallScript",
+   "flag": "EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB"
+  },
+  {
+   "x": 7,
+   "y": 3,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "TotodilePokeBallScript",
+   "flag": "EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB"
+  },
+  {
+   "x": 8,
+   "y": 3,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "ChikoritaPokeBallScript",
+   "flag": "EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB"
+  },
+  {
+   "x": 5,
+   "y": 3,
+   "sprite": "OFFICER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "CopScript",
+   "flag": "EVENT_COP_IN_ELMS_LAB"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

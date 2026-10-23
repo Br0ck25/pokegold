@@ -7,7 +7,7 @@ We are replacing the ROM with our own JS engine, scene by scene. Rule: read how 
 - Grid of 16px cells ("steps"). One step = 16 frames at 60 fps (~0.27s); bike = 2x. Input is read once per step.
 - Tapping a direction you are not facing only turns you (`.CheckTurning`); walking happens when you already face it.
 - `.TryStep`: blocked by land permissions (tile collision), then by NPCs. Blocked = bump sound, no move.
-- Ledges are one-way jumps (`.TryJump`); water needs Surf; ice slides until blocked.
+- Ledges (`.TryJump`): a HOP_* cell is walkable; pressing its direction while standing on it jumps two cells over the wall (cliff) beyond. Water needs Surf; ice slides until blocked.
 - Warps (`.CheckWarp`): stepping onto a door cell, or walking off an "edge warp" cell, triggers the warp event.
 - After a finished step the game checks, in order: coord events, wild encounter (grass/water cells), trainer sight lines.
 

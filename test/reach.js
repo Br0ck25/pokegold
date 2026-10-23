@@ -17,10 +17,17 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
       if (key === "bedroom") starts.push([3, 3]);
       for (const o of Object.values(Game.maps)) for (const wp of o.warps || []) if (wp.to === key) starts.push([wp.tx, wp.ty]);
       const seen = new Set(starts.map(([x, y]) => `${x},${y}`)), q = [...starts];
-      while (q.length) { const [x, y] = q.shift(); for (const [dx, dy] of D) { const k = `${x + dx},${y + dy}`; if (!seen.has(k) && free(x + dx, y + dy)) { seen.add(k); q.push([x + dx, y + dy]); } } }
-      const near = (x, y) => D.some(([dx, dy]) => seen.has(`${x + dx},${y + dy}`));
+      const cells = m.world && m.world.cells, HOP = { v: [[0, 1]], ">": [[1, 0]], "<": [[-1, 0]], R: [[0, 1], [1, 0]], L: [[0, 1], [-1, 0]] }; // Gold's ledges: jump two cells
+      while (q.length) {
+        const [x, y] = q.shift();
+        const next = D.map(([dx, dy]) => [x + dx, y + dy]).concat(cells ? (HOP[cells[y][x]] || []).map(([dx, dy]) => [x + 2 * dx, y + 2 * dy]) : []);
+        for (const [nx, ny] of next) if (!seen.has(`${nx},${ny}`) && free(nx, ny)) { seen.add(`${nx},${ny}`); q.push([nx, ny]); }
+      }
+      // you can also talk across a counter (kind k): stand two cells away with a counter between
+      const across = (x, y) => D.some(([dx, dy]) => (m.kinds || [])[y + dy]?.[x + dx] === "k" && seen.has(`${x + 2 * dx},${y + 2 * dy}`));
+      const near = (x, y) => D.some(([dx, dy]) => seen.has(`${x + dx},${y + dy}`)) || across(x, y);
       for (const wp of m.warps || []) if (!seen.has(`${wp.x},${wp.y}`)) out.push(`${key}: door/exit at (${wp.x},${wp.y}) cannot be reached`);
-      for (const sg of m.signs || []) if (!near(sg.x, sg.y)) out.push(`${key}: sign at (${sg.x},${sg.y}) cannot be reached`);
+      for (const sg of m.signs || []) if (!sg.needs && !near(sg.x, sg.y)) out.push(`${key}: sign at (${sg.x},${sg.y}) cannot be reached`);
       for (const n of m.npcs || []) if (!n.hideIf && !n.surf && n.faces !== false && !near(n.x, n.y)) out.push(`${key}: ${n.name} at (${n.x},${n.y}) cannot be reached`);
     }
     return out;

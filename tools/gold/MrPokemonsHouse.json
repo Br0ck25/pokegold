@@ -1,0 +1,86 @@
+{
+ "name": "MrPokemonsHouse",
+ "const": "MR_POKEMONS_HOUSE",
+ "w": 8,
+ "h": 8,
+ "tileset": "facility",
+ "grid": [
+  "TTTTTTTT",
+  "bbTT..TT",
+  "........",
+  "........",
+  "....TTTT",
+  "....TT..",
+  "T.......",
+  "T.DD...."
+ ],
+ "warps": [
+  {
+   "x": 2,
+   "y": 7,
+   "to": "ROUTE_30",
+   "idx": 2
+  },
+  {
+   "x": 3,
+   "y": 7,
+   "to": "ROUTE_30",
+   "idx": 2
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouse_ForeignMagazines"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouse_ForeignMagazines"
+  },
+  {
+   "x": 6,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouse_BrokenComputer"
+  },
+  {
+   "x": 7,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouse_BrokenComputer"
+  },
+  {
+   "x": 6,
+   "y": 4,
+   "kind": "BGEVENT_READ",
+   "script": "MrPokemonsHouse_StrangeCoins"
+  }
+ ],
+ "objects": [
+  {
+   "x": 3,
+   "y": 5,
+   "sprite": "GENTLEMAN",
+   "move": "STANDING_RIGHT",
+   "type": "SCRIPT",
+   "script": "MrPokemonsHouse_MrPokemonScript",
+   "flag": "-1"
+  },
+  {
+   "x": 6,
+   "y": 5,
+   "sprite": "OAK",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "ObjectEvent",
+   "flag": "EVENT_MR_POKEMONS_HOUSE_OAK"
+  }
+ ],
+ "buildings": [],
+ "connections": []
+}

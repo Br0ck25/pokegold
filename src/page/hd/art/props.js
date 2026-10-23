@@ -13,6 +13,7 @@ Art.net = () => `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><
 <path d="M18 30 Q50 52 82 30 M12 48 Q50 70 88 48 M20 66 Q50 84 80 66 M34 14 Q40 52 36 88 M50 8 Q54 52 50 92 M66 14 Q60 52 64 88" fill="none" stroke-width="2"/>
 <circle cx="50" cy="8" r="6" fill="#3a8fd9"/></g></svg>`;
 
+Art.props.NOTEBOOK = () => `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg"><g stroke="${INK}" stroke-width="3" stroke-linejoin="round"><rect x="12" y="36" width="36" height="26" rx="3" fill="#fff6dc" transform="rotate(-6 30 49)"/><path d="M18 44 H42 M18 50 H38" stroke-width="2" stroke-linecap="round"/></g></svg>`;
 Art.props.SACK = () => `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="62" rx="15" ry="5" fill="#000" opacity=".25"/>
 <g stroke="${INK}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"><path d="M16 60 Q10 44 22 34 L38 34 Q50 44 44 60 Z" fill="#c9965a"/>
 <path d="M22 34 Q30 26 38 34 Z" fill="#b07a42"/><path d="M24 32 L36 32" stroke="#ffc93c" stroke-width="3"/><path d="M26 46 H34" stroke-width="2.4"/></g></svg>`;

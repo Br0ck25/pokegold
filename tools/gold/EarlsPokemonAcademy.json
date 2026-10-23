@@ -1,0 +1,143 @@
+{
+ "name": "EarlsPokemonAcademy",
+ "const": "EARLS_POKEMON_ACADEMY",
+ "w": 8,
+ "h": 16,
+ "tileset": "lab",
+ "grid": [
+  "TTTTTTTT",
+  "bb......",
+  "...T....",
+  "........",
+  "..TTTT..",
+  "........",
+  "..TTTT..",
+  "........",
+  "..TTTT..",
+  "........",
+  "..TTTT..",
+  "........",
+  "........",
+  "........",
+  "........",
+  "...DD..."
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 15,
+   "to": "VIOLET_CITY",
+   "idx": 3
+  },
+  {
+   "x": 4,
+   "y": 15,
+   "to": "VIOLET_CITY",
+   "idx": 3
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 0,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "AcademyBookshelf"
+  },
+  {
+   "x": 1,
+   "y": 1,
+   "kind": "BGEVENT_READ",
+   "script": "AcademyBookshelf"
+  },
+  {
+   "x": 3,
+   "y": 0,
+   "kind": "BGEVENT_READ",
+   "script": "AcademyBlackboard"
+  },
+  {
+   "x": 4,
+   "y": 0,
+   "kind": "BGEVENT_READ",
+   "script": "AcademyBlackboard"
+  }
+ ],
+ "objects": [
+  {
+   "x": 4,
+   "y": 2,
+   "sprite": "FISHER",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "AcademyEarl",
+   "flag": "EVENT_EARLS_ACADEMY_EARL"
+  },
+  {
+   "x": 2,
+   "y": 5,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "EarlsPokemonAcademyYoungster1Script",
+   "flag": "-1"
+  },
+  {
+   "x": 3,
+   "y": 11,
+   "sprite": "GAMEBOY_KID",
+   "move": "STANDING_DOWN",
+   "type": "SCRIPT",
+   "script": "EarlsPokemonAcademyGameboyKid1Script",
+   "flag": "-1"
+  },
+  {
+   "x": 4,
+   "y": 11,
+   "sprite": "GAMEBOY_KID",
+   "move": "STANDING_LEFT",
+   "type": "SCRIPT",
+   "script": "EarlsPokemonAcademyGameboyKid2Script",
+   "flag": "-1"
+  },
+  {
+   "x": 4,
+   "y": 7,
+   "sprite": "YOUNGSTER",
+   "move": "STANDING_UP",
+   "type": "SCRIPT",
+   "script": "EarlsPokemonAcademyYoungster2Script",
+   "flag": "-1"
+  },
+  {
+   "x": 2,
+   "y": 4,
+   "sprite": "POKEDEX",
+   "move": "STILL",
+   "type": "SCRIPT",
+   "script": "AcademyNotebook",
+   "flag": "-1"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 2,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "doors": [
+    [
+     3,
+     15,
+     "VIOLET_CITY"
+    ],
+    [
+     4,
+     15,
+     "VIOLET_CITY"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}
