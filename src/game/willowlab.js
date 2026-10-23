@@ -1,6 +1,6 @@
 // Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one
 // Gold: ElmsLab.asm (read before editing: object positions, connections, terrain; note what we change on purpose)
-// (big picture first), he explains the machine and Mr. Buddymon, and his aide hands you a tonic as you head for the door.
+// (big picture first), she explains the machine and Mr. Buddymon, and her aide hands you a tonic as you head for the door.
 // Cells match art/willowLab.js. 10 x 12.
 (() => {
   const WILLOW = 1, AIDE = 2;
@@ -79,7 +79,7 @@
     s.flag("COP_GONE", true);
   };
 
-  // Willow with the egg: he takes it, is amazed by the BUDDYDEX, and sends you off to see your mom.
+  // Willow with the egg: she takes it, is amazed by the BUDDYDEX, and sends you off to see your mom.
   const afterTheft = async (s) => {
     await s.say(`WILLOW: ${s.name}, this is terrible... Oh, yes, what was MR. BUDDYMON's big discovery?`);
     if (!s.G.player.bag.mystery_egg) return;
@@ -141,7 +141,7 @@
       ...[4, 5].map((x) => ({ x, y: 8, script: aide })),
       ...[4, 5].map((x) => ({ x, y: 5, script: officer })),
     ],
-    // Like Gold: the first time in, you walk straight up to the professor and he explains the favor.
+    // Like Gold: the first time in, you walk straight up to the professor and she explains the favor.
     enter: async (s) => {
       if (s.flag("MET_WILLOW")) return;
       await s.move("player", Array(9).fill(1));

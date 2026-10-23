@@ -44,7 +44,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/violet.js` | 57 | Violet City: Mart, Buddymon Center, the Gym, Earl's Academy, a talk house and Sprout Tower around a lake, with the Route 31 gate on the east edge. |
 | `src/game/violetgym.js` | 39 | Violet Gym: Falkner and his bird keepers on a winding floor over a pit. Beating him gives the ZEPHYRBADGE (P.badges) and TM31 MUD SLAP. |
 | `src/game/violethouses.js` | 94 | Violet City's interiors: Mart, Buddymon Center, the talk house and Earl's Academy. |
-| `src/game/willowhouse.js` | 18 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
+| `src/game/willowhouse.js` | 18 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). Her husband paces; her son dreams of the lab. |
 | `src/game/willowlab.js` | 159 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
 | `src/page/app.js` | 86 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |

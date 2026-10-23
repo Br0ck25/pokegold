@@ -28,7 +28,7 @@
     s.turn("player", 3);
     await s.say(`ASPEN: Aha! So you're ${s.name}! I'm ASPEN! A BUDDYMON researcher. I was just visiting my old friend MR. BUDDYMON.`);
     await s.say("I heard you were running an errand for PROF. WILLOW, so I waited here. Oh! What's this? A rare BUDDYMON egg!");
-    await s.say("Hm, I see! I understand why PROF. WILLOW gave you a BUDDYMON for this errand. To researchers like PROF. WILLOW and I, BUDDYMON are our friends. He saw that you would treat your BUDDYMON with love and care.");
+    await s.say("Hm, I see! I understand why PROF. WILLOW gave you a BUDDYMON for this errand. To researchers like PROF. WILLOW and I, BUDDYMON are our friends. She saw that you would treat your BUDDYMON with love and care.");
     await s.say("...Ah! You seem to be dependable. How would you like to help me out? See? This is the latest version of BUDDYDEX. It automatically records data on BUDDYMON you've seen or caught. It's a hi-tech encyclopedia!");
     s.flag("GOT_BUDDYDEX", true);
     await s.say(`${s.name} received BUDDYDEX!`);

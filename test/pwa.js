@@ -15,6 +15,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.goto(base);
   const manifest = await page.evaluate(async () => (await fetch(document.querySelector("link[rel=manifest]").href)).json());
   if (manifest.display !== "standalone" || manifest.start_url !== "/") fail("manifest should be a standalone app", manifest);
+  if (manifest.orientation === "portrait" || manifest.orientation === "portrait-primary") fail("the installed app must be allowed to rotate to landscape", manifest.orientation);
   const sizes = manifest.icons.map((i) => i.sizes).join();
   if (!sizes.includes("192x192") || !sizes.includes("512x512") || !manifest.icons.some((i) => i.purpose === "maskable")) fail("manifest needs 192, 512 and a maskable icon", sizes);
   for (const icon of manifest.icons) {

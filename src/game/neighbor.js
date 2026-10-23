@@ -6,7 +6,7 @@
     art: "neighborHouse", label: "New Bark Town · Neighbors' House",
     npcs: [{
       id: 1, name: "COOLTRAINER_F", x: 2, y: 3, dir: 3,
-      script: talk("A buddymon that evolves is a wonder. I was amazed by PROF. WILLOW's findings.", "He's so famous for his research on BUDDYMON evolution. ...sigh... I wish I could be a researcher like him..."),
+      script: talk("A buddymon that evolves is a wonder. I was amazed by PROF. WILLOW's findings.", "She's so famous for her research on BUDDYMON evolution. ...sigh... I wish I could be a researcher like her..."),
     }],
     signs: [
       { x: 0, y: 1, script: talk("A shelf of magazines about BUDDYMON trainers.") },
