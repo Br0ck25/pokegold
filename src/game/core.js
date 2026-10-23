@@ -11,8 +11,12 @@ const Game = (() => {
     state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null, pic: null },
   };
   let moving = 0, turning = 0;
+  G.msgMs = 900; // how long battle messages stay up (tests shorten it)
+  G.picked = null; // set by tapping a menu button (see scenes/battle.js)
+  G.pick = (i) => { G.picked = i; };
 
   const here = () => maps[G.state.map.key];
+  const kindAt = (x, y) => { const w = here().world; return w && y >= 0 && y < w.rows && x >= 0 && x < w.cols ? w.cells[y][x] : null; };
   const npcAt = (x, y) => G.state.objects.find((o) => o.x === x && o.y === y);
   const blocked = (x, y) => {
     const m = here();
@@ -32,7 +36,9 @@ const Game = (() => {
     }
     return { solid: solid.map((r) => r.join("")), warps };
   };
-  G.newPlayer = () => ({ name: "", flags: {}, bag: {}, party: [] });
+  // Money is "BUDS" (Gold starts you with 3000, so do we).
+  G.CURRENCY = "BUDS";
+  G.newPlayer = () => ({ name: "", money: 3000, flags: {}, bag: {}, party: [] });
   G.register = (key, def) => {
     if (def.world) {
       Object.assign(def, fromWorld(def.world), { warps: [...fromWorld(def.world).warps, ...(def.warps || [])] });
@@ -60,7 +66,7 @@ const Game = (() => {
     return out;
   };
 
-  // People that wander when idle: wander "spin" turns on the spot, "vertical" paces one cell up and down from where it stands.
+  // People that wander when idle: wander "spin" turns on the spot, "vertical" / "horizontal" pace one cell either way from where they stand.
   function wander() {
     for (const o of G.state.objects) {
       if (!o.wander) continue;
@@ -69,8 +75,8 @@ const Game = (() => {
       if (o.wait > 0) continue;
       o.wait = 60 + Math.random() * 180;
       if (o.wander === "spin") { o.dir = Math.floor(Math.random() * 4); continue; }
-      const d = Math.random() < 0.5 ? 0 : 1, ny = o.y + DY[d];
-      if (Math.abs(ny - o.home.y) <= 1 && !blocked(o.x, ny) && !(o.x === G.state.x && ny === G.state.y)) { o.dir = d; o.y = ny; }
+      const d = (o.wander === "horizontal" ? 2 : 0) + (Math.random() < 0.5 ? 0 : 1), nx = o.x + DX[d], ny = o.y + DY[d];
+      if (Math.abs(nx - o.home.x) <= 1 && Math.abs(ny - o.home.y) <= 1 && !blocked(nx, ny) && !(nx === G.state.x && ny === G.state.y)) { o.dir = d; o.x = nx; o.y = ny; }
     }
   }
 
@@ -85,6 +91,28 @@ const Game = (() => {
     if (G.script) return;
     G.script = fn;
     try { await fn(scriptApi(G)); } finally { G.state.dialogue = null; G.state.boxes = []; G.script = null; Input.clear(); }
+  };
+
+  // Wild encounters, as in Gold: on tall grass each step rolls against the map's rate for the time of day; the species comes
+  // from 7 slots weighted 30/30/20/10/5/4/1 %, and the level is bumped by 0-4.
+  const PROBS = [30, 60, 80, 90, 95, 99, 100];
+  function encounter(m) {
+    const wild = m.wild;
+    if (!wild || kindAt(G.state.x, G.state.y) !== "g" || rand(256) >= Math.floor((wild.rate * 256) / 100)) return;
+    const roll = rand(100) + 1, [level, species] = wild[timeOfDay()][PROBS.findIndex((p) => roll <= p)];
+    const r = rand(256), bump = r < 89 ? 0 : r < 166 ? 1 : r < 217 ? 2 : r < 242 ? 3 : 4; // 35 / 65 / 85 / 95 percent of 256
+    G.run(async (s) => {
+      if ((await Game.battle(s, makeMon(species, level + bump))) === "lost") await Game.whiteout(s);
+    });
+  }
+  // Out of usable buddymon: lose half your money, everyone is healed, and you wake up at home.
+  G.whiteout = async (s) => {
+    await s.say(`${G.player.name} is out of usable BUDDYMON!`);
+    G.player.money = Math.floor(G.player.money / 2);
+    await s.say(`${G.player.name} panicked and dropped half of their ${G.CURRENCY}...`);
+    for (const m of G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
+    G.state.map = { key: "livingroom" };
+    Object.assign(G.state, { x: 7, y: 6, dir: 1, objects: (maps.livingroom.npcs || []).map((n) => ({ ...n })) });
   };
 
   function interact() {
@@ -108,7 +136,7 @@ const Game = (() => {
       if (--moving > 0) return;
       const m = here(), w = (m.warps || []).find((g) => g.x === state.x && g.y === state.y);
       if (w) G.warp(w.to, w.tx, w.ty, w.dir);
-      else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y); if (c) G.run(c.script); }
+      else { const c = (m.coords || []).find((g) => g.x === state.x && g.y === state.y); if (c) G.run(c.script); else encounter(m); }
       return;
     }
     if (Input.pressed("A")) return interact();
@@ -117,6 +145,8 @@ const Game = (() => {
     if (d !== state.dir) { state.dir = d; turning = TURN; return; }
     if (turning > 0) { turning--; return; }
     const nx = state.x + DX[d], ny = state.y + DY[d];
+    // A ledge is jumped one way only (down): you land two cells on, past the lip.
+    if (d === 0 && kindAt(nx, ny) === "v" && !blocked(nx, ny + 1)) { state.x = nx; state.y = ny + 1; moving = STEP + 8; return; }
     if (blocked(nx, ny)) return;
     G.step(state, d);
     moving = STEP;

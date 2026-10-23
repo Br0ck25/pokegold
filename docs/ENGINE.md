@@ -61,5 +61,8 @@ the same player code, so registering keeps the guest's progress and logging in e
 1. Engine core (done): loop, input, grid movement, collision, turn-first, warps, actors, flags, JSON save (`src/game/`).
 2. Start-up flow (done): splash, intro, title, menu, Willow's talk, typed name. Scene 1 (done): bedroom, living room, Mom.
 3. New Bark Town (done: outdoor map renderer, neighbor, Willow's lab, starter choice + 5 nets).
-4. Route 29 + wild encounters + battle with buddy nets. 5. Cherrygrove, then onward.
+4. Route 29 (done: grass, Gold's wild table, ledge, item, berry tree, gate) + wild battles with buddy nets (done: fight, pack, switch, run, catch, exp, level-up, whiteout). Still to do there: the catching tutorial and the egg errand that unlocks nets, trainers, status conditions.
+5. Cherrygrove, then onward.
+
+Money is BUDS (3000 at the start, as in Gold). Battle code: `src/game/battle/`, data in `src/game/data/`.
 Persistence: save = JSON of flags, party, bag, map, position (device + KV through `/api/save`).

@@ -27,10 +27,6 @@
     s.turn(t, 2);
     await s.say("It's dangerous to go out without a BUDDYMON! Wild BUDDYMON jump out of the grass on the way to the next town.");
   };
-  const roadWest = async (s) => {
-    await s.say("ROUTE 29 is not open yet. Come back soon!");
-    await s.move("player", [3]);
-  };
 
   // The rival lurks beside the lab, grumbles, and shoves you away.
   const rival = async (s) => {
@@ -70,7 +66,7 @@
     ],
     coords: [
       ...[9, 10].map((y) => ({ x: 1, y, script: teacherStops })),
-      ...[9, 10].map((y) => ({ x: 0, y, script: roadWest })),
     ],
+    warps: [9, 10].map((y) => ({ x: 0, y, to: "route29", tx: 54, ty: y, dir: 2 })), // the road west: Route 29
   });
 })();

@@ -9,6 +9,33 @@ function scriptApi(G) {
     screen: (name, extra) => Object.assign(G.state, { screen: name, ...extra }),
     get name() { return G.player.name; },
     flag: (name, v) => (v === undefined ? !!G.player.flags[name] : void (G.player.flags[name] = v)),
+    // Show a line for `ms` (a press of A skips ahead): battle messages that flow by without waiting for a button.
+    async msg(text, ms = Game.msgMs) {
+      G.state.dialogue = { text, more: false };
+      Input.clear();
+      for (const t0 = performance.now(); performance.now() - t0 < ms;) { Input.poll(); if (Input.pressed("A")) break; await frame(); }
+    },
+    // A button menu in the battle screen: arrows + A, or tap a button. Returns the index, or -1 for B.
+    async menu(items, cols = 1, kind = "cmd") {
+      let i = 0;
+      const B = G.state.battle, show = () => (B.menu = { kind, cols, items: items.map((label, n) => ({ label, sel: n === i })) });
+      G.picked = null; show();
+      for (Input.clear(); ;) {
+        Input.poll();
+        const n = items.length;
+        if (Input.pressed("UP")) i = (i - cols + n) % n;
+        if (Input.pressed("DOWN")) i = (i + cols) % n;
+        if (cols > 1 && Input.pressed("LEFT")) i = (i + n - 1) % n;
+        if (cols > 1 && Input.pressed("RIGHT")) i = (i + 1) % n;
+        show();
+        if (Input.pressed("A")) break;
+        if (Input.pressed("B")) { i = -1; break; }
+        if (G.picked !== null) { i = G.picked; G.picked = null; break; }
+        await frame();
+      }
+      B.menu = null;
+      return i;
+    },
     async say(text) {
       G.state.dialogue = { text, more: true };
       await press("A");
@@ -28,6 +55,8 @@ function scriptApi(G) {
       G.state.boxes = [];
       return i;
     },
+    // Yes/No over a question; resolves 0 for yes, like ask(), but with the question shown in the box.
+    async confirm(text) { G.state.dialogue = { text, more: false }; return s.ask(); },
     // Opens the phone's own keyboard on a real input.
     prompt(label, max = 10) {
       return new Promise((ok) => {
@@ -65,7 +94,7 @@ function scriptApi(G) {
     wait: async (frames) => { for (let i = 0; i < frames; i++) await frame(); },
     warp: (map, x, y, dir) => G.warp(map, x, y, dir),
     give(item, n = 1) { G.player.bag[item] = (G.player.bag[item] || 0) + n; },
-    addBuddy(species, level) { G.player.party.push({ species, level, nick: species.toUpperCase() }); },
+    addBuddy(species, level) { G.player.party.push(makeMon(species, level)); },
     hide(id) { G.state.objects = G.state.objects.filter((o) => o.id !== id); },
   };
   return s;

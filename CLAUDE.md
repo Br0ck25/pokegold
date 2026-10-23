@@ -19,6 +19,7 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
 ## Layout (read `MAP.md` first: generated index of every file, its size and purpose)
 - `build.js` builds `worker.js` (the page is embedded) and regenerates `MAP.md`. **Commit `worker.js` with every push** (the user pastes it
   into Cloudflare). **Never Read `worker.js`** (blocked in `.claude/settings.json`); read the sources in `src/`.
+- Game data (`src/game/data/`: species, moves, items, types) and battle code (`src/game/battle/`: formulas in `calc.js`, flow in `battle.js`). Currency is BUDS (start 3000).
 - `src/worker/` the Worker: saves + accounts in KV. `src/page/` the page: `app.js`, `pad.js` (touch), `style.css`, `hd/` the renderer
   (`art/` SVG art, `scenes/` one screen each, `ui/` shared bits, `core/` registry + loop). `src/game/` the engine, flow and one map file per area.
 - Every source file: header comment on line 1 (feeds `MAP.md`), under 2000 lines (build fails otherwise), aim for ~150. Split by scene/creature.

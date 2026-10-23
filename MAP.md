@@ -4,13 +4,22 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/core.js` | 142 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/battle/battle.js` | 114 | A wild battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/calc.js` | 68 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
+| `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
+| `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
+| `src/game/core.js` | 172 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/data/items.js` | 7 | Items. nets: catch multiplier of a buddy net. tonic restores HP. |
+| `src/game/data/moves.js` | 19 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
+| `src/game/data/species.js` | 12 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level. |
+| `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
-| `src/game/newbark.js` | 77 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
-| `src/game/script.js` | 73 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/newbark.js` | 73 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
+| `src/game/route29.js` | 72 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
+| `src/game/script.js` | 102 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/start.js` | 31 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
 | `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
@@ -24,6 +33,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/creature.js` | 8 | Art for a species id (as the game numbers them): hand-drawn where we have it, procedural otherwise. |
 | `src/page/hd/art/critter.js` | 50 | Procedural placeholder creature for any species without hand-drawn art (Art.creature falls back here). |
 | `src/page/hd/art/furniture.js` | 46 | Shared room pieces. All coordinates are art units (cell = 100); pieces draw at (x, y) = top-left. |
+| `src/page/hd/art/gate.js` | 7 | Route gate house, 10 x 8 cells: doors north (4..5,0) and south (4..5,7), guard room at (0,4). |
 | `src/page/hd/art/hero.js` | 24 | Player portrait: the kid in the cap (viewBox 300 x 380) |
 | `src/page/hd/art/hootling.js` | 21 | HOOTLING (was Hoothoot): round night owl with moon-yellow eyes and ear tufts. |
 | `src/page/hd/art/introMeadow.js` | 19 | Intro act 2 backdrop: morning meadow with rolling hills and flowers (portrait, slice). |
@@ -35,7 +45,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/peekat.js` | 22 | PEEKAT (was Sentret): meerkat standing tall on its tail, always keeping watch. |
 | `src/page/hd/art/person.js` | 31 | Overworld person, dir: 0 down, 1 up, 2 left, 3 right (viewBox 60 x 80). Look `o` comes from Art.looks: |
 | `src/page/hd/art/professor.js` | 30 | Friendly professor, bust portrait (viewBox 300 x 380) |
-| `src/page/hd/art/props.js` | 9 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are the names maps give their objects. |
+| `src/page/hd/art/props.js` | 24 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are the names maps give their objects. |
 | `src/page/hd/art/room.js` | 69 | The player's bedroom: an 8 x 6 grid, one cell = 100 units. Layout mirrors the |
 | `src/page/hd/art/room1F.js` | 46 | Player's house, ground floor: 10 x 8 cells of 100 units. Blocked cells (from the game's collision data): |
 | `src/page/hd/art/sky.js` | 30 | Night sky with a big golden moon and layered hills. `dim` darkens it for menus. |
@@ -47,6 +57,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 30 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |
+| `src/page/hd/scenes/battle.css` | 42 | battle |
+| `src/page/hd/scenes/battle.js` | 66 | Battle screen. state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }. |
 | `src/page/hd/scenes/intro.css` | 50 | opening cinematic: act i starts at i*6s (--t) |
 | `src/page/hd/scenes/intro.js` | 26 | Opening cinematic: four 6s acts (sea, meadow, night, finale) timed by CSS from mount. |
 | `src/page/hd/scenes/menu.css` | 10 | menu |
