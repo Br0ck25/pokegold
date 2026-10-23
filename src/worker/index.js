@@ -125,17 +125,20 @@ function json(body, status = 200, headers = new Headers()) {
 }
 
 // --- embedded page ----------------------------------------------------------
-// build.js prepends `const EMBEDDED = { "/index.html": "...", ... }` (text files only).
+// build.js prepends `const EMBEDDED = { "/index.html": "...", ... }` (text files as strings, PNG icons as base64).
 
 const TYPES = {
   html: "text/html; charset=utf-8",
   js: "text/javascript; charset=utf-8",
   css: "text/css; charset=utf-8",
+  json: "application/manifest+json",
+  png: "image/png",
 };
 
 function serveEmbedded(url) {
   const path = url.pathname === "/" ? "/index.html" : url.pathname;
-  const body = EMBEDDED[path];
+  let body = EMBEDDED[path];
   if (body === undefined) return new Response("Not found", { status: 404 });
+  if (path.endsWith(".png")) body = Uint8Array.from(atob(body), (c) => c.charCodeAt(0)); // images are embedded as base64
   return new Response(body, { headers: { "Content-Type": TYPES[path.split(".").pop()], "Cache-Control": "no-cache" } });
 }

@@ -28,7 +28,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/start.js` | 33 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
 | `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
-| `src/page/app.js` | 46 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
+| `src/page/app.js` | 53 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |
 | `src/page/hd/art/badger.js` | 23 | Brock Family emblem: a badger (brock = badger) in a gold-ringed crest. |
 | `src/page/hd/art/bandit.js` | 29 | BANDIT: the tuxedo cat (dark starter), drawn from the author's cat: black coat, white muzzle, chest and paws, amber-green eyes. |
@@ -84,12 +84,15 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/ui/dom.js` | 6 | DOM helpers shared by scenes. |
 | `src/page/hd/ui/panel.css` | 22 | list screens (party, pack, trainer card, ...) |
 | `src/page/hd/ui/panel.js` | 35 | A full-height list screen over the current scene (state.panel, see game/menu/verbs.js): title, optional big picture, tabs, |
-| `src/page/hd/ui/pic.css` | 8 | big buddymon picture |
+| `src/page/hd/ui/pic.css` | 8 | big buddymon picture: kept to the left so it never sits under the right-hand Yes/No box |
 | `src/page/hd/ui/pic.js` | 15 | The big buddymon picture shown while the game introduces one (state.pic = species name), like Gold's pokepic. |
 | `src/page/hd/ui/popup.css` | 9 | popup menus |
 | `src/page/hd/ui/popup.js` | 21 | List boxes (Start menu, Yes/No, submenus) drawn over a scene from state.boxes; tap a row to answer. |
 | `src/page/hd/ui/portrait.css` | 4 | portrait (shared by prof, names, naming) |
-| `src/page/index.html` | 56 | <!doctype html> |
+| `src/page/index.html` | 63 | <!doctype html> |
 | `src/page/pad.js` | 115 | Touch input: on-screen pad and gesture mode. Needs $ and setStatus from app.js (loaded after this file). |
 | `src/page/style.css` | 47 | App shell, tuned for a phone (target: Pixel 9, 412x924). Rules: docs/UI.md |
-| `src/worker/index.js` | 142 | Cloudflare Worker: serves the game page (embedded by build.js) and stores each player's save in KV. |
+| `src/page/sw.js` | 22 | Service worker: keeps the game shell (page, scripts, icons) so Buddymon Gold opens and plays offline once installed. |
+| `src/worker/index.js` | 145 | Cloudflare Worker: serves the game page (embedded by build.js) and stores each player's save in KV. |
+| `src/page/manifest.json` | - | PWA manifest (name, icons, standalone display) |
+| `src/page/icons/*.png` | - | App icons, drawn by `tools/make-icons.js` |

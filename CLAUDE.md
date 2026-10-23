@@ -27,6 +27,7 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
 
 ## Commands
 - `npm run build` -> `worker.js` + `MAP.md`. `npm run dev` local at :8787 (wrangler). `npm test` (dev running): accounts and the full game flow at 412x924.
+- Installable PWA: `src/page/manifest.json`, `src/page/sw.js` (offline shell cache, versioned by `build.js`), icons in `src/page/icons/` (redraw with `node tools/make-icons.js`). `worker.js` serves them all.
 - `npm run deploy`. KV namespace `SAVES` is the only binding.
 
 ## Naming (game text)

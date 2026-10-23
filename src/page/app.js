@@ -22,6 +22,13 @@ $("play").addEventListener("click", async () => {
   Game.boot($("hd"));
 });
 
+// Installable: register the service worker (offline play) and offer an Install button when the browser allows it.
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+let installEvent = null;
+addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installEvent = e; $("install").hidden = false; });
+addEventListener("appinstalled", () => { $("install").hidden = true; });
+$("install").addEventListener("click", async () => { if (!installEvent) return; installEvent.prompt(); await installEvent.userChoice; installEvent = null; $("install").hidden = true; });
+
 // Optional account: a username + password that points at the same cloud player as the guest cookie.
 const acct = { dlg: $("account"), msg: $("acct-msg") };
 async function showAccount() {
