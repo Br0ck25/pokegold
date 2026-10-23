@@ -78,6 +78,23 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     return bad;
   });
   if (ov.length) fail("battle parts stay inside the stage and apart", ov);
+  // Every building: tiles at least as big as ~6% of the stage width, hero on screen, nothing wider than the stage.
+  await page.evaluate(() => { Game.state.battle = null; Game.state.screen = null; });
+  const keys = await page.evaluate(() => Object.keys(ROOMS));
+  for (const key of keys) {
+    const w = await page.evaluate((k) => { const r = ROOMS[k], d = (r.warps && r.warps[0]) || { x: 1, y: 1 }; return Game.warp(k, d.x, d.y, 0).then ? 0 : 0; }, key).catch(() => 0);
+    await page.waitForFunction((k) => HD.last.map.key === k, key);
+    await page.waitForTimeout(450);
+    const m = await page.evaluate(() => {
+      const st = document.querySelector("#hd").getBoundingClientRect(), r = document.querySelector("#hd .room-svg").getBoundingClientRect(), h = document.querySelector("#hd .actor.hero").getBoundingClientRect();
+      return { stageW: st.width, roomW: r.width, left: r.x - st.x, right: st.right - r.right, heroIn: h.x >= st.x && h.right <= st.right && h.y >= st.y && h.bottom <= st.bottom };
+    });
+    const cols = await page.evaluate((k) => ROOMS[k].cols, key);
+    if (m.roomW / (cols + 0.4) < m.stageW * 0.06 && m.roomW < m.stageW * 0.9) fail(`${key}: tiles too small in landscape`, m);
+    if (m.left < -1 || m.right < -1) fail(`${key}: room wider than the stage`, m);
+    if (!m.heroIn) fail(`${key}: hero off screen`, m);
+    if (key === "willowlab") await page.screenshot({ path: "test/out/landscape-lab.png" });
+  }
   await browser.close();
   if (failed) process.exit(1);
   console.log("landscape: ok");

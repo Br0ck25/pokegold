@@ -92,7 +92,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/prof.css` | 4 | professor intro |
 | `src/page/hd/scenes/prof.js` | 32 | Professor Willow's welcome talk. state.prof = { who: "professor" | "hero", species?: number }; text comes from state.dialogue. |
 | `src/page/hd/scenes/room.css` | 19 | room |
-| `src/page/hd/scenes/room.js` | 50 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
+| `src/page/hd/scenes/room.js` | 56 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
 | `src/page/hd/scenes/splash.css` | 25 | studio splash |
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
 | `src/page/hd/scenes/title.css` | 17 | title |

@@ -25,10 +25,16 @@ Scenes.room = function (root) {
       if (state.map.key !== map) build(state.map.key);
       people.update(state);
       const stageH = el.clientHeight, stageW = el.clientWidth, room = ROOMS[map];
-      // A wide stage fits the whole room to its height, centred; a tall one fills the width and scrolls if the room is taller.
+      // A wide stage draws rooms at least as big as the world's tiles (the whole room when it fits, else scrolling with the hero).
       if (stageW > stageH * 1.1) {
-        wrap.style.width = `${Math.min(stageW * 0.98, stageH * 0.9 * (room.cols * 100 + 40) / (room.rows * 100 + 40))}px`;
-        wrap.style.transform = ""; wrap.style.top = "50%";
+        const fit = (stageH * 0.9) / (room.rows + 0.4), big = Math.min(stageW * 0.075, (stageW * 0.98) / (room.cols + 0.4));
+        wrap.style.width = `${Math.min(Math.max(fit, big) * (room.cols + 0.4), stageW * 0.98)}px`;
+        const roomH = wrap.offsetHeight;
+        if (roomH > stageH * 0.94) {
+          const heroY = (parseFloat(people.hero.style.top) / 100) * roomH;
+          wrap.style.transform = "translateX(-50%)";
+          wrap.style.top = `${Math.min(stageH * 0.03, Math.max(stageH * 0.97 - roomH, stageH * 0.45 - heroY))}px`;
+        } else { wrap.style.transform = ""; wrap.style.top = "50%"; }
         dlg.update(state.dialogue); menus.update(state.boxes); pic.update(state.pic); panel.update(state.panel);
         return;
       }
