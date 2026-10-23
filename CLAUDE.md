@@ -43,7 +43,7 @@ Original names for everything else as it is built; no real Pokemon/Nintendo name
 Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, the egg errand
 (egg -> Willow -> aide nets -> BUDDYDEX), trainers, genders (BANDIT always female; `SPECIES[x].female` = female share), BUDDYDEX screen.
 Rival is named by the player at the officer; his starter is the one that beats yours. Dialogue uses the shared `Game.talk(...)`.
-Missing vs Gold: status conditions, PC storage, BuddyGear map/phone, evolutions, Route 31+, gyms.
+Status conditions are in (sleep, poison, burn, paralysis, freeze; REMEDY cures). Everything still missing or half-done is tracked in **`docs/TODO.md`**: add to it whenever you notice a gap, remove items you finish.
 
 ## Layout rules (tested by `test/layout.js`)
 - Every outdoor exit is a dirt path ("p") that runs to the map edge and on out of the map; never a bare gap in trees.
