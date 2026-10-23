@@ -4,10 +4,10 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 150 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/battle.js` | 151 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
 | `src/game/battle/calc.js` | 71 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
-| `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
-| `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
+| `src/game/battle/growth.js` | 34 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
+| `src/game/battle/moves.js` | 31 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
 | `src/game/cherrygrove.js` | 111 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
 | `src/game/cherryhouses.js` | 62 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
 | `src/game/core.js` | 178 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
@@ -75,8 +75,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 30 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |
-| `src/page/hd/scenes/battle.css` | 43 | battle |
-| `src/page/hd/scenes/battle.js` | 69 | Battle screen. state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }. |
+| `src/page/hd/scenes/battle.css` | 56 | battle |
+| `src/page/hd/scenes/battle.js` | 89 | Battle screen. Moves animate from state.battle.fx = { n, who, type, kind } (attacker lunges, the target gets a type-coloured burst or a stat arrow); |
 | `src/page/hd/scenes/intro.css` | 50 | opening cinematic: act i starts at i*6s (--t) |
 | `src/page/hd/scenes/intro.js` | 26 | Opening cinematic: four 6s acts (sea, meadow, night, finale) timed by CSS from mount. |
 | `src/page/hd/scenes/menu.css` | 10 | menu |

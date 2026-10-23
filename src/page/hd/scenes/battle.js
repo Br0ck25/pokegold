@@ -1,21 +1,34 @@
-// Battle screen. state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }.
+// Battle screen. Moves animate from state.battle.fx = { n, who, type, kind } (attacker lunges, the target gets a type-coloured burst or a stat arrow);
+// the player's card shows an EXP bar from me.xp (0..1). state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }.
 // Menu buttons answer taps through Game.pick(index); messages use the shared dialogue box.
 Scenes.battle = function (root) {
   const el = h(`<div class="scene battle">
     <div class="bt-bg"></div>
-    <div class="bt-side foe"><i class="plat"></i><div class="mon"></div><div class="bt-net" hidden>${Art.net()}</div></div>
-    <div class="bt-side me"><i class="plat"></i><div class="mon"></div></div>
+    <div class="bt-side foe"><i class="plat"></i><div class="mon"></div><div class="bt-net" hidden>${Art.net()}</div><div class="fx"></div></div>
+    <div class="bt-side me"><i class="plat"></i><div class="mon"></div><div class="fx"></div></div>
     <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div></div>
-    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div><span class="num"></span></div>
+    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div><span class="num"></span><div class="xp" title="EXP"><i></i></div></div>
     <div class="bt-menu" hidden></div>
   </div>`);
   root.appendChild(el);
   const dlg = dialogue(el);
   const menus = popups(el);
-  const side = (cls) => ({ mon: el.querySelector(`.bt-side.${cls} .mon`), card: el.querySelector(`.bt-card.${cls}`), species: null, hp: null });
+  const side = (cls) => ({ mon: el.querySelector(`.bt-side.${cls} .mon`), card: el.querySelector(`.bt-card.${cls}`), fx: el.querySelector(`.bt-side.${cls} .fx`), species: null, hp: null });
   const sides = { foe: side("foe"), me: side("me") };
   const menu = el.querySelector(".bt-menu"), net = el.querySelector(".bt-net"), foeMon = sides.foe.mon;
-  let lastMenu = "", lastNet = null;
+  let lastMenu = "", lastNet = null, lastFx = 0, lastLevel = 0;
+  const COLORS = { normal: "#e8e0d0", fire: "#ff7a3c", water: "#4fb6ff", grass: "#6fd35a", electric: "#ffe03c", dark: "#7a5aa8", flying: "#a8c8ff", poison: "#b45ad9", ground: "#d9a860", rock: "#b8a078", bug: "#a8d83c", ghost: "#8a6ac8", psychic: "#ff7ab8", ice: "#9fe8ff", fighting: "#e0523c", steel: "#b8c4d8", dragon: "#6a5aff" };
+  const burst = (c) => `<svg viewBox="-50 -50 100 100"><g fill="${c}" stroke="#14213d" stroke-width="3" stroke-linejoin="round"><path d="M0 -44 L10 -14 L42 -18 L18 4 L34 38 L2 20 L-28 40 L-16 8 L-44 -12 L-10 -14Z"/></g><circle r="9" fill="#fff"/></svg>`;
+  const arrows = (c, up) => `<svg viewBox="0 0 100 100" class="${up ? "up" : "down"}"><g fill="none" stroke="${c}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">${[26, 52, 78].map((y) => `<path d="M26 ${up ? y + 10 : y - 10} L50 ${up ? y - 10 : y + 10} L74 ${up ? y + 10 : y - 10}"/>`).join("")}</g></svg>`;
+  const play = (fx) => {
+    const att = sides[fx.who], tgt = sides[fx.who === "me" ? "foe" : "me"];
+    att.mon.classList.remove("lunge-me", "lunge-foe"); void att.mon.offsetWidth;
+    const target = fx.kind === "hit" ? tgt : fx.kind === "up" ? att : tgt;
+    if (fx.kind === "hit") att.mon.classList.add(`lunge-${fx.who}`);
+    const box = target.fx;
+    box.innerHTML = fx.kind === "hit" ? burst(COLORS[fx.type] || "#fff") : arrows(fx.kind === "up" ? "#46c26f" : "#ff6b5e", fx.kind === "up");
+    box.classList.remove("go"); void box.offsetWidth; box.classList.add("go");
+  };
   menu.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (b) Game.pick(+b.dataset.i); });
 
   const update = (who, mon) => {
@@ -36,6 +49,12 @@ Scenes.battle = function (root) {
     const pct = mon.max ? Math.round((mon.hp / mon.max) * 100) : 0, bar = s.card.querySelector(".hp i");
     bar.style.width = `${pct}%`;
     bar.dataset.level = pct > 50 ? "ok" : pct > 20 ? "warn" : "low";
+    const xp = s.card.querySelector(".xp i");
+    if (xp) {
+      xp.style.transition = mon.level !== s.level ? "none" : ""; // the bar jumps back to empty on a level-up, it does not drain
+      xp.style.width = `${Math.round((mon.xp || 0) * 100)}%`;
+    }
+    s.level = mon.level;
     const num = s.card.querySelector(".num");
     if (num) num.textContent = `${mon.hp} / ${mon.max}`;
   };
@@ -44,6 +63,7 @@ Scenes.battle = function (root) {
     update(state) {
       const b = state.battle;
       if (!b) return;
+      if (b.fx && b.fx.n !== lastFx) { lastFx = b.fx.n; play(b.fx); }
       update("foe", b.foe);
       update("me", b.me);
       dlg.update(state.dialogue);

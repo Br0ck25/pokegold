@@ -43,6 +43,14 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
       return false;
     };
     out.grass = { westNoGrass: reach([54, 9], [1, 9], true), westAny: reach([54, 9], [1, 9], false), eastNoGrass: reach([1, 9], [54, 9], true) };
+    for (const [key, mm] of Object.entries(Game.maps)) {
+      if (!mm.world) continue;
+      for (const n of mm.npcs || []) {
+        if (n.trainer || n.faces === false) continue; // trainers wait in grass in Gold; props and items are placed on purpose
+        const along = n.wander === "vertical" ? [[0, -2], [0, -1], [0, 0], [0, 1], [0, 2]] : n.wander === "horizontal" ? [[-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0]] : [[0, 0]];
+        if (along.some(([dx, dy]) => (mm.world.cells[n.y + dy] || "")[n.x + dx] === "g")) out.exits.push(`${key}: ${n.name} at (${n.x},${n.y}) stands in or wanders into tall grass`);
+      }
+    }
     return out;
   });
   maps.exits.forEach((e) => fail(e));
@@ -78,6 +86,19 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     if (hit(boxes[a], boxes[b])) fail(`battle screen: ${a} overlaps ${b}`, [boxes[a], boxes[b]]);
   }
   await page.screenshot({ path: "test/out/battle-layout.png" });
+
+  // Move animation + EXP bar: run from the first fight, then beat a level 2 foe in one hit.
+  if (!(await page.locator(".bt-card.me .xp").isVisible())) fail("the player's card shows an EXP bar");
+  await page.evaluate(() => Game.pick(3));
+  await page.waitForFunction(() => !Game.state.battle, null, { timeout: 15000 });
+  await page.evaluate(() => { window.__xp = Game.player.party[0].exp; Game.run(async (s) => { await Game.battle(s, makeMon("nibblet", 2)); }); });
+  await page.waitForSelector(".bt-menu:not([hidden]) button", { timeout: 8000 });
+  await page.evaluate(() => Game.pick(0)); await page.waitForTimeout(300); await page.evaluate(() => Game.pick(0));
+  if (!(await page.waitForSelector(".bt-side .fx.go", { timeout: 6000 }).then(() => true, () => false))) fail("using a move plays an attack animation");
+  await page.evaluate(async () => { for (let i = 0; i < 40 && Game.state.battle; i++) { Game.pick(0); await new Promise((r) => setTimeout(r, 250)); } });
+  if (!(await page.evaluate(() => Game.player.party[0].exp > window.__xp))) fail("EXP is awarded after the foe faints");
+  const bar = await page.evaluate(() => Game.state.battle && Game.state.battle.me.xp);
+  if (bar !== null && bar !== undefined && !(bar > 0)) fail("the EXP bar fills after a win", bar);
 
   console.log(failed ? "FAILED" : "OK");
   await browser.close();

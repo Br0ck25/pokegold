@@ -50,7 +50,7 @@
     coords: [9, 10].map((y) => ({ x: 53, y, script: lesson })),
     npcs: [
       { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: async (s) => { if (s.flag("GAVE_EGG") && !s.flag("LEARNED_TO_CATCH")) return lesson(s); await s.say("BUDDYMON hide in the grass. Who knows when they'll pop out..."); } },
-      { id: 2, name: "YOUNGSTER", x: 27, y: 11, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
+      { id: 2, name: "YOUNGSTER", x: 43, y: 10, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
       { id: 3, name: "TEACHER", x: 38, y: 5, dir: 3, wander: "horizontal", script: talk("See those ledges? It's scary to jump off them. But you can get back to NEW BARK without walking through the grass.") },
       { id: 4, name: "FRUIT_TREE", x: 12, y: 3, dir: 0, faces: false, script: Game.berryTree("TREE_R29") },
       { id: 5, name: "FISHER", x: 29, y: 5, dir: 1, script: talk("I wanted to take a break, so I saved my game to record my progress.") },

@@ -15,7 +15,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
-  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: x.stats.hp });
+  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: statsFor(x.mon).hp, xp: xpBar(x.mon) });
   const refresh = () => { state.battle.foe = info(them); state.battle.me = info(me); };
   const partyMenu = async (forced) => {
     for (;;) {
@@ -61,7 +61,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const settle = async () => {
     if (them.mon.hp <= 0) {
       await s.msg(`${them.label} fainted!`);
-      await awardExp(s, P.party, fought, them.mon, !trainer);
+      await awardExp(s, P.party, fought, them.mon, !trainer, refresh);
       const next = foes[foes.indexOf(them.mon) + 1];
       if (!next) ended = "won";
       else {
@@ -77,7 +77,8 @@ Game.battle = async (s, foeMon, opts = {}) => {
     }
     return !!ended;
   };
-  const attack = async (a, d, slot) => { await useMove(s, a, d, slot, refresh); return settle(); };
+  let fxN = 0; // each move bumps this so the screen plays one animation per use: who attacks, the move's type, and hit / up / down
+  const attack = async (a, d, slot) => { await useMove(s, a, d, slot, refresh, (kind) => (state.battle.fx = { n: ++fxN, who: a === me ? "me" : "foe", type: MOVES[slot.id].type, kind })); return settle(); };
   const foeSlot = () => { const u = them.mon.moves.filter((m) => m.pp > 0); return u.length ? u[rand(u.length)] : { id: "tackle", pp: 1 }; };
 
   const useNet = async (id) => {
@@ -100,7 +101,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const dex = (P.dex ||= {});
   for (const f of foes) dex[f.species] ||= "seen";
   state.screen = "battle";
-  state.battle = { foe: null, me: null, menu: null, net: null };
+  state.battle = { foe: null, me: null, menu: null, net: null, fx: null };
   refresh();
   if (trainer) {
     await s.msg(`${trainer.name} wants to battle!`, Math.max(Game.msgMs, 900));
