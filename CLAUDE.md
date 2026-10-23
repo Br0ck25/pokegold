@@ -30,6 +30,7 @@ nets instead of balls). Read how Gold does a thing (see `web/docs/ENGINE.md`) be
 - `web/public/hd/` HD layer, one small file per thing, CSS beside its JS:
   `core/` engine+registry, `ui/` shared bits (dialogue, popup, actors), `art/` SVG art, `scenes/` one screen each (room, world, ...).
   Species art: `art/creature.js` (hand-drawn) + `art/critter.js` (procedural placeholder). Generated: `hd/syms.js` (RAM addresses, `web/build.sh`), `hd/maps.js` (outdoor map blocks, `web/gen-maps.py`). See `web/docs/UI.md`.
+- Native engine (new): `web/public/hd/game/` (`core.js` movement/loop, `script.js` script verbs, `input.js`, `start.js` boot+save, one map file per area e.g. `home.js`). Pick "new engine" on the start screen. Scene 1 (your room, living room) is done; New Bark Town is next. See `web/docs/ENGINE.md`.
 - The game clock is the device clock (`web/public/app.js` patches `DeviceTime` in the ROM at boot; no clock/day/DST screens).
 - Start-up screens (splash, cinematic) are HD scenes; old pixel intro/splash code and gfx were deleted. Credits still show the old copyright text.
 - `gfx/pokemon/<slot>/*.svg` creature art -> PNG via `tools/svgpic.py` (pixel fallback only).

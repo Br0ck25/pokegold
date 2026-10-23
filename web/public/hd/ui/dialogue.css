@@ -7,3 +7,10 @@
 #hd .more { position:absolute; right:4cqw; bottom:2cqw; font-size:4cqw; color:var(--gold); animation:nudge .9s ease-in-out infinite; }
 @keyframes nudge { 50% { transform:translateY(.8cqw); } }
 
+
+/* text entry: the phone's own keyboard on a real input */
+#hd .ask { pointer-events:auto; position:absolute; left:8%; right:8%; top:30%; display:flex; flex-direction:column; gap:3cqw; padding:5cqw; border-radius:4cqw; z-index:5;
+  background:linear-gradient(#18224f,#0e1536); border:.7cqw solid var(--accent,#ffc93c); }
+#hd .ask label { font-size:5cqw; font-weight:600; }
+#hd .ask input { min-height:12cqw; padding:0 4cqw; font:inherit; font-size:6cqw; color:inherit; background:#0b1022; border:.4cqw solid #3a4680; border-radius:3cqw; }
+#hd .ask button { min-height:12cqw; font-size:5cqw; }

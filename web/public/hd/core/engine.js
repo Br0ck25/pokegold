@@ -153,7 +153,7 @@ const HD = (() => {
   function show(id) {
     if (id === currentId) return;
     if (current && current.destroy) current.destroy();
-    root.textContent = "";
+    for (const el of root.querySelectorAll(":scope > .scene")) el.remove(); // keep overlays such as the text-entry form
     current = id ? scenes[id](root, flags) : null;
     currentId = id;
     root.parentElement.classList.toggle("hd-on", !!id);
@@ -183,6 +183,16 @@ const HD = (() => {
     start(emulator, rootEl, sceneTable) {
       wb = emulator; root = rootEl; scenes = sceneTable;
       timer = setInterval(tick, 1000 / 30);
+    },
+    // Native engine: the same scenes, fed from our own state instead of emulator memory.
+    startNative(rootEl, sceneTable, getState) {
+      root = rootEl; scenes = sceneTable;
+      timer = setInterval(() => {
+        const state = getState();
+        show(pick(state));
+        if (current) current.update(state);
+        HD.last = state;
+      }, 1000 / 30);
     },
     stop() { clearInterval(timer); show(null); },
   };

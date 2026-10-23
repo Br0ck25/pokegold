@@ -35,7 +35,7 @@ function actorLayer(wrap, box) {
         const a = npcs.get(o.id);
         // The sprite byte can read as something else for a frame while the game redraws: keep the last known look.
         if (spriteName[o.sprite]) a.sprite = o.sprite;
-        const name = spriteName[a.sprite];
+        const name = o.name || spriteName[a.sprite];
         if (a.dataset.look !== String(name)) { a.dataset.look = name; delete a.dataset.dir; }
         sync(a, Art.props[name] || person(Art.looks[name] || Art.looks.OTHER), o.x, o.y, o.dir);
       }

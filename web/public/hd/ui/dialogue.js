@@ -8,8 +8,9 @@ function dialogue(parent, tag) {
     update(d) {
       el.hidden = !d;
       if (!d) return;
-      el.querySelector(".l1").textContent = d.lines[0];
-      el.querySelector(".l2").textContent = d.lines[1];
+      // Native engine sends one paragraph (`text`) and lets it wrap; the ROM sends two fixed lines.
+      el.querySelector(".l1").textContent = d.text ?? d.lines[0];
+      el.querySelector(".l2").textContent = d.text ? "" : d.lines[1];
       el.querySelector(".more").style.visibility = d.more ? "visible" : "hidden";
     },
   };

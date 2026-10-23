@@ -125,6 +125,12 @@ async function start() {
   setStatus("Loading…");
   try {
     await ensurePlayer();
+    if (game === "native") {
+      $("start").hidden = true;
+      $("pad").hidden = false;
+      setStatus("Playing");
+      return Game.boot($("hd"));
+    }
     const rom = new Uint8Array(await (await fetch(`roms/poke${game}.gbc`)).arrayBuffer());
     await restoreCloudSave(saveKey(rom));
 
