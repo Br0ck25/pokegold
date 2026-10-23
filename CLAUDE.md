@@ -19,6 +19,10 @@ Cloudflare Worker. The ROM is the game engine; `web/` is the Worker + an HD vect
 4. **Goal-driven execution.** Turn tasks into verifiable goals (bug -> reproduce, then fix; refactor -> tests
    pass before/after). For multi-step work state a plan: `1. step -> verify: check`. Loop until verified.
 
+## Direction
+We are moving from ROM + HD overlay to our own native JS engine, one scene at a time (original layouts, Gold-like rules,
+nets instead of balls). Read how Gold does a thing (see `web/docs/ENGINE.md`) before writing ours; delete the ROM path for a scene once ours replaces it.
+
 ## Map (read only what you need)
 - ROM source: `engine/ home/ data/ constants/ ram/ maps/ gfx/` (pret layout). Build: `make gold` (needs rgbds 1.0.1).
 - `web/src/worker.js` Worker (assets or embedded + KV saves). `web/make-worker.js` -> `web/paste/worker.js` (the paste-in file; it embeds the ROM, so keep the repo private. COMMIT the regenerated file with every push: the user copies it from GitHub. Never Read it).
