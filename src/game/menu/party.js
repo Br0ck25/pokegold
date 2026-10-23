@@ -14,15 +14,16 @@ Game.useOn = async (s, key, mon) => {
   await s.say(`${mon.nick} regained ${gain} HP.`);
 };
 
+Game.statsCard = async (s, m) => {
+  const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
+  await s.panel({
+    title: m.nick, g: m.gender, art: m.species, rows: [],
+    lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}${m.status ? "  ·  " + STATUS_TAG[m.status] : ""}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
+  });
+};
+
 Game.partyScreen = async (s) => {
   const P = s.G.player, partyRows = () => P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}${m.status ? "  " + STATUS_TAG[m.status] : ""}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species, dim: m.hp <= 0 }; });
-  const summary = async (m) => {
-    const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
-    await s.panel({
-      title: m.nick, g: m.gender, art: m.species, rows: [],
-      lines: [`Lv ${m.level}  ·  ${sp.types.join(" / ").toUpperCase()}${m.status ? "  ·  " + STATUS_TAG[m.status] : ""}`, `HP ${m.hp}/${st.hp}  ATK ${st.atk}  DEF ${st.def}`, `SP.ATK ${st.spa}  SP.DEF ${st.spd}  SPEED ${st.spe}`, `EXP ${m.exp}  ·  ${next} to next level`, ...m.moves.map((x) => `${MOVES[x.id].name}  ${x.pp}/${MOVES[x.id].pp}`)],
-    });
-  };
   let at = 0;
   for (;;) {
     const r = await s.panel({ title: "BUDDYMON", rows: partyRows(), hint: "Pick one" }, at);
@@ -30,7 +31,7 @@ Game.partyScreen = async (s) => {
     if (r.key !== "A") continue;
     at = r.i;
     const mon = P.party[at], pick = await s.choose(["STATS", "SWITCH", "ITEM", "CANCEL"], { c0: 12, r0: 5, cancel: 3 });
-    if (pick === 0) await summary(mon);
+    if (pick === 0) await Game.statsCard(s, mon);
     else if (pick === 1 && P.party.length > 1) {
       const to = await s.panel({ title: `Switch ${mon.nick} with...`, rows: partyRows() }, at);
       if (to.key === "A" && to.i !== at) { [P.party[at], P.party[to.i]] = [P.party[to.i], P.party[at]]; at = to.i; }

@@ -38,7 +38,7 @@ const Game = (() => {
   };
   // Money is "BUDS" (Gold starts you with 3000, so do we).
   G.CURRENCY = "BUDS";
-  G.newPlayer = () => ({ name: "", id: 10000 + rand(90000), money: 3000, play: 0, options: { speed: "mid" }, flags: {}, bag: {}, party: [], box: [] });
+  G.newPlayer = () => ({ name: "", id: 10000 + rand(90000), money: 3000, play: 0, options: { speed: "mid" }, flags: {}, bag: {}, party: [], boxes: Array.from({ length: 14 }, () => []), curBox: 0 });
   G.register = (key, def) => {
     if (def.world) {
       Object.assign(def, fromWorld(def.world), { warps: [...fromWorld(def.world).warps, ...(def.warps || [])] });

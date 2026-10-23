@@ -4,7 +4,7 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 161 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/battle.js` | 163 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
 | `src/game/battle/calc.js` | 74 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/evolve.js` | 24 | Evolution after a battle (Gold: engine/pokemon/evolve.asm): a buddymon that levelled up and reached its species' evolve level changes form, |
 | `src/game/battle/growth.js` | 39 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
@@ -22,13 +22,14 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/lib/rival.js` | 4 | Your rival: his starter counters yours (original pairing), and his name stays "???" until you give it to the officer in Willow's lab. |
 | `src/game/lib/script.js` | 102 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/lib/shared.js` | 15 | Small scripts maps share: berry trees (one berry a day) and hidden items (found once). |
-| `src/game/lib/start.js` | 35 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
+| `src/game/lib/start.js` | 36 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/lib/trainer.js` | 33 | Trainers: an NPC with `trainer: { name, cls, party: [[species, level]...], money, sight, seen, beaten, after, flag }`. |
 | `src/game/menu/card.js` | 33 | Trainer card, BuddyGear (the clock) and Options. |
 | `src/game/menu/center.js` | 13 | The Buddymon Center nurse: heals the whole party and makes this the place you wake up after a whiteout. |
 | `src/game/menu/dex.js` | 18 | BUDDYDEX: every species in order, "-----" until you have seen it; a dot for seen, a ball of net for caught. |
 | `src/game/menu/pack.js` | 33 | Pack screen: three pockets (Items, Nets, Key items) switched with left/right or the tabs; a chosen item offers USE. |
-| `src/game/menu/party.js` | 45 | Party screen: the list with HP bars; a chosen buddymon offers STATS, SWITCH, ITEM, CANCEL (as in Gold). |
+| `src/game/menu/party.js` | 46 | Party screen: the list with HP bars; a chosen buddymon offers STATS, SWITCH, ITEM, CANCEL (as in Gold). |
+| `src/game/menu/pc.js` | 68 | The Center's PC, as in Gold's bills_pc.asm: 14 boxes of 20. WITHDRAW / DEPOSIT / CHANGE BOX / SEE YA, and per buddymon WITHDRAW / STATS / RELEASE. |
 | `src/game/menu/shop.js` | 55 | Marts: Game.shop(s, stock) where stock is a list of item keys. BUY / SELL / QUIT like Gold's clerk, quantity picked with left/right. |
 | `src/game/menu/startmenu.js` | 23 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
 | `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |

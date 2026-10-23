@@ -87,6 +87,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const foeSlot = () => { const u = them.mon.moves.filter((m) => m.pp > 0); return u.length ? u[rand(u.length)] : { id: "tackle", pp: 1 }; };
 
   const useNet = async (id) => {
+    if (!opts.tutorial && P.party.length >= 6 && Game.boxFull(P)) return s.msg("The BOX is full! Can't use that now!"); // Gold's BallBoxFullText
     if (!opts.tutorial) P.bag[id]--;
     await s.msg(`${opts.tutorial ? "DUDE" : P.name} threw a ${ITEMS[id].name}!`);
     const rate = catchRate(them.mon, them.stats.hp, ITEMS[id].net), { caught, shakes } = opts.tutorial ? { caught: true, shakes: 3 } : throwNet(rate);
@@ -98,7 +99,8 @@ Game.battle = async (s, foeMon, opts = {}) => {
     if (opts.tutorial) return (ended = "caught");
     const mon = them.mon;
     if ((await s.confirm(`Give a nickname to ${mon.nick}?`)) === 0) mon.nick = await s.prompt(`Nickname for ${mon.nick}?`, 10);
-    (P.party.length < 6 ? P.party : (P.box ||= [])).push(mon);
+    if (P.party.length < 6) P.party.push(mon);
+    else await s.msg(`${mon.nick} was sent to BUDDYBOX PC (${Game.boxAdd(P, mon)}).`);
     dex[mon.species] = "caught";
     ended = "caught";
   };

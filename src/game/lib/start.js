@@ -21,7 +21,8 @@ Game.loadSave = async () => {
 Game.boot = async (root) => {
   const saved = await Game.loadSave();
   const player = saved ? { ...Game.newPlayer(), ...saved.player } : Game.newPlayer();
-  for (const m of [...player.party, ...player.box]) m.gender ||= rollGender(m.species); // saves from before genders
+  if (player.box) { player.boxes[0].push(...player.box); delete player.box; } // saves from before the PC
+  for (const m of [...player.party, ...player.boxes.flat()]) m.gender ||= rollGender(m.species); // saves from before genders
   Game.start(root, player);
   const resume = await Game.flow(saved);
   setInterval(Game.save, 5000);

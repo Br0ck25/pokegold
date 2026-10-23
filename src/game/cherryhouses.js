@@ -35,7 +35,7 @@
     ],
     signs: [
       ...[0, 1, 2, 3, 4, 5].map((x) => ({ x, y: 2, script: nurse })),
-      { x: 9, y: 1, script: talk((s) => `${s.name} turned on the PC.`, "The BUDDYMON storage system is not online yet.") },
+      { x: 9, y: 1, script: Game.pc },
     ],
   });
 

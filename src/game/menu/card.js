@@ -1,6 +1,6 @@
 // Trainer card, BuddyGear (the clock) and Options.
 Game.cardScreen = async (s) => {
-  const P = s.G.player, owned = new Set([...P.party, ...(P.box || [])].map((m) => m.species)).size;
+  const P = s.G.player, owned = new Set([...P.party, ...P.boxes.flat()].map((m) => m.species)).size;
   const mins = Math.floor(P.play / 60), time = `${Math.floor(mins / 60)}:${String(mins % 60).padStart(2, "0")}`;
   await s.panel({
     title: "TRAINER CARD", rows: [],

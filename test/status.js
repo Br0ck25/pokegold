@@ -52,11 +52,11 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.evaluate(() => { Math.random = window.__rand; });
   const dmg = await page.evaluate(async () => {
     const out = {}, fake = { msg: async () => {} };
-    for (const k of ["psn", "brn", null]) { const m = makeMon("bandit", 20); m.status = k; const h = m.hp; await residual(fake, { mon: m, label: "X" }, () => {}); out[k] = h - m.hp; }
+    const m = makeMon("bandit", 20); out.eighth = Math.floor(statsFor(m).hp / 8);
+    for (const k of ["psn", "brn", null]) { m.hp = statsFor(m).hp; m.status = k; const h = m.hp; await residual(fake, { mon: m, label: "X" }, () => {}); out[k] = h - m.hp; }
     return out;
   });
-  const eighth = await page.evaluate(() => Math.floor(statsFor(makeMon("bandit", 20)).hp / 8));
-  if (dmg.psn !== eighth || dmg.brn !== eighth || dmg.null !== 0) fail("poison and burn cost 1/8 max HP, nothing else does", [dmg, eighth]);
+  if (dmg.psn !== dmg.eighth || dmg.brn !== dmg.eighth || dmg.null !== 0) fail("poison and burn cost 1/8 max HP, nothing else does", dmg);
   console.log(failed ? "FAILED" : "OK");
   await browser.close();
   process.exitCode = failed ? 1 : 0;

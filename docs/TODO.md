@@ -10,9 +10,9 @@ Keep this current. Add an item the moment you notice a gap; delete it (and say s
 - Credits screen text is still the old ROM-era wording (if it exists in the native engine; check).
 
 ## Systems missing vs Gold
-- Evolutions: level evolutions are in (`menu`-less, battle/evolve.js). Still missing: stones, happiness, trade, Gold's exact levels for every line, and evolve-time move learning [data/pokemon/evos_attacks.asm].
-- Evolved forms (FLUTTERBY, BRAMBLEAF, THORNKING, RAIDER, OUTLAW, CHOMPJAW, GATORMAW, SWOOPLET, SKYHAWK, GNAWLER, SCOUTAT, WEBSPINNER, OWLSAGE) use the procedural placeholder art and rough base stats; draw them and tune stats.
-- PC storage in the Center (boxes already collect overflow catches, but nothing opens them) [engine/pc/bills_pc.asm].
+- Evolutions: level evolutions are in (`menu`-less, battle/evolve.js). Levels, base stats, catch rates and base exp were checked against Gold's `evos_attacks.asm` and `base_stats/*.asm`. Still missing: stones, happiness, trade, and evolve-time move learning; evolved forms' learnsets are ours (Gold's moves mostly do not exist yet) [data/pokemon/evos_attacks.asm].
+- Evolved forms (FLUTTERBY, BRAMBLEAF, THORNKING, RAIDER, OUTLAW, CHOMPJAW, GATORMAW, SWOOPLET, SKYHAWK, GNAWLER, SCOUTAT, WEBSPINNER, OWLSAGE) use the procedural placeholder art; draw them.
+- PC: BUDDYBOX storage is in (menu/pc.js). Missing: the player's own PC (item storage), PROF. ASPEN's BUDDYDEX rating PC, MOVE BUDDYMON between boxes, box names, nets refused when the box is full is done but the turn is still spent [engine/pokemon/bills_pc.asm, engine/events/pokecenter_pc.asm].
 - BuddyGear map screen and phone calls / trainer rematches [engine/pokegear/].
 - Overworld status effects (see polish), Repel, bike, Surf and other field moves, HMs.
 - Held items, berries as held items, abilities-free but Gold's catch-time items.
