@@ -32,7 +32,7 @@
 #hd .bt-card .hp i[data-level=warn] { background:#ffc93c; } #hd .bt-card .hp i[data-level=low] { background:#ff6b5e; }
 #hd .bt-card .num { display:block; margin-top:1cqw; text-align:right; font-size:3.2cqw; opacity:.9; }
 /* command, move, pack and party menus: big touch buttons above the message box */
-#hd .bt-menu { position:absolute; left:4%; right:4%; bottom:33%; display:grid; gap:2cqw; pointer-events:auto; z-index:3; }
+#hd .bt-menu { position:absolute; left:4%; right:4%; bottom:calc(var(--dlg-h, 0px) + 3.5% + 3cqw); display:grid; gap:2cqw; pointer-events:auto; z-index:3; }
 #hd .bt-menu[hidden] { display:none; }
 #hd .bt-menu.cols2 { grid-template-columns:1fr 1fr; }
 #hd .bt-menu button { font:inherit; font-weight:700; font-size:4.6cqw; padding:3cqw 2cqw; min-height:12cqw; border-radius:3.6cqw; color:var(--cream); text-align:center;

@@ -10,7 +10,7 @@
   const tip = (n, text) => talk((s) => `${s.name} opened a book.`, `Travel Tip ${n}: ${text}`);
 
   const STARTERS = [
-    { id: 11, species: "sparkit", x: 6, kind: "fire" },
+    { id: 11, species: "bandit", x: 6, kind: "dark" },
     { id: 12, species: "chomplet", x: 7, kind: "water" },
     { id: 13, species: "bramblet", x: 8, kind: "grass" },
   ];

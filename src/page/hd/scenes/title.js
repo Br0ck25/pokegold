@@ -3,7 +3,7 @@ Scenes.title = function (root) {
   const el = h(`<div class="scene title">
     <div class="logo">${Art.logo()}</div>
     <div class="trio">
-      <div class="mon m1">${Art.bramblet()}</div><div class="mon m2">${Art.sparkit()}</div><div class="mon m3">${Art.chomplet()}</div>
+      <div class="mon m1">${Art.bramblet()}</div><div class="mon m2">${Art.bandit()}</div><div class="mon m3">${Art.chomplet()}</div>
     </div>
     <div class="press">PRESS START</div>
   </div>`);

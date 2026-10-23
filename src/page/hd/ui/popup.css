@@ -2,6 +2,6 @@
 #hd .popups { position:absolute; inset:0; pointer-events:none; }
 #hd .popup { position:absolute; margin:0; padding:2.4cqw; list-style:none; min-width:34cqw; border-radius:4cqw;
   background:linear-gradient(rgba(18,32,82,.95),rgba(10,18,50,.96)); border:.6cqw solid var(--gold); box-shadow:0 0 0 .5cqw var(--ink), 0 1.6cqw 4cqw rgba(0,0,0,.5); }
-#hd .popup.top { top:4%; } #hd .popup.low { bottom:34%; } #hd .popup.right { right:4%; } #hd .popup.left { left:4%; }
+#hd .popup.top { top:4%; } #hd .popup.low { bottom:calc(var(--dlg-h, 0px) + 3.5% + 3cqw); } #hd .popup.right { right:4%; } #hd .popup.left { left:4%; }
 #hd .popup li { padding:1.8cqw 3.4cqw; margin-bottom:.8cqw; font-size:5cqw; font-weight:600; border-radius:2.6cqw; white-space:nowrap; }
 #hd .popup li.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); font-weight:700; }

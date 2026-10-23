@@ -1,7 +1,7 @@
 /* big buddymon picture */
-#hd .pic { position:absolute; left:50%; top:16%; width:62%; transform:translateX(-50%); padding:3cqw; border-radius:5cqw; z-index:4;
+#hd .pic { position:absolute; left:50%; top:3%; width:44%; transform:translateX(-50%); padding:3cqw; border-radius:5cqw; z-index:4;
   background:linear-gradient(#26356f,#121a40); border:.7cqw solid var(--gold); text-align:center; animation:pic-in .25s ease-out; }
 #hd .pic[hidden] { display:none; }
 #hd .pic-art svg { width:100%; display:block; }
-#hd .pic-name { margin-top:1cqw; font-family:'Lilita One','Fredoka',sans-serif; font-size:6cqw; letter-spacing:.3cqw; color:var(--gold); }
+#hd .pic-name { margin-top:1cqw; font-family:'Lilita One','Fredoka',sans-serif; font-size:5cqw; letter-spacing:.3cqw; color:var(--gold); }
 @keyframes pic-in { from { transform:translateX(-50%) scale(.85); opacity:0; } to { transform:translateX(-50%) scale(1); opacity:1; } }

@@ -18,6 +18,7 @@ function scriptApi(G) {
     // A button menu in the battle screen: arrows + A, or tap a button. Returns the index, or -1 for B.
     async menu(items, cols = 1, kind = "cmd") {
       let i = 0;
+      G.state.dialogue = null; // the menu takes the message box's place, leaving the battle screen clear
       const B = G.state.battle, show = () => (B.menu = { kind, cols, items: items.map((label, n) => ({ label, sel: n === i })) });
       G.picked = null; show();
       for (Input.clear(); ;) {

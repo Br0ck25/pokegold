@@ -30,7 +30,7 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
 - `npm run deploy`. KV namespace `SAVES` is the only binding.
 
 ## Naming (game text)
-Buddymon / BUDDYDEX / BUDDYGEAR / buddy nets; PROF. WILLOW; starters BRAMBLET / SPARKIT / CHOMPLET; Route 29 species CHIRPLET / NIBBLET / PEEKAT / HOOTLING.
+Buddymon / BUDDYDEX / BUDDYGEAR / buddy nets; PROF. WILLOW; starters BRAMBLET / BANDIT (the tuxedo cat, the author's own cat) / CHOMPLET; Route 29 species CHIRPLET / NIBBLET / PEEKAT / HOOTLING.
 Original names for everything else as it is built; no real Pokemon/Nintendo names or text.
 
 ## Save tokens

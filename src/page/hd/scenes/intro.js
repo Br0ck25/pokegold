@@ -11,11 +11,11 @@ Scenes.intro = function (root) {
       <div class="roll"><div>${Art.bramblet()}</div></div>
       <p class="cap">…across the green meadows…</p></div>
     <div class="act" style="--i:2"><div class="nightbg"></div>
-      <div class="pop">${Art.sparkit()}</div>
+      <div class="pop">${Art.bandit()}</div>
       ${many(18, (i) => `<i class="ember" style="--x:${30 + ((i * 23) % 40)}cqw;--d:${(i % 6) * 0.45}s"></i>`)}
       <p class="cap">…under a golden moon…</p></div>
     <div class="act" style="--i:3"><div class="burst"></div>
-      <div class="jump j1">${Art.bramblet()}</div><div class="jump j2">${Art.sparkit()}</div><div class="jump j3">${Art.chomplet()}</div>
+      <div class="jump j1">${Art.bramblet()}</div><div class="jump j2">${Art.bandit()}</div><div class="jump j3">${Art.chomplet()}</div>
       <p class="cap big">…your adventure begins!</p></div>
     <div class="skip">Tap or press any button to skip</div>
   </div>`);

@@ -7,11 +7,12 @@ function dialogue(parent, tag) {
     setTag(t) { const tg = el.querySelector(".dlg-tag"); if (tg) tg.textContent = t; },
     update(d) {
       el.hidden = !d;
-      if (!d) return;
+      if (!d) { parent.style.setProperty("--dlg-h", "0px"); return; }
       // Native engine sends one paragraph (`text`) and lets it wrap; the ROM sends two fixed lines.
       el.querySelector(".l1").textContent = d.text ?? d.lines[0];
       el.querySelector(".l2").textContent = d.text ? "" : d.lines[1];
       el.querySelector(".more").style.visibility = d.more ? "visible" : "hidden";
+      parent.style.setProperty("--dlg-h", `${el.offsetHeight}px`); // menus anchor above the box, whatever its size
     },
   };
 }

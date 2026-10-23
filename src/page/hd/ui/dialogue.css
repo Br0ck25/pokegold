@@ -1,5 +1,5 @@
 /* dialogue */
-#hd .dlg { position:absolute; left:3.5%; right:3.5%; bottom:3.5%; height:27%; padding:3.8cqw 5cqw 2cqw; border-radius:4cqw;
+#hd .dlg { position:absolute; left:3.5%; right:3.5%; bottom:3.5%; min-height:15cqw; padding:3.8cqw 9cqw 3.2cqw 5cqw; border-radius:4cqw;
   background:linear-gradient(rgba(18,32,82,.94),rgba(10,18,50,.96)); border:.7cqw solid var(--gold); box-shadow:0 0 0 .5cqw var(--ink), 0 1.6cqw 4cqw rgba(0,0,0,.5); }
 #hd .dlg[hidden] { display:none; }
 #hd .dlg p { margin:0; font-size:5.6cqw; line-height:1.28; font-weight:500; min-height:7.2cqw; text-shadow:0 .3cqw 0 rgba(0,0,0,.35); }
