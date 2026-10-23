@@ -6,11 +6,15 @@
   const put = (kind, ...pts) => pts.forEach(([x, y]) => (cells[y][x] = kind));
   const fill = (kind, x0, y0, x1, y1) => { for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) cells[y][x] = kind; };
   for (let x = 0; x < cols; x++) put("T", [x, 0], [x, 1], [x, rows - 1], [x, rows - 2]);
-  for (let y = 0; y < rows; y++) { if (y !== 9 && y !== 10) put("T", [0, y], [cols - 1, y]); } // open at rows 9-10: Cherrygrove (west) and New Bark (east)
-  fill("g", 40, 3, 51, 7); fill("g", 6, 12, 20, 13); fill("g", 30, 11, 39, 13); fill("g", 14, 3, 22, 6);
-  fill("v", 30, 8, 38, 8); // ledge: hop down from the north side onto the road
-  put("T", [10, 5], [11, 5], [10, 6], [34, 12], [44, 11], [45, 11], [44, 12], [3, 3], [4, 3], [3, 4], [50, 12], [51, 12]);
-  put("f", [8, 9], [20, 8], [42, 9], [53, 7], [2, 11], [28, 7]);
+  for (let y = 0; y < rows; y++) put("T", [0, y], [cols - 1, y]);
+  // Two lanes. West-bound you walk the south lane, and it is all tall grass. East-bound you can walk the north lane (no grass) and hop
+  // the ledge at its east end back down to the New Bark side. The ledge only goes down, so from the south lane you cannot get up to it.
+  fill("T", 8, 7, 40, 7); fill("v", 41, 7, 46, 7);
+  fill("T", 47, 7, 54, 7);
+  fill("g", 8, 8, 40, 13);
+  fill("p", 47, 9, 55, 10); fill("p", 0, 9, 7, 10); // dirt road at both ends, running out of the map
+  put("T", [24, 10], [25, 10], [24, 11], [16, 12], [31, 8], [10, 4], [11, 4], [34, 5], [3, 3], [4, 3], [3, 4], [50, 12], [51, 12], [45, 11], [46, 11], [46, 12]);
+  put("f", [4, 11], [20, 3], [48, 11], [53, 12], [2, 5], [28, 6]);
   put("S", [52, 8], [3, 8]);
 
   const talk = Game.talk;
@@ -28,7 +32,7 @@
     await s.say("I've seen you a couple times. How many BUDDYMON have you caught? Would you like me to show you how to catch BUDDYMON?");
     if ((await s.ask()) !== 0) return s.say("Oh. Fine, then. Anyway, if you want to catch BUDDYMON, you have to walk a lot.");
     await s.say("OK, watch closely! Follow me.");
-    await s.follow(DUDE, s.G.path(dude().x, dude().y, 46, 6));
+    await s.follow(DUDE, s.G.path(dude().x, dude().y, 44, 10));
     await Game.battle(s, makeMon("nibblet", 5), { tutorial: { lines: ["DUDE: First, weaken the BUDDYMON by battling it. A weak BUDDYMON is easier to catch.", "DUDE: Now! Throw a BUDDY NET at it!"] } });
     s.turn(DUDE, 1);
     await s.say("That's how you do it. If you weaken them first, BUDDYMON are easier to catch.");
@@ -46,15 +50,15 @@
     npcs: [
       { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: async (s) => { if (s.flag("GAVE_EGG") && !s.flag("LEARNED_TO_CATCH")) return lesson(s); await s.say("BUDDYMON hide in the grass. Who knows when they'll pop out..."); } },
       { id: 2, name: "YOUNGSTER", x: 27, y: 11, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
-      { id: 3, name: "TEACHER", x: 17, y: 9, dir: 3, wander: "horizontal", script: talk("See those ledges? It's scary to jump off them. But you can get back to NEW BARK without walking through the grass.") },
+      { id: 3, name: "TEACHER", x: 38, y: 5, dir: 3, wander: "horizontal", script: talk("See those ledges? It's scary to jump off them. But you can get back to NEW BARK without walking through the grass.") },
       { id: 4, name: "FRUIT_TREE", x: 12, y: 3, dir: 0, faces: false, script: Game.berryTree("TREE_R29") },
       { id: 5, name: "FISHER", x: 29, y: 5, dir: 1, script: talk("I wanted to take a break, so I saved my game to record my progress.") },
       {
-        id: 6, name: "COOLTRAINER_M", x: 13, y: 7, dir: 0,
+        id: 6, name: "COOLTRAINER_M", x: 20, y: 5, dir: 0,
         script: async (s) => { await s.say(`I'm waiting for BUDDYMON that appear only at ${timeOfDay() === "nite" ? "dawn" : "night"}.`); },
       },
       {
-        id: 7, name: "SACK", x: 48, y: 2, dir: 0, faces: false, hideIf: "GOT_R29_TONIC",
+        id: 7, name: "SACK", x: 44, y: 3, dir: 0, faces: false, hideIf: "GOT_R29_TONIC",
         script: async (s) => { s.hide(7); s.flag("GOT_R29_TONIC", true); s.give("tonic"); await s.say(`${s.name} found a TONIC!`); },
       },
     ],

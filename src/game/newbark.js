@@ -6,8 +6,9 @@
   const cells = Array.from({ length: rows }, () => Array(cols).fill("."));
   const put = (kind, ...pts) => pts.forEach(([x, y]) => (cells[y][x] = kind));
   for (let x = 0; x < cols; x++) put("T", [x, 0], [x, 1], [x, rows - 1]);
-  for (let y = 0; y < rows; y++) { put("T", [cols - 1, y]); if (y !== 9 && y !== 10) put("T", [0, y]); } // the road west is open at rows 9-10
+  for (let y = 0; y < rows; y++) put("T", [cols - 1, y], [0, y]);
   for (let y = 13; y <= 15; y++) for (let x = 9; x <= 11; x++) put("w", [x, y]);
+  for (let x = 0; x <= 9; x++) put("p", [x, 9], [x, 10]); // the dirt road west, wide and open to the edge
   put("f", [2, 7], [9, 5], [20, 9], [18, 13], [12, 16], [6, 3], [1, 15]);
   put("S", [10, 9], [8, 7], [12, 5], [13, 14], [8, 14]); // signs stand beside buildings, never in front of a door: town, your house, lab, Willow's house, neighbors'
   put("T", [1, 14], [2, 14], [1, 13]);

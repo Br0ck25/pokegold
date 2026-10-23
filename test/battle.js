@@ -38,16 +38,16 @@ const out = process.argv[3] || "test/out";
   if (genders.bramblet < 5 || genders.bramblet > 60) fail("about one starter in eight is female", genders);
 
   // Ledge: hopping down from the north side of the road lands two cells on (and never back up).
-  await page.evaluate(() => Game.warp("route29", 33, 7, 0));
+  await page.evaluate(() => Game.warp("route29", 43, 6, 0));
   await page.evaluate(() => setKey("DOWN", true));
-  await page.waitForFunction(() => Game.state.y >= 9, null, { timeout: 3000 }).catch(() => {});
+  await page.waitForFunction(() => Game.state.y >= 8, null, { timeout: 3000 }).catch(() => {});
   await page.evaluate(() => setKey("DOWN", false));
   await page.waitForTimeout(500);
-  if ((await page.evaluate(() => Game.state.y)) !== 9) fail("the ledge should drop you onto the road", await page.evaluate(() => [Game.state.x, Game.state.y]));
+  if ((await page.evaluate(() => Game.state.y)) !== 8) fail("the ledge should drop you onto the road", await page.evaluate(() => [Game.state.x, Game.state.y]));
   await page.evaluate(() => setKey("UP", true));
   await page.waitForTimeout(700);
   await page.evaluate(() => setKey("UP", false));
-  if ((await page.evaluate(() => Game.state.y)) !== 9) fail("you cannot climb back up a ledge");
+  if ((await page.evaluate(() => Game.state.y)) !== 8) fail("you cannot climb back up a ledge");
   if ((await page.evaluate(() => Game.player.money)) !== 3000) fail("you start with 3000 BUDS");
 
   // Plays a battle by clicking real buttons; `plan(menu)` returns the label to tap for the visible menu.

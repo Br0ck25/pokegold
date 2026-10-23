@@ -8,7 +8,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/battle/calc.js` | 71 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/cherrygrove.js` | 108 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
+| `src/game/cherrygrove.js` | 110 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
 | `src/game/cherryhouses.js` | 61 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
 | `src/game/core.js` | 178 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/data/items.js` | 9 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
@@ -33,8 +33,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |
 | `src/game/mrbuddymon.js` | 74 | Mr. Buddymon's house: Willow's errand. He hands you the MYSTERY EGG, PROF. ASPEN drops in and gives you the BUDDYDEX, and your |
 | `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
-| `src/game/newbark.js` | 73 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
-| `src/game/route29.js` | 80 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
+| `src/game/newbark.js` | 74 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
+| `src/game/route29.js` | 84 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
 | `src/game/route30.js` | 48 | Route 30: the road north from Cherrygrove to Mr. Buddymon's house. Three trainers watch the road, grass with Gold's wild table, |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
 | `src/game/willowlab.js` | 163 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
@@ -68,10 +68,10 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/room.js` | 69 | The player's bedroom: an 8 x 6 grid, one cell = 100 units. Layout mirrors the |
 | `src/page/hd/art/room1F.js` | 46 | Player's house, ground floor: 10 x 8 cells of 100 units. Blocked cells (from the game's collision data): |
 | `src/page/hd/art/sky.js` | 30 | Night sky with a big golden moon and layered hills. `dim` darkens it for menus. |
-| `src/page/hd/art/terrain.js` | 59 | Outdoor terrain for the world scene, drawn per cell (100 x 100 units): ground, tall grass, trees, rocks, water, ledges, signs, flowers, doors. |
+| `src/page/hd/art/terrain.js` | 61 | Outdoor terrain for the world scene, drawn per cell (100 x 100 units): ground, tall grass, trees, rocks, water, ledges, signs, flowers, doors. |
 | `src/page/hd/art/willowHouse.js` | 7 | Willow's house, 8 x 8 cells: PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4), door (2..3,7). |
 | `src/page/hd/art/willowLab.js` | 10 | Willow's lab, 10 x 12 cells: machine + counters (0..3,1..2), shelves (6..9,1), ball table (6..9,3), divider wall + shelves (rows 6-7), door (4..5,11). |
-| `src/page/hd/art/world.js` | 22 | A whole outdoor map as one SVG (cell = 100 units): terrain per cell, buildings on top, then `margin` cells of forest all round. |
+| `src/page/hd/art/world.js` | 26 | A whole outdoor map as one SVG (cell = 100 units): terrain per cell, buildings on top, then `margin` cells of forest all round. |
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 30 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |

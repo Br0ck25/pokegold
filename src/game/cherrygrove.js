@@ -6,8 +6,10 @@
   const put = (kind, ...pts) => pts.forEach(([x, y]) => (cells[y][x] = kind));
   const fill = (kind, x0, y0, x1, y1) => { for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) cells[y][x] = kind; };
   for (let x = 0; x < cols; x++) put("T", [x, 0], [x, 1], [x, rows - 1]);
-  for (let y = 0; y < rows; y++) { if (y !== 9 && y !== 10) put("T", [0, y], [cols - 1, y]); }
-  put(".", [15, 0], [16, 0], [15, 1], [16, 1]); // the road north to Route 30
+  for (let y = 0; y < rows; y++) put("T", [0, y], [cols - 1, y]);
+  for (let x = 28; x < cols; x++) put("p", [x, 9], [x, 10]); // dirt road east to Route 29
+  for (let x = 0; x <= 5; x++) put("p", [x, 9], [x, 10]); // dirt road west (Route 31, not open yet)
+  for (let y = 0; y <= 6; y++) put("p", [15, y], [16, y]); // dirt road north to Route 30
   fill("w", 1, 13, 13, 16); fill("w", 14, 15, 17, 16); // the sea front
   put("f", [12, 9], [14, 4], [33, 5], [2, 8], [26, 16], [4, 11]);
   put("S", [17, 9], [23, 7], [23, 15], [27, 7]);

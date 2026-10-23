@@ -2,7 +2,11 @@
 // world = { cols, rows, cells: [rows of kind chars], buildings: [{x, y, w, h, roof, wall, label, door}] } (kinds: see art/terrain.js).
 Art.world = function (world, margin) {
   const W = world.cols + margin * 2, H = world.rows + margin * 2;
-  const kindAt = (x, y) => (x >= 0 && x < world.cols && y >= 0 && y < world.rows ? world.cells[y][x] : "T");
+  const kindAt = (x, y) => {
+    if (x >= 0 && x < world.cols && y >= 0 && y < world.rows) return world.cells[y][x];
+    const edge = world.cells[Math.min(Math.max(y, 0), world.rows - 1)][Math.min(Math.max(x, 0), world.cols - 1)];
+    return edge === "p" ? "p" : "T"; // a dirt path on the edge carries on out of the map so exits can be seen
+  };
   const dry = (k) => k !== "w" && k !== "r"; // sand shows where water meets land
   const symbols = new Map();
   let uses = "";

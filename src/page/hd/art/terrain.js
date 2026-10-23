@@ -1,5 +1,5 @@
 // Outdoor terrain for the world scene, drawn per cell (100 x 100 units): ground, tall grass, trees, rocks, water, ledges, signs, flowers, doors.
-// Kinds used in map `cells`: . floor, g tall grass, T tree, c bush, r rock, w water, S sign, f flowers, v ledge (jump down).
+// Kinds used in map `cells`: . floor, g tall grass, T tree, c bush, r rock, w water, S sign, f flowers, p dirt path (an exit path carries on through the forest at the map edge), v ledge (jump down).
 Art.johto = (() => {
   const o = `stroke="${INK}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"`;
   const tufts = [[30, 40], [116, 30], [160, 86], [62, 124], [146, 160], [22, 176], [96, 92]]
@@ -28,6 +28,7 @@ Art.johtoCell = (() => {
   const tall = `<rect x="-1" y="-1" width="102" height="102" fill="#58b85c"/><g stroke-linecap="round" stroke-linejoin="round" fill="none">${
     [[24, 44], [72, 40], [48, 70], [16, 86], [84, 90], [52, 22]]
       .map(([x, y]) => `<path stroke="#1f6b34" stroke-width="5" d="M${x - 14} ${y + 14} Q${x - 10} ${y - 8} ${x - 2} ${y - 20} Q${x} ${y} ${x + 4} ${y - 24} Q${x + 8} ${y} ${x + 16} ${y - 16} Q${x + 14} ${y + 6} ${x + 14} ${y + 14}Z" fill="#7be07a" opacity=".9"/>`).join("")}</g>`;
+  const dirt = `<rect x="-1" y="-1" width="102" height="102" fill="#e3c88f"/><g stroke="#c9a96a" stroke-width="3.5" stroke-linecap="round" fill="none"><path d="M14 30 h12 M60 22 h14 M30 70 h14 M72 78 h12 M52 50 h8"/></g>`;
   const rock = `<ellipse cx="50" cy="86" rx="38" ry="8" fill="#000" opacity=".2"/><ellipse cx="50" cy="58" rx="44" ry="36" fill="#aeb6c8" ${o}/><ellipse cx="36" cy="44" rx="14" ry="9" fill="#d5dbe8"/><path d="M60 66 q10 6 22 -2" fill="none" stroke="#8791aa" stroke-width="4" stroke-linecap="round"/>`;
   const sandSide = `<path d="M-2 -2 H102 V20 Q76 34 50 20 T-2 20Z" fill="#f2d9a0" ${o} stroke-width="3"/>`;
   const water = (mask) => `<rect x="-1" y="-1" width="102" height="102" fill="#4fb6d9"/><g stroke="#9fe0f4" stroke-width="4" stroke-linecap="round" fill="none"><path d="M18 40 q10 -8 20 0 t20 0"/><path d="M40 78 q10 -8 20 0 t20 0"/></g>${
@@ -38,6 +39,7 @@ Art.johtoCell = (() => {
   return (kind, mask = 0, v = 0) => {
     switch (kind) {
       case "g": return tall;
+      case "p": return dirt;
       case "S": return ground(v) + Art.johto.sign(0, 0);
       case "f": return ground(v) + `<g ${o} stroke-width="3"><circle cx="28" cy="40" r="9" fill="#ff6b5e"/><circle cx="68" cy="30" r="9" fill="#fff6dc"/><circle cx="56" cy="72" r="9" fill="#ffc93c"/><circle cx="20" cy="80" r="8" fill="#ff9aa8"/></g>`;
       case "T": return ground(v) + tree(0, 0);

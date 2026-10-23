@@ -6,7 +6,7 @@
   const put = (kind, ...pts) => pts.forEach(([x, y]) => (cells[y][x] = kind));
   const fill = (kind, x0, y0, x1, y1) => { for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) cells[y][x] = kind; };
   fill("T", 0, 0, 31, 1); fill("T", 0, 0, 7, 39); fill("T", 26, 0, 31, 39); fill("T", 0, 39, 31, 39);
-  put(".", [15, 39], [16, 39]); // south: Cherrygrove
+  fill("p", 15, 35, 16, 39); // south: Cherrygrove
   fill("g", 8, 24, 13, 30); fill("g", 20, 14, 25, 20); fill("g", 8, 6, 12, 10); fill("g", 20, 34, 25, 37);
   fill("T", 8, 16, 11, 19); fill("T", 21, 25, 25, 28); fill("T", 8, 33, 11, 36);
   put("f", [14, 9], [18, 22], [13, 32], [24, 30], [10, 12], [24, 11]);
