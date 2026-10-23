@@ -12,9 +12,12 @@
   // the ledge at its east end back down to the New Bark side. The ledge only goes down, so from the south lane you cannot get up to it.
   fill("T", 8, 7, 40, 7); fill("v", 41, 7, 46, 7);
   fill("T", 47, 7, 54, 7);
-  fill("g", 8, 8, 40, 13);
+  // The south lane is a winding grass corridor through forest, as in Gold: 1 wide at the New Bark end (where the youngster stands),
+  // then 2 wide, turning down and back up so you cannot see the end of it.
+  fill("T", 8, 8, 40, 13);
+  fill("g", 34, 10, 40, 10); fill("g", 27, 10, 33, 11); fill("g", 26, 10, 27, 13); fill("g", 14, 12, 27, 13); fill("g", 14, 9, 15, 13); fill("g", 8, 9, 13, 10);
   fill("p", 47, 9, 55, 10); fill("p", 0, 9, 7, 10); // dirt road at both ends, running out of the map
-  put("T", [24, 10], [25, 10], [24, 11], [16, 12], [31, 8], [10, 4], [11, 4], [34, 5], [3, 3], [4, 3], [3, 4], [50, 12], [51, 12], [45, 11], [46, 11], [46, 12]);
+  put("T", [10, 4], [11, 4], [34, 5], [3, 3], [4, 3], [3, 4], [50, 12], [51, 12], [45, 11], [46, 11], [46, 12]);
   put("f", [4, 11], [20, 3], [48, 11], [53, 12], [2, 5], [28, 6]);
   put("S", [52, 8], [3, 8]);
 
@@ -50,7 +53,7 @@
     coords: [9, 10].map((y) => ({ x: 53, y, script: lesson })),
     npcs: [
       { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: async (s) => { if (s.flag("GAVE_EGG") && !s.flag("LEARNED_TO_CATCH")) return lesson(s); await s.say("BUDDYMON hide in the grass. Who knows when they'll pop out..."); } },
-      { id: 2, name: "YOUNGSTER", x: 43, y: 10, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
+      { id: 2, name: "YOUNGSTER", x: 41, y: 11, dir: 2, script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
       { id: 3, name: "TEACHER", x: 38, y: 5, dir: 3, wander: "horizontal", script: talk("See those ledges? It's scary to jump off them. But you can get back to NEW BARK without walking through the grass.") },
       { id: 4, name: "FRUIT_TREE", x: 12, y: 3, dir: 0, faces: false, script: Game.berryTree("TREE_R29") },
       { id: 5, name: "FISHER", x: 29, y: 5, dir: 1, script: talk("I wanted to take a break, so I saved my game to record my progress.") },

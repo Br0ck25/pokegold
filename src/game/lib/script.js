@@ -10,7 +10,7 @@ function scriptApi(G) {
     get name() { return G.player.name; },
     flag: (name, v) => (v === undefined ? !!G.player.flags[name] : void (G.player.flags[name] = v)),
     // Show a line for `ms` (a press of A skips ahead): battle messages that flow by without waiting for a button.
-    async msg(text, ms = Game.msgMs) {
+    async msg(text, ms = Game.msgMs * (0.6 + text.length / 28)) { // longer lines stay up longer
       G.state.dialogue = { text, more: false };
       Input.clear();
       for (const t0 = performance.now(); performance.now() - t0 < ms;) { Input.poll(); if (Input.pressed("A")) break; await frame(); }

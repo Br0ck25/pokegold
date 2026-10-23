@@ -42,7 +42,7 @@
     s.turn("player", 1);
     await s.say("You are returning to PROF. WILLOW? Here. Your BUDDYMON should have some rest.");
     s.G.state.dialogue = null;
-    for (const m of s.G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
+    for (const m of s.G.player.party) healMon(m);
     await s.wait(60);
     await s.say("I'm depending on you!");
     // Back at the lab someone has broken in and taken the starter you did not choose... the one your rival picked.

@@ -9,13 +9,13 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const fresh = () => ({ atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 });
   const side = (mon, label) => ({ mon, label, stats: statsFor(mon), stages: fresh() });
   const alive = () => P.party.filter((m) => m.hp > 0);
-  const speed = (x) => x.stats.spe * stageMult(x.stages.spe);
+  const speed = (x) => x.stats.spe * stageMult(x.stages.spe) * (x.mon.status === "par" ? 0.25 : 1);
   const fought = new Set();
   const foeLabel = (mon) => (trainer ? `${trainer.name}'s ${SPECIES[mon.species].name}` : `Wild ${SPECIES[mon.species].name}`);
   let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
-  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: statsFor(x.mon).hp, xp: xpBar(x.mon) });
+  const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: statsFor(x.mon).hp, xp: xpBar(x.mon), exp: xpText(x.mon), status: x.mon.status });
   const refresh = () => { state.battle.foe = info(them); state.battle.me = info(me); };
   const partyMenu = async (forced) => {
     for (;;) {
@@ -78,7 +78,12 @@ Game.battle = async (s, foeMon, opts = {}) => {
     return !!ended;
   };
   let fxN = 0; // each move bumps this so the screen plays one animation per use: who attacks, the move's type, and hit / up / down
-  const attack = async (a, d, slot) => { await useMove(s, a, d, slot, refresh, (kind) => (state.battle.fx = { n: ++fxN, who: a === me ? "me" : "foe", type: MOVES[slot.id].type, kind })); return settle(); };
+  const attack = async (a, d, slot) => {
+    if (!(await canAct(s, a, refresh))) return settle();
+    await useMove(s, a, d, slot, refresh, (kind) => (state.battle.fx = { n: ++fxN, who: a === me ? "me" : "foe", type: MOVES[slot.id].type, kind }));
+    await residual(s, a, refresh);
+    return settle();
+  };
   const foeSlot = () => { const u = them.mon.moves.filter((m) => m.pp > 0); return u.length ? u[rand(u.length)] : { id: "tackle", pp: 1 }; };
 
   const useNet = async (id) => {
@@ -121,13 +126,17 @@ Game.battle = async (s, foeMon, opts = {}) => {
       if (act.type === "switch") { await s.msg(`Come back, ${me.mon.nick}!`); await sendOut(act.mon); }
       else if (act.type === "item" && ITEMS[act.id].net && trainer) await s.msg("The trainer blocked the net! Don't be a thief!");
       else if (act.type === "item" && ITEMS[act.id].net) await useNet(act.id);
-      else if (act.type === "item") {
+      else if (act.type === "item" && !ITEMS[act.id].cure) {
         const max = me.stats.hp;
         if (me.mon.hp >= max) { await s.msg("It won't have any effect."); continue; }
         P.bag[act.id]--;
         me.mon.hp = Math.min(max, me.mon.hp + ITEMS[act.id].heal);
         refresh();
         await s.msg(`${me.mon.nick} regained health!`);
+      } else if (act.type === "item" && ITEMS[act.id].cure) {
+        if (!me.mon.status) { await s.msg("It won't have any effect."); continue; }
+        P.bag[act.id]--; me.mon.status = null; me.mon.sleep = 0; refresh();
+        await s.msg(`${me.mon.nick} was cured!`);
       } else if (act.type === "run") {
         if (trainer) { await s.msg("No! There's no running from a trainer battle!"); continue; }
         tries++;

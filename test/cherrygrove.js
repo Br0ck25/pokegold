@@ -69,7 +69,7 @@ const out = process.argv[3] || "test/out";
   await key("A"); // welcome
   await pick(0); // BUY
   const rows = await page.evaluate(() => Game.state.panel && Game.state.panel.rows.map((r) => r.label));
-  if (rows?.join() !== "TONIC") fail("before the errand the Mart sells only tonics", rows);
+  if (rows?.join() !== "TONIC,REMEDY") fail("before the errand the Mart sells no nets (tonics and remedies only)", rows);
   const money0 = await page.evaluate(() => Game.player.money), tonic0 = await page.evaluate(() => Game.player.bag.tonic);
   await pick(0);
   await key("RIGHT"); await key("A"); // quantity 2, confirm

@@ -2,6 +2,11 @@
 // Using a healing item is shared with the Pack: Game.useOn(s, itemKey, mon).
 Game.useOn = async (s, key, mon) => {
   const it = ITEMS[key], max = statsFor(mon).hp;
+  if (it.cure) {
+    if (!mon.status || mon.hp <= 0) return s.say("It won't have any effect.");
+    mon.status = null; mon.sleep = 0; s.G.player.bag[key]--;
+    return s.say(`${mon.nick} was cured!`);
+  }
   if (!it.heal || mon.hp <= 0 || mon.hp >= max) return s.say("It won't have any effect.");
   const gain = Math.min(it.heal, max - mon.hp);
   mon.hp += gain;
@@ -10,7 +15,7 @@ Game.useOn = async (s, key, mon) => {
 };
 
 Game.partyScreen = async (s) => {
-  const P = s.G.player, partyRows = () => P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species, dim: m.hp <= 0 }; });
+  const P = s.G.player, partyRows = () => P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}${m.status ? "  " + STATUS_TAG[m.status] : ""}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species, dim: m.hp <= 0 }; });
   const summary = async (m) => {
     const st = statsFor(m), sp = SPECIES[m.species], next = growthExp(sp.growth, m.level + 1) - m.exp;
     await s.panel({
@@ -30,7 +35,7 @@ Game.partyScreen = async (s) => {
       const to = await s.panel({ title: `Switch ${mon.nick} with...`, rows: partyRows() }, at);
       if (to.key === "A" && to.i !== at) { [P.party[at], P.party[to.i]] = [P.party[to.i], P.party[at]]; at = to.i; }
     } else if (pick === 2) {
-      const keys = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && ITEMS[k].heal);
+      const keys = Object.keys(P.bag).filter((k) => P.bag[k] > 0 && ITEMS[k] && (ITEMS[k].heal || ITEMS[k].cure));
       if (!keys.length) { await s.say("You have nothing to use."); continue; }
       const it = await s.choose([...keys.map((k) => `${ITEMS[k].name} x${P.bag[k]}`), "CANCEL"], { c0: 8, r0: 5, cancel: keys.length });
       if (it < keys.length) await Game.useOn(s, keys[it], mon);

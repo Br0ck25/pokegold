@@ -6,8 +6,8 @@ Scenes.battle = function (root) {
     <div class="bt-bg"></div>
     <div class="bt-side foe"><i class="plat"></i><div class="mon"></div><div class="bt-net" hidden>${Art.net()}</div><div class="fx"></div></div>
     <div class="bt-side me"><i class="plat"></i><div class="mon"></div><div class="fx"></div></div>
-    <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div></div>
-    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><div class="hp"><i></i></div><span class="num"></span><div class="xp" title="EXP"><i></i></div></div>
+    <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div></div>
+    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div><span class="num"></span><div class="xp" title="EXP"><i></i></div><span class="xpn"></span></div>
     <div class="bt-menu" hidden></div>
   </div>`);
   root.appendChild(el);
@@ -55,6 +55,11 @@ Scenes.battle = function (root) {
       xp.style.width = `${Math.round((mon.xp || 0) * 100)}%`;
     }
     s.level = mon.level;
+    const xn = s.card.querySelector(".xpn");
+    if (xn) xn.textContent = `EXP ${mon.exp}`;
+    const st = s.card.querySelector(".st");
+    st.textContent = mon.status ? { slp: "SLP", psn: "PSN", brn: "BRN", par: "PAR", frz: "FRZ" }[mon.status] : "";
+    st.dataset.k = mon.status || "";
     const num = s.card.querySelector(".num");
     if (num) num.textContent = `${mon.hp} / ${mon.max}`;
   };

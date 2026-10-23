@@ -1,4 +1,4 @@
-// Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first.
+// Moves. status: { kind: slp|psn|brn|par|frz, chance } inflicts a condition on the foe (chance in % for damaging moves; status moves use 100 and their acc). power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first.
 const MOVES = {
   tackle: { name: "TACKLE", type: "normal", power: 35, acc: 95, pp: 35 },
   scratch: { name: "SCRATCH", type: "normal", power: 40, acc: 100, pp: 35 },
@@ -15,5 +15,9 @@ const MOVES = {
   peck: { name: "PECK", type: "flying", power: 35, acc: 100, pp: 35 },
   night_nip: { name: "NIGHT NIP", type: "dark", power: 40, acc: 100, pp: 25 },
   splash_jet: { name: "SPLASH JET", type: "water", power: 40, acc: 100, pp: 25 },
+  lull_song: { name: "LULL SONG", type: "normal", power: 0, acc: 60, pp: 15, status: { kind: "slp", chance: 100 } },
+  venom_dart: { name: "VENOM DART", type: "poison", power: 0, acc: 75, pp: 35, status: { kind: "psn", chance: 100 } },
+  static_zap: { name: "STATIC ZAP", type: "electric", power: 40, acc: 100, pp: 30, status: { kind: "par", chance: 10 } },
+  ember_puff: { name: "EMBER PUFF", type: "fire", power: 40, acc: 100, pp: 25, status: { kind: "brn", chance: 10 } },
   leaf_cutter: { name: "LEAF CUTTER", type: "grass", power: 55, acc: 95, pp: 25 },
 };

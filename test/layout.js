@@ -42,6 +42,9 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
       }
       return false;
     };
+    if (!(at(40, 10) === "g" && at(40, 9) !== "g" && at(40, 11) !== "g" && at(30, 10) === "g" && at(30, 11) === "g")) out.exits.push("Route 29's grass starts 1 wide and then widens to 2");
+    const yo = m.npcs.find((n) => n.name === "YOUNGSTER");
+    if (!yo || Math.abs(yo.x - 41) > 1 || at(yo.x, yo.y) === "g") out.exits.push("the grass-warning youngster stands at the start of the grass, not in it");
     out.grass = { westNoGrass: reach([54, 9], [1, 9], true), westAny: reach([54, 9], [1, 9], false), eastNoGrass: reach([1, 9], [54, 9], true) };
     for (const [key, mm] of Object.entries(Game.maps)) {
       if (!mm.world) continue;

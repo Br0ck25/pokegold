@@ -11,7 +11,7 @@ const Game = (() => {
     state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null, pic: null, panel: null },
   };
   let moving = 0, turning = 0;
-  G.msgMs = 900; // how long battle messages stay up (tests shorten it)
+  G.msgMs = 1200; // how long battle messages stay up (tests shorten it)
   G.picked = null; // set by tapping a menu button (see scenes/battle.js)
   G.pick = (i) => { G.picked = i; };
 
@@ -114,7 +114,7 @@ const Game = (() => {
     await s.say(`${G.player.name} is out of usable BUDDYMON!`);
     G.player.money = Math.floor(G.player.money / 2);
     await s.say(`${G.player.name} panicked and dropped half of their ${G.CURRENCY}...`);
-    for (const m of G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
+    for (const m of G.player.party) healMon(m);
     const home = G.player.lastCenter || { map: "livingroom", x: 7, y: 6, dir: 1 }; // the last Center you healed at, else home
     G.state.map = { key: home.map };
     Object.assign(G.state, { x: home.x, y: home.y, dir: home.dir, objects: (maps[home.map].npcs || []).map((n) => ({ ...n })) });

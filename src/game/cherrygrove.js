@@ -59,10 +59,10 @@
     await s.say(`${Game.rivalName(s.G.player)}: ...Hold it. You got a BUDDYMON at the LAB. What a waste. A wimp like you with a BUDDYMON? ...Let's see how good you are.`);
     const result = await Game.battle(s, makeMon(Game.rivalSpecies(s.G.player), 6), { trainer: { name: Game.rivalName(s.G.player), money: 60, win: "...Humph. You got lucky. Don't get cocky." } });
     if (result === "lost") {
-      for (const m of s.G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
+      for (const m of s.G.player.party) healMon(m);
       await s.say(`${Game.rivalName(s.G.player)}: Ha! I knew it. Weaklings like you don't deserve BUDDYMON.`);
     }
-    for (const m of s.G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
+    for (const m of s.G.player.party) healMon(m);
     await s.move("player", [1], 3); // he barges past, shoving you aside, and walks off into town
     await s.move(RIVAL, [2, 2, 2, 2, 2, 2, 2, 2]);
     s.hide(RIVAL);

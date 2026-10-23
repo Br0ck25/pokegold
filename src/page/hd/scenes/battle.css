@@ -53,3 +53,8 @@
 #hd .mon.lunge-me { animation:lunge-me .45s ease-in-out; } #hd .mon.lunge-foe { animation:lunge-foe .45s ease-in-out; }
 @keyframes lunge-me { 0%,100% { transform:none; } 40% { transform:translate(16cqw,-9cqw); } }
 @keyframes lunge-foe { 0%,100% { transform:none; } 40% { transform:translate(-16cqw,9cqw); } }
+#hd .bt-card .xpn { display:block; margin-top:.8cqw; text-align:right; font-size:2.8cqw; opacity:.8; }
+#hd .bt-card .st { position:absolute; left:3cqw; bottom:-2.6cqw; font-style:normal; font-weight:700; font-size:3cqw; padding:.2cqw 1.6cqw; border-radius:1.6cqw; color:var(--ink); background:#ccc; border:.4cqw solid var(--ink); }
+#hd .bt-card .st:empty { display:none; }
+#hd .bt-card .st[data-k=slp] { background:#b8b8d8; } #hd .bt-card .st[data-k=psn] { background:#c88ad9; } #hd .bt-card .st[data-k=brn] { background:#ff9a5c; }
+#hd .bt-card .st[data-k=par] { background:#ffe03c; } #hd .bt-card .st[data-k=frz] { background:#9fe8ff; }

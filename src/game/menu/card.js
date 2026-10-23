@@ -17,8 +17,8 @@ Game.gearScreen = async (s) => {
 };
 
 // Options: text speed (how long battle messages stay up). Left/right changes the value.
-Game.SPEEDS = { slow: 1500, mid: 900, fast: 450 };
-Game.applyOptions = () => { Game.msgMs = Game.SPEEDS[Game.player.options.speed] ?? 900; };
+Game.SPEEDS = { slow: 2000, mid: 1200, fast: 600 };
+Game.applyOptions = () => { Game.msgMs = Game.SPEEDS[Game.player.options.speed] ?? 1200; };
 Game.optionsScreen = async (s) => {
   const o = s.G.player.options, names = Object.keys(Game.SPEEDS);
   for (;;) {

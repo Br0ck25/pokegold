@@ -19,7 +19,7 @@ const accMult = (s) => (s >= 0 ? (3 + s) / 3 : 3 / (3 - s));
 // Damage of one hit. att/def: { mon, stats, stages }. Returns { damage, crit, mult }.
 const damageOf = (att, def, move) => {
   const special = SPECIAL_TYPES.has(move.type);
-  const A = (special ? att.stats.spa : att.stats.atk) * stageMult(att.stages[special ? "spa" : "atk"]);
+  const A = (special ? att.stats.spa : att.stats.atk) * stageMult(att.stages[special ? "spa" : "atk"]) * (att.mon.status === "brn" && !special ? 0.5 : 1);
   const D = (special ? def.stats.spd : def.stats.def) * stageMult(def.stages[special ? "spd" : "def"]);
   const crit = rand(256) < 17;
   let dmg = Math.floor((Math.floor((2 * att.mon.level) / 5 + 2) * move.power * Math.floor(A)) / Math.max(1, Math.floor(D)) / 50);
@@ -33,12 +33,15 @@ const damageOf = (att, def, move) => {
   return { damage: dmg, crit, mult };
 };
 
+const STATUS_TAG = { slp: "SLP", psn: "PSN", brn: "BRN", par: "PAR", frz: "FRZ" };
+// Full restore (Center, whiteout, rival aftermath): HP, PP and status.
+const healMon = (m) => { m.hp = statsFor(m).hp; m.status = null; m.sleep = 0; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; };
 const expGain = (foe, wild = true) => Math.floor(((SPECIES[foe.species].exp * foe.level) / 7) * (wild ? 1 : 1.5));
 
 // Catch chance, as in PokeBallEffect: ((3*max - 2*hp) * rate * net) / (3*max), + status bonus, capped at 255.
 const catchRate = (foe, maxHp, net) => {
   let r = Math.floor(((3 * maxHp - 2 * foe.hp) * SPECIES[foe.species].catchRate * net) / (3 * maxHp));
-  r = Math.max(1, r) + (foe.status === "sleep" || foe.status === "freeze" ? 10 : foe.status ? 5 : 0);
+  r = Math.max(1, r) + (foe.status === "slp" || foe.status === "frz" ? 10 : foe.status ? 5 : 0);
   return Math.min(255, r);
 };
 // chance (out of 255) that the net keeps shaking for a final catch rate (data/battle/wobble_probabilities.asm)

@@ -25,7 +25,7 @@ Game.packScreen = async (s) => {
     else if (item.key === "mapcard" || ITEMS[item.key].pocket === "key") await s.say("It can't be used here.");
     else if (ITEMS[item.key].net) await s.say("Nets are for throwing at wild BUDDYMON in battle.");
     else {
-      const who = await s.panel({ title: `Use ${ITEMS[item.key].name} on...`, rows: P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species }; }) });
+      const who = await s.panel({ title: `Use ${ITEMS[item.key].name} on...`, rows: P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}${m.status ? "  " + STATUS_TAG[m.status] : ""}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species }; }) });
       if (who.key === "A") await Game.useOn(s, item.key, P.party[who.i]);
     }
   }

@@ -8,7 +8,7 @@
   const exit = (xs, to, tx, ty, y = 7) => xs.map((x) => ({ x, y, to, tx, ty, dir: 0 }));
 
   // --- Mart (12 x 8): shelves along the back wall, counter at (0..2,4), clerk behind it
-  const clerk = async (s) => { await Game.shop(s, s.flag("GAVE_EGG") ? ["tonic", "buddy_net"] : ["tonic"]); };
+  const clerk = async (s) => { await Game.shop(s, s.flag("GAVE_EGG") ? ["tonic", "remedy", "buddy_net"] : ["tonic", "remedy"]); };
   Game.register("cgmart", {
     room: { art: "cherrygroveMart", cols: 12, rows: 8, label: "Cherrygrove · Mart" },
     solid: grid(12, 8, new Set([...rect(0, 0, 11, 0), ...rect(3, 1, 11, 1), ...rect(0, 4, 2, 4)])),
