@@ -8,6 +8,7 @@ Scenes.world = function (root) {
   const view = el.querySelector(".world-map"), loc = el.querySelector(".loc");
   const dlg = dialogue(el);
   const menus = popups(el);
+  const pic = picLayer(el);
   let map = null, people = null;
 
   const build = (key) => {
@@ -30,6 +31,7 @@ Scenes.world = function (root) {
       people.update(state);
       dlg.update(state.dialogue);
       menus.update(state.boxes);
+      pic.update(state.pic);
     },
   };
 };

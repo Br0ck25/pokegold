@@ -8,7 +8,7 @@ const Game = (() => {
   const maps = {};
   const G = {
     maps, root: null, running: false, player: null, script: null,
-    state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null },
+    state: { screen: "splash", map: { key: "" }, x: 0, y: 0, dir: 0, objects: [], dialogue: null, boxes: [], menu: null, prof: null, pic: null },
   };
   let moving = 0, turning = 0;
 
@@ -43,6 +43,37 @@ const Game = (() => {
 
   G.step = (a, d) => { a.x += DX[d]; a.y += DY[d]; };
 
+  // Shortest walk (list of directions) from (x, y) to (tx, ty) through free cells; used by scripts to send people to the player.
+  G.path = (x, y, tx, ty) => {
+    const free = (cx, cy) => !blocked(cx, cy) && !(cx === G.state.x && cy === G.state.y);
+    const from = new Map([[`${x},${y}`, null]]), queue = [[x, y]];
+    while (queue.length) {
+      const [cx, cy] = queue.shift();
+      if (cx === tx && cy === ty) break;
+      for (let d = 0; d < 4; d++) {
+        const nx = cx + DX[d], ny = cy + DY[d], k = `${nx},${ny}`;
+        if (!from.has(k) && (free(nx, ny) || (nx === tx && ny === ty))) { from.set(k, [cx, cy, d]); queue.push([nx, ny]); }
+      }
+    }
+    const out = [];
+    for (let at = from.get(`${tx},${ty}`); at; at = from.get(`${at[0]},${at[1]}`)) out.unshift(at[2]);
+    return out;
+  };
+
+  // People that wander when idle: wander "spin" turns on the spot, "vertical" paces one cell up and down from where it stands.
+  function wander() {
+    for (const o of G.state.objects) {
+      if (!o.wander) continue;
+      o.home ||= { x: o.x, y: o.y };
+      o.wait = (o.wait ?? 40 + Math.random() * 120) - 1;
+      if (o.wait > 0) continue;
+      o.wait = 60 + Math.random() * 180;
+      if (o.wander === "spin") { o.dir = Math.floor(Math.random() * 4); continue; }
+      const d = Math.random() < 0.5 ? 0 : 1, ny = o.y + DY[d];
+      if (Math.abs(ny - o.home.y) <= 1 && !blocked(o.x, ny) && !(o.x === G.state.x && ny === G.state.y)) { o.dir = d; o.y = ny; }
+    }
+  }
+
   G.warp = async (key, x, y, dir) => {
     const def = maps[key];
     Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => !n.hideIf || !G.player.flags[n.hideIf]).map((n) => ({ ...n })) });
@@ -72,6 +103,7 @@ const Game = (() => {
     Input.poll();
     if (G.script || G.state.screen) return;
     const { state } = G;
+    wander();
     if (moving) {
       if (--moving > 0) return;
       const m = here(), w = (m.warps || []).find((g) => g.x === state.x && g.y === state.y);

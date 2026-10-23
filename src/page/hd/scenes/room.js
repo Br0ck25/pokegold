@@ -8,6 +8,7 @@ Scenes.room = function (root) {
   const wrap = el.querySelector(".room-wrap"), loc = el.querySelector(".loc");
   const dlg = dialogue(el);
   const menus = popups(el);
+  const pic = picLayer(el);
   let map = null, people = null;
 
   const build = (key) => {
@@ -31,6 +32,7 @@ Scenes.room = function (root) {
       } else { wrap.style.transform = ""; wrap.style.top = ""; }
       dlg.update(state.dialogue);
       menus.update(state.boxes);
+      pic.update(state.pic);
     },
   };
 };

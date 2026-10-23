@@ -7,7 +7,7 @@
 
   Game.register("bedroom", {
     room: { art: "room", cols: 8, rows: 6, label: "Home · Your Room" },
-    solid: solidGrid(8, 6, new Set([...rect(0, 0, 6, 0), ...rect(2, 1, 5, 1), ...rect(4, 2, 4, 2), ...rect(0, 4, 0, 5)])),
+    solid: solidGrid(8, 6, new Set([...rect(0, 0, 6, 0), ...rect(2, 1, 5, 1), ...rect(4, 2, 4, 2), ...rect(4, 4, 5, 4), ...rect(0, 4, 0, 5)])),
     warps: [{ x: 7, y: 0, to: "livingroom", tx: 9, ty: 1, dir: 0 }],
     signs: [
       { x: 2, y: 1, script: talk("The PC is off. Nothing to do on it yet.") },
@@ -21,7 +21,7 @@
   Game.register("livingroom", {
     room: { art: "room1F", cols: 10, rows: 8, label: "Home · Living Room" },
     solid: solidGrid(10, 8, new Set([...rect(0, 0, 9, 0), ...rect(0, 1, 5, 1), ...rect(3, 2, 3, 3), ...rect(5, 3, 6, 4)])),
-    warps: [{ x: 9, y: 0, to: "bedroom", tx: 7, ty: 1, dir: 0 }, { x: 6, y: 7, to: "newbark", tx: 5, ty: 7, dir: 0 }, { x: 7, y: 7, to: "newbark", tx: 5, ty: 7, dir: 0 }],
+    warps: [{ x: 9, y: 0, to: "bedroom", tx: 7, ty: 1, dir: 0 }, { x: 6, y: 7, to: "newbark", tx: 5, ty: 9, dir: 0 }, { x: 7, y: 7, to: "newbark", tx: 5, ty: 9, dir: 0 }],
     npcs: [{
       id: 1, name: "MOM", x: 7, y: 3, dir: 2,
       script: async (s) => {

@@ -4,15 +4,16 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/core.js` | 110 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/core.js` | 142 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
 | `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
-| `src/game/neighbor.js` | 16 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). |
-| `src/game/newbark.js` | 38 | New Bark Town (outdoors): your house, the neighbor's house, Willow's lab, a pond, and the road west to Route 29. 22 x 16 cells, original layout. |
-| `src/game/script.js` | 54 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
+| `src/game/newbark.js` | 77 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
+| `src/game/script.js` | 73 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/start.js` | 31 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
-| `src/game/willowlab.js` | 47 | Willow's lab: meet the professor, then pick your first buddymon from the three on the table (cells match art/willowLab.js). |
+| `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
+| `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
 | `src/page/app.js` | 46 | Page shell: tiny helpers, the optional account dialog, and the Play button that starts the game (game/start.js). |
 | `src/page/hd/art/_eye.js` | 9 | Shared eye: white sclera, coloured iris, ink pupil, two glints. |
 | `src/page/hd/art/badger.js` | 23 | Brock Family emblem: a badger (brock = badger) in a gold-ringed crest. |
@@ -20,7 +21,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/buildings.js` | 20 | A building for the world scene, w x h cells (100 units each) drawn at (x, y): roof on top, wall below with windows, door on the bottom row. |
 | `src/page/hd/art/chirplet.js` | 21 | CHIRPLET (was Pidgey): fluffy chick-bird with a three-feather crest. |
 | `src/page/hd/art/chomplet.js` | 25 | CHOMPLET: shark pup (water starter), after the supplied reference style |
-| `src/page/hd/art/creature.js` | 7 | Art for a species id (as the game numbers them): hand-drawn where we have it, procedural otherwise. |
+| `src/page/hd/art/creature.js` | 8 | Art for a species id (as the game numbers them): hand-drawn where we have it, procedural otherwise. |
 | `src/page/hd/art/critter.js` | 50 | Procedural placeholder creature for any species without hand-drawn art (Art.creature falls back here). |
 | `src/page/hd/art/furniture.js` | 46 | Shared room pieces. All coordinates are art units (cell = 100); pieces draw at (x, y) = top-left. |
 | `src/page/hd/art/hero.js` | 24 | Player portrait: the kid in the cap (viewBox 300 x 380) |
@@ -40,6 +41,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/sky.js` | 30 | Night sky with a big golden moon and layered hills. `dim` darkens it for menus. |
 | `src/page/hd/art/sparkit.js` | 28 | SPARKIT: ember fox (fire starter) |
 | `src/page/hd/art/terrain.js` | 59 | Outdoor terrain for the world scene, drawn per cell (100 x 100 units): ground, tall grass, trees, rocks, water, ledges, signs, flowers, doors. |
+| `src/page/hd/art/willowHouse.js` | 7 | Willow's house, 8 x 8 cells: PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4), door (2..3,7). |
 | `src/page/hd/art/willowLab.js` | 10 | Willow's lab, 10 x 12 cells: machine + counters (0..3,1..2), shelves (6..9,1), ball table (6..9,3), divider wall + shelves (rows 6-7), door (4..5,11). |
 | `src/page/hd/art/world.js` | 22 | A whole outdoor map as one SVG (cell = 100 units): terrain per cell, buildings on top, then `margin` cells of forest all round. |
 | `src/page/hd/core/base.css` | 17 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
@@ -52,17 +54,19 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/scenes/prof.css` | 4 | professor intro |
 | `src/page/hd/scenes/prof.js` | 30 | Professor Willow's welcome talk. state.prof = { who: "professor" | "hero", species?: number }; text comes from state.dialogue. |
 | `src/page/hd/scenes/room.css` | 16 | room |
-| `src/page/hd/scenes/room.js` | 37 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
+| `src/page/hd/scenes/room.js` | 39 | Single-screen rooms, keyed by map key. Cell (x, y) is 100 art units; people are positioned from game state (ui/actors.js). |
 | `src/page/hd/scenes/splash.css` | 25 | studio splash |
 | `src/page/hd/scenes/splash.js` | 15 | "Brock Family Presents" studio splash (~5.5s, driven by CSS timing from mount). |
 | `src/page/hd/scenes/title.css` | 17 | title |
 | `src/page/hd/scenes/title.js` | 18 | Title screen: logo, the three starters and "PRESS START". |
 | `src/page/hd/scenes/world.css` | 7 | Outdoor scene styles. |
-| `src/page/hd/scenes/world.js` | 36 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
+| `src/page/hd/scenes/world.js` | 38 | Outdoor maps (WORLDS, filled by Game.register). One cell = 10cqw; the camera keeps the hero centred. |
 | `src/page/hd/ui/actors.js` | 43 | The hero and other people drawn over a room or world, kept in step with game state. |
 | `src/page/hd/ui/dialogue.css` | 17 | dialogue |
 | `src/page/hd/ui/dialogue.js` | 19 | Bottom text box fed by state.dialogue (see core/engine.js). |
 | `src/page/hd/ui/dom.js` | 6 | DOM helpers shared by scenes. |
+| `src/page/hd/ui/pic.css` | 8 | big buddymon picture |
+| `src/page/hd/ui/pic.js` | 15 | The big buddymon picture shown while the game introduces one (state.pic = species name), like Gold's pokepic. |
 | `src/page/hd/ui/popup.css` | 8 | popup menus |
 | `src/page/hd/ui/popup.js` | 20 | Menu boxes (Start menu, Yes/No) read from the tilemap, drawn as HD panels over a scene. |
 | `src/page/hd/ui/portrait.css` | 4 | portrait (shared by prof, names, naming) |

@@ -38,10 +38,29 @@ function scriptApi(G) {
         box.addEventListener("submit", (e) => { e.preventDefault(); const v = input.value.trim(); if (v) { box.remove(); ok(v); } });
       });
     },
-    async move(who, dirs) {
+    // Walk one person along `dirs` (0 down, 1 up, 2 left, 3 right); `face` keeps them looking that way while they move.
+    async move(who, dirs, face) {
       const a = actor(who);
-      for (const d of dirs) { a.dir = d; G.step(a, d); await s.wait(16); }
+      for (const d of dirs) { a.dir = face ?? d; G.step(a, d); await s.wait(16); }
     },
+    // Several people walking together: pairs of [who, dirs], moved in the order given each step.
+    async walk(pairs) {
+      const n = Math.max(...pairs.map(([, dirs]) => dirs.length));
+      for (let i = 0; i < n; i++) {
+        for (const [who, dirs] of pairs) if (i < dirs.length) { const a = actor(who); a.dir = dirs[i]; G.step(a, dirs[i]); }
+        await s.wait(16);
+      }
+    },
+    // Send someone to stand next to the player (on the given side: 0 below, 1 above, 2 left, 3 right).
+    approach: (who, side = 3) => {
+      const a = actor(who), p = G.state, off = [[0, 1], [0, -1], [-1, 0], [1, 0]][side];
+      return s.move(who, G.path(a.x, a.y, p.x + off[0], p.y + off[1]));
+    },
+    // The big picture of a buddymon (like Gold's pokepic) until unpic().
+    pic: (species) => { G.state.pic = species; },
+    unpic: () => { G.state.pic = null; },
+    // A short pause with a message when something is restored or given.
+    async notify(text) { await s.say(text); },
     turn(who, d) { actor(who).dir = d; },
     wait: async (frames) => { for (let i = 0; i < frames; i++) await frame(); },
     warp: (map, x, y, dir) => G.warp(map, x, y, dir),
