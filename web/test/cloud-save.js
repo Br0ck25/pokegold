@@ -15,6 +15,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
 
   const play = async () => {
     await page.goto(base);
+    await page.selectOption("#game", "gold");
     await page.click("#play");
     await page.waitForFunction(() => document.getElementById("start").hidden, null, { timeout: 60000 });
   };

@@ -13,6 +13,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   page.on("pageerror", (e) => { console.error("pageerror:", e.message); failed = true; });
 
   await page.goto(base);
+  await page.selectOption("#game", "gold");
   const play = await page.locator("#play").boundingBox();
   await page.touchscreen.tap(play.x + play.width / 2, play.y + play.height / 2);
   await page.waitForFunction(() => document.getElementById("start").hidden, null, { timeout: 60000 });

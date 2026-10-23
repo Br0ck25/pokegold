@@ -30,6 +30,7 @@ const out = process.argv[3] || "test/out";
   const snap = async () => { const s = await scene(); if (!seen.has(s)) { seen.add(s); await shot(`scene${s}`); } };
 
   await page.goto(base);
+  await page.selectOption("#game", "gold");
   const play = await page.locator("#play").boundingBox();
   await page.touchscreen.tap(play.x + play.width / 2, play.y + play.height / 2);
   await page.waitForFunction(() => document.getElementById("start").hidden, null, { timeout: 60000 });
