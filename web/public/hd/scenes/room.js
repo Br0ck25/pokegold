@@ -5,6 +5,8 @@ const ROOMS = {
   "24:5": { art: "elmsLab", cols: 10, rows: 12, label: "New Bark Town · Willow's Lab" }, // ELMS_LAB
   "24:8": { art: "neighborHouse", cols: 8, rows: 8, label: "New Bark Town · Neighbor's House" }, // PLAYERS_NEIGHBORS_HOUSE
   "24:9": { art: "elmsHouse", cols: 8, rows: 8, label: "New Bark Town · Willow's House" }, // ELMS_HOUSE
+  "26:4": { art: "cherrygroveMart", cols: 12, rows: 8, label: "Cherrygrove · Mart" }, // CHERRYGROVE_MART
+  "26:5": { art: "pokecenter", cols: 10, rows: 8, label: "Cherrygrove · Pokécenter" }, // CHERRYGROVE_POKECENTER_1F
 };
 
 Scenes.room = function (root) {
