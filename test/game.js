@@ -49,6 +49,7 @@ const out = process.argv[3] || "test/out";
   await until(() => HD.last && HD.last.map.key === "bedroom");
   let s = await st();
   if (s.x !== 3 || s.y !== 3 || s.screen) fail("should start in the bedroom at (3,3)", s);
+  if ((await page.evaluate(() => HD.last.objects.length)) !== 0) fail("the bedroom should have no dolls or other people");
   await page.screenshot({ path: `${out}/6-bedroom.png` });
 
   await hold("UP", () => Game.state.y <= 2, 1500);
@@ -61,6 +62,8 @@ const out = process.argv[3] || "test/out";
   await until(() => HD.last.dialogue, 5000).catch(() => {});
   s = await st();
   if (s.map !== "livingroom" || !/WILLOW/.test(s.say || "")) fail("Mom should greet you downstairs", s);
+  const mom = await page.evaluate(() => HD.last.objects[0]);
+  if (mom.x !== 9 || mom.y !== 2) fail("Mom should have walked over next to the stairs", mom);
   for (let i = 0; i < 8; i++) await tapA();
   s = await st();
   if (!s.flags.GOT_BUDDYGEAR || s.say) fail("Mom's scene should finish and set GOT_BUDDYGEAR", s);

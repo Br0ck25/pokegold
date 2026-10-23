@@ -12,6 +12,10 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
    When new code replaces old, delete the old code, art, data and tests in the same change.
 4. **Goal-driven.** Turn tasks into verifiable goals (bug -> reproduce then fix; feature -> test). Loop until verified.
 
+5. **Study Gold before building a scene.** Read that area's map script and data first (`git show claude/fervent-brahmagupta-2v8nau:maps/<Name>.asm`,
+   also `engine/` for mechanics) and reproduce its beats: who walks where, what faces what, which objects exist, what each cell does. Then redraw it with
+   original layout, text and art. Check every object has art (an unknown name draws as a plain villager) and every sign/trigger cell matches the art.
+
 ## Layout (read `MAP.md` first: generated index of every file, its size and purpose)
 - `build.js` builds `worker.js` (the page is embedded) and regenerates `MAP.md`. **Commit `worker.js` with every push** (the user pastes it
   into Cloudflare). **Never Read `worker.js`** (blocked in `.claude/settings.json`); read the sources in `src/`.

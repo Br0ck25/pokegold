@@ -6,7 +6,7 @@ Every source file, its size and its first-line description. Add a header comment
 |---|---|---|
 | `src/game/core.js` | 110 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
 | `src/game/flow.js` | 54 | Start-up flow: splash -> intro cinematic -> title -> menu -> (new game) Willow's welcome talk and name entry. |
-| `src/game/home.js` | 53 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
+| `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/neighbor.js` | 16 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). |
 | `src/game/newbark.js` | 38 | New Bark Town (outdoors): your house, the neighbor's house, Willow's lab, a pond, and the road west to Route 29. 22 x 16 cells, original layout. |
