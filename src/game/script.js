@@ -67,6 +67,17 @@ function scriptApi(G) {
         await s.wait(16);
       }
     },
+    // The player follows `who` along `dirs`, one cell behind (Gold's "follow"): used for the Guide Gent's tour.
+    async follow(who, dirs) {
+      const a = actor(who), trail = [];
+      for (const d of dirs) {
+        trail.push({ x: a.x, y: a.y });
+        a.dir = d; G.step(a, d);
+        const t = trail.shift(), p = G.state;
+        if (t.x !== p.x || t.y !== p.y) { p.dir = t.x > p.x ? 3 : t.x < p.x ? 2 : t.y > p.y ? 0 : 1; p.x = t.x; p.y = t.y; }
+        await s.wait(16);
+      }
+    },
     // Send someone to stand next to the player (on the given side: 0 below, 1 above, 2 left, 3 right).
     approach: (who, side = 3) => {
       const a = actor(who), p = G.state, off = [[0, 1], [0, -1], [-1, 0], [1, 0]][side];

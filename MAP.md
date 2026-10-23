@@ -4,12 +4,14 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 114 | A wild battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/battle.js` | 136 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
 | `src/game/battle/calc.js` | 68 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/growth.js` | 29 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
 | `src/game/battle/moves.js` | 29 | Using a move in battle: accuracy, damage, stat changes and their messages. `att` and `def` are battle sides: |
-| `src/game/core.js` | 173 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
-| `src/game/data/items.js` | 7 | Items. nets: catch multiplier of a buddy net. tonic restores HP. |
+| `src/game/cherrygrove.js` | 110 | Cherrygrove City: the Mart, the Buddymon Center, the Guide Gent's house and two talk houses around a sea front. 36 x 18 cells, original layout. |
+| `src/game/cherryhouses.js` | 61 | Cherrygrove's interiors: the Mart (a clerk behind the counter), the Buddymon Center (the nurse), and three small houses. |
+| `src/game/core.js` | 174 | The game engine: grid movement like Gold's (docs/ENGINE.md). Its `state` is what the HD scenes draw. |
+| `src/game/data/items.js` | 8 | Items. net: catch multiplier of a buddy net; heal: HP restored; price in BUDS (selling gives half). |
 | `src/game/data/moves.js` | 18 | Moves. power 0 = status move. effect: { stat, stages, target: "foe" | "self" } changes a stat stage. priority 1 goes first. |
 | `src/game/data/species.js` | 12 | Species: types, base stats (hp, atk, def, spe, spa, spd), catch rate, base experience, growth curve, learnset by level. |
 | `src/game/data/types.js` | 23 | Type chart (same matchups as Gold): TYPE_CHART[attacker][defender] = multiplier when not 1. Fire, water, grass, electric, ice, psychic, dark and dragon moves are special. |
@@ -17,14 +19,16 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/game/home.js` | 55 | Scene 1: your room (upstairs) and the living room. Original text; same beats as Gold's start. |
 | `src/game/input.js` | 28 | Player input for the native engine: pad and gesture presses (`held` from pad.js) plus the keyboard. |
 | `src/game/menu/card.js` | 33 | Trainer card, BuddyGear (the clock) and Options. |
+| `src/game/menu/center.js` | 13 | The Buddymon Center nurse: heals the whole party and makes this the place you wake up after a whiteout. |
 | `src/game/menu/pack.js` | 27 | Pack screen: three pockets (Items, Nets, Key items) switched with left/right or the tabs; a chosen item offers USE. |
 | `src/game/menu/party.js` | 40 | Party screen: the list with HP bars; a chosen buddymon offers STATS, SWITCH, ITEM, CANCEL (as in Gold). |
+| `src/game/menu/shop.js` | 55 | Marts: Game.shop(s, stock) where stock is a list of item keys. BUY / SELL / QUIT like Gold's clerk, quantity picked with left/right. |
 | `src/game/menu/startmenu.js` | 22 | The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side. |
 | `src/game/menu/verbs.js` | 49 | Menu verbs for scripts: choose() draws a small list box (Start menu, Yes/No) and panel() a full-height list screen |
 | `src/game/neighbor.js` | 27 | The neighbor's house (cells match art/neighborHouse.js): shelves (0..1,1), TV (2,1), radio (7,1), table (3..4,3..4). The neighbor's daughter is the only one home. |
 | `src/game/newbark.js` | 73 | New Bark Town: four buildings (your house, the neighbor's, Willow's lab and Willow's house), a pond, and the road west to Route 29. |
-| `src/game/route29.js` | 72 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
-| `src/game/script.js` | 89 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
+| `src/game/route29.js` | 71 | Route 29: the road west of New Bark Town to Cherrygrove. Tall grass with wild buddymon (Gold's table), a ledge, an item, |
+| `src/game/script.js` | 100 | Scripts are async functions taking `s`: the same verbs Gold's scripts use (text, yes/no, flags, movement, warps). |
 | `src/game/start.js` | 33 | Boot and saves. A save is JSON ({ at, player, map, x, y, dir }) kept on the device and, when the server is reachable, in the cloud (/api/save). |
 | `src/game/willowhouse.js` | 21 | Willow's house (cells match art/willowHouse.js): PC (0,1), TV (4,1), shelves (6..7,1), table (3..4,3..4). His wife paces; his son dreams of the lab. |
 | `src/game/willowlab.js` | 121 | Willow's lab, scripted like Gold's: you walk up to the professor on your own, can't leave until you have a buddymon, pick one |
@@ -34,6 +38,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/bandit.js` | 29 | BANDIT: the tuxedo cat (dark starter), drawn from the author's cat: black coat, white muzzle, chest and paws, amber-green eyes. |
 | `src/page/hd/art/bramblet.js` | 27 | BRAMBLET: leaf-spined hedgehog (grass starter) |
 | `src/page/hd/art/buildings.js` | 20 | A building for the world scene, w x h cells (100 units each) drawn at (x, y): roof on top, wall below with windows, door on the bottom row. |
+| `src/page/hd/art/cherrygroveMart.js` | 7 | Cherrygrove Mart, 12 x 8 cells: shelves (0..11,0..1), counter (0..2,4) with the clerk behind at (1,3), door (2..3,7). |
 | `src/page/hd/art/chirplet.js` | 21 | CHIRPLET (was Pidgey): fluffy chick-bird with a three-feather crest. |
 | `src/page/hd/art/chomplet.js` | 25 | CHOMPLET: shark pup (water starter), after the supplied reference style |
 | `src/page/hd/art/creature.js` | 3 | Art for a species key ("bramblet"): hand-drawn where we have art/<key>.js, otherwise a seeded placeholder (art/critter.js). |
@@ -50,6 +55,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/art/nibblet.js` | 22 | NIBBLET (was Rattata): round purple mouse with big front teeth and a curly tail. |
 | `src/page/hd/art/peekat.js` | 22 | PEEKAT (was Sentret): meerkat standing tall on its tail, always keeping watch. |
 | `src/page/hd/art/person.js` | 31 | Overworld person, dir: 0 down, 1 up, 2 left, 3 right (viewBox 60 x 80). Look `o` comes from Art.looks: |
+| `src/page/hd/art/pokecenter.js` | 8 | Pokecenter 1F, 10 x 8 cells: counter (0..5,2), healing machine (5,1), PC (9,1), sofas (7..8,5) (7..8,7), stairs (0,7), door (3..4,7). |
 | `src/page/hd/art/professor.js` | 30 | Friendly professor, bust portrait (viewBox 300 x 380) |
 | `src/page/hd/art/props.js` | 24 | Map objects that aren't people (viewBox 60 x 80, same box as Art.person). Keys are the names maps give their objects. |
 | `src/page/hd/art/room.js` | 69 | The player's bedroom: an 8 x 6 grid, one cell = 100 units. Layout mirrors the |

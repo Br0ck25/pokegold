@@ -111,8 +111,9 @@ const Game = (() => {
     G.player.money = Math.floor(G.player.money / 2);
     await s.say(`${G.player.name} panicked and dropped half of their ${G.CURRENCY}...`);
     for (const m of G.player.party) { m.hp = statsFor(m).hp; for (const mv of m.moves) mv.pp = MOVES[mv.id].pp; }
-    G.state.map = { key: "livingroom" };
-    Object.assign(G.state, { x: 7, y: 6, dir: 1, objects: (maps.livingroom.npcs || []).map((n) => ({ ...n })) });
+    const home = G.player.lastCenter || { map: "livingroom", x: 7, y: 6, dir: 1 }; // the last Center you healed at, else home
+    G.state.map = { key: home.map };
+    Object.assign(G.state, { x: home.x, y: home.y, dir: home.dir, objects: (maps[home.map].npcs || []).map((n) => ({ ...n })) });
   };
 
   function interact() {

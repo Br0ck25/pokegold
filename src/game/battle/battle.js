@@ -1,13 +1,17 @@
-// A wild battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed,
-// catching with buddy nets, experience. Game.battle(s, foeMon) -> "won" | "lost" | "ran" | "caught". Run it inside a script.
-Game.battle = async (s, foeMon) => {
+// A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed,
+// catching with buddy nets (wild only), experience. Game.battle(s, foe, opts) -> "won" | "lost" | "ran" | "caught". Run it inside a script.
+// foe is a mon (wild) or, with opts.trainer = { name, money, win }, a list of mons: no nets, no running, prize money on a win.
+Game.battle = async (s, foeMon, opts = {}) => {
+  const trainer = opts.trainer, foes = [].concat(foeMon);
+  foeMon = foes[0];
   const P = s.G.player, state = s.G.state;
   const fresh = () => ({ atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 });
   const side = (mon, label) => ({ mon, label, stats: statsFor(mon), stages: fresh() });
   const alive = () => P.party.filter((m) => m.hp > 0);
   const speed = (x) => x.stats.spe * stageMult(x.stages.spe);
   const fought = new Set();
-  const them = side(foeMon, `Wild ${SPECIES[foeMon.species].name}`);
+  const foeLabel = (mon) => (trainer ? `${trainer.name}'s ${SPECIES[mon.species].name}` : `Wild ${SPECIES[mon.species].name}`);
+  let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
   const info = (x) => ({ species: x.mon.species, name: x.mon.nick, level: x.mon.level, hp: x.mon.hp, max: x.stats.hp });
@@ -49,8 +53,15 @@ Game.battle = async (s, foeMon) => {
   const settle = async () => {
     if (them.mon.hp <= 0) {
       await s.msg(`${them.label} fainted!`);
-      await awardExp(s, P.party, fought, them.mon, true);
-      ended = "won";
+      await awardExp(s, P.party, fought, them.mon, !trainer);
+      const next = foes[foes.indexOf(them.mon) + 1];
+      if (!next) ended = "won";
+      else {
+        them = side(next, foeLabel(next));
+        fought.clear(); fought.add(me.mon);
+        refresh();
+        await s.msg(`${trainer.name} sent out ${SPECIES[next.species].name}!`);
+      }
     } else if (me.mon.hp <= 0) {
       await s.msg(`${me.mon.nick} fainted!`);
       if (!alive().length) return (ended = "lost");
@@ -79,7 +90,10 @@ Game.battle = async (s, foeMon) => {
   state.screen = "battle";
   state.battle = { foe: null, me: null, menu: null, net: null };
   refresh();
-  await s.msg(`${them.label} appeared!`, Math.max(Game.msgMs, 600));
+  if (trainer) {
+    await s.msg(`${trainer.name} wants to battle!`, Math.max(Game.msgMs, 900));
+    await s.msg(`${trainer.name} sent out ${SPECIES[foeMon.species].name}!`);
+  } else await s.msg(`${them.label} appeared!`, Math.max(Game.msgMs, 600));
   await sendOut(me.mon);
 
   while (!ended) {
@@ -91,6 +105,7 @@ Game.battle = async (s, foeMon) => {
       else { if (await attack(them, me, fs)) break; if (await attack(me, them, act.slot)) break; }
     } else {
       if (act.type === "switch") { await s.msg(`Come back, ${me.mon.nick}!`); await sendOut(act.mon); }
+      else if (act.type === "item" && ITEMS[act.id].net && trainer) await s.msg("The trainer blocked the net! Don't be a thief!");
       else if (act.type === "item" && ITEMS[act.id].net) await useNet(act.id);
       else if (act.type === "item") {
         const max = me.stats.hp;
@@ -100,6 +115,7 @@ Game.battle = async (s, foeMon) => {
         refresh();
         await s.msg(`${me.mon.nick} regained health!`);
       } else if (act.type === "run") {
+        if (trainer) { await s.msg("No! There's no running from a trainer battle!"); continue; }
         tries++;
         if (speed(me) >= speed(them) || rand(256) < Math.floor((speed(me) * 128) / speed(them)) + 30 * tries) { await s.msg("Got away safely!"); ended = "ran"; break; }
         await s.msg("Can't escape!");
@@ -107,6 +123,12 @@ Game.battle = async (s, foeMon) => {
       if (ended) break;
       if (await attack(them, me, foeSlot())) break;
     }
+  }
+  if (trainer && ended === "won") {
+    if (trainer.win) await s.say(trainer.win);
+    const prize = (trainer.money || 20) * foes[foes.length - 1].level;
+    P.money += prize;
+    await s.say(`${P.name} got ${prize} ${Game.CURRENCY} for winning!`);
   }
   state.screen = null; state.battle = null; state.dialogue = null;
   return ended;

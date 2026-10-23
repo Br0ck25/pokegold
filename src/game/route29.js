@@ -24,8 +24,7 @@
       buildings: [{ x: 24, y: 2, w: 5, h: 3, door: 2, to: "gate29", tx: 4, ty: 6, dir: 1, roof: "#8a6ad9" }],
     },
     wild: { rate: 10, morn: MORN, day: MORN, nite: NITE }, // Gold's Route 29 table: day is the same as morning
-    warps: [9, 10].map((y) => ({ x: 55, y, to: "newbark", tx: 1, ty: y, dir: 3 })),
-    coords: [9, 10].map((y) => ({ x: 0, y, script: async (s) => { await s.say("CHERRYGROVE CITY is not open yet. Come back soon!"); await s.move("player", [3]); } })),
+    warps: [9, 10].map((y) => ({ x: 55, y, to: "newbark", tx: 1, ty: y, dir: 3 })).concat([9, 10].map((y) => ({ x: 0, y, to: "cherrygrove", tx: 34, ty: y, dir: 2 }))),
     npcs: [
       { id: 1, name: "COOLTRAINER_M", x: 50, y: 11, dir: 0, wander: "spin", script: talk("BUDDYMON hide in the grass. Who knows when they'll pop out...") },
       { id: 2, name: "YOUNGSTER", x: 27, y: 11, dir: 0, wander: "vertical", script: talk("Yo. How are your BUDDYMON? If they're weak and not ready for battle, keep out of the grass.") },
