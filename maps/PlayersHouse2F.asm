@@ -91,9 +91,10 @@ PlayersHouseGameConsoleScript:
 	describedecoration DECODESC_CONSOLE
 
 PlayersRadioText1:
-	text "PROF.ASPEN'S BUDDYMON"
-	line "TALK! Please tune"
-	cont "in next time!"
+	text "PROF. ASPEN'S"
+	line "BUDDYMON TALK!"
+	cont "Please tune in"
+	cont "next time!"
 	done
 
 PlayersRadioText2:

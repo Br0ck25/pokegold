@@ -44,8 +44,9 @@ ElmPhoneAssistantText:
 	para "Did you see my"
 	line "assistant? He's at"
 
-	para "the BUDDYMON CENTER"
-	line "in VIOLET CITY."
+	para "the BUDDYMON"
+	line "CENTER in VIOLET"
+	cont "CITY."
 	done
 
 ElmPhoneHowIsTheEggText:
@@ -151,7 +152,8 @@ ElmPhoneEggAssistantText:
 	line "EGG!"
 
 	para "My assistant is at"
-	line "the BUDDYMON CENTER"
+	line "the BUDDYMON"
+	cont "CENTER"
 
 	para "in VIOLET CITY. "
 	line "Could you talk to"

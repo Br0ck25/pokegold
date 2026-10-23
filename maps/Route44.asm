@@ -319,8 +319,9 @@ PokemaniacZachSeenText:
 	done
 
 PokemaniacZachBeatenText:
-	text "Oooh, your BUDDYMON"
-	line "are so appealing."
+	text "Oooh, your"
+	line "BUDDYMON are so"
+	cont "appealing."
 	done
 
 PokemaniacZachAfterBattleText:

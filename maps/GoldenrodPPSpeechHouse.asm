@@ -44,9 +44,9 @@ GoldenrodPPSpeechHouseLassText:
 	line "use its moves."
 
 	para "If that happens,"
-	line "heal it at a BUDDY-"
-	cont "MON CENTER or use"
-	cont "an item."
+	line "heal it at a"
+	cont "BUDDYMON CENTER or"
+	cont "use an item."
 	done
 
 GoldenrodPPSpeechHouse_MapEvents:

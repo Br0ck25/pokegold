@@ -357,16 +357,16 @@ LakeOfRageCooltrainerFText:
 
 FisherAndreSeenText:
 	text "Let me battle with"
-	line "the BUDDYMON I just"
-	cont "caught!"
+	line "the BUDDYMON I"
+	cont "just caught!"
 	done
 
 FisherAndreBeatenText:
 	text "I might be an ex-"
 	line "pert angler, but"
 
-	para "I stink as a BUDDY-"
-	line "MON trainer…"
+	para "I stink as a"
+	line "BUDDYMON trainer…"
 	done
 
 FisherAndreAfterBattleText:
@@ -379,8 +379,8 @@ FisherRaymondSeenText:
 	text "No matter what I"
 	line "do, all I catch"
 
-	para "are the same BUDDY-"
-	line "MON…"
+	para "are the same"
+	line "BUDDYMON…"
 	done
 
 FisherRaymondBeatenText:

@@ -203,9 +203,10 @@ PryceText_GlacierBadgeSpeech:
 	cont "stats of BUDDYMON."
 
 	para "It also lets your"
-	line "BUDDYMON use WHIRL-"
-	cont "POOL to get across"
-	cont "real whirlpools."
+	line "BUDDYMON use"
+	cont "WHIRLPOOL to get"
+	cont "across real"
+	cont "whirlpools."
 
 	para "And this… This is"
 	line "a gift from me!"
@@ -228,8 +229,9 @@ PryceText_CherishYourPokemon:
 	line "snow melt, spring"
 	cont "arrives."
 
-	para "You and your BUDDY-"
-	line "MON will be to-"
+	para "You and your"
+	line "BUDDYMON will be"
+	cont "to-"
 
 	para "gether for many"
 	line "years to come."

@@ -417,14 +417,14 @@ PokefanfGeorgiaBeatenText:
 
 PokefanfGeorgiaAfterBattleText:
 	text "Oh, yes! I have to"
-	line "get my BUDDYMON out"
-	cont "of DAY-CARE!"
+	line "get my BUDDYMON"
+	cont "out of DAY-CARE!"
 	done
 
 SupernerdShawnSeenText:
-	text "What kinds of BUDDY"
-	line "BALLS do you have"
-	cont "with you?"
+	text "What kinds of"
+	line "BUDDY BALLS do you"
+	cont "have with you?"
 	done
 
 SupernerdShawnBeatenText:

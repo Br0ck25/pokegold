@@ -17,6 +17,10 @@ NamingScreen:
 	ld [hl], d
 	ld hl, wNamingScreenType
 	ld [hl], b
+	ld a, [wHDScene]
+	push af
+	ld a, HDSCENE_NAMING
+	ld [wHDScene], a
 	ld hl, wOptions
 	ld a, [hl]
 	push af
@@ -40,6 +44,8 @@ NamingScreen:
 	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
+	pop af
+	ld [wHDScene], a
 	call ClearJoypad
 	ret
 

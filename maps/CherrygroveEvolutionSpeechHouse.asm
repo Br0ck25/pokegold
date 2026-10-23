@@ -25,8 +25,9 @@ CherrygroveEvolutionSpeechHouseBookshelf:
 	jumpstd MagazineBookshelfScript
 
 CherrygroveEvolutionSpeechHouseYoungsterText:
-	text "BUDDYMON gain expe-"
-	line "rience in battle"
+	text "BUDDYMON gain"
+	line "experience in"
+	cont "battle"
 
 	para "and change their"
 	line "form."

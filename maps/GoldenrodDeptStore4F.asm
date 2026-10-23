@@ -48,7 +48,8 @@ GoldenrodDeptStore4FCooltrainerMText:
 
 GoldenrodDeptStore4FBugCatcherText:
 	text "IRON adds to your"
-	line "BUDDYMON's DEFENSE."
+	line "BUDDYMON's"
+	cont "DEFENSE."
 	done
 
 GoldenrodDeptStore4FGameboyKidText:

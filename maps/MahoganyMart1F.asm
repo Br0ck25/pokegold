@@ -186,7 +186,8 @@ MahoganyMart1FBlackBeltText_LanceEntered:
 	text "Urrgh…"
 
 	para "That guy's dragon"
-	line "BUDDYMON are tough…"
+	line "BUDDYMON are"
+	cont "tough…"
 	done
 
 MahoganyMart1FLanceDragoniteHyperBeamText:

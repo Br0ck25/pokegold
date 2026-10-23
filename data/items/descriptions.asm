@@ -529,7 +529,7 @@ SSTicketDesc:
 
 MysteryEggDesc:
 	db   "An EGG obtained"
-	next "from MR.BUDDYMON.@"
+	next "from MR. BUDDYMON.@"
 
 TeruSama6Desc:
 	db   "?@"

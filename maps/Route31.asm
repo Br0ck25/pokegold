@@ -201,8 +201,9 @@ Route31CooltrainerMText:
 
 BugCatcherWade1SeenText:
 	text "I caught a bunch"
-	line "of BUDDYMON. Let me"
-	cont "battle with you!"
+	line "of BUDDYMON. Let"
+	cont "me battle with"
+	cont "you!"
 	done
 
 BugCatcherWade1BeatenText:

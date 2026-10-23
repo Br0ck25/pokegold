@@ -144,7 +144,7 @@ ReceivedEeveeText:
 	done
 
 BillEeveeMayEvolveText:
-	text "BILL: PROF.WILLOW"
+	text "BILL: PROF. WILLOW"
 	line "claims EEVEE may"
 
 	para "evolve in new and"

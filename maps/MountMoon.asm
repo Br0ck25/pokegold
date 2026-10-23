@@ -131,8 +131,9 @@ MountMoonRivalTextAfter:
 	cont "end."
 
 	para "I'm going to be"
-	line "the greatest BUDDY-"
-	cont "MON trainer ever."
+	line "the greatest"
+	cont "BUDDYMON trainer"
+	cont "ever."
 
 	para "Because these guys"
 	line "are behind me."

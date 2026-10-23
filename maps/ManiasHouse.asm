@@ -135,8 +135,8 @@ ManiaText_GotShuckle:
 	done
 
 ManiaText_PartyFull:
-	text "Your BUDDYMON party"
-	line "is full."
+	text "Your BUDDYMON"
+	line "party is full."
 	done
 
 ManiaText_IfHeComesBack:
@@ -146,8 +146,8 @@ ManiaText_IfHeComesBack:
 	done
 
 ManiaText_CanIHaveMyMonBack:
-	text "Hi! How's my BUDDY-"
-	line "MON?"
+	text "Hi! How's my"
+	line "BUDDYMON?"
 
 	para "I think I'm safe"
 	line "now, so may I have"
@@ -190,8 +190,9 @@ ManiaText_HappinessSpeech:
 	done
 
 ManiaText_ShuckleIsYourLastMon:
-	text "If I take my BUDDY-"
-	line "MON back, what are"
+	text "If I take my"
+	line "BUDDYMON back,"
+	cont "what are"
 
 	para "you going to use"
 	line "in battle?"

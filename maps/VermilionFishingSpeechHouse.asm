@@ -33,8 +33,9 @@ FishingDudeText:
 	para "Thanks to him, I"
 	line "caught a whole lot"
 
-	para "of a rare BUDDYMON."
-	line "What a day it was!"
+	para "of a rare"
+	line "BUDDYMON. What a"
+	cont "day it was!"
 	done
 
 FishingDudesHousePhotoText:

@@ -33,9 +33,9 @@ CeruleanTradeSpeechHouseZubatScript:
 
 CeruleanTradeSpeechHouseGrannyText:
 	text "My husband lives"
-	line "happily with BUDDY-"
-	cont "MON he got through"
-	cont "trades."
+	line "happily with"
+	cont "BUDDYMON he got"
+	cont "through trades."
 	done
 
 CeruleanTradeSpeechHouseGrampsText:

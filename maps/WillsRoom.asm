@@ -79,8 +79,9 @@ WillsRoom_EnterMovement:
 	step_end
 
 WillScript_WillBeforeText:
-	text "Welcome to BUDDYMON"
-	line "LEAGUE, <PLAYER>."
+	text "Welcome to"
+	line "BUDDYMON LEAGUE,"
+	cont "<PLAYER>."
 
 	para "Allow me to intro-"
 	line "duce myself. I am"

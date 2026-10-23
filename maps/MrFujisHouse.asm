@@ -56,7 +56,8 @@ MrFujisHouseSuperNerdText:
 MrFujisHouseLassText:
 	text "Some cold-hearted"
 	line "people stop caring"
-	cont "for their BUDDYMON."
+	cont "for their"
+	cont "BUDDYMON."
 
 	para "Grandpa takes in"
 	line "the poor homeless"

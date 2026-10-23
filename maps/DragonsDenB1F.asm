@@ -144,8 +144,9 @@ DragonShrineRisingBadgeExplanationText:
 	text "RISINGBADGE will"
 	line "enable your"
 
-	para "BUDDYMON to use the"
-	line "move for climbing"
+	para "BUDDYMON to use"
+	line "the move for"
+	cont "climbing"
 	cont "waterfalls."
 
 	para "Also, all BUDDYMON"
@@ -215,7 +216,8 @@ DragonShrineSignpostText:
 	text "DRAGON SHRINE"
 
 	para "A shrine honoring"
-	line "the dragon BUDDYMON"
+	line "the dragon"
+	cont "BUDDYMON"
 
 	para "said to have lived"
 	line "in DRAGON'S DEN."
@@ -237,8 +239,8 @@ RivalText_Training1:
 	para "I have to be dis-"
 	line "ciplined to become"
 
-	para "the greatest BUDDY-"
-	line "MON trainer…"
+	para "the greatest"
+	line "BUDDYMON trainer…"
 	done
 
 RivalText_Training2:

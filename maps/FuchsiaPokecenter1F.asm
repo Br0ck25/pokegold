@@ -63,7 +63,7 @@ FuchsiaPokecenter1FCooltrainerMText:
 	line "brand new kind of"
 	cont "BUDDYDEX."
 
-	para "Did PROF.OAK give"
+	para "Did PROF. OAK give"
 	line "that to you?"
 	done
 

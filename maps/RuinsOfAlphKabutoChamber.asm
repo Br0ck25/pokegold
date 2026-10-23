@@ -57,8 +57,8 @@ RuinsOfAlphKabutoChamberReceptionistText:
 	para "There are sliding"
 	line "panels that depict"
 
-	para "a BUDDYMON drawn by"
-	line "the ancients."
+	para "a BUDDYMON drawn"
+	line "by the ancients."
 
 	para "Slide the panels"
 	line "around to form the"
@@ -76,8 +76,9 @@ RuinsOfAlphKabutoChamberAncientReplicaText:
 	done
 
 RuinsOfAlphKabutoChamberDescriptionText:
-	text "A BUDDYMON that hid"
-	line "on the sea floor."
+	text "A BUDDYMON that"
+	line "hid on the sea"
+	cont "floor."
 
 	para "Eyes on its back"
 	line "scanned the area."

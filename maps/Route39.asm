@@ -235,8 +235,9 @@ PsychicNormanBeatenText:
 	done
 
 PsychicNormanAfterBattleText:
-	text "You know how BUDDY-"
-	line "MON have different"
+	text "You know how"
+	line "BUDDYMON have"
+	cont "different"
 	cont "abilities?"
 
 	para "People are like"

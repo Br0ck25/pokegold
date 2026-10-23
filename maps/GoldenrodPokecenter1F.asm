@@ -31,8 +31,9 @@ GoldenrodPokecenter1FGameboyKidText:
 	text "The COLOSSEUM--"
 	line "upstairs at any"
 
-	para "BUDDYMON CENTER--is"
-	line "for link battles."
+	para "BUDDYMON"
+	line "CENTER--is for"
+	cont "link battles."
 
 	para "Battle records are"
 	line "posted on the"
@@ -49,7 +50,8 @@ GoldenrodPokecenter1FPersonText:
 	line "world."
 
 	para "Three years ago,"
-	line "PROF.OAK said that"
+	line "PROF. OAK said"
+	cont "that"
 
 	para "there were 150"
 	line "different kinds."

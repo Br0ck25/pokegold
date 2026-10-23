@@ -358,9 +358,10 @@ RadioTower1FRadioCardWomanQuestion5Text:
 	line "Here's the final"
 	cont "question:"
 
-	para "PROF.OAK'S BUDDYMON"
-	line "TALK is a very"
-	cont "popular program."
+	para "PROF. OAK'S"
+	line "BUDDYMON TALK is a"
+	cont "very popular"
+	cont "program."
 
 	para "Is MARIE the co-"
 	line "host of the show?"
@@ -461,9 +462,10 @@ RadioTower1FLuckyChannelSignText:
 	para "Win with BUDDYMON"
 	line "ID numbers!"
 
-	para "Trade your BUDDYMON"
-	line "to collect differ-"
-	cont "ent ID numbers!"
+	para "Trade your"
+	line "BUDDYMON to"
+	cont "collect different"
+	cont "ID numbers!"
 	done
 
 RadioTower1F_MapEvents:

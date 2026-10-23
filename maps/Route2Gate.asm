@@ -18,7 +18,7 @@ Route2GateScientistText:
 	para "I had no idea that"
 	line "you were out here."
 
-	para "PROF.OAK's LAB is"
+	para "PROF. OAK's LAB is"
 	line "nearby in PALLET"
 	cont "TOWN."
 	done

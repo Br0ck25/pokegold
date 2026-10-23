@@ -105,7 +105,8 @@ PokefanmJoshuaBeatenText:
 
 PokefanmJoshuaAfterBattleText:
 	text "You look like you"
-	line "have many BUDDYMON,"
+	line "have many"
+	cont "BUDDYMON,"
 
 	para "but PIKACHU is"
 	line "still the best."
@@ -129,8 +130,9 @@ BirdKeeperPerryAfterBattleText:
 	done
 
 BirdKeeperBretSeenText:
-	text "Check out my BUDDY-"
-	line "MON. Just look at"
+	text "Check out my"
+	line "BUDDYMON. Just"
+	cont "look at"
 
 	para "their coloring and"
 	line "their plumage."
@@ -143,7 +145,8 @@ BirdKeeperBretBeatenText:
 
 BirdKeeperBretAfterBattleText:
 	text "If you groom them,"
-	line "BUDDYMON get happy."
+	line "BUDDYMON get"
+	cont "happy."
 	done
 
 HikerKennySeenText:

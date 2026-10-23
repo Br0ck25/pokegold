@@ -59,8 +59,8 @@ UnusedSweetHoneyAfterText3: ; unreferenced
 	line "HONEY on a tree?"
 
 	para "It takes about a"
-	line "day for BUDDYMON to"
-	cont "be drawn to it."
+	line "day for BUDDYMON"
+	cont "to be drawn to it."
 	done
 
 UnusedSweetHoneyButterfreeText: ; unreferenced

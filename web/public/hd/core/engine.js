@@ -101,7 +101,7 @@ const HD = (() => {
       naming: (() => {
         const p = mem[HD_SYMS.wNamingScreenCursorObjectPointer - 0xc000] | (mem[HD_SYMS.wNamingScreenCursorObjectPointer + 1 - 0xc000] << 8);
         if (p < 0xc000 || p > 0xdfff) return null;
-        return { col: mem[p + 12 - 0xc000], row: mem[p + 13 - 0xc000], max: at("wNamingScreenMaxNameLength") };
+        return { col: mem[p + 12 - 0xc000], row: mem[p + 13 - 0xc000], max: at("wNamingScreenMaxNameLength"), type: at("wNamingScreenType") };
       })(),
       name: readName(mem, HD_SYMS.wPlayerName, 8),
       battle: readBattle(mem),

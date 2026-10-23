@@ -694,7 +694,8 @@ RockerBaseLanceElectrodeFaintText:
 	line "strange signal."
 
 	para "It's no fault of"
-	line "the BUDDYMON, so it"
+	line "the BUDDYMON, so"
+	cont "it"
 
 	para "makes me feel"
 	line "guilty."
@@ -755,8 +756,9 @@ RocketBaseLanceWhirlpoolText:
 RocketBaseLanceMonMasterText:
 	text "<PLAYER>…"
 
-	para "The journey to be-"
-	line "coming the BUDDYMON"
+	para "The journey to"
+	line "becoming the"
+	cont "BUDDYMON"
 
 	para "MASTER is long and"
 	line "difficult."

@@ -461,8 +461,8 @@ Route32CooltrainerMText_AideIsWaiting:
 	para "See for yourself."
 	line "He's waiting for"
 
-	para "you at the BUDDYMON"
-	line "CENTER."
+	para "you at the"
+	line "BUDDYMON CENTER."
 	done
 
 Route32CooltrainerMText_UnusedSproutTower:
@@ -662,8 +662,9 @@ YoungsterAlbertAfterText:
 	cont "with my favorites."
 
 	para "I'm not using the"
-	line "same tough BUDDYMON"
-	cont "as everyone else."
+	line "same tough"
+	cont "BUDDYMON as"
+	cont "everyone else."
 	done
 
 YoungsterGordonSeenText:
@@ -782,8 +783,9 @@ FriedaGivesGiftText:
 
 FriedaGaveGiftText:
 	text "FRIEDA: Give it to"
-	line "a BUDDYMON that has"
-	cont "poison-type moves."
+	line "a BUDDYMON that"
+	cont "has poison-type"
+	cont "moves."
 
 	para "Oh!"
 

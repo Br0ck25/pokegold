@@ -262,8 +262,9 @@ HikerMichaelSeenText:
 	done
 
 HikerMichaelBeatenText:
-	text "My BUDDYMON weren't"
-	line "spunky enough!"
+	text "My BUDDYMON"
+	line "weren't spunky"
+	cont "enough!"
 	done
 
 HikerMichaelAfterBattleText:

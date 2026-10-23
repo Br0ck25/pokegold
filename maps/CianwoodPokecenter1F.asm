@@ -59,8 +59,9 @@ CianwoodGymGuideText:
 	line "confound him with"
 	cont "psychic BUDDYMON."
 
-	para "Wipe out his BUDDY-"
-	line "MON before they"
+	para "Wipe out his"
+	line "BUDDYMON before"
+	cont "they"
 
 	para "can use their"
 	line "physical strength."

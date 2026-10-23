@@ -313,8 +313,9 @@ NationalParkTeacher1Text:
 	done
 
 NationalParkTeacher1Text_GotQuickClaw:
-	text "Let a BUDDYMON hold"
-	line "that QUICK CLAW."
+	text "Let a BUDDYMON"
+	line "hold that QUICK"
+	cont "CLAW."
 
 	para "Sometimes it will"
 	line "strike first"
@@ -381,8 +382,9 @@ SchoolboyJackTradeMonText:
 
 	para "For example…"
 
-	para "There are {d:NUM_TMS} kinds"
-	line "of TM."
+	para "There are"
+	line "{d:NUM_TMS} kinds"
+	cont "of TM."
 
 	para "Traded BUDDYMON"
 	line "level up faster."
@@ -411,9 +413,9 @@ PokefanBeverlyCuteMonText:
 	done
 
 PokefanmWilliamSeenText:
-	text "We adore our BUDDY-"
-	line "MON, even if they"
-	cont "dislike us."
+	text "We adore our"
+	line "BUDDYMON, even if"
+	cont "they dislike us."
 
 	para "That's what being"
 	line "a FAN is about."
@@ -425,7 +427,8 @@ PokefanmWilliamBeatenText:
 
 PokefanmWilliamAfterBattleText:
 	text "I lost the battle,"
-	line "but my BUDDYMON win"
+	line "but my BUDDYMON"
+	cont "win"
 
 	para "the prize for"
 	line "being most lovely."

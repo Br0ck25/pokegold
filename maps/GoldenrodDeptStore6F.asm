@@ -124,7 +124,8 @@ GoldenrodDeptStore6FLassText:
 	line "LUCKY CHANNEL?"
 
 	para "If you want to"
-	line "win, trade BUDDYMON"
+	line "win, trade"
+	cont "BUDDYMON"
 
 	para "with as many peo-"
 	line "ple as possible to"

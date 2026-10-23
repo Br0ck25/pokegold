@@ -80,9 +80,9 @@ Route2HiddenRevive:
 	hiddenitem REVIVE, EVENT_ROUTE_2_HIDDEN_REVIVE
 
 BugCatcherRobSeenText:
-	text "My bug BUDDYMON are"
-	line "tough. Prepare to"
-	cont "lose!"
+	text "My bug BUDDYMON"
+	line "are tough. Prepare"
+	cont "to lose!"
 	done
 
 BugCatcherRobBeatenText:
@@ -123,8 +123,9 @@ BugCatcherDougBeatenText:
 	done
 
 BugCatcherDougAfterBattleText:
-	text "Bug BUDDYMON squish"
-	line "like plush toys"
+	text "Bug BUDDYMON"
+	line "squish like plush"
+	cont "toys"
 
 	para "when you squeeze"
 	line "their bellies."

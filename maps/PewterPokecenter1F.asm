@@ -62,7 +62,8 @@ PewterPokecenter1FBugCatcherText:
 	line "moves that can be"
 
 	para "used only while a"
-	line "BUDDYMON is asleep."
+	line "BUDDYMON is"
+	cont "asleep."
 	done
 
 PewterPokecenter1F_MapEvents:

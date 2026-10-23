@@ -329,8 +329,9 @@ PicnickerKimAfterBattleText:
 	done
 
 BirdKeeperBryanSeenText:
-	text "What kinds of BUDDY"
-	line "BALL do you use?"
+	text "What kinds of"
+	line "BUDDY BALL do you"
+	cont "use?"
 	done
 
 BirdKeeperBryanBeatenText:

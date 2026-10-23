@@ -45,8 +45,8 @@ GoldenrodDeptStore2FUnusedText1: ; unreferenced
 	cont "to hold."
 
 	para "This is a free"
-	line "gift. Have a BUDDY-"
-	cont "MON hold it."
+	line "gift. Have a"
+	cont "BUDDYMON hold it."
 	done
 
 GoldenrodDeptStore2FUnusedText2: ; unreferenced
@@ -58,9 +58,9 @@ GoldenrodDeptStore2FUnusedText2: ; unreferenced
 	done
 
 GoldenrodDeptStore2FYoungsterText:
-	text "BUDDYGEAR can store"
-	line "up to ten phone"
-	cont "numbers."
+	text "BUDDYGEAR can"
+	line "store up to ten"
+	cont "phone numbers."
 
 	para "It's hard to de-"
 	line "cide which numbers"

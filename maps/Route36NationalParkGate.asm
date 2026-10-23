@@ -503,7 +503,8 @@ Route36NationalParkGateOfficer1GiveParkBallsText:
 
 Route36NationalParkGatePlayerReceivedParkBallsText:
 	text "<PLAYER> received"
-	line "{d:BUG_CONTEST_BALLS} PARK BALLS."
+	line "{d:BUG_CONTEST_BALLS}"
+	cont "PARK BALLS."
 	done
 
 Route36NationalParkGateOfficer1ExplainsRulesText:
@@ -512,8 +513,9 @@ Route36NationalParkGateOfficer1ExplainsRulesText:
 	cont "est bug BUDDYMON"
 	cont "is the winner."
 
-	para "You have {d:BUG_CONTEST_MINUTES}"
-	line "minutes."
+	para "You have"
+	line "{d:BUG_CONTEST_MINUTES}"
+	cont "minutes."
 
 	para "If you run out of"
 	line "PARK BALLS, you're"
@@ -550,8 +552,9 @@ Route36NationalParkGateOfficer1AskToUseFirstMonText:
 
 Route36NationalParkGateOfficer1WellHoldYourMonText:
 	text "Fine. We'll hold"
-	line "your other BUDDYMON"
-	cont "while you compete."
+	line "your other"
+	cont "BUDDYMON while you"
+	cont "compete."
 	done
 
 Route36NationalParkGatePlayersMonLeftWithHelperText:
@@ -562,7 +565,8 @@ Route36NationalParkGatePlayersMonLeftWithHelperText:
 
 Route36NationalParkGateOfficer1ChooseMonAndComeBackText:
 	text "Please choose the"
-	line "BUDDYMON to be used"
+	line "BUDDYMON to be"
+	cont "used"
 
 	para "in the Contest,"
 	line "then come see me."
@@ -597,7 +601,8 @@ Route36NationalParkGateOfficer1MakeRoomText:
 
 	para "You have nowhere"
 	line "to put the bug"
-	cont "BUDDYMON you catch."
+	cont "BUDDYMON you"
+	cont "catch."
 
 	para "Please make room"
 	line "in your party or"
@@ -687,7 +692,8 @@ BugCatchingContestant2BStillCompetingText:
 BugCatchingContestant3BText:
 	text "NICK: Well done!"
 	line "I'm going to raise"
-	cont "my BUDDYMON better."
+	cont "my BUDDYMON"
+	cont "better."
 	done
 
 BugCatchingContestant3BStillCompetingText:
@@ -708,8 +714,9 @@ BugCatchingContestant4BStillCompetingText:
 	text "WILLIAM: Well, I'm"
 	line "satisfied because"
 
-	para "I caught a BUDDYMON"
-	line "that I wanted."
+	para "I caught a"
+	line "BUDDYMON that I"
+	cont "wanted."
 	done
 
 BugCatchingContestant5BText:
@@ -821,8 +828,9 @@ UnusedBugCatchingContestExplanationText:
 	para "for participating,"
 	line "you also get to"
 
-	para "keep a bug BUDDYMON"
-	line "that you catch."
+	para "keep a bug"
+	line "BUDDYMON that you"
+	cont "catch."
 	done
 
 Route36NationalParkGateOfficer1WellHoldPrizeText:

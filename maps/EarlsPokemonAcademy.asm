@@ -179,9 +179,10 @@ AcademyEarlTeachHowToWinText:
 	text "Good! Teach you,"
 	line "I will!"
 
-	para "In battle, BUDDYMON"
-	line "top on list jump"
-	cont "out first!"
+	para "In battle,"
+	line "BUDDYMON top on"
+	cont "list jump out"
+	cont "first!"
 
 	para "Change order in"
 	line "list, make battle"
@@ -244,9 +245,9 @@ EarlsPokemonAcademyGameboyKid1Text:
 	done
 
 EarlsPokemonAcademyGameboyKid2Text:
-	text "Huh? The BUDDYMON I"
-	line "just got is hold-"
-	cont "ing something!"
+	text "Huh? The BUDDYMON"
+	line "I just got is"
+	cont "holding something!"
 	done
 
 EarlsPokemonAcademyYoungster2Text:
@@ -301,12 +302,13 @@ AcademyParalysisText:
 
 AcademySleepText:
 	text "If asleep, your"
-	line "BUDDYMON can't make"
-	cont "a move."
+	line "BUDDYMON can't"
+	cont "make a move."
 
-	para "A sleeping BUDDYMON"
-	line "doesn't wake up"
-	cont "after battle."
+	para "A sleeping"
+	line "BUDDYMON doesn't"
+	cont "wake up after"
+	cont "battle."
 
 	para "Wake it up with"
 	line "an AWAKENING."
@@ -327,9 +329,9 @@ AcademyBurnText:
 	done
 
 AcademyFreezeText:
-	text "If your BUDDYMON is"
-	line "frozen, it can't"
-	cont "do a thing."
+	text "If your BUDDYMON"
+	line "is frozen, it"
+	cont "can't do a thing."
 
 	para "It remains frozen"
 	line "after battle."

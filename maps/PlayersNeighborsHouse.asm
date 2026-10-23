@@ -45,12 +45,13 @@ PlayersNeighborsDaughterText:
 	line "evolved BUDDYMON."
 
 	para "I was amazed by"
-	line "PROF.WILLOW's find-"
-	cont "ings."
+	line "PROF. WILLOW's"
+	cont "findings."
 
 	para "He's so famous for"
 	line "his research on"
-	cont "BUDDYMON evolution."
+	cont "BUDDYMON"
+	cont "evolution."
 
 	para "…sigh…"
 
@@ -60,9 +61,10 @@ PlayersNeighborsDaughterText:
 	done
 
 PlayerNeighborRadioText1:
-	text "PROF.ASPEN'S BUDDYMON"
-	line "TALK! Please tune"
-	cont "in next time!"
+	text "PROF. ASPEN'S"
+	line "BUDDYMON TALK!"
+	cont "Please tune in"
+	cont "next time!"
 	done
 
 PlayerNeighborRadioText2:

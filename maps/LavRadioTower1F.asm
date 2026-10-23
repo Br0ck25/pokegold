@@ -161,8 +161,9 @@ LavRadioTower1FSuperNerd2Text:
 	para "I am the super"
 	line "MUSIC DIRECTOR!"
 
-	para "Huh? Your BUDDYGEAR"
-	line "can't tune into my"
+	para "Huh? Your"
+	line "BUDDYGEAR can't"
+	cont "tune into my"
 
 	para "music programs."
 	line "How unfortunate!"
@@ -210,8 +211,8 @@ LavRadioTower1FPokeFluteSignText:
 
 LavRadioTower1FReferenceLibraryText:
 	text "Wow! A full rack"
-	line "of BUDDYMON CDs and"
-	cont "videos."
+	line "of BUDDYMON CDs"
+	cont "and videos."
 
 	para "This must be the"
 	line "reference library."

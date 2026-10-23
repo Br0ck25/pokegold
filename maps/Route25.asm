@@ -413,9 +413,9 @@ CooltrainermKevinAfterBattleText:
 	text "That was a great"
 	line "battle!"
 
-	para "You and your BUDDY-"
-	line "MON are truly out-"
-	cont "standing!"
+	para "You and your"
+	line "BUDDYMON are truly"
+	cont "outstanding!"
 	done
 
 BillsHouseSignText:

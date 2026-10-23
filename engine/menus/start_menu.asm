@@ -201,23 +201,23 @@ StartMenu::
 	next "database@"
 
 .PartyDesc:
-	db   "Party BUDDYMON"
-	next "status@"
+	db   "Your"
+	next "party@"
 
 .PackDesc:
 	db   "Contains"
 	next "items@"
 
 .PokegearDesc:
-	db   "Trainer's"
-	next "key device@"
+	db   "Key"
+	next "device@"
 
 .StatusDesc:
 	db   "Your own"
 	next "status@"
 
 .SaveDesc:
-	db   "Save your"
+	db   "Save"
 	next "progress@"
 
 .OptionDesc:
@@ -225,12 +225,12 @@ StartMenu::
 	next "settings@"
 
 .ExitDesc:
-	db   "Close this"
+	db   "Close"
 	next "menu@"
 
 .QuitDesc:
 	db   "Quit and"
-	next "be judged.@"
+	next "judged.@"
 
 .OpenMenu:
 	ld a, [wMenuSelection]
@@ -374,7 +374,7 @@ endr
 	call .IsMenuAccountOn
 	ret z
 	hlcoord 0, 13
-	lb bc, 5, 10
+	lb bc, 5, 8
 	call ClearBox
 	hlcoord 0, 13
 	ld b, 3

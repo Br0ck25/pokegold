@@ -87,8 +87,9 @@ SandstormHouseWomanDisloyalText:
 	line "tough going."
 
 	para "Trust is the tie"
-	line "that binds BUDDYMON"
-	cont "and trainers."
+	line "that binds"
+	cont "BUDDYMON and"
+	cont "trainers."
 	done
 
 Route27SandstormHouse_MapEvents:

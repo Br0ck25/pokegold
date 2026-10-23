@@ -107,8 +107,8 @@ VioletPokecenterElmsAideFavorText:
 	text "<PLAYER>, long"
 	line "time, no see."
 
-	para "PROF.WILLOW asked me"
-	line "to find you."
+	para "PROF. WILLOW asked"
+	line "me to find you."
 
 	para "He has another"
 	line "favor to ask."
@@ -119,7 +119,8 @@ VioletPokecenterElmsAideFavorText:
 
 VioletPokecenterElmsAideGiveEggText:
 	text "We discovered that"
-	line "a BUDDYMON will not"
+	line "a BUDDYMON will"
+	cont "not"
 
 	para "hatch until it"
 	line "grows in the EGG."
@@ -133,8 +134,8 @@ VioletPokecenterElmsAideGiveEggText:
 	cont "we can rely on."
 
 	para "Please call PROF."
-	line "WILLOW when that EGG"
-	cont "hatches!"
+	line "WILLOW when that"
+	cont "EGG hatches!"
 	done
 
 VioletCityElmsAideFullPartyText:
@@ -148,8 +149,9 @@ VioletCityElmsAideFullPartyText:
 	done
 
 VioletPokecenterElmsAideRefuseText:
-	text "B-but… PROF.WILLOW"
-	line "asked for you…"
+	text "B-but… PROF."
+	line "WILLOW asked for"
+	cont "you…"
 	done
 
 VioletPokecenterElmsAideAskEggText:
@@ -177,8 +179,9 @@ VioletPokecenter1FGentlemanText:
 	done
 
 VioletPokecenter1FYoungsterText:
-	text "BUDDYMON are smart."
-	line "They won't obey a"
+	text "BUDDYMON are"
+	line "smart. They won't"
+	cont "obey a"
 
 	para "trainer they don't"
 	line "respect."

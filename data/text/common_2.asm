@@ -58,8 +58,9 @@ _CantUseTeleportText::
 	done
 
 _AlreadyUsingStrengthText::
-	text "A BUDDYMON is using"
-	line "STRENGTH already."
+	text "A BUDDYMON is"
+	line "using STRENGTH"
+	cont "already."
 	prompt
 
 _UseStrengthText::
@@ -125,8 +126,8 @@ _HeadbuttNothingText::
 	done
 
 _AskHeadbuttText::
-	text "A BUDDYMON could be"
-	line "in this tree."
+	text "A BUDDYMON could"
+	line "be in this tree."
 
 	para "Want to HEADBUTT"
 	line "it?"
@@ -564,8 +565,9 @@ _PCWhatText::
 	done
 
 _PCMonHoldingMailText::
-	text "There is a BUDDYMON"
-	line "holding MAIL."
+	text "There is a"
+	line "BUDDYMON holding"
+	cont "MAIL."
 
 	para "Please remove the"
 	line "MAIL."
@@ -578,7 +580,8 @@ _PCNoSingleMonText::
 
 _PCCantDepositLastMonText::
 	text "You can't deposit"
-	line "your last BUDDYMON!"
+	line "your last"
+	cont "BUDDYMON!"
 	prompt
 
 _PCCantTakeText::
@@ -805,7 +808,7 @@ _PokecenterPlayersPCText::
 	prompt
 
 _PokecenterOaksPCText::
-	text "PROF.OAK's PC"
+	text "PROF. OAK's PC"
 	line "accessed."
 
 	para "BUDDYDEX Rating"
@@ -834,7 +837,7 @@ _OakPCText3::
 	text_ram wStringBuffer4
 	text " BUDDYMON owned"
 
-	para "PROF.OAK's"
+	para "PROF. OAK's"
 	line "Rating:"
 	done
 
@@ -1253,8 +1256,9 @@ _LinkTimeoutText::
 
 _LinkTradeCantBattleText::
 	text "If you trade that"
-	line "BUDDYMON, you won't"
-	cont "be able to battle."
+	line "BUDDYMON, you"
+	cont "won't be able to"
+	cont "battle."
 	prompt
 
 _LinkAbnormalMonText::

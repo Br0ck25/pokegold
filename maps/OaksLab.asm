@@ -183,8 +183,9 @@ OakYesKantoBadgesText:
 	done
 
 OaksAssistant1Text:
-	text "The PROF's BUDDYMON"
-	line "TALK radio program"
+	text "The PROF's"
+	line "BUDDYMON TALK"
+	cont "radio program"
 
 	para "isn't aired here"
 	line "in KANTO."
@@ -204,10 +205,11 @@ OaksAssistant2Text:
 
 OaksAssistant3Text:
 	text "Don't tell anyone,"
-	line "but PROF.OAK'S"
+	line "but PROF. OAK'S"
 
-	para "BUDDYMON TALK isn't"
-	line "a live broadcast."
+	para "BUDDYMON TALK"
+	line "isn't a live"
+	cont "broadcast."
 	done
 
 OaksLabPoster1Text:
@@ -234,7 +236,7 @@ OaksLabPCText:
 
 	para "…"
 
-	para "PROF.OAK, how is"
+	para "PROF. OAK, how is"
 	line "your research"
 	cont "coming along?"
 

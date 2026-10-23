@@ -198,8 +198,8 @@ GoldenrodDeptStore5FLassText:
 
 GoldenrodDeptStore5FPokefanMText:
 	text "You can't rename a"
-	line "BUDDYMON you get in"
-	cont "a trade."
+	line "BUDDYMON you get"
+	cont "in a trade."
 
 	para "The name is a re-"
 	line "flection of the"

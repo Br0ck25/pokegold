@@ -120,8 +120,8 @@ PokemonFanClubBraggingSign:
 
 PokemonFanClubChairmanDidYouVisitToHearAboutMyMonText:
 	text "I'm the CHAIRMAN"
-	line "of the BUDDYMON FAN"
-	cont "CLUB."
+	line "of the BUDDYMON"
+	cont "FAN CLUB."
 
 	para "I've raised over"
 	line "150 BUDDYMON."
@@ -169,8 +169,8 @@ PokemonFanClubChairmanIWantYouToHaveThisText:
 
 PokemonFanClubChairmanItsARareCandyText:
 	text "It's a RARE CANDY"
-	line "that makes BUDDYMON"
-	cont "stronger."
+	line "that makes"
+	cont "BUDDYMON stronger."
 
 	para "I prefer making my"
 	line "BUDDYMON stronger"

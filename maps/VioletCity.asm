@@ -208,7 +208,8 @@ VioletCityLassText:
 	cont "SPROUT TOWER."
 
 	para "They said normal-"
-	line "type BUDDYMON moves"
+	line "type BUDDYMON"
+	cont "moves"
 
 	para "had no effect on"
 	line "ghosts."

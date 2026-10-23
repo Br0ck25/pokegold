@@ -237,8 +237,8 @@ RadioTower2FSalesSignText:
 	done
 
 RadioTower2FOaksPKMNTalkSignText:
-	text "PROF.OAK'S BUDDYMON"
-	line "TALK"
+	text "PROF. OAK'S"
+	line "BUDDYMON TALK"
 
 	para "The Hottest Show"
 	line "on the Air!"

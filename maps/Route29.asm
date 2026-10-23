@@ -271,8 +271,9 @@ CatchingTutorialDebriefText:
 	line "it."
 
 	para "If you weaken them"
-	line "first, BUDDYMON are"
-	cont "easier to catch."
+	line "first, BUDDYMON"
+	cont "are easier to"
+	cont "catch."
 	done
 
 CatchingTutorialDeclinedText:

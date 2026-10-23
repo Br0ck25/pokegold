@@ -77,8 +77,9 @@ Route8FruitTree:
 
 BikerDwayneSeenText:
 	text "We're the KANTO"
-	line "BUDDYMON FEDERATION"
-	cont "trainer group."
+	line "BUDDYMON"
+	cont "FEDERATION trainer"
+	cont "group."
 
 	para "We'll drive you"
 	line "under our wheels!"

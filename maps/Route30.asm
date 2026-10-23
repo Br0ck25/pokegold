@@ -272,7 +272,7 @@ BugCatcherDonAfterText:
 	done
 
 Route30YoungsterText_DirectionsToMrPokemonsHouse:
-	text "MR.BUDDYMON's"
+	text "MR. BUDDYMON's"
 	line "house? It's a bit"
 	cont "farther ahead."
 	done
@@ -299,12 +299,14 @@ Route30SignText:
 	done
 
 MrPokemonsHouseDirectionsSignText:
-	text "MR.BUDDYMON'S HOUSE"
-	line "Straight Ahead!"
+	text "MR. BUDDYMON'S"
+	line "HOUSE Straight"
+	cont "Ahead!"
 	done
 
 MrPokemonsHouseSignText:
-	text "MR.BUDDYMON'S HOUSE"
+	text "MR. BUDDYMON'S"
+	line "HOUSE"
 	done
 
 Route30TrainerTipsText:

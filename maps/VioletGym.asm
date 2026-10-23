@@ -112,8 +112,8 @@ VioletGymStatue:
 
 FalknerIntroText:
 	text "I'm FALKNER, the"
-	line "VIOLET BUDDYMON GYM"
-	cont "leader!"
+	line "VIOLET BUDDYMON"
+	cont "GYM leader!"
 
 	para "People say you can"
 	line "clip flying-type"

@@ -140,8 +140,8 @@ RadioTower4FDJMaryText_After:
 	text "MARY: Please tune"
 	line "into me on PROF."
 
-	para "OAK'S BUDDYMON TALK"
-	line "show."
+	para "OAK'S BUDDYMON"
+	line "TALK show."
 	done
 
 RadioTowerMeowthText:
@@ -195,7 +195,8 @@ GruntF4SeenText:
 	line "BUDDYMON are cute?"
 
 	para "I'll think my"
-	line "BUDDYMON are cute--"
+	line "BUDDYMON are"
+	cont "cute--"
 
 	para "after they beat"
 	line "yours!"

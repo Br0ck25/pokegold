@@ -243,8 +243,9 @@ BeautyJuliaAfterBattleText:
 
 TwinsJoAndZoe1SeenText:
 	text "We'll show you"
-	line "BUDDYMON moves that"
-	cont "ERIKA taught us!"
+	line "BUDDYMON moves"
+	cont "that ERIKA taught"
+	cont "us!"
 	done
 
 TwinsJoAndZoe1BeatenText:

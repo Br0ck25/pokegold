@@ -229,8 +229,9 @@ BugsyText_BugMonsAreDeep:
 	done
 
 BugCatcherBennySeenText:
-	text "Bug BUDDYMON evolve"
-	line "young. So they get"
+	text "Bug BUDDYMON"
+	line "evolve young. So"
+	cont "they get"
 
 	para "stronger that much"
 	line "faster."
@@ -276,8 +277,8 @@ BugCatcherJoshSeenText:
 	cont "you're mighty!"
 
 	para "But my grown-up"
-	line "BUDDYMON are pretty"
-	cont "tough too!"
+	line "BUDDYMON are"
+	cont "pretty tough too!"
 	done
 
 BugCatcherJoshBeatenText:
@@ -318,9 +319,9 @@ TwinsAmyandmay2BeatenText:
 	done
 
 TwinsAmyandmay2AfterBattleText:
-	text "MAY: Our bug BUDDY-"
-	line "MON lost! Oh, what"
-	cont "a shame."
+	text "MAY: Our bug"
+	line "BUDDYMON lost! Oh,"
+	cont "what a shame."
 	done
 
 AzaleaGymGuideText:
@@ -329,16 +330,16 @@ AzaleaGymGuideText:
 	para "BUGSY's young, but"
 	line "his knowledge of"
 
-	para "bug BUDDYMON is for"
-	line "real."
+	para "bug BUDDYMON is"
+	line "for real."
 
 	para "It's going to be"
 	line "tough without my"
 	cont "advice."
 
 	para "Let's see… Bug"
-	line "BUDDYMON don't like"
-	cont "fire."
+	line "BUDDYMON don't"
+	cont "like fire."
 
 	para "Flying-type moves"
 	line "are super-effec-"
@@ -354,7 +355,8 @@ AzaleaGymGuideWinText:
 
 	para "With people like"
 	line "you, the future of"
-	cont "BUDDYMON is bright!"
+	cont "BUDDYMON is"
+	cont "bright!"
 	done
 
 AzaleaGym_MapEvents:

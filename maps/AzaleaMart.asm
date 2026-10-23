@@ -34,9 +34,9 @@ AzaleaMartCooltrainerMText:
 
 AzaleaMartBugCatcherText:
 	text "A GREAT BALL is"
-	line "better for catch-"
-	cont "ing BUDDYMON than a"
-	cont "BUDDY BALL."
+	line "better for"
+	cont "catching BUDDYMON"
+	cont "than a BUDDY BALL."
 
 	para "But KURT's might"
 	line "be better some-"

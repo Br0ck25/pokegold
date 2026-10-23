@@ -157,17 +157,18 @@ CianwoodCityPokefanMText:
 	para "They may be hiding"
 	line "something."
 
-	para "Your BUDDYMON could"
-	line "use ROCK SMASH to"
-	cont "break them."
+	para "Your BUDDYMON"
+	line "could use ROCK"
+	cont "SMASH to break"
+	cont "them."
 	done
 
 CianwoodCityLassText:
 	text "CHUCK, the GYM"
 	line "LEADER, spars with"
 
-	para "his fighting BUDDY-"
-	line "MON."
+	para "his fighting"
+	line "BUDDYMON."
 	done
 
 CianwoodCityUnusedText:

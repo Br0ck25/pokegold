@@ -234,9 +234,10 @@ AzaleaTownRivalWinText:
 AzaleaTownRivalAfterText:
 	text "I hate the weak."
 
-	para "BUDDYMON, trainers."
-	line "It doesn't matter"
-	cont "who or what."
+	para "BUDDYMON,"
+	line "trainers. It"
+	cont "doesn't matter who"
+	cont "or what."
 
 	para "I'm going to be"
 	line "strong and wipe"

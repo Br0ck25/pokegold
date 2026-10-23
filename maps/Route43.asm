@@ -313,9 +313,10 @@ PokemaniacRonAfterBattleText:
 	para "different types"
 	line "of BUDDYMON."
 
-	para "BUDDYMON isn't just"
-	line "about having the"
-	cont "most powerful one."
+	para "BUDDYMON isn't"
+	line "just about having"
+	cont "the most powerful"
+	cont "one."
 	done
 
 FisherMarvinSeenText:

@@ -356,8 +356,8 @@ GuideGentPokecenterText:
 	text "This is a BUDDYMON"
 	line "CENTER. They heal"
 
-	para "your BUDDYMON in no"
-	line "time at all."
+	para "your BUDDYMON in"
+	line "no time at all."
 
 	para "You'll be relying"
 	line "on them a lot, so"
@@ -500,9 +500,9 @@ CherrygroveTeacherText_HaveMapCard:
 	done
 
 CherrygroveYoungsterText_NoPokedex:
-	text "MR.BUDDYMON's house"
-	line "is still farther"
-	cont "up ahead."
+	text "MR. BUDDYMON's"
+	line "house is still"
+	cont "farther up ahead."
 	done
 
 CherrygroveYoungsterText_HavePokedex:
@@ -518,8 +518,9 @@ CherrygroveYoungsterText_HavePokedex:
 	done
 
 MysticWaterGuyTextBefore:
-	text "A BUDDYMON I caught"
-	line "had an item."
+	text "A BUDDYMON I"
+	line "caught had an"
+	cont "item."
 
 	para "I think it's"
 	line "MYSTIC WATER."

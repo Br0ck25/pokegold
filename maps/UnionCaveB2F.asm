@@ -92,9 +92,10 @@ CooltrainermNickBeatenText:
 	done
 
 CooltrainermNickAfterBattleText:
-	text "Your BUDDYMON style"
-	line "is stunning and"
-	cont "colorful, I admit."
+	text "Your BUDDYMON"
+	line "style is stunning"
+	cont "and colorful, I"
+	cont "admit."
 
 	para "You'll just keep"
 	line "getting better!"
@@ -132,8 +133,9 @@ CooltrainerfEmmaBeatenText:
 
 CooltrainerfEmmaAfterBattleText:
 	text "Just once a week,"
-	line "a BUDDYMON comes to"
-	cont "the water's edge."
+	line "a BUDDYMON comes"
+	cont "to the water's"
+	cont "edge."
 
 	para "I wanted to see"
 	line "that BUDDYMON…"

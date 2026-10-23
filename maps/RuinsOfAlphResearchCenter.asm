@@ -286,8 +286,9 @@ RuinsOfAlphResearchCenterComputerText_GotAllUnown:
 	text "Mystery BUDDYMON"
 	line "Name: UNOWN"
 
-	para "A total of {d:NUM_UNOWN}"
-	line "kinds found."
+	para "A total of"
+	line "{d:NUM_UNOWN}"
+	cont "kinds found."
 	done
 
 RuinsOfAlphResearchCenterPrinterText_DoesntWork:
@@ -305,7 +306,7 @@ RuinsOfAlphResearchCenterProfSilktreePhotoText:
 	line "the RESEARCH"
 
 	para "CENTER'S founder,"
-	line "PROF.SILKTREE."
+	line "PROF. SILKTREE."
 	done
 
 RuinsOfAlphResearchCenterAcademicBooksText:

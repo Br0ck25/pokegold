@@ -46,8 +46,8 @@ Route10Pokecenter1FGymGuideText:
 	text "The POWER PLANT's"
 	line "MANAGER is looking"
 
-	para "for a strong BUDDY-"
-	line "MON trainer."
+	para "for a strong"
+	line "BUDDYMON trainer."
 
 	para "He needs help"
 	line "getting back"

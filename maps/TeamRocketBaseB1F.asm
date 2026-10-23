@@ -644,8 +644,8 @@ CameraGrunt2SeenText:
 
 CameraGrunt2BeatenText:
 	text "Surveillance cams"
-	line "are in the BUDDYMON"
-	cont "statues."
+	line "are in the"
+	cont "BUDDYMON statues."
 
 	para "We'll keep appear-"
 	line "ing until you trip"

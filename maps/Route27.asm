@@ -364,7 +364,8 @@ CooltrainerfMeganBeatenText:
 CooltrainerfMeganAfterBattleText:
 	text "I'm checking out"
 	line "pre- and post-"
-	cont "evolution BUDDYMON."
+	cont "evolution"
+	cont "BUDDYMON."
 
 	para "Evolution really"
 	line "does make BUDDYMON"

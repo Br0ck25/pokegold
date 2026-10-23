@@ -124,8 +124,9 @@ MomPhoneNoPokemonText:
 	text "Hello?"
 
 	para "Oh, hi, <PLAYER>!"
-	line "Wasn't PROF.WILLOW"
-	cont "waiting for you?"
+	line "Wasn't PROF."
+	cont "WILLOW waiting for"
+	cont "you?"
 	done
 
 MomPhoneNoPokedexText:
@@ -154,8 +155,9 @@ MomPhoneLectureText:
 	para "…… <PLAYER>?"
 	line "I heard from PROF."
 
-	para "WILLOW that you went"
-	line "on a long trip."
+	para "WILLOW that you"
+	line "went on a long"
+	cont "trip."
 
 	para "I wish you would"
 	line "have told me…"

@@ -408,7 +408,7 @@ _ForYourMonWillTradeText::
 
 _OPT_IntroText1::
 	text_start
-	line "MARY: PROF.ASPEN'S"
+	line "MARY: PROF. ASPEN'S"
 	done
 
 _OPT_IntroText2::
@@ -1722,7 +1722,8 @@ _MysteryGiftCommErrorText::
 
 _RetrieveMysteryGiftText::
 	text "Must retrieve GIFT"
-	line "at BUDDYMON CENTER."
+	line "at BUDDYMON"
+	cont "CENTER."
 	prompt
 
 _YourFriendIsNotReadyText::

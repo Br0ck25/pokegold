@@ -232,8 +232,8 @@ LanceBattleIntroText:
 	para "As the most power-"
 	line "ful trainer and as"
 
-	para "the BUDDYMON LEAGUE"
-	line "CHAMPION…"
+	para "the BUDDYMON"
+	line "LEAGUE CHAMPION…"
 
 	para "I, LANCE the drag-"
 	line "on master, accept"
@@ -281,12 +281,12 @@ LancesRoomMaryOhNoOakText:
 	text "MARY: Oh, no!"
 	line "It's all over!"
 
-	para "PROF.OAK, if you"
+	para "PROF. OAK, if you"
 	line "weren't so slow…"
 	done
 
 LancesRoomOakCongratulationsText:
-	text "PROF.OAK: Ah,"
+	text "PROF. OAK: Ah,"
 	line "<PLAYER>!"
 
 	para "It's been a long"

@@ -118,11 +118,13 @@ FarmerMText_BuyMilk:
 	para "It's my pride and"
 	line "joy, son."
 
-	para "Give it to BUDDYMON"
-	line "to restore HP!"
+	para "Give it to"
+	line "BUDDYMON to"
+	cont "restore HP!"
 
 	para "I'll give it to ya"
-	line "fer just ¥{d:ROUTE39FARMHOUSE_MILK_PRICE}."
+	line "fer just"
+	cont "¥{d:ROUTE39FARMHOUSE_MILK_PRICE}."
 	done
 
 FarmerMText_GotMilk:

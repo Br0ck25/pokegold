@@ -88,9 +88,10 @@ HikerRussellSeenText:
 	text "You're headed to"
 	line "AZALEA, are you?"
 
-	para "Let my BUDDYMON see"
-	line "if you are good"
-	cont "enough to battle."
+	para "Let my BUDDYMON"
+	line "see if you are"
+	cont "good enough to"
+	cont "battle."
 	done
 
 HikerRussellBeatenText:
@@ -119,8 +120,8 @@ PokemaniacLarrySeenText:
 	done
 
 PokemaniacLarryBeatenText:
-	text "Ugh. My poor BUDDY-"
-	line "MON…"
+	text "Ugh. My poor"
+	line "BUDDYMON…"
 	done
 
 PokemaniacLarryAfterBattleText:

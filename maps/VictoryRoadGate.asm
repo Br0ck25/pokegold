@@ -80,13 +80,14 @@ VictoryRoadGateLeftBlackBeltText:
 	line "MT.SILVER."
 
 	para "You'll see scary-"
-	line "strong BUDDYMON out"
-	cont "there."
+	line "strong BUDDYMON"
+	cont "out there."
 	done
 
 VictoryRoadGateRightBlackBeltText:
-	text "Off to the BUDDYMON"
-	line "LEAGUE, are you?"
+	text "Off to the"
+	line "BUDDYMON LEAGUE,"
+	cont "are you?"
 
 	para "The ELITE FOUR are"
 	line "so strong it's"

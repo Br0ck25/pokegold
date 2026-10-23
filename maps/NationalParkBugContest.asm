@@ -152,7 +152,8 @@ BugCatchingContestant5AText:
 
 BugCatchingContestant6AText:
 	text "BARRY: You should"
-	line "weaken bug BUDDYMON"
+	line "weaken bug"
+	cont "BUDDYMON"
 
 	para "first, then throw"
 	line "a BUDDY BALL."

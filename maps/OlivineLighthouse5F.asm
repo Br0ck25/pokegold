@@ -79,9 +79,9 @@ BirdKeeperDenisBeatenText:
 	done
 
 BirdKeeperDenisAfterBattleText:
-	text "My BUDDYMON learned"
-	line "how to use FLY in"
-	cont "CIANWOOD."
+	text "My BUDDYMON"
+	line "learned how to use"
+	cont "FLY in CIANWOOD."
 
 	para "Well, since I'm a"
 	line "loser, I'll FLY"

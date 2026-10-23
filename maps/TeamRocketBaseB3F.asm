@@ -352,8 +352,8 @@ RocketBaseRivalText:
 	para "cape who used"
 	line "dragon BUDDYMON?"
 
-	para "My BUDDYMON were no"
-	line "match at all."
+	para "My BUDDYMON were"
+	line "no match at all."
 
 	para "I don't care that"
 	line "I lost. I can beat"

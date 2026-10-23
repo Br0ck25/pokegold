@@ -222,8 +222,8 @@ BillsGrandpaIntroText:
 
 BillsGrandpaAskToSeeMonText:
 	text "If you have that"
-	line "BUDDYMON, may I see"
-	cont "it, please?"
+	line "BUDDYMON, may I"
+	cont "see it, please?"
 	done
 
 BillsGrandpaExcitedToSeeText:
@@ -275,25 +275,26 @@ BillsGrandpaWrongPokemonText:
 	text "Hm?"
 
 	para "That's not the"
-	line "BUDDYMON that I was"
-	cont "told about."
+	line "BUDDYMON that I"
+	cont "was told about."
 	done
 
 BillsGrandpaLickitungText:
 	text "My grandson BILL"
 	line "told me about a"
 
-	para "BUDDYMON that has a"
-	line "long tongue."
+	para "BUDDYMON that has"
+	line "a long tongue."
 	done
 
 BillsGrandpaOddishText:
 	text "Ah, my grandson"
 	line "mentioned a round,"
 
-	para "green BUDDYMON that"
-	line "has leaves growing"
-	cont "on its head."
+	para "green BUDDYMON"
+	line "that has leaves"
+	cont "growing on its"
+	cont "head."
 	done
 
 BillsGrandpaStaryuText:
@@ -331,8 +332,9 @@ BillsGrandpaVulpixText:
 	cont "has six tails."
 
 	para "I would love to"
-	line "hug a cute BUDDYMON"
-	cont "like that."
+	line "hug a cute"
+	cont "BUDDYMON like"
+	cont "that."
 	done
 
 BillsGrandpaPichuText:

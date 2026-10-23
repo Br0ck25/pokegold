@@ -84,10 +84,12 @@ BrockIntroText:
 	line "PEWTER GYM LEADER."
 
 	para "I'm an expert on"
-	line "rock-type BUDDYMON."
+	line "rock-type"
+	cont "BUDDYMON."
 
-	para "My BUDDYMON are im-"
-	line "pervious to most"
+	para "My BUDDYMON are"
+	line "im- pervious to"
+	cont "most"
 
 	para "physical attacks."
 	line "You'll have a hard"

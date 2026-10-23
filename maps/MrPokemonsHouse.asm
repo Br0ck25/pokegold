@@ -171,14 +171,15 @@ MrPokemonIntroText1:
 	text "Hello, hello! You"
 	line "must be <PLAYER>."
 
-	para "PROF.WILLOW said that"
-	line "you would visit."
+	para "PROF. WILLOW said"
+	line "that you would"
+	cont "visit."
 	done
 
 MrPokemonIntroText2:
 	text "This is what I"
-	line "want PROF.WILLOW to"
-	cont "examine."
+	line "want PROF. WILLOW"
+	cont "to examine."
 	done
 
 MrPokemonsHouse_GotEggText:
@@ -196,31 +197,34 @@ MrPokemonIntroText3:
 
 	para "I was intrigued,"
 	line "so I sent mail to"
-	cont "PROF.WILLOW."
+	cont "PROF. WILLOW."
 
-	para "For BUDDYMON evolu-"
-	line "tion, PROF.WILLOW is"
-	cont "the authority."
+	para "For BUDDYMON"
+	line "evolution, PROF."
+	cont "WILLOW is the"
+	cont "authority."
 	done
 
 MrPokemonIntroText4:
-	text "Even PROF.OAK here"
-	line "recognizes that."
+	text "Even PROF. OAK"
+	line "here recognizes"
+	cont "that."
 	done
 
 MrPokemonIntroText5:
 	text "If my assumption"
 	line "is correct, PROF."
-	cont "WILLOW will know it."
+	cont "WILLOW will know"
+	cont "it."
 	done
 
 MrPokemonsHouse_MrPokemonHealText:
 	text "You are returning"
-	line "to PROF.WILLOW?"
+	line "to PROF. WILLOW?"
 
-	para "Here. Your BUDDYMON"
-	line "should have some"
-	cont "rest."
+	para "Here. Your"
+	line "BUDDYMON should"
+	cont "have some rest."
 	done
 
 MrPokemonText_ImDependingOnYou:
@@ -240,18 +244,19 @@ MrPokemonsHouse_OakText1:
 	text "OAK: Aha! So"
 	line "you're <PLAYER>!"
 
-	para "I'm OAK! A BUDDYMON"
-	line "researcher."
+	para "I'm OAK! A"
+	line "BUDDYMON"
+	cont "researcher."
 
 	para "I was just visit-"
 	line "ing my old friend"
-	cont "MR.BUDDYMON."
+	cont "MR. BUDDYMON."
 
 	para "I heard you were"
 	line "running an errand"
 
-	para "for PROF.WILLOW, so I"
-	line "waited here."
+	para "for PROF. WILLOW,"
+	line "so I waited here."
 
 	para "Oh! What's this?"
 	line "A rare BUDDYMON!"
@@ -261,16 +266,18 @@ MrPokemonsHouse_OakText1:
 	para "Hm, I see!"
 
 	para "I understand why"
-	line "PROF.WILLOW gave you"
+	line "PROF. WILLOW gave"
+	cont "you"
 
-	para "a BUDDYMON for this"
-	line "errand."
+	para "a BUDDYMON for"
+	line "this errand."
 
 	para "To researchers"
-	line "like PROF.WILLOW and"
+	line "like PROF. WILLOW"
+	cont "and"
 
-	para "I, BUDDYMON are our"
-	line "friends."
+	para "I, BUDDYMON are"
+	line "our friends."
 
 	para "He saw that you"
 	line "would treat your"
@@ -336,7 +343,7 @@ MrPokemonText_GimmeTheScale:
 
 	para "I can offer this"
 	line "EXP.SHARE I got"
-	cont "from PROF.OAK."
+	cont "from PROF. OAK."
 	done
 
 MrPokemonText_Disappointed:

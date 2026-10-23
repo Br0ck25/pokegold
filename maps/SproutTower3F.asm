@@ -210,8 +210,9 @@ SageLiSeenText:
 	para "SPROUT TOWER is a"
 	line "place of training."
 
-	para "People and BUDDYMON"
-	line "test their bonds"
+	para "People and"
+	line "BUDDYMON test"
+	cont "their bonds"
 
 	para "to build a bright"
 	line "future together."
@@ -231,8 +232,9 @@ SageLiBeatenText:
 	done
 
 SageLiTakeThisFlashText:
-	text "You and your BUDDY-"
-	line "MON should have"
+	text "You and your"
+	line "BUDDYMON should"
+	cont "have"
 
 	para "no problem using"
 	line "this move."

@@ -353,9 +353,9 @@ PsychicRichardBeatenText:
 	done
 
 PsychicRichardAfterBattleText:
-	text "People and BUDDYMON"
-	line "grow from their"
-	cont "experiences."
+	text "People and"
+	line "BUDDYMON grow from"
+	cont "their experiences."
 
 	para "Don't get lazy and"
 	line "complacent."

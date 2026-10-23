@@ -204,8 +204,8 @@ VictoryRoadRivalDefeatText:
 	done
 
 VictoryRoadRivalAfterText:
-	text "…I haven't given up"
-	line "on becoming the"
+	text "…I haven't given"
+	line "up on becoming the"
 	cont "greatest trainer…"
 
 	para "I'm going to find"

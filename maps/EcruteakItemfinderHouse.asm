@@ -140,8 +140,9 @@ EcruteakThreeMonText:
 	text "ECRUTEAK was also"
 	line "home to three"
 
-	para "BUDDYMON that raced"
-	line "around the town."
+	para "BUDDYMON that"
+	line "raced around the"
+	cont "town."
 
 	para "They were said to"
 	line "have been born of"

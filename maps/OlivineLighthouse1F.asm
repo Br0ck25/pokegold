@@ -23,8 +23,9 @@ OlivineLighthouse1FSailorText:
 	done
 
 OlivineLighthouse1FPokefanFText:
-	text "In the past, BUDDY-"
-	line "MON used to light"
+	text "In the past,"
+	line "BUDDYMON used to"
+	cont "light"
 
 	para "the sea around"
 	line "OLIVINE at night."

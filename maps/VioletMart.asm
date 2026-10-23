@@ -30,8 +30,8 @@ VioletMartGrannyText:
 	cont "strong."
 
 	para "It's important to"
-	line "treat BUDDYMON with"
-	cont "love."
+	line "treat BUDDYMON"
+	cont "with love."
 	done
 
 VioletMartCooltrainerMText:

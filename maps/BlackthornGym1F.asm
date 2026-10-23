@@ -393,8 +393,8 @@ BlackthornGymGuideWinText:
 	line "beat CLAIR!"
 
 	para "All that's left is"
-	line "the BUDDYMON LEAGUE"
-	cont "challenge."
+	line "the BUDDYMON"
+	cont "LEAGUE challenge."
 
 	para "You're on the way"
 	line "to becoming the"

@@ -163,7 +163,8 @@ SaffronCityCooltrainerMText:
 
 SaffronCityCooltrainerFText:
 	text "This is SILPH CO.,"
-	line "famous for BUDDYMON"
+	line "famous for"
+	cont "BUDDYMON"
 	cont "merchandise."
 
 	para "In the past, TEAM"

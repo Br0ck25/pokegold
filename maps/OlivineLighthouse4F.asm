@@ -63,14 +63,16 @@ LassConnie1SeenText:
 	done
 
 LassConnie1BeatenText:
-	text "Aaack! My BUDDYMON!"
+	text "Aaack! My"
+	line "BUDDYMON!"
 	done
 
 LassConnie1AfterBattleText:
 	text "Right. Anybody"
 	line "would be worried"
 	cont "if his or her own"
-	cont "BUDDYMON were hurt."
+	cont "BUDDYMON were"
+	cont "hurt."
 
 	para "I'll pray for the"
 	line "BUDDYMON here, so"

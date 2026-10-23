@@ -13,10 +13,13 @@ function actorLayer(wrap, box) {
   const sync = (a, draw, x, y, dir) => {
     if (a.dataset.dir !== String(dir)) { a.dataset.dir = dir; a.innerHTML = draw(dir); }
     if (a.dataset.x !== String(x) || a.dataset.y !== String(y)) {
-      if (a.dataset.x !== undefined) a.walkUntil = performance.now() + 400;
+      const first = a.dataset.x === undefined;
+      if (!first) a.walkUntil = performance.now() + 400;
+      else a.style.transition = "none"; // appear in place instead of gliding in from the corner
       a.dataset.x = x; a.dataset.y = y;
       a.style.left = `${((x * 100 + 50 + box.ox) / box.w) * 100}%`;
       a.style.top = `${((y * 100 + 92 + box.oy) / box.h) * 100}%`;
+      if (first) { a.offsetWidth; a.style.transition = ""; }
     }
     a.classList.toggle("walk", performance.now() < (a.walkUntil || 0));
   };
@@ -29,8 +32,12 @@ function actorLayer(wrap, box) {
       for (const o of state.objects) {
         seen.add(o.id);
         if (!npcs.has(o.id)) npcs.set(o.id, spawn("npc"));
-        const name = spriteName[o.sprite];
-        sync(npcs.get(o.id), Art.props[name] || person(Art.looks[name] || Art.looks.OTHER), o.x, o.y, o.dir);
+        const a = npcs.get(o.id);
+        // The sprite byte can read as something else for a frame while the game redraws: keep the last known look.
+        if (spriteName[o.sprite]) a.sprite = o.sprite;
+        const name = spriteName[a.sprite];
+        if (a.dataset.look !== String(name)) { a.dataset.look = name; delete a.dataset.dir; }
+        sync(a, Art.props[name] || person(Art.looks[name] || Art.looks.OTHER), o.x, o.y, o.dir);
       }
       for (const [id, a] of npcs) if (!seen.has(id)) { a.remove(); npcs.delete(id); }
     },

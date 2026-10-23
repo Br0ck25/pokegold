@@ -1,12 +1,14 @@
+const NAME_PROMPTS = ["Nickname?", "Your name?", "Rival's name?", "Mom's name?", "Box name?"]; // NAME_* order
+
 Scenes.naming = function (root) {
   const el = h(`<div class="scene naming">
     <div class="portrait">${Art.hero()}</div>
-    <div class="entry"><h2>Your name?</h2><div class="slots"></div></div>
+    <div class="entry"><h2></h2><div class="slots"></div></div>
     <div class="kb"></div>
   </div>`);
   el.prepend(h(`<div class="sky warm"></div>`));
   root.appendChild(el);
-  const slots = el.querySelector(".slots"), kb = el.querySelector(".kb");
+  const head = el.querySelector("h2"), portrait = el.querySelector(".portrait"), slots = el.querySelector(".slots"), kb = el.querySelector(".kb");
   let last = "";
   return {
     update(state) {
@@ -21,8 +23,10 @@ Scenes.naming = function (root) {
       });
       const bottom = HD.text(state, 16, 1, 19);
       const typed = HD.text(state, 6, 3, 19).replace(/\s+/g, "");
-      const cur = state.naming || { col: -1, row: -1, max: 7 };
+      const cur = state.naming || { col: -1, row: -1, max: 7, type: 1 };
       const key = JSON.stringify([grid, bottom, typed, cur]);
+      head.textContent = NAME_PROMPTS[cur.type] || "Name?";
+      portrait.hidden = cur.type !== 1;
       if (key === last) return;
       last = key;
       slots.innerHTML = Array.from({ length: cur.max || 7 }, (_, i) =>

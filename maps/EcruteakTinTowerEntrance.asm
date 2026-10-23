@@ -137,8 +137,9 @@ EcruteakTinTowerEntranceGrampsText:
 	para "But when one"
 	line "burned down, both"
 
-	para "BUDDYMON flew away,"
-	line "never to return."
+	para "BUDDYMON flew"
+	line "away, never to"
+	cont "return."
 	done
 
 EcruteakTinTowerEntrance_MapEvents:

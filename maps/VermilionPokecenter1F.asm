@@ -35,9 +35,10 @@ VermilionPokecenter1FBugCatcherScript:
 	jumptextfaceplayer VermilionPokecenter1FBugCatcherText
 
 VermilionPokecenter1FFishingGuruText:
-	text "A sleeping BUDDYMON"
-	line "is lying in front"
-	cont "of DIGLETT'S CAVE."
+	text "A sleeping"
+	line "BUDDYMON is lying"
+	cont "in front of"
+	cont "DIGLETT'S CAVE."
 
 	para "It's a fantastic"
 	line "opportunity to get"

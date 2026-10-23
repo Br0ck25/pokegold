@@ -238,8 +238,9 @@ _BallMissedText::
 	prompt
 
 _BallBrokeFreeText::
-	text "Oh no! The BUDDYMON"
-	line "broke free!"
+	text "Oh no! The"
+	line "BUDDYMON broke"
+	cont "free!"
 	prompt
 
 _BallAppearedCaughtText::
@@ -461,8 +462,9 @@ _KnowsMoveText::
 	prompt
 
 _MoveKnowsOneText::
-	text "That BUDDYMON knows"
-	line "only one move."
+	text "That BUDDYMON"
+	line "knows only one"
+	cont "move."
 	done
 
 _AskDeleteMoveText::
@@ -473,8 +475,9 @@ _AskDeleteMoveText::
 	done
 
 _DeleterForgotMoveText::
-	text "Done! Your BUDDYMON"
-	line "forgot the move."
+	text "Done! Your"
+	line "BUDDYMON forgot"
+	cont "the move."
 	done
 
 _DeleterEggText::
@@ -496,8 +499,9 @@ _DeleterIntroText::
 	text "Um… Oh, yes, I'm"
 	line "the MOVE DELETER."
 
-	para "I can make BUDDYMON"
-	line "forget moves."
+	para "I can make"
+	line "BUDDYMON forget"
+	cont "moves."
 
 	para "Shall I make a"
 	line "BUDDYMON forget?"

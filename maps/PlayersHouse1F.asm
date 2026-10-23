@@ -136,8 +136,8 @@ ElmsLookingForYouText:
 	text "Oh, <PLAYER>…! Our"
 	line "neighbor, PROF."
 
-	para "WILLOW, was looking"
-	line "for you."
+	para "WILLOW, was"
+	line "looking for you."
 
 	para "He said he wanted"
 	line "you to do some-"
@@ -197,8 +197,8 @@ InstructionsNextText:
 	done
 
 HurryUpElmIsWaitingText:
-	text "PROF.WILLOW is wait-"
-	line "ing for you."
+	text "PROF. WILLOW is"
+	line "waiting for you."
 
 	para "Hurry up, baby!"
 	done

@@ -195,8 +195,9 @@ NewBarkTown_RivalReturnsToTheShadowsMovement:
 	step_end
 
 Text_GearIsImpressive:
-	text "Wow, your BUDDYGEAR"
-	line "is impressive!"
+	text "Wow, your"
+	line "BUDDYGEAR is"
+	cont "impressive!"
 
 	para "Did your mom get"
 	line "it for you?"
@@ -249,17 +250,17 @@ Text_CallMomOnGear:
 Text_ElmDiscoveredNewMon:
 	text "Yo, <PLAYER>!"
 
-	para "I hear PROF.WILLOW"
-	line "discovered some"
-	cont "new BUDDYMON."
+	para "I hear PROF."
+	line "WILLOW discovered"
+	cont "some new BUDDYMON."
 	done
 
 NewBarkTownRivalText1:
 	text "<……>"
 
 	para "So this is the"
-	line "famous WILLOW BUDDYMON"
-	cont "LAB…"
+	line "famous WILLOW"
+	cont "BUDDYMON LAB…"
 	done
 
 NewBarkTownRivalText2:
@@ -280,7 +281,8 @@ NewBarkTownPlayersHouseSignText:
 	done
 
 NewBarkTownElmsLabSignText:
-	text "WILLOW BUDDYMON LAB"
+	text "WILLOW BUDDYMON"
+	line "LAB"
 	done
 
 NewBarkTownElmsHouseSignText:

@@ -161,7 +161,8 @@ EcruteakPokecenter1FPokefanMText:
 
 	para "marvelous. Just"
 	line "like the way they"
-	cont "use their BUDDYMON."
+	cont "use their"
+	cont "BUDDYMON."
 	done
 
 EcruteakPokecenter1FCooltrainerFText:

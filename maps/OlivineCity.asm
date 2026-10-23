@@ -222,9 +222,9 @@ OlivineCitySailor1Text:
 
 OlivineCityStandingYoungsterPokegearText:
 	text "That thing you"
-	line "have--it's a BUDDY-"
-	cont "GEAR, right? Wow,"
-	cont "that's cool."
+	line "have--it's a"
+	cont "BUDDYGEAR, right?"
+	cont "Wow, that's cool."
 	done
 
 OlivineCityStandingYoungsterPokedexText:

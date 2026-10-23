@@ -174,8 +174,9 @@ EcruteakCityFisherText_JasmineReturned:
 	done
 
 EcruteakCityYoungsterText:
-	text "I hear BUDDYMON are"
-	line "rampaging at the"
+	text "I hear BUDDYMON"
+	line "are rampaging at"
+	cont "the"
 
 	para "LAKE OF RAGE. I'd"
 	line "like to see that."

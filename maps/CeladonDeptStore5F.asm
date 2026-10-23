@@ -43,8 +43,8 @@ CeladonDeptStore5FGentlemanText:
 	text "I want to buy some"
 	line "items that raise"
 
-	para "BUDDYMON stats, but"
-	line "I don't have"
+	para "BUDDYMON stats,"
+	line "but I don't have"
 	cont "enough money…"
 	done
 

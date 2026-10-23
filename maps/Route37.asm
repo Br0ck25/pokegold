@@ -144,9 +144,9 @@ TwinsAnnandanne2AfterBattleText:
 	done
 
 PsychicGregSeenText:
-	text "BUDDYMON can't do a"
-	line "thing if they are"
-	cont "asleep."
+	text "BUDDYMON can't do"
+	line "a thing if they"
+	cont "are asleep."
 
 	para "I'll show you how"
 	line "scary that is!"
@@ -158,10 +158,11 @@ PsychicGregBeatenText:
 	done
 
 PsychicGregAfterBattleText:
-	text "Putting BUDDYMON to"
-	line "sleep or paralyz-"
-	cont "ing them are good"
-	cont "battle techniques."
+	text "Putting BUDDYMON"
+	line "to sleep or"
+	cont "paralyz- ing them"
+	cont "are good battle"
+	cont "techniques."
 	done
 
 MeetSunnyText:

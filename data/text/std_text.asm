@@ -20,8 +20,8 @@ NurseNiteText:
 
 NurseAskHealText:
 	text "We can heal your"
-	line "BUDDYMON to perfect"
-	cont "health."
+	line "BUDDYMON to"
+	cont "perfect health."
 
 	para "Shall we heal your"
 	line "BUDDYMON?"
@@ -75,13 +75,14 @@ DifficultBookshelfText:
 
 PictureBookshelfText:
 	text "A whole collection"
-	line "of BUDDYMON picture"
-	cont "books!"
+	line "of BUDDYMON"
+	cont "picture books!"
 	done
 
 MagazineBookshelfText:
-	text "BUDDYMON magazines…"
-	line "BUDDYMON PAL,"
+	text "BUDDYMON"
+	line "magazines…"
+	cont "BUDDYMON PAL,"
 
 	para "BUDDYMON HANDBOOK,"
 	line "BUDDYMON GRAPH…"
@@ -157,8 +158,9 @@ TrashCanText:
 	done
 
 PokecenterSignText:
-	text "Heal Your BUDDYMON!"
-	line "BUDDYMON CENTER"
+	text "Heal Your"
+	line "BUDDYMON! BUDDYMON"
+	cont "CENTER"
 	done
 
 MartSignText:
@@ -170,8 +172,8 @@ MartSignText:
 
 ContestResults_ReadyToJudgeText:
 	text "We will now judge"
-	line "the BUDDYMON you've"
-	cont "caught."
+	line "the BUDDYMON"
+	cont "you've caught."
 
 	para "<……>"
 	line "<……>"
@@ -320,7 +322,8 @@ ContestResults_ReturnPartyText:
 
 ContestResults_PartyFullText:
 	text "Your party's full,"
-	line "so the BUDDYMON was"
+	line "so the BUDDYMON"
+	cont "was"
 
 	para "sent to your BOX"
 	line "in BILL's PC."
@@ -401,8 +404,8 @@ BugContestPrizeNoRoomText:
 
 HappinessText3:
 	text "Wow! You and your"
-	line "BUDDYMON are really"
-	cont "close!"
+	line "BUDDYMON are"
+	cont "really close!"
 	done
 
 HappinessText2:

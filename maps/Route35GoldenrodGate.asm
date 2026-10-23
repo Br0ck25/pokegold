@@ -114,7 +114,8 @@ Route35GoldenrodGateRandyThanksText:
 
 Route35GoldenrodGatePlayerReceivedAMonWithMailText:
 	text "<PLAYER> received a"
-	line "BUDDYMON with MAIL."
+	line "BUDDYMON with"
+	cont "MAIL."
 	done
 
 Route35GoldenrodGateRandyWeirdTreeBlockingRoadText:
@@ -170,9 +171,10 @@ Route35GoldenrodGatePokefanFText:
 	done
 
 Route35GoldenrodGatePokefanFText_FoughtSudowoodo:
-	text "I like the BUDDYMON"
-	line "Lullaby they play"
-	cont "on the radio."
+	text "I like the"
+	line "BUDDYMON Lullaby"
+	cont "they play on the"
+	cont "radio."
 	done
 
 Route35GoldenrodGate_MapEvents:

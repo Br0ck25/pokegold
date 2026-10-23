@@ -252,7 +252,8 @@ Route35NationalParkGateOfficer1GiveParkBallsText:
 
 Route35NationalParkGatePlayerReceivedParkBallsText:
 	text "<PLAYER> received"
-	line "{d:BUG_CONTEST_BALLS} PARK BALLS."
+	line "{d:BUG_CONTEST_BALLS}"
+	cont "PARK BALLS."
 	done
 
 Route35NationalParkGateOfficer1ExplainsRulesText:
@@ -261,8 +262,9 @@ Route35NationalParkGateOfficer1ExplainsRulesText:
 	cont "est bug BUDDYMON"
 	cont "is the winner."
 
-	para "You have {d:BUG_CONTEST_MINUTES}"
-	line "minutes."
+	para "You have"
+	line "{d:BUG_CONTEST_MINUTES}"
+	cont "minutes."
 
 	para "If you run out of"
 	line "PARK BALLS, you're"
@@ -299,8 +301,9 @@ Route35NationalParkGateOfficer1AskToUseFirstMonText:
 
 Route35NationalParkGateOfficer1WellHoldYourMonText:
 	text "Fine, we'll hold"
-	line "your other BUDDYMON"
-	cont "while you compete."
+	line "your other"
+	cont "BUDDYMON while you"
+	cont "compete."
 	done
 
 Route35NationalParkGatePlayersMonLeftWithHelperText:
@@ -311,7 +314,8 @@ Route35NationalParkGatePlayersMonLeftWithHelperText:
 
 Route35NationalParkGateOfficer1ChooseMonAndComeBackText:
 	text "Please choose the"
-	line "BUDDYMON to be used"
+	line "BUDDYMON to be"
+	cont "used"
 
 	para "in the Contest,"
 	line "then come see me."
@@ -346,7 +350,8 @@ Route35NationalParkGateOfficer1MakeRoomText:
 
 	para "You have no room"
 	line "to put the bug"
-	cont "BUDDYMON you catch."
+	cont "BUDDYMON you"
+	cont "catch."
 
 	para "Please make room"
 	line "in your party or"
@@ -428,8 +433,9 @@ BugCatchingContestExplanationText:
 	para "for participating,"
 	line "you also get to"
 
-	para "keep a bug BUDDYMON"
-	line "that you catch."
+	para "keep a bug"
+	line "BUDDYMON that you"
+	cont "catch."
 	done
 
 Route35NationalParkGate_MapEvents:

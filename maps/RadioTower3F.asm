@@ -166,8 +166,8 @@ RadioTower3FSuperNerdText:
 	done
 
 RadioTower3FGymGuideText_Rockets:
-	text "To trainers, BUDDY-"
-	line "MON are their"
+	text "To trainers,"
+	line "BUDDYMON are their"
 	cont "beloved partners."
 
 	para "It's terrible how"
@@ -322,8 +322,8 @@ RadioTower3FPersonnelSignText:
 	done
 
 RadioTower3FPokemonMusicSignText:
-	text "BUDDYMON MUSIC with"
-	line "Host DJ BEN"
+	text "BUDDYMON MUSIC"
+	line "with Host DJ BEN"
 	done
 
 RadioTower3F_MapEvents:

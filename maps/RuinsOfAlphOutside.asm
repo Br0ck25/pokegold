@@ -117,9 +117,9 @@ RuinsOfAlphOutsidePlayerEnterLabMovement:
 	step_end
 
 RuinsOfAlphOutsideScientistText:
-	text "Hm? That's a BUDDY-"
-	line "DEX, isn't it?"
-	cont "May I see it?"
+	text "Hm? That's a"
+	line "BUDDYDEX, isn't"
+	cont "it? May I see it?"
 
 	para "There are so many"
 	line "kinds of BUDDYMON."
@@ -168,9 +168,9 @@ SuperNerdEricUnusedAfterBattleText:
 	line "built them."
 
 	para "It's also not"
-	line "known if the BUDDY-"
-	cont "MON statues have"
-	cont "any meaning."
+	line "known if the"
+	cont "BUDDYMON statues"
+	cont "have any meaning."
 
 	para "It's all one big"
 	line "mystery…"

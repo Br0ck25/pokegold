@@ -262,7 +262,8 @@ FirebreatherNedBeatenText:
 
 FirebreatherNedAfterText:
 	text "In the past, there"
-	line "were these BUDDYMON"
+	line "were these"
+	cont "BUDDYMON"
 
 	para "that ran through"
 	line "grass at super-"

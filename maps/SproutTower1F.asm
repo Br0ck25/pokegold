@@ -46,7 +46,8 @@ SageChowSeenText:
 
 	para "Here, we express"
 	line "our gratitude to"
-	cont "honor all BUDDYMON."
+	cont "honor all"
+	cont "BUDDYMON."
 	done
 
 SageChowBeatenText:

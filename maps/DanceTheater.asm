@@ -129,8 +129,9 @@ DanceTheaterFancyPanel:
 
 KimonoGirlNaokoSeenText:
 	text "You have lovely"
-	line "BUDDYMON. May I see"
-	cont "them in battle?"
+	line "BUDDYMON. May I"
+	cont "see them in"
+	cont "battle?"
 	done
 
 KimonoGirlNaokoBeatenText:
@@ -221,8 +222,8 @@ KimonoGirlMikiAfterBattleText:
 	para "people who enjoy"
 	line "what I do."
 
-	para "My BUDDYMON keep my"
-	line "spirits up too."
+	para "My BUDDYMON keep"
+	line "my spirits up too."
 	done
 
 SurfGuyNeverLeftAScratchText:
