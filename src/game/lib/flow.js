@@ -32,6 +32,9 @@ Game.flow = (() => {
     await s.say("My name is WILLOW. People call me the BUDDYMON PROF!");
     await s.say("This world is full of creatures called BUDDYMON. Some people keep them as friends. Others battle with them.");
     await s.say("As for me, I study BUDDYMON for a living. But first, tell me a little about yourself.");
+    // Like Crystal: "Are you a boy? Or are you a girl?" before the name.
+    s.G.state.dialogue = { text: "First, are you a boy? Or are you a girl?", more: false };
+    s.G.player.gender = await s.ask(["BOY", "GIRL"]);
     s.G.player.name = await s.prompt("What is your name?", 7);
     s.screen("prof", { prof: { who: "hero" } });
     await s.say(`${s.name}! Your very own BUDDYMON story is about to unfold. A world of dreams and adventure is waiting. Let's go!`);

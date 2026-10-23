@@ -1,4 +1,4 @@
-// Battle screen. Moves animate from state.battle.fx = { n, who, type, kind } (attacker lunges, the target gets a type-coloured burst or a stat arrow);
+// Battle screen. Moves animate from state.battle.fx = { n, who, type, anim, hurts, kind } (the move's own effect from battleFx.js, then stat arrows);
 // the player's card shows an EXP bar from me.xp (0..1). state.battle = { foe, me: { species, name, level, hp, max }, menu: { kind, cols, items: [{label, sel}] } | null, net: { shakes, caught } | null }.
 // Menu buttons answer taps through Game.pick(index); messages use the shared dialogue box.
 Scenes.battle = function (root) {
@@ -18,16 +18,24 @@ Scenes.battle = function (root) {
   const menu = el.querySelector(".bt-menu"), net = el.querySelector(".bt-net"), foeMon = sides.foe.mon;
   let lastMenu = "", lastNet = null, lastFx = 0, lastLevel = 0;
   const COLORS = { normal: "#e8e0d0", fire: "#ff7a3c", water: "#4fb6ff", grass: "#6fd35a", electric: "#ffe03c", dark: "#7a5aa8", flying: "#a8c8ff", poison: "#b45ad9", ground: "#d9a860", rock: "#b8a078", bug: "#a8d83c", ghost: "#8a6ac8", psychic: "#ff7ab8", ice: "#9fe8ff", fighting: "#e0523c", steel: "#b8c4d8", dragon: "#6a5aff" };
-  const burst = (c) => `<svg viewBox="-50 -50 100 100"><g fill="${c}" stroke="#14213d" stroke-width="3" stroke-linejoin="round"><path d="M0 -44 L10 -14 L42 -18 L18 4 L34 38 L2 20 L-28 40 L-16 8 L-44 -12 L-10 -14Z"/></g><circle r="9" fill="#fff"/></svg>`;
   const arrows = (c, up) => `<svg viewBox="0 0 100 100" class="${up ? "up" : "down"}"><g fill="none" stroke="${c}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">${[26, 52, 78].map((y) => `<path d="M26 ${up ? y + 10 : y - 10} L50 ${up ? y - 10 : y + 10} L74 ${up ? y + 10 : y - 10}"/>`).join("")}</g></svg>`;
+  const show = (box, html) => { box.innerHTML = html; box.classList.remove("go"); void box.offsetWidth; box.classList.add("go"); };
   const play = (fx) => {
     const att = sides[fx.who], tgt = sides[fx.who === "me" ? "foe" : "me"];
-    att.mon.classList.remove("lunge-me", "lunge-foe"); void att.mon.offsetWidth;
-    const target = fx.kind === "hit" ? tgt : fx.kind === "up" ? att : tgt;
-    if (fx.kind === "hit") att.mon.classList.add(`lunge-${fx.who}`);
-    const box = target.fx;
-    box.innerHTML = fx.kind === "hit" ? burst(COLORS[fx.type] || "#fff") : arrows(fx.kind === "up" ? "#46c26f" : "#ff6b5e", fx.kind === "up");
-    box.classList.remove("go"); void box.offsetWidth; box.classList.add("go");
+    att.mon.classList.remove("lunge-me", "lunge-foe", "wiggle"); tgt.mon.classList.remove("hurt"); void att.mon.offsetWidth;
+    if (fx.kind === "move") {
+      const how = Art.moveFxHow[fx.anim] || {}, draw = Art.moveFx[fx.anim] || Art.moveFx.tackle;
+      if (how.contact) att.mon.classList.add(`lunge-${fx.who}`);
+      if (how.wiggle) att.mon.classList.add("wiggle");
+      if (fx.hurts) setTimeout(() => tgt.mon.classList.add("hurt"), how.contact ? 220 : 380);
+      const box = (how.self ? att : tgt).fx;
+      box.dataset.dir = fx.who; box.dataset.anim = fx.anim;
+      show(box, `<svg viewBox="0 0 100 100" class="a-${fx.anim}">${draw(COLORS[fx.type] || "#fff")}</svg>`);
+      return;
+    }
+    const box = (fx.kind === "up" ? att : tgt).fx;
+    delete box.dataset.anim;
+    show(box, arrows(fx.kind === "up" ? "#46c26f" : "#ff6b5e", fx.kind === "up"));
   };
   menu.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (b) Game.pick(+b.dataset.i); });
 

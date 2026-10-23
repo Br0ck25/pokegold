@@ -1,6 +1,7 @@
 // Who is who: looks for Art.person. NPC keys are SPRITE_* names (see constants/sprite_constants.asm).
 Art.looks = {
   HERO: { hat: "#c9322a", hair: "#3a2418", top: "#ffb62e", legs: "#1f3a8a" },
+  HEROINE: { hat: "#ffffff", hair: "#7a3a1e", top: "#6fb4ff", legs: "#2f3f7a" },
   MOM: { hair: "#6b3d1e", bun: true, dress: true, top: "#ff8fa3", apron: "#fff6dc", legs: "#f4c397" },
   TEACHER: { hair: "#8a5a2b", glasses: true, dress: true, top: "#7ab6ff", legs: "#f4c397" },
   FISHER: { hat: "#ffd25a", hair: "#7a5a2a", top: "#3fae62", legs: "#6b4a2a" },
@@ -27,4 +28,5 @@ Art.looks = {
   GAMEBOY_KID: { hat: "#ffd25a", hair: "#3a2418", top: "#3fae62", legs: "#1f3a8a" },
   OTHER: { hair: "#555a6e", top: "#9aa4c8", legs: "#5a5f7a" }, // anyone without a look yet
 };
-Art.heroSprite = (dir) => Art.person(dir, Art.looks.HERO);
+Art.heroLook = () => (Game.player.gender === 1 ? Art.looks.HEROINE : Art.looks.HERO);
+Art.heroSprite = (dir) => Art.person(dir, Art.heroLook());

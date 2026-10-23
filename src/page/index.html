@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, interactive-widget=resizes-content">
-<title>Buddymon Gold</title>
+<title>Buddymon</title>
 <link rel="icon" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icon-192.png">
@@ -53,6 +53,8 @@
       <div class="row"><button type="button" id="acct-login">Sign in</button><button type="button" id="acct-register">Create account</button></div>
     </div>
     <div id="account-in" hidden><button type="button" id="acct-logout">Sign out</button></div>
+    <div class="row"><button type="button" id="save-export">Export save</button><button type="button" id="save-import">Import save</button></div>
+    <input id="save-file" type="file" accept=".json,application/json" hidden>
     <p id="acct-msg" role="status"></p>
     <button value="close">Close</button>
   </form>

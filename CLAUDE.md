@@ -1,4 +1,4 @@
-# Buddymon Gold
+# Buddymon
 
 An original monster-collecting game in the spirit of Pokemon Gold, written from scratch to run in a phone browser (target Pixel 9)
 from one Cloudflare Worker file. No emulator, no ROM. Layouts, story, names and art are original; the rules and feel follow Gold
@@ -52,6 +52,7 @@ Original names for everything else as it is built; no real Pokemon/Nintendo name
 Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, the egg errand
 (egg -> Willow -> aide nets -> BUDDYDEX), trainers, genders (BANDIT always female; `SPECIES[x].female` = female share), BUDDYDEX screen.
 Rival is named by the player at the officer; his starter is the one that beats yours. Dialogue uses the shared `Game.talk(...)`.
+Also in: boy/girl choice in the intro (`player.gender`, 0 boy / 1 girl, `Art.heroLook`), landscape phone layout (`style.css` media query + a `@container` block in `scenes/battle.css`; new wide-screen layouts go in the same style), per-move battle effects (`MOVES[id].anim` -> `Art.moveFx` in `hd/scenes/battleFx.js`; a new move must name an anim, `test/extras.js` checks), save export/import (Account dialog, `app.js`).
 Status conditions are in (sleep, poison, burn, paralysis, freeze; REMEDY cures). Everything still missing or half-done is tracked in **`docs/TODO.md`**: add to it whenever you notice a gap, remove items you finish.
 
 ## Layout rules (tested by `test/layout.js`, `test/gold.js`)

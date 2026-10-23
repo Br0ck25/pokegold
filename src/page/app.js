@@ -50,3 +50,36 @@ $("account-btn").addEventListener("click", async () => { await showAccount(); ac
 $("acct-login").addEventListener("click", () => submitAccount("login"));
 $("acct-register").addEventListener("click", () => submitAccount("register"));
 $("acct-logout").addEventListener("click", async () => { await api("/api/logout", { method: "POST" }); await showAccount(); acct.msg.textContent = "Signed out. Reload to start as a guest."; });
+
+// Save files: export downloads the newest save; import checks the file, makes it the newest save (device + cloud) and reloads.
+$("save-export").addEventListener("click", async () => {
+  if (typeof Game !== "undefined" && Game.state && Game.state.map && Game.state.map.key) Game.save(true);
+  let text = null;
+  try { text = localStorage.getItem("buddymon-save"); } catch {}
+  if (!text) { acct.msg.textContent = "No saved game yet. Play a little first."; return; }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+  a.download = `buddymon-${JSON.parse(text).player.name || "save"}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  acct.msg.textContent = "Save file downloaded.";
+});
+$("save-import").addEventListener("click", () => $("save-file").click());
+$("save-file").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  try {
+    const save = JSON.parse(await file.text());
+    if (!save.player || !Array.isArray(save.player.party) || !save.map || typeof save.x !== "number" || typeof save.y !== "number") throw new Error("bad");
+    save.at = Date.now();
+    const text = JSON.stringify(save);
+    localStorage.setItem("buddymon-save", text);
+    await api("/api/save", { method: "PUT", body: text }).catch(() => {});
+    if (typeof Game !== "undefined") Game.frozen = true; // stop the game overwriting it on the way out
+    acct.msg.textContent = "Save imported. Loading...";
+    setTimeout(() => location.reload(), 400);
+  } catch {
+    acct.msg.textContent = "That file is not a Buddymon save.";
+  }
+});

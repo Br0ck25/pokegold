@@ -80,7 +80,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   let fxN = 0; // each move bumps this so the screen plays one animation per use: who attacks, the move's type, and hit / up / down
   const attack = async (a, d, slot) => {
     if (!(await canAct(s, a, refresh))) return settle();
-    await useMove(s, a, d, slot, refresh, (kind) => (state.battle.fx = { n: ++fxN, who: a === me ? "me" : "foe", type: MOVES[slot.id].type, kind }));
+    await useMove(s, a, d, slot, refresh, (kind) => (state.battle.fx = { n: ++fxN, who: a === me ? "me" : "foe", type: MOVES[slot.id].type, anim: MOVES[slot.id].anim, hurts: !!MOVES[slot.id].power, kind }));
     await residual(s, a, refresh);
     return settle();
   };

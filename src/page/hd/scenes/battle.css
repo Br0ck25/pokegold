@@ -58,3 +58,40 @@
 #hd .bt-card .st:empty { display:none; }
 #hd .bt-card .st[data-k=slp] { background:#b8b8d8; } #hd .bt-card .st[data-k=psn] { background:#c88ad9; } #hd .bt-card .st[data-k=brn] { background:#ff9a5c; }
 #hd .bt-card .st[data-k=par] { background:#ffe03c; } #hd .bt-card .st[data-k=frz] { background:#9fe8ff; }
+
+/* per-move effects (parts built in battleFx.js); the box is .go for ~1s */
+#hd .bt-side .fx.go[data-anim] { animation:fxbox 1s linear both; } @keyframes fxbox { 0%,85% { opacity:1; } 100% { opacity:0; } }
+#hd .bt-side .fx svg .p { opacity:0; transform-box:fill-box; transform-origin:center; animation:fxp .55s ease-out both; animation-delay:calc(var(--i) * .09s); }
+@keyframes fxp { 0% { opacity:0; transform:scale(.3); } 25% { opacity:1; transform:scale(1.1); } 80% { opacity:1; } 100% { opacity:0; transform:scale(1.25); } }
+#hd .bt-side .fx svg .p[data-travel] { animation-name:fxt; }
+#hd .bt-side .fx[data-dir=me] svg .p[data-travel] { --dx:-34px; --dy:20px; } #hd .bt-side .fx[data-dir=foe] svg .p[data-travel] { --dx:34px; --dy:-20px; }
+@keyframes fxt { 0% { opacity:0; transform:translate(var(--dx),var(--dy)) scale(.6); } 20% { opacity:1; } 80% { opacity:1; transform:none; } 100% { opacity:0; transform:scale(1.3); } }
+#hd .fx svg.a-scratch .p { animation-name:fxs; } @keyframes fxs { 0% { opacity:0; transform:translate(-14px,-14px) scale(.5); } 30% { opacity:1; transform:none; } 100% { opacity:0; transform:translate(8px,8px); } }
+#hd .fx svg.a-quick .p { animation-name:fxq; } @keyframes fxq { 0% { opacity:0; transform:translateX(-30px); } 30% { opacity:1; } 100% { opacity:0; transform:translateX(30px); } }
+#hd .fx svg.a-bite .jaw.u { animation:jaw-u .5s ease-in both; } #hd .fx svg.a-bite .jaw.d { animation:jaw-d .5s ease-in both; }
+@keyframes jaw-u { 0% { opacity:1; transform:translateY(-34px); } 60%,100% { opacity:1; transform:none; } } @keyframes jaw-d { 0% { opacity:1; transform:translateY(34px); } 60%,100% { opacity:1; transform:none; } }
+#hd .fx svg.a-bite .p { animation-name:none; opacity:1; }
+#hd .fx svg.a-sound .p { animation-name:fxring; } @keyframes fxring { 0% { opacity:.9; transform:scale(.2); } 100% { opacity:0; transform:scale(1.5); } }
+#hd .fx svg.a-song .p, #hd .fx svg.a-grow .p { animation-name:fxrise; } @keyframes fxrise { 0% { opacity:0; transform:translateY(16px); } 30% { opacity:1; } 100% { opacity:0; transform:translateY(-22px); } }
+#hd .fx svg.a-vine .whip { stroke-dasharray:140; animation:whip .45s ease-out both; } @keyframes whip { from { stroke-dashoffset:140; } to { stroke-dashoffset:0; } }
+#hd .fx svg.a-vine .p:first-child { animation-name:none; opacity:1; }
+#hd .fx svg.a-wag .p { animation-name:fxwag; } @keyframes fxwag { 0%,100% { opacity:0; } 20%,80% { opacity:1; } 35% { transform:rotate(-14deg); } 65% { transform:rotate(14deg); } }
+#hd .fx svg.a-bolt .p { animation-name:fxbolt; } @keyframes fxbolt { 0%,40%,70% { opacity:0; } 20%,55%,100% { opacity:1; } 100% { opacity:0; } }
+#hd .mon.hurt { animation:hurt .5s steps(2,jump-none) 1; } @keyframes hurt { 0%,40%,80% { opacity:.15; } 20%,60%,100% { opacity:1; } }
+#hd .mon.wiggle { animation:wiggle .5s ease-in-out; } @keyframes wiggle { 0%,100% { transform:none; } 25% { transform:rotate(-8deg); } 75% { transform:rotate(8deg); } }
+
+/* wide stage (landscape phone): sizes follow the height, cards sit left, buttons bottom right */
+@container (min-aspect-ratio: 11/10) {
+  #hd .bt-side.foe { right:10cqw; top:3cqh; width:min(22cqw, 30cqh); }
+  #hd .bt-side.me { left:9cqw; top:40cqh; width:min(28cqw, 40cqh); }
+  #hd .bt-card { padding:2cqh 2.4cqw; border-radius:3cqh; }
+  #hd .bt-card.foe { left:3cqw; top:4cqh; width:40cqw; }
+  #hd .bt-card.me { right:3cqw; top:40cqh; width:40cqw; padding:1.2cqh 2.4cqw; }
+  #hd .bt-card .nm { font-size:6cqh; } #hd .bt-card .lv { font-size:4.4cqh; top:2.4cqh; right:2.4cqw; }
+  #hd .bt-card .hp { height:3cqh; margin-top:1.2cqh; } #hd .bt-card .xp { height:2cqh; margin-top:1.4cqh; }
+  #hd .bt-card .num, #hd .bt-card .xpn { font-size:4cqh; margin-top:.6cqh; }
+  #hd .bt-card .gd { font-size:5.6cqh; }
+  #hd .bt-menu { left:44cqw; right:3cqw; bottom:calc(var(--dlg-h, 0px) + 3cqh); gap:1.6cqh; }
+  #hd .bt-menu button { font-size:5.6cqh; padding:1cqh 1cqw; min-height:11cqh; border-radius:3cqh; }
+  #hd .bt-menu.cmd { left:44cqw; }
+}

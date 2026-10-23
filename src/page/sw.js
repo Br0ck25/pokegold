@@ -1,4 +1,4 @@
-// Service worker: keeps the game shell (page, scripts, icons) so Buddymon Gold opens and plays offline once installed.
+// Service worker: keeps the game shell (page, scripts, icons) so Buddymon opens and plays offline once installed.
 // build.js replaces __VERSION__ with a hash of the shell, so a new worker.js refreshes the cache. Saves (/api/*) always go to the network.
 const VERSION = "__VERSION__";
 const SHELL = ["/", "/app.js", "/style.css", "/manifest.json", "/icon-192.png", "/icon-512.png"];

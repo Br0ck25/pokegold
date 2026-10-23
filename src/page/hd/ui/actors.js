@@ -28,7 +28,7 @@ function actorLayer(wrap, box) {
   return {
     hero,
     update(state) {
-      sync(hero, person(Art.looks.HERO), state.x, state.y, state.dir);
+      sync(hero, person(Art.heroLook()), state.x, state.y, state.dir);
       const seen = new Set();
       for (const o of state.objects) {
         seen.add(o.id);

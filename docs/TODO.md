@@ -49,3 +49,9 @@ Evolved forms of the starters and routes' species, other characters, towns beyon
 - Joey's "important battle" scene on Route 30, Tuscany of Tuesday on Route 29, the berry house (Route 30), Route 27/36/32/46 and Dark Cave, Sprout Tower: closed with a message.
 - Hidden items behind Cut/Surf (Violet HYPER TONIC etc.) are placed but unreachable; reach.js skips signs marked `needs`.
 - Wild tables are only checked by hand against data/wild/johto_grass.asm; a generator like terrain.js would stop drift.
+
+## Added with landscape / gender / animations
+- Landscape: only battle has a wide-screen layout; world, menus and panels just scale (check them in test/out/landscape-*.png when you touch them).
+- Move animations are simplified shapes, not Gold's frame-by-frame sprites; every move has one, new moves need an `anim`.
+- Girl hero: sprite and portrait only (no other girl-specific text yet; Crystal also changes a few lines).
+- `wrangler.toml` name is still `buddymon-gold` (renaming it would create a new Worker/URL); change it when the user wants a new URL.

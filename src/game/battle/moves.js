@@ -48,7 +48,7 @@ async function useMove(s, att, def, slot, refresh, fx) {
   const acc = Math.min(255, Math.floor((mv.acc * 255 / 100) * accMult(att.stages.acc - def.stages.eva)));
   if (rand(256) >= acc) return s.msg(`${att.label}'s attack missed!`);
   if (mv.power) {
-    fx("hit"); await s.wait(34);
+    fx("move"); await s.wait(34);
     const { damage, crit, mult } = damageOf(att, def, mv);
     if (mult === 0) return s.msg(`It doesn't affect ${def.label}...`);
     def.mon.hp = Math.max(0, def.mon.hp - damage);
@@ -58,10 +58,10 @@ async function useMove(s, att, def, slot, refresh, fx) {
     if (mult > 1) await s.msg("It's super effective!");
     else if (mult < 1) await s.msg("It's not very effective...");
     if (mv.status && def.mon.hp > 0) await inflict(s, def, mv.status, false, refresh);
-  } else if (mv.status) { fx("down"); await s.wait(34); await inflict(s, def, mv.status, true, refresh); }
+  } else if (mv.status) { fx("move"); await s.wait(34); await inflict(s, def, mv.status, true, refresh); }
   const e = mv.effect;
   if (e) {
-    if (!mv.power) { fx(e.stages > 0 ? "up" : "down"); await s.wait(34); }
+    if (!mv.power) { fx("move"); await s.wait(34); fx(e.stages > 0 ? "up" : "down"); await s.wait(24); }
     const t = e.target === "self" ? att : def, now = t.stages[e.stat], next = Math.max(-6, Math.min(6, now + e.stages));
     if (next === now) return s.msg(`Nothing happened!`);
     t.stages[e.stat] = next;

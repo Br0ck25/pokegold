@@ -32,7 +32,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.reload();
   const title = await page.title();
   const hasPlay = await page.$("#play");
-  if (title !== "Buddymon Gold" || !hasPlay) fail("the game should open offline", { title, hasPlay: !!hasPlay });
+  if (title !== "Buddymon" || !hasPlay) fail("the game should open offline", { title, hasPlay: !!hasPlay });
 
   console.log(failed ? "FAILED" : "OK");
   process.exitCode = failed ? 1 : 0;

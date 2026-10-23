@@ -6,7 +6,7 @@ const saveText = () => {
 };
 let lastCloud = 0;
 Game.save = (force) => {
-  if (Game.state.screen || !Game.state.map.key) return;
+  if (Game.frozen || Game.state.screen || !Game.state.map.key) return; // frozen: a save file is being imported
   const text = saveText();
   try { localStorage.setItem(Game.SAVE_KEY, text); } catch {}
   if (force || Date.now() - lastCloud > 15000) { lastCloud = Date.now(); api("/api/save", { method: "PUT", body: text }).catch(() => {}); }
