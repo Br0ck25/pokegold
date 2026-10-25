@@ -6,3 +6,4 @@
 #hd .popup.top { top:4%; } #hd .popup.low { bottom:calc(var(--dlg-h, 0px) + 3.5% + 3cqw); } #hd .popup.right { right:4%; } #hd .popup.left { left:4%; }
 #hd .popup li { padding:1.8cqw 3.4cqw; margin-bottom:.8cqw; font-size:5cqw; font-weight:600; border-radius:2.6cqw; white-space:nowrap; }
 #hd .popup li.sel { color:var(--ink); background:linear-gradient(#ffe98a,#ffc93c); font-weight:700; }
+/*wide*/

@@ -27,6 +27,7 @@ function menuVerbs(G, s) {
     async panel(spec, start = 0) {
       let i = Math.min(start, Math.max(0, spec.rows.length - 1));
       const show = () => (G.state.panel = { ...spec, sel: i });
+      G.state.dialogue = null; // the list takes the message box's place (it used to hide the Back button)
       G.picked = null; show();
       let out;
       for (Input.clear(); !out;) {

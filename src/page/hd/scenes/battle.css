@@ -95,3 +95,7 @@
   #hd .bt-menu button { font-size:5.6cqh; padding:1cqh 1cqw; min-height:11cqh; border-radius:3cqh; }
   #hd .bt-menu.cmd { left:44cqw; }
 }
+
+#hd .bt-menu.moves button { display:flex; flex-direction:column; justify-content:center; min-height:15cqw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#hd .bt-menu.moves button small { font-size:3.2cqw; font-weight:500; opacity:.8; }
+@container (min-aspect-ratio: 11/10) { #hd .bt-menu.moves button { min-height:12cqh; } #hd .bt-menu.moves button small { font-size:3.8cqh; } }

@@ -8,6 +8,10 @@
 #hd .actor .leg { transform-box:fill-box; transform-origin:50% 0; }
 #hd .actor.walk .leg.l { animation:stride .27s ease-in-out infinite alternate; }
 #hd .actor.walk .leg.r { animation:stride .27s ease-in-out infinite alternate-reverse; }
+/* facing the camera or away, the feet take turns lifting (no scissoring sideways) */
+#hd .actor[data-dir="0"].walk .leg.l, #hd .actor[data-dir="1"].walk .leg.l { animation:stride-fb .27s ease-in-out infinite alternate; }
+#hd .actor[data-dir="0"].walk .leg.r, #hd .actor[data-dir="1"].walk .leg.r { animation:stride-fb .27s ease-in-out infinite alternate-reverse; }
+@keyframes stride-fb { from { transform:translateY(-14%) scaleY(.8); } to { transform:translateY(3%); } }
 #hd .actor.walk svg { animation:bob-step .27s ease-in-out infinite alternate; }
 @keyframes stride { from { transform:translateY(-6%) rotate(-22deg); } to { transform:translateY(0) rotate(22deg); } }
 @keyframes bob-step { from { transform:translateY(0); } to { transform:translateY(-3%); } }

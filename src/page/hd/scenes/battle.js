@@ -22,7 +22,9 @@ Scenes.battle = function (root) {
   const show = (box, html) => { box.innerHTML = html; box.classList.remove("go"); void box.offsetWidth; box.classList.add("go"); };
   const play = (fx) => {
     const att = sides[fx.who], tgt = sides[fx.who === "me" ? "foe" : "me"];
-    att.mon.classList.remove("lunge-me", "lunge-foe", "wiggle"); tgt.mon.classList.remove("hurt"); void att.mon.offsetWidth;
+    // Clear every animation class on both sprites first: a class left behind replays its animation when another one is removed.
+    for (const side of [att, tgt]) side.mon.classList.remove("lunge-me", "lunge-foe", "wiggle", "hurt");
+    void att.mon.offsetWidth;
     if (fx.kind === "move") {
       const how = Art.moveFxHow[fx.anim] || {}, draw = Art.moveFx[fx.anim] || Art.moveFx.tackle;
       if (how.contact) att.mon.classList.add(`lunge-${fx.who}`);
@@ -49,7 +51,12 @@ Scenes.battle = function (root) {
     if (s.hp !== null && mon.hp < s.hp) { s.mon.classList.remove("hit"); void s.mon.offsetWidth; s.mon.classList.add("hit"); }
     s.hp = mon.hp;
     s.mon.classList.toggle("faint", mon.hp === 0);
-    s.card.querySelector(".nm").textContent = mon.name;
+    const nm = s.card.querySelector(".nm");
+    if (nm.textContent !== mon.name) { // a long name shrinks until it fits instead of being cut off
+      nm.textContent = mon.name; nm.style.fontSize = "";
+      const full = parseFloat(getComputedStyle(nm).fontSize);
+      for (let f = full; nm.scrollWidth > nm.clientWidth && f > full * 0.5; f -= full * 0.04) nm.style.fontSize = `${f}px`;
+    }
     const gd = s.card.querySelector(".gd");
     gd.textContent = mon.gender === "F" ? "♀" : mon.gender === "M" ? "♂" : "";
     gd.className = `gd ${mon.gender === "F" ? "f" : "m"}`;
@@ -94,7 +101,10 @@ Scenes.battle = function (root) {
       menu.hidden = !b.menu;
       if (b.menu) {
         menu.className = `bt-menu ${b.menu.kind} cols${b.menu.cols}`;
-        menu.innerHTML = b.menu.items.map((i, n) => `<button data-i="${n}" class="${i.sel ? "sel" : ""}">${esc(i.label)}</button>`).join("");
+        menu.innerHTML = b.menu.items.map((i, n) => {
+          const [name, pp] = b.menu.kind === "moves" ? i.label.split("  ") : [i.label]; // move buttons: name over PP, always the same size
+          return `<button data-i="${n}" class="${i.sel ? "sel" : ""}">${esc(name)}${pp ? `<small>${esc(pp)}</small>` : ""}</button>`;
+        }).join("");
       }
     },
   };

@@ -20,6 +20,15 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     await page.waitForFunction(() => HD.last.screen === "menu");
   };
 
+  // --- Rotate button: a portrait phone that won't lock the screen gets the page turned sideways
+  await page.goto(base);
+  await page.evaluate(() => { screen.orientation.lock = () => Promise.reject(new Error("no lock")); });
+  await page.locator("#rotate").tap();
+  const turned = await page.evaluate(() => { const b = document.querySelector("#stage"); return { land: document.body.classList.contains("land"), rot: document.body.classList.contains("rot"), w: b.offsetWidth, h: b.offsetHeight }; });
+  if (!turned.land || !turned.rot || turned.w <= turned.h) fail("Rotate turns the game sideways", turned);
+  await page.locator("#rotate").tap();
+  if (await page.evaluate(() => document.body.classList.contains("rot"))) fail("Rotate again turns it back");
+
   // --- boy/girl choice (new game, no save)
   await page.goto(base);
   await page.evaluate(() => localStorage.clear());
@@ -60,6 +69,21 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     if (["scratch", "bite", "flame", "bolt", "vine"].includes(anim)) await page.screenshot({ path: `test/out/fx-${anim}.png` });
     await page.waitForTimeout(900);
   }
+
+  // Animations stay on the side that acts: after we attack, the foe's old lunge class must not replay, and the other way round.
+  const sides = async (who, n) => page.evaluate(async ([who, n]) => {
+    Game.state.battle.fx = { n, who, type: "normal", anim: "scratch", hurts: true, kind: "move" };
+    await new Promise((r) => setTimeout(r, 120));
+    const cls = (side) => document.querySelector(`#hd .bt-side.${side} .mon`).className;
+    return { me: cls("me"), foe: cls("foe") };
+  }, [who, n]);
+  const a1 = await sides("me", 2001); await page.waitForTimeout(700);
+  const a2 = await sides("foe", 2002); await page.waitForTimeout(700);
+  const a3 = await sides("me", 2003);
+  if (!/lunge-me/.test(a1.me) || /lunge-foe/.test(a1.foe)) fail("our attack lunges only our side", a1);
+  if (!/lunge-foe/.test(a2.foe) || /lunge-me/.test(a2.me)) fail("the foe's attack lunges only its side", a2);
+  if (!/lunge-me/.test(a3.me) || /lunge-foe/.test(a3.foe)) fail("our second attack still lunges only our side", a3);
+  await page.waitForTimeout(900);
 
   // --- export and import
   await page.evaluate(() => { Game.state.screen = null; });

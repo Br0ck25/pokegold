@@ -5,9 +5,12 @@ Art.johto = (() => {
   const tufts = [[30, 40], [116, 30], [160, 86], [62, 124], [146, 160], [22, 176], [96, 92]]
     .map(([x, y]) => `<path d="M${x} ${y} l-6 -10 M${x} ${y} l0 -13 M${x} ${y} l6 -10"/>`).join("");
   const ground = `<rect x="-1" y="-1" width="202" height="202" fill="#86dc6f"/><g stroke="#4fae57" stroke-width="4" stroke-linecap="round" fill="none">${tufts}</g>`;
-  const tree = (x, y) => `<g transform="translate(${x} ${y})"><ellipse cx="50" cy="92" rx="34" ry="8" fill="#000" opacity=".2"/>
-    <rect x="43" y="66" width="14" height="28" rx="3" fill="#9a6a3a" ${o}/><circle cx="50" cy="42" r="46" fill="#2f9b4a" ${o}/>
-    <circle cx="34" cy="26" r="15" fill="#4fc467"/><path d="M22 54 Q50 78 78 54" fill="none" stroke="#1f7a38" stroke-width="5" stroke-linecap="round"/></g>`;
+  // A tree: a visible trunk with roots, three overlapping clumps of leaves (darker underneath, lit from the top left) and a few leaf marks.
+  const tree = (x, y, v = 0) => `<g transform="translate(${x} ${y})"><ellipse cx="50" cy="94" rx="36" ry="8" fill="#000" opacity=".22"/>
+    <path d="M42 96 L44 58 H58 L60 96 Q51 100 42 96Z M42 96 l-8 4 M60 96 l8 4" fill="#a8743f" ${o}/><path d="M48 62 V90" stroke="#7a4e24" stroke-width="4" stroke-linecap="round"/>
+    <g ${o}><circle cx="${v === 1 ? 70 : 72}" cy="52" r="26" fill="#2a8c43"/><circle cx="${v === 2 ? 34 : 28}" cy="52" r="27" fill="#2a8c43"/><circle cx="50" cy="32" r="32" fill="#38a653"/></g>
+    <circle cx="38" cy="20" r="11" fill="#6fd382"/><circle cx="66" cy="44" r="7" fill="#4fc467"/><circle cx="24" cy="48" r="6" fill="#4fc467"/>
+    <path d="M34 58 q6 6 12 0 M56 62 q6 6 12 0 M44 40 q5 5 10 0" fill="none" stroke="#1d6b33" stroke-width="4" stroke-linecap="round"/></g>`;
   const bush = (x, y) => `<g transform="translate(${x} ${y})"><ellipse cx="50" cy="70" rx="46" ry="28" fill="#3fae57" ${o}/><ellipse cx="34" cy="60" rx="14" ry="9" fill="#6fd382"/></g>`;
   const sign = (x, y) => `<g transform="translate(${x} ${y})"><rect x="44" y="52" width="12" height="38" rx="3" fill="#9a6a3a" ${o}/>
     <rect x="16" y="14" width="68" height="44" rx="7" fill="#e2a468" ${o}/><path d="M28 28 H72 M28 42 H60" stroke="${INK}" stroke-width="4" stroke-linecap="round"/></g>`;
@@ -37,13 +40,17 @@ Art.johtoCell = (() => {
   const lip = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="9" fill="#b8a07a" ${o}/><rect x="${x + 6}" y="${y + 4}" width="${Math.max(w - 12, 4)}" height="5" rx="2" fill="#dccaa0"/>`;
   const ledge = { v: lip(-2, 68, 104, 24), "<": lip(2, -2, 24, 104), ">": lip(74, -2, 24, 104), L: lip(-2, 68, 104, 24) + lip(2, -2, 24, 76), R: lip(-2, 68, 104, 24) + lip(74, -2, 24, 76) };
 
-  return (kind, mask = 0, v = 0) => {
+  // Cave theme: stone floor and dark rock walls instead of grass and trees.
+  const floorC = (v) => `<rect x="-1" y="-1" width="102" height="102" fill="#a98f6b"/><g fill="#8f7654">${[[[16, 30], [70, 22], [52, 70]], [[30, 18], [78, 50], [20, 74]], [[58, 30], [24, 58], [80, 80]]][v % 3].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="9" ry="5"/>`).join("")}</g>`;
+  const wallC = (v) => `<rect x="-1" y="-1" width="102" height="102" fill="#4a3d33"/><path d="M-1 30 Q30 10 54 26 T101 20 M-1 70 Q24 54 50 72 T101 62" fill="none" stroke="#6b5a4a" stroke-width="7" stroke-linecap="round"/><path d="M${14 + v * 20} 12 l12 8 -8 12Z M${60 - v * 10} 78 l14 6 -10 10Z" fill="#2c231c"/>`;
+  return (kind, mask = 0, v = 0, theme = "") => {
+    if (theme === "cave" && kind !== "w") return kind === "T" || kind === "r" || kind === "C" ? wallC(v) : floorC(v) + (ledge[kind] || "");
     switch (kind) {
       case "g": return tall;
       case "p": return dirt;
       case "S": return ground(v) + Art.johto.sign(0, 0);
       case "f": return ground(v) + `<g ${o} stroke-width="3"><circle cx="28" cy="40" r="9" fill="#ff6b5e"/><circle cx="68" cy="30" r="9" fill="#fff6dc"/><circle cx="56" cy="72" r="9" fill="#ffc93c"/><circle cx="20" cy="80" r="8" fill="#ff9aa8"/></g>`;
-      case "T": return ground(v) + tree(0, 0);
+      case "T": return ground(v) + tree(0, 0, v);
       case "c": return ground(v) + bush(0, 0);
       case "r": return ground(v) + rock;
       case "w": return water(mask);

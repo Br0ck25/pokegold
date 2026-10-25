@@ -22,3 +22,5 @@
 
 #hd .gender { margin-left:1.4cqw; font-weight:700; } #hd .gender.m { color:#4aa3e8; } #hd .gender.f { color:#ff7aa8; }
 #hd .panel-ui li.sel .gender { color:var(--ink); }
+#hd .pn-map { width:100%; align-self:stretch; }
+/*wide*/

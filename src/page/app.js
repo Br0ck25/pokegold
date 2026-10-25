@@ -83,3 +83,25 @@ $("save-file").addEventListener("change", async (e) => {
     acct.msg.textContent = "That file is not a Buddymon save.";
   }
 });
+
+// Landscape: body.land follows the phone's orientation; Rotate locks the screen sideways, or turns the page itself when the browser won't lock.
+const sideways = matchMedia("(orientation: landscape) and (max-height: 520px)");
+const syncLand = () => document.body.classList.toggle("land", sideways.matches || document.body.classList.contains("rot"));
+sideways.addEventListener("change", syncLand);
+let locked = false;
+$("rotate").addEventListener("click", async () => {
+  const body = document.body;
+  if (locked || body.classList.contains("rot")) {
+    try { screen.orientation.unlock(); } catch {}
+    locked = false; body.classList.remove("rot"); syncLand(); return;
+  }
+  try {
+    if (!matchMedia("(display-mode: standalone)").matches && !document.fullscreenElement) await document.documentElement.requestFullscreen();
+    await screen.orientation.lock("landscape");
+    locked = true;
+  } catch {
+    if (!sideways.matches) body.classList.add("rot"); // already sideways? nothing to turn
+  }
+  syncLand();
+});
+syncLand();

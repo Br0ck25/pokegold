@@ -21,31 +21,38 @@
     await s.say("It's dangerous to go out without a BUDDYMON! Wild BUDDYMON jump out of the grass on the way to the next town.");
   };
 
-  // The rival lurks beside the lab at (3,2); you can only talk to him from (2,2). He turns on you, you are pushed back and then shoved out.
+  // Gold's NewBarkTownRivalScript: he stares at the lab; talk to him from (2,2) and he turns on you, pushes you down a step and then shoves you
+  // another (Gold walks him "into the shadows" beside the lab afterwards; he stays standing there, so you can do it all again).
   const rival = async (s) => {
-    await s.say("<...> So this is the famous WILLOW BUDDYMON LAB...");
+    await s.say("……");
+    await s.say("So this is the famous WILLOW BUDDYMON LAB…");
     s.turn(3, 2);
-    await s.say("...What are you staring at?");
-    await s.move("player", [0], 1); // a step back, still facing him
+    await s.say("…What are you staring at?");
+    await s.move("player", [0], 1); // pushed away, still facing him
     await s.wait(5);
     s.turn(3, 0);
     await s.wait(5);
     await s.move("player", [0], 1); // the shove
-    await s.move(3, [3]);
-    s.hide(3);
+    await s.wait(10);
+    s.turn(3, 3);
   };
 
   Game.outdoor("newbark", "NewBarkTown", {
     label: "New Bark Town",
+    enter: async (s) => { s.flag("MOM_FIRST_BANKING", false); }, // Gold clears it here: Mom only says "I'm behind you" until you next leave the house
     style: { "6,3": { roof: "#5aa860", wall: "#eaf3ff", label: "LAB" }, "13,5": { roof: "#d9604c" }, "3,11": { roof: "#3a8fd9" }, "11,13": { roof: "#9a6ad9" } },
     closed: { Route27: "ROUTE 27 is across the water. You'd need SURF." },
     npcs: [
       {
         id: 1, name: "TEACHER", x: 6, y: 8, dir: 0, wander: "spin",
-        script: async (s) => { await s.say(hasMon(s) ? "Oh! Your BUDDYMON is adorable! I wish I had one!" : "Wow, your BUDDYGEAR is impressive! Did your mom get it for you?"); },
+        script: async (s) => { // Gold's NewBarkTownTeacherScript, by progress
+          if (s.flag("MOM_TALKED_AFTER_EGG")) { await s.say("Call your mom on your BUDDYGEAR to let her know how you're doing."); return; }
+          if (s.flag("GAVE_EGG")) { await s.say(`Hi, ${s.name}! Leaving again?`); await s.say("You should tell your mom if you are leaving."); return; }
+          await s.say(hasMon(s) ? "Oh! Your BUDDYMON is adorable! I wish I had one!" : "Wow, your BUDDYGEAR is impressive!"); if (!hasMon(s)) await s.say("Did your mom get it for you?");
+        },
       },
       { id: 2, name: "FISHER", x: 12, y: 9, dir: 0, wander: "vertical", script: talk((s) => `Yo, ${s.name}! I hear PROF. WILLOW discovered some new BUDDYMON.`) },
-      { id: 3, name: "RIVAL", x: 3, y: 2, dir: 3, hideIf: "RIVAL_NEWBARK_GONE", script: rival },
+      { id: 3, name: "RIVAL", x: 3, y: 2, dir: 3, script: rival },
     ],
     signs: [
       { x: 8, y: 8, script: talk("NEW BARK TOWN. The town where the winds of a new beginning blow.") },

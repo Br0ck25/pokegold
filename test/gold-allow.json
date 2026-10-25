@@ -4,11 +4,9 @@
  "bedroom:npc4,4": "doll: hidden until placed with the decoration system (the player asked for no dolls)",
  "bedroom:npc5,4": "doll: hidden until placed with the decoration system (the player asked for no dolls)",
  "bedroom:npc0,1": "big doll: hidden until placed with the decoration system (the player asked for no dolls)",
- "route29:npc29,12": "Tuscany of Tuesday: weekday-only event, not built (docs/TODO.md)",
  "cherrygrove:npc39,6": "the rival appears from the east edge by script (Game.rivalScene), not as a standing object",
- "route30:npc5,26": "Joey's important-battle scene: not built (docs/TODO.md)",
- "route30:npc5,24": "monster sprites of Joey's scene: not built",
- "route30:npc5,25": "monster sprites of Joey's scene: not built",
  "vcenter:npc4,3": "the aide's EGG: not built (docs/TODO.md)",
- "vnickname:npc5,2": "the pet bird: no bird sprite yet (docs/TODO.md)"
+ "vnickname:npc5,2": "the pet bird: no bird sprite yet (docs/TODO.md)",
+ "darkcave:terrain": "the 2x2 'building' at the west mouth is only a warp carpet in a cave wall; caves are drawn with theme cave and no buildings",
+ "darkcave:bld4,14": "same: a cave mouth, not a building"
 }

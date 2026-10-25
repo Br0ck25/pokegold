@@ -23,6 +23,12 @@ Catching uses buddy nets instead of balls. Accounts are optional (guest cookie b
    4. `node test/gold.js` must pass: same size, walls/grass/water/ledges, building footprints, doors, signs and people at the same cells. A deliberate difference goes in
       `test/gold-allow.json` with a reason (e.g. decoration-system objects, events not built yet); never silence a mismatch without one.
    5. Run `node tools/audit-maps.js <key>` / `node tools/audit-rooms.js`, **open the pictures and look** (houses on trees, wrong sizes, signs, doors), then `node test/reach.js` + `npm test`.
+   6. **Text, people, trainers and walks come from scripts too.** `python3 tools/goldtext.py <GoldName>` lists every person (sprite, cell, movement, script), trainer (class, party,
+      speeches) and text block of a map; `--label _LabelName` prints shared text (data/text/*.asm: Mom's bank, ...); `--audit <our files>` lists Gold text we do not say.
+      `python3 tools/gen-text.py` writes `src/game/data/text.js` (`Game.text[GoldMap][Label]`, `Game.moves[GoldMap][Label]` = Gold's movement lists) with our renames and fixes
+      (Willow is a woman; nets not balls; add a fix to FIXES in the tool, never edit text.js). In a map file say it with `s.text("Map", "Label")`, `Game.said("Map", "Label")`
+      (a whole script), `Game.line("Map", "Label")` (one string for trainer speeches) and walk with `s.follow(who, Game.moves.Map.Label)`. Never retype Gold's text or invent lines.
+      `node test/text.js` fails when a built map misses Gold text beyond `test/text-allow.json` (the allowance only goes down).
    Gold facts the engine follows: ledge cells are walkable and pressing their direction jumps two cells over the cliff (C); you can talk across a COUNTER tile; a PC tile opens
    the PC; a map entry starts a 5-step wild-encounter cooldown; trainers' sight comes from the object event. Sign cells on a building footprint are its plaque (no sign drawn).
 
@@ -49,7 +55,7 @@ Original names for everything else as it is built; no real Pokemon/Nintendo name
 - Don't commit test output (`test/out`). The audit pictures are for you to look at, not to commit. `worker.js` is the one generated file that is committed.
 
 ## Status
-Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, the egg errand
+Done: home, New Bark, Willow's lab/house, neighbor, Route 29, Cherrygrove, Route 30, Mr. Buddymon's house, Route 31, Violet City, Dark Cave (entrance level), the egg errand
 (egg -> Willow -> aide nets -> BUDDYDEX), trainers, genders (BANDIT always female; `SPECIES[x].female` = female share), BUDDYDEX screen.
 Rival is named by the player at the officer; his starter is the one that beats yours. Dialogue uses the shared `Game.talk(...)`.
 Also in: boy/girl choice in the intro (`player.gender`, 0 boy / 1 girl, `Art.heroLook`), landscape phone layout (`style.css` media query + a `@container` block in `scenes/battle.css`; new wide-screen layouts go in the same style), per-move battle effects (`MOVES[id].anim` -> `Art.moveFx` in `hd/scenes/battleFx.js`; a new move must name an anim, `test/extras.js` checks), save export/import (Account dialog, `app.js`).

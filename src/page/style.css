@@ -41,21 +41,24 @@ body.gestures #stage { touch-action:none; user-select:none; -webkit-user-select:
 .hint { display:none; margin:0; opacity:.6; font-size:13px; text-align:center; }
 @media (hover:hover) and (pointer:fine) { #pad { display:none !important; } .hint { display:block; } main { height:min(100dvh, 900px); } }
 
-/* landscape phone: game in the middle (4:3, as wide as fits), d-pad + page buttons on the left, A/B + Start/Select on the right */
-@media (orientation:landscape) and (max-height:520px) {
-  main { position:relative; max-width:none; flex-direction:row; justify-content:center; align-items:center; padding:max(6px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
-  #stage { flex:none; height:100%; aspect-ratio:4/3; max-width:calc(100% - 380px); }
-  body.gestures #stage { max-width:100%; aspect-ratio:auto; flex:1 1 0; }
-  #pad { display:contents; }
-  #pad[hidden], body.gestures #pad { display:none; }
-  #dpad { left:max(14px, env(safe-area-inset-left)); top:auto; bottom:10px; }
-  #pad .ab { position:absolute; right:max(14px, env(safe-area-inset-right)); bottom:56px; width:196px; height:150px; }
-  #pad .ab [data-key=A] { right:0; top:0; } #pad .ab [data-key=B] { right:100px; top:60px; }
-  #pad .center { left:auto; right:max(14px, env(safe-area-inset-right)); transform:none; bottom:6px; }
-  #pad .center button { min-width:84px; }
-  #cloud { position:absolute; left:max(14px, env(safe-area-inset-left)); top:6px; flex-direction:column; align-items:stretch; width:120px; }
-  #status, .hint { display:none; }
-}
+/* landscape (body.land: a landscape phone, or forced with the Rotate button): game in the middle (4:3, as wide as fits),
+   d-pad + page buttons on the left, A/B + Start/Select on the right */
+body.land main { position:relative; max-width:none; flex-direction:row; justify-content:center; align-items:center; padding:max(6px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
+body.land #stage { flex:none; height:100%; aspect-ratio:4/3; max-width:calc(100% - 380px); }
+body.land.gestures #stage { max-width:100%; aspect-ratio:auto; flex:1 1 0; }
+body.land #pad { display:contents; }
+body.land #pad[hidden], body.land.gestures #pad { display:none; }
+body.land #dpad { left:max(14px, env(safe-area-inset-left)); top:auto; bottom:10px; }
+body.land #pad .ab { position:absolute; right:max(14px, env(safe-area-inset-right)); bottom:56px; width:196px; height:150px; }
+body.land #pad .ab [data-key=A] { right:0; top:0; } body.land #pad .ab [data-key=B] { right:100px; top:60px; }
+body.land #pad .center { left:auto; right:max(14px, env(safe-area-inset-right)); transform:none; bottom:6px; }
+body.land #pad .center button { min-width:84px; }
+body.land #cloud { position:absolute; left:max(14px, env(safe-area-inset-left)); top:6px; flex-direction:column; align-items:stretch; width:120px; gap:6px; }
+body.land #cloud button { min-height:40px; }
+body.land #status, body.land .hint { display:none; }
+/* forced landscape on a portrait screen: the whole page turned a quarter */
+body.rot main { position:fixed; top:0; left:0; width:100dvh; height:100dvw; transform-origin:top left; transform:translateX(100dvw) rotate(90deg); }
+body, button { -webkit-user-select:none; user-select:none; } input { -webkit-user-select:text; user-select:text; }
 
 dialog#account { width:min(92vw,380px); padding:20px; color:var(--fg); background:var(--panel); border:1px solid #3a4680; border-radius:18px; }
 dialog#account::backdrop { background:#000b; }

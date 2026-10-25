@@ -6,6 +6,7 @@ const { chromium } = require("playwright");
 const fs = require("fs"), path = require("path");
 const base = process.argv[2] || "http://127.0.0.1:8787";
 const MAPS = {
+  darkcave: "DarkCaveVioletEntrance",
   bedroom: "PlayersHouse2F", livingroom: "PlayersHouse1F", newbark: "NewBarkTown", willowlab: "ElmsLab", neighbor: "PlayersNeighborsHouse", willowhouse: "ElmsHouse",
   route29: "Route29", gate29: "Route29Route46Gate", cherrygrove: "CherrygroveCity", cgmart: "CherrygroveMart", cgcenter: "CherrygrovePokecenter1F",
   cggent: "GuideGentsHouse", cggym: "CherrygroveGymSpeechHouse", cgevo: "CherrygroveEvolutionSpeechHouse", route30: "Route30", mrbuddy: "MrPokemonsHouse",

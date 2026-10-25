@@ -5,3 +5,4 @@
 #hd .pic-art svg { width:100%; display:block; }
 #hd .pic-name { margin-top:1cqw; font-family:'Lilita One','Fredoka',sans-serif; font-size:5cqw; letter-spacing:.3cqw; color:var(--gold); }
 @keyframes pic-in { from { transform:scale(.85); opacity:0; } to { transform:scale(1); opacity:1; } }
+/*wide*/

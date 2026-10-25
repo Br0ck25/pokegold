@@ -18,9 +18,12 @@ const HD = (() => {
     last: null,
     start(rootEl, sceneTable, getState) {
       root = rootEl; scenes = sceneTable;
+      const fade = h(`<div class="fade"></div>`); // black veil used between maps (state.fade)
+      root.appendChild(fade);
       setInterval(() => {
         const state = getState();
         show(pick(state));
+        fade.classList.toggle("on", !!state.fade);
         if (current) current.update(state);
         HD.last = state;
       }, 1000 / 30);

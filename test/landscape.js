@@ -45,12 +45,6 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.evaluate(() => Game.warp("bedroom", 3, 3, 0));
   await page.waitForFunction(() => HD.last.map.key === "bedroom");
   await page.waitForTimeout(600);
-  const room = await page.evaluate(() => {
-    const st = document.querySelector("#hd").getBoundingClientRect(), r = document.querySelector("#hd .room-svg").getBoundingClientRect();
-    return { top: r.y - st.y, bottom: st.bottom - r.bottom, left: r.x - st.x, right: st.right - r.right };
-  });
-  if (room.top < -1 || room.bottom < -1 || room.left < -1 || room.right < -1) fail("the room fits inside the wide stage", room);
-  if (room.top > 60 && room.bottom > 60 && Math.abs(room.top - room.bottom) > 40) fail("the room is centred", room);
   await page.screenshot({ path: "test/out/landscape-room.png" });
   await page.evaluate(() => { Game.run(async (s) => { await s.say("Jayda! Your very own BUDDYMON story is about to unfold. A world of dreams and adventure is waiting. Let's go!"); }); });
   await page.waitForFunction(() => HD.last.dialogue);
@@ -78,19 +72,20 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
     return bad;
   });
   if (ov.length) fail("battle parts stay inside the stage and apart", ov);
-  // Every building: tiles exactly the world's size (8% of the stage width), hero on screen.
+  // Every building: tiles at least the world's size, the room covers the whole stage, hero on screen.
   await page.evaluate(() => { Game.state.battle = null; Game.state.screen = null; });
   const keys = await page.evaluate(() => Object.keys(ROOMS));
   for (const key of keys) {
     const w = await page.evaluate((k) => { const r = ROOMS[k], d = (r.warps && r.warps[0]) || { x: 1, y: 1 }; return Game.warp(k, d.x, d.y, 0).then ? 0 : 0; }, key).catch(() => 0);
     await page.waitForFunction((k) => HD.last.map.key === k, key);
     await page.waitForTimeout(450);
-    const m = await page.evaluate(() => {
+    const m = await page.evaluate((k) => {
       const st = document.querySelector("#hd").getBoundingClientRect(), r = document.querySelector("#hd .room-svg").getBoundingClientRect(), h = document.querySelector("#hd .actor.hero").getBoundingClientRect();
-      return { stageW: st.width, roomW: r.width, left: r.x - st.x, right: st.right - r.right, heroIn: h.x >= st.x && h.right <= st.right && h.y >= st.y && h.bottom <= st.bottom };
-    });
-    const cols = await page.evaluate((k) => ROOMS[k].cols, key);
-    if (Math.abs(m.roomW / (cols + 0.4) - m.stageW * 0.08) > m.stageW * 0.002) fail(`${key}: tiles are not the world's size in landscape`, m);
+      const cell = r.width / (ROOMS[k].cols + 0.4), pad = cell * 0.2;
+      return { stageW: st.width, cell, covers: r.x + pad <= st.x + 1 && r.right - pad >= st.right - 1 && r.y + pad <= st.y + 1 && r.bottom - pad >= st.bottom - 1, heroIn: h.x >= st.x && h.right <= st.right && h.y >= st.y && h.bottom <= st.bottom };
+    }, key);
+    if (m.cell < m.stageW * 0.079) fail(`${key}: tiles smaller than the world's in landscape`, m);
+    if (!m.covers) fail(`${key}: the room does not fill the stage to its edges`, m);
     if (!m.heroIn) fail(`${key}: hero off screen`, m);
     if (key === "willowlab") await page.screenshot({ path: "test/out/landscape-lab.png" });
   }

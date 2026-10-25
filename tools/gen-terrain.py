@@ -10,13 +10,14 @@ Outdoor maps: {cols, rows, cells, buildings, signs, warps, exits}; indoor maps: 
 import json, os
 
 BUILT = {
+    "DarkCaveVioletEntrance": "darkcave",
     "PlayersHouse2F": "bedroom", "PlayersHouse1F": "livingroom", "NewBarkTown": "newbark", "ElmsLab": "willowlab", "PlayersNeighborsHouse": "neighbor",
     "ElmsHouse": "willowhouse", "Route29": "route29", "Route29Route46Gate": "gate29", "CherrygroveCity": "cherrygrove", "CherrygroveMart": "cgmart",
     "CherrygrovePokecenter1F": "cgcenter", "GuideGentsHouse": "cggent", "CherrygroveGymSpeechHouse": "cggym", "CherrygroveEvolutionSpeechHouse": "cgevo",
     "Route30": "route30", "MrPokemonsHouse": "mrbuddy", "Route31": "route31", "Route31VioletGate": "gate31", "VioletCity": "violet", "VioletMart": "vmart",
     "VioletPokecenter1F": "vcenter", "VioletNicknameSpeechHouse": "vnickname", "EarlsPokemonAcademy": "academy", "VioletGym": "violetgym",
 }
-OUTDOOR = ["NewBarkTown", "Route29", "CherrygroveCity", "Route30", "Route31", "VioletCity"]
+OUTDOOR = ["DarkCaveVioletEntrance", "NewBarkTown", "Route29", "CherrygroveCity", "Route30", "Route31", "VioletCity"]
 here = os.path.dirname(__file__)
 SNAP = {}
 for n in BUILT:

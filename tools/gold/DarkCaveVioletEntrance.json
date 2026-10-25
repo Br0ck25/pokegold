@@ -1,0 +1,155 @@
+{
+ "name": "DarkCaveVioletEntrance",
+ "const": "DARK_CAVE_VIOLET_ENTRANCE",
+ "w": 40,
+ "h": 36,
+ "tileset": "cave",
+ "grid": [
+  "........................................",
+  ".TTTTTTTTTTTTTTTTTT......TTTTTTTTTTTTTT.",
+  ".TT.........wwww..T......TTT...TTT...TT.",
+  ".T...TTTTT..wwww..T....TTT.T.......D..T.",
+  ".T..TTT.T<..wwww..T....TTT....TTTTTT..T.",
+  ".T..TT..T<..wwww..T....TTTT...T....T..T.",
+  ".T..T...T<.TwwwwwwT....TTT...TT....T.TT.",
+  ".T..T...T<.TwwwwwwT..TTT....TTT..TTT.TT.",
+  ".T.TT...T<..wwwwwwT..TTT.....TT..TTT..T.",
+  ".T.TTTT.T<..wwwwwwT..TT.......T..TT...T.",
+  ".Tvv..T<T<..wwwwTT...T..TTTT..T...TT..T.",
+  ".TTTT.T<T<..wwwwT....T.DT..T..T....T..T.",
+  ".T..T.T<wwwwwwwwT....T..T..T..T....TvvT.",
+  ".T....T<wwwwwwwwTTTTTT.DT..T..TTTTTTTTT.",
+  ".T..TTT.................T..TT.........T.",
+  ".T.DTTT..DTTT...T.......T..TT......D..T.",
+  "..TTTTTTTTTTTTTTTTTTTTTT....TTvvTTTT..T.",
+  ".............................TTTT..T.TT.",
+  ".............................T..T..T..T.",
+  ".............................T..T..T.DT.",
+  ".............................TvvT..TT.T.",
+  ".............................TTTTTTTT.T.",
+  ".............................T....T<..T.",
+  ".............................T...DT<.DT.",
+  ".............................TvvTTTT..T.",
+  ".............................TTTT..T.TT.",
+  ".............................T..T..T..T.",
+  ".............................T..T..T..T.",
+  ".............................TvvT..T..T.",
+  ".............................TTTT..T..T.",
+  ".............................T..T..T..T.",
+  ".............................T..TTTT..T.",
+  ".............................TT......TT.",
+  ".............................TTTT..D.TT.",
+  "..............................TTTTTTTT..",
+  "........................................"
+ ],
+ "warps": [
+  {
+   "x": 3,
+   "y": 15,
+   "to": "ROUTE_31",
+   "idx": 3
+  },
+  {
+   "x": 17,
+   "y": 1,
+   "to": "DARK_CAVE_BLACKTHORN_ENTRANCE",
+   "idx": 2
+  },
+  {
+   "x": 35,
+   "y": 33,
+   "to": "ROUTE_46",
+   "idx": 3
+  }
+ ],
+ "coords": [],
+ "signs": [
+  {
+   "x": 26,
+   "y": 3,
+   "kind": "BGEVENT_ITEM",
+   "script": "DarkCaveVioletEntranceHiddenElixer"
+  }
+ ],
+ "objects": [
+  {
+   "x": 6,
+   "y": 8,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "DarkCaveVioletEntrancePotion",
+   "flag": "EVENT_DARK_CAVE_VIOLET_ENTRANCE_POTION"
+  },
+  {
+   "x": 16,
+   "y": 14,
+   "sprite": "ROCK",
+   "move": "SMASHABLE_ROCK",
+   "type": "SCRIPT",
+   "script": "DarkCaveVioletEntranceRock",
+   "flag": "-1"
+  },
+  {
+   "x": 27,
+   "y": 6,
+   "sprite": "ROCK",
+   "move": "SMASHABLE_ROCK",
+   "type": "SCRIPT",
+   "script": "DarkCaveVioletEntranceRock",
+   "flag": "-1"
+  },
+  {
+   "x": 7,
+   "y": 14,
+   "sprite": "ROCK",
+   "move": "SMASHABLE_ROCK",
+   "type": "SCRIPT",
+   "script": "DarkCaveVioletEntranceRock",
+   "flag": "-1"
+  },
+  {
+   "x": 36,
+   "y": 31,
+   "sprite": "ROCK",
+   "move": "SMASHABLE_ROCK",
+   "type": "SCRIPT",
+   "script": "DarkCaveVioletEntranceRock",
+   "flag": "-1"
+  },
+  {
+   "x": 36,
+   "y": 22,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "DarkCaveVioletEntranceFullHeal",
+   "flag": "EVENT_DARK_CAVE_VIOLET_ENTRANCE_FULL_HEAL"
+  },
+  {
+   "x": 35,
+   "y": 9,
+   "sprite": "POKE_BALL",
+   "move": "STILL",
+   "type": "ITEMBALL",
+   "script": "DarkCaveVioletEntranceHyperPotion",
+   "flag": "EVENT_DARK_CAVE_VIOLET_ENTRANCE_HYPER_POTION"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 4,
+   "y": 14,
+   "w": 2,
+   "h": 2,
+   "doors": [
+    [
+     3,
+     15,
+     "ROUTE_31"
+    ]
+   ]
+  }
+ ],
+ "connections": []
+}

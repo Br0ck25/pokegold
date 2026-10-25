@@ -9,5 +9,7 @@ const ITEMS = {
   tm31: { name: "TM31 MUD SLAP", tm: "mud_slap", pocket: "items" },
   tide_charm: { name: "TIDE CHARM", pocket: "items" },
   mystery_egg: { name: "MYSTERY EGG", pocket: "key" },
+  pink_bow: { name: "PINK BOW", pocket: "items", price: 0 }, // held item: strengthens normal moves (not used in battle yet)
+  elixir: { name: "ELIXIR", pocket: "items", price: 0 }, // found only; restoring PP from the pack is not built yet
   berry: { name: "SWEET BERRY", heal: 10, pocket: "items", price: 100 },
 };

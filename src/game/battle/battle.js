@@ -11,7 +11,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const alive = () => P.party.filter((m) => m.hp > 0);
   const speed = (x) => x.stats.spe * stageMult(x.stages.spe) * (x.mon.status === "par" ? 0.25 : 1);
   const fought = new Set(), leveled = new Set();
-  const foeLabel = (mon) => (trainer ? `${trainer.name}'s ${SPECIES[mon.species].name}` : `Wild ${SPECIES[mon.species].name}`);
+  const foeLabel = (mon) => (trainer ? `Enemy ${SPECIES[mon.species].name}` : `Wild ${SPECIES[mon.species].name}`);
   let them = side(foeMon, foeLabel(foeMon));
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
@@ -29,6 +29,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
   };
   const sendOut = async (mon) => { me = side(mon, mon.nick); fought.add(mon); refresh(); await s.msg(`Go! ${mon.nick}!`); };
 
+  const lastSlot = new Map();
   const lesson = opts.tutorial ? [{ type: "fight", slot: null }, { type: "item", id: "buddy_net" }] : null;
   const choose = async () => {
     if (lesson) {
@@ -40,9 +41,10 @@ Game.battle = async (s, foeMon, opts = {}) => {
     for (;;) {
       const c = await s.menu(["FIGHT", "PACK", "BUDDYMON", "RUN"], 2, "cmd");
       if (c === 0) {
-        const m = me.mon.moves, i = await s.menu(m.map((x) => `${MOVES[x.id].name}  ${x.pp}/${maxPP(x)}`), 2, "moves");
+        const m = me.mon.moves, i = await s.menu(m.map((x) => `${MOVES[x.id].name}  ${x.pp}/${maxPP(x)}`), 2, "moves", Math.max(0, m.indexOf(lastSlot.get(me.mon))));
         if (i < 0) continue;
         if (m[i].pp <= 0) { await s.msg("No PP left for this move!"); continue; }
+        lastSlot.set(me.mon, m[i]); // the cursor starts on the move you used last
         return { type: "fight", slot: m[i] };
       }
       if (c === 1) {
@@ -153,8 +155,10 @@ Game.battle = async (s, foeMon, opts = {}) => {
   if (trainer && ended === "won") {
     if (trainer.win) await s.say(trainer.win);
     const prize = (trainer.money || 20) * foes[foes.length - 1].level;
-    P.money += prize;
-    await s.say(`${P.name} got ${prize} ${Game.CURRENCY} for winning!`);
+    const cut = Game.momCut(P, prize); // Gold: a saving Mom gets a quarter of the prize
+    P.money += prize - cut;
+    if (cut) P.mom.money += cut;
+    await s.say(`${P.name} got ${prize - cut} ${Game.CURRENCY} for winning!${cut ? " Sent some to MOM!" : ""}`);
   }
   state.screen = null; state.battle = null; state.dialogue = null;
   if (ended !== "lost") for (const m of P.party) if (leveled.has(m)) await Game.evolve(s, m);

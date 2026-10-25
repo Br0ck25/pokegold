@@ -11,8 +11,8 @@
     art: "roomGrid", theme: "lab", label: "Cherrygrove · Mart",
     npcs: [
       { id: 1, name: "CLERK", x: 1, y: 3, dir: 3, faces: false, script: clerk },
-      { id: 2, name: "COOLTRAINER_M", x: 7, y: 6, dir: 2, wander: "horizontal", script: talk((s) => (s.flag("GAVE_EGG") ? "BUDDY NETS are in stock! Now I can catch BUDDYMON!" : "They're fresh out of BUDDY NETS. Maybe the delivery is late.")) },
-      { id: 3, name: "YOUNGSTER", x: 2, y: 5, dir: 0, script: talk("When I was walking in the grass, a bug BUDDYMON poisoned my BUDDYMON! I just kept going, but then my BUDDYMON fainted. You should keep a REMEDY with you.") },
+      { id: 2, name: "COOLTRAINER_M", x: 7, y: 6, dir: 2, wander: "horizontal", script: async (s) => s.text("CherrygroveMart", s.flag("GAVE_EGG") ? "CherrygroveMartCooltrainerMText_PokeBallsInStock" : "CherrygroveMartCooltrainerMText") },
+      { id: 3, name: "YOUNGSTER", x: 2, y: 5, dir: 0, script: Game.said("CherrygroveMart", "CherrygroveMartYoungsterText") },
     ],
   });
 
@@ -23,23 +23,23 @@
     closed: { POKECENTER_2F: "The COMMUNICATION CENTER upstairs is not open yet." },
     npcs: [
       { id: 1, name: "NURSE", x: 3, y: 1, dir: 0, faces: false, script: nurse },
-      { id: 2, name: "FISHER", x: 2, y: 3, dir: 1, script: talk("It's great. I can store any number of BUDDYMON, and it's all free.") },
-      { id: 3, name: "GENTLEMAN", x: 8, y: 6, dir: 1, script: talk("That PC is free for any trainer to use.") },
-      { id: 4, name: "TEACHER", x: 1, y: 6, dir: 3, script: talk((s) => (s.flag("GAVE_EGG") ? "The COMMUNICATION CENTER upstairs was just built. It should open soon." : "The COMMUNICATION CENTER upstairs is under construction.")) },
+      { id: 2, name: "FISHER", x: 2, y: 3, dir: 1, script: Game.said("CherrygrovePokecenter1F", "CherrygrovePokecenter1FFisherText") },
+      { id: 3, name: "GENTLEMAN", x: 8, y: 6, dir: 1, script: Game.said("CherrygrovePokecenter1F", "CherrygrovePokecenter1FGentlemanText") },
+      { id: 4, name: "TEACHER", x: 1, y: 6, dir: 3, script: async (s) => s.text("CherrygrovePokecenter1F", s.flag("GAVE_EGG") ? "CherrygrovePokecenter1FTeacherText_CommCenterOpen" : "CherrygrovePokecenter1FTeacherText") },
     ],
   });
 
   // --- Small houses (8 x 8)
   const house = (key, gold, label, npcs) => Game.indoor(key, gold, { art: "neighborHouse", label: `Cherrygrove · ${label}`, npcs, signs: books("A shelf of BUDDYMON books and magazines.") });
   house("cggent", "GuideGentsHouse", "Guide Gent's House", [
-    { id: 1, name: "GRAMPS", x: 2, y: 3, dir: 3, script: talk("When I was a wee lad, I was a hotshot trainer! Here's a word of advice: Catch lots of BUDDYMON! Treat them all with kindness!") },
+    { id: 1, name: "GRAMPS", x: 2, y: 3, dir: 3, script: Game.said("GuideGentsHouse", "GuideGentsHouseGuideGentText") },
   ]);
   house("cggym", "CherrygroveGymSpeechHouse", "Gym Talk House", [
-    { id: 1, name: "POKEFAN_M", x: 2, y: 3, dir: 0, script: talk("You're trying to see how good you are as a BUDDYMON trainer? You better visit the BUDDYMON GYMS all over JOHTO and collect BADGES.") },
-    { id: 2, name: "BUG_CATCHER", x: 5, y: 5, dir: 2, wander: "horizontal", script: talk("When I get older, I'm going to be a GYM LEADER! I make my BUDDYMON battle with my friend's to make them tougher!") },
+    { id: 1, name: "POKEFAN_M", x: 2, y: 3, dir: 0, script: Game.said("CherrygroveGymSpeechHouse", "CherrygroveGymSpeechHousePokefanMText") },
+    { id: 2, name: "BUG_CATCHER", x: 5, y: 5, dir: 2, wander: "horizontal", script: Game.said("CherrygroveGymSpeechHouse", "CherrygroveGymSpeechHouseBugCatcherText") },
   ]);
   house("cgevo", "CherrygroveEvolutionSpeechHouse", "Evolution Talk House", [
-    { id: 1, name: "LASS", x: 3, y: 5, dir: 2, script: talk("BUDDYMON change? I would be shocked if one did that!") },
-    { id: 2, name: "YOUNGSTER", x: 2, y: 5, dir: 3, script: talk("BUDDYMON gain experience in battle and change their form.") },
+    { id: 1, name: "LASS", x: 3, y: 5, dir: 2, script: Game.said("CherrygroveEvolutionSpeechHouse", "CherrygroveEvolutionSpeechHouseLassText") },
+    { id: 2, name: "YOUNGSTER", x: 2, y: 5, dir: 3, script: Game.said("CherrygroveEvolutionSpeechHouse", "CherrygroveEvolutionSpeechHouseYoungsterText") },
   ]);
 })();

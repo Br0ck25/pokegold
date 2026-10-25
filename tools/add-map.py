@@ -14,7 +14,7 @@ out_path = sys.argv[sys.argv.index("--write") + 1] if "--write" in sys.argv else
 snap = subprocess.run([sys.executable, os.path.join(here, "goldmap.py"), name, "--json"], capture_output=True, text=True, check=True).stdout
 open(os.path.join(here, "gold", name + ".json"), "w").write(snap)
 g = json.loads(snap)
-outdoor = g["tileset"] in ("johto", "kanto")
+outdoor = g["tileset"] in ("johto", "kanto", "cave")  # caves are drawn like a world map (cell grid), with theme "cave"
 
 def edit(path, fn):
     s = open(path).read(); s2 = fn(s)
@@ -24,8 +24,21 @@ edit(gen, lambda s: s if f'"{name}": "{key}"' in s else s.replace("BUILT = {\n",
 if outdoor: edit(gen, lambda s: s if f'"{name}"' in s.split("OUTDOOR = [", 1)[1].split("]", 1)[0] else s.replace("OUTDOOR = [", f'OUTDOOR = ["{name}", ', 1))
 edit(os.path.join(root, "test", "gold.js"), lambda s: s if f'"{name}"' in s.split("const MAPS = {", 1)[1].split("};", 1)[0] else s.replace("const MAPS = {\n", f'const MAPS = {{\n  {key}: "{name}",\n', 1))
 subprocess.run([sys.executable, gen], check=True)
+subprocess.run([sys.executable, os.path.join(here, "gen-text.py")], check=True)  # Game.text / Game.moves for the new map
 
+# Gold's own scripts for this map (tools/goldtext.py): people that only say one text get `Game.said(...)`, trainers get their party and speeches.
+import importlib.util
+_spec = importlib.util.spec_from_file_location("goldtext", os.path.join(here, "goldtext.py")); goldtext = importlib.util.module_from_spec(_spec); sys.argv = [sys.argv[0]]; _spec.loader.exec_module(goldtext)
+gt = goldtext.parse(name)
+jump = {}
+for lab, body in list(gt["scripts"].items()) + [(k, []) for k in gt["texts"]]:
+    for ln in body:
+        m = re.match(r"^jumptext(?:faceplayer)? (\w+)", ln)
+        if m and m.group(1) in gt["texts"]: jump[lab] = m.group(1)
+trainers = {t["script"]: t for t in gt["trainers"]}
+SPECIES_TODO = lambda sp: sp.lower()
 DIR = {"DOWN": 0, "UP": 1, "LEFT": 2, "RIGHT": 3}
+name_ = name
 def npc(i, o):
     mv = o["move"]
     d = next((v for k, v in DIR.items() if mv.endswith(k)), 0)
@@ -33,7 +46,14 @@ def npc(i, o):
     still = ', faces: false' if o["sprite"] in ("FRUIT_TREE", "POKE_BALL") else ""
     name = {"POKE_BALL": "SACK"}.get(o["sprite"], o["sprite"])
     hidden = f', hideIf: "TODO_{o["flag"]}"' if o["flag"] not in ("-1", "0") else ""
-    return f'      {{ id: {i}, name: "{name}", x: {o["x"]}, y: {o["y"]}, dir: {d}{extra}{still}{hidden}, script: talk("TODO {o["script"]}") }},'
+    t = trainers.get(o["script"])
+    if t:
+        party = ", ".join(f'["{SPECIES_TODO(p["species"])}", {p["lv"]}]' for p in t.get("party", []))
+        script = (f'trainer: trainer("{t["class"].replace("_", " ")}", "{t.get("name")}", [{party}], Game.line("{name_}", "{t["seen"]}"), Game.line("{name_}", "{t["beaten"]}"), '
+                  f'Game.line("{name_}", "{t["after"].lstrip(".") if t["after"] in gt["texts"] else "TODO"}"), "BEAT_{t.get("name")}", {next((p["sight"] for p in gt["people"] if p["script"] == o["script"]), 3)})')
+    elif o["script"] in jump: script = f'script: Game.said("{name_}", "{jump[o["script"]]}")'
+    else: script = f'script: talk("TODO {o["script"]}")'
+    return f'      {{ id: {i}, name: "{name}", x: {o["x"]}, y: {o["y"]}, dir: {d}{extra}{still}{hidden}, {script} }},'
 lines = [f"// TODO one-line description of {name}.", f"// Gold: {name}.asm (positions from tools/goldmap.py {name}; keep them: test/gold.js checks every person, sign, door and cell)", "(() => {", "  const talk = Game.talk;"]
 if outdoor:
     styles = ", ".join(f'"{b["doors"][0][0]},{b["doors"][0][1]}": {{ roof: "#d9604c" }}' for b in g["buildings"])
@@ -43,7 +63,7 @@ else:
 lines.append("    npcs: [")
 lines += [npc(i + 1, o) for i, o in enumerate(g["objects"])]
 lines += ["    ],", "    signs: ["]
-lines += [f'      {{ x: {s["x"]}, y: {s["y"]}, script: talk("TODO {s["script"]}") }},' for s in g["signs"]]
+lines += [f'      {{ x: {s["x"]}, y: {s["y"]}, script: ' + (f'Game.said("{name}", "{jump[s["script"]]}")' if s["script"] in jump else f'talk("TODO {s["script"]}")') + ' },' for s in g["signs"]]
 lines += ["    ],", "  });", "})();"]
 text = "\n".join(lines) + "\n"
 if out_path: open(os.path.join(root, out_path), "w").write(text); print("wrote", out_path)

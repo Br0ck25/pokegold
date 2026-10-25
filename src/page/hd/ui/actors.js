@@ -37,7 +37,7 @@ function actorLayer(wrap, box) {
         const name = o.name;
         if (a.dataset.look !== String(name)) { a.dataset.look = name; delete a.dataset.dir; }
         shout(a, o.emote);
-        sync(a, Art.props[name] || person(Art.looks[name] || Art.looks.OTHER), o.x, o.y, o.dir);
+        sync(a, Art.props[name] || person(Art.look(name, o.id, state.map.key)), o.x, o.y, o.dir);
       }
       for (const [id, a] of npcs) if (!seen.has(id)) { a.remove(); npcs.delete(id); }
     },

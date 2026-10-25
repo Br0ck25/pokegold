@@ -9,7 +9,13 @@
     label: "Home · Your Room",
     signs: [
       { x: 2, y: 1, script: talk("The PC is off. Nothing to do on it yet.") },
-      { x: 3, y: 1, script: talk("PROF. ASPEN'S BUDDYMON TALK! Please tune in next time!") },
+      { x: 3, y: 1, script: async (s) => { // PlayersHouseRadioScript: the first time (before you have a buddymon) the whole show, then a short bit
+          const T = (label) => s.text("PlayersHouse2F", label);
+          if (s.flag("GOT_STARTER")) return T("PlayersRadioText1");
+          if (s.flag("LISTENED_TO_RADIO")) return T("PlayersRadioText4");
+          await T("PlayersRadioText1"); await T("PlayersRadioText2"); await T("PlayersRadioText3");
+          s.flag("LISTENED_TO_RADIO", true);
+        } },
       { x: 5, y: 1, script: talk("A shelf full of picture books about buddymon.") },
     ],
   });
@@ -18,16 +24,22 @@
     art: "room1F", label: "Home · Living Room",
     npcs: [{
       id: 1, name: "MOM", x: 7, y: 3, dir: 2,
+      // Gold's MomScript, by what you have done: errand, starter, egg (then the Bank of Mom).
       script: async (s) => {
+        const T = (label) => s.text("PlayersHouse1F", label);
         if (!s.flag("GOT_BUDDYGEAR")) return;
-        await s.say(s.flag("GOT_STARTER") ? "Welcome home! Tell me all about your buddymon." : "PROF. WILLOW is waiting for you. Hurry up!");
+        if (s.flag("MOM_FIRST_BANKING")) return T("ImBehindYouText");
+        if (s.flag("MOM_TALKED_AFTER_EGG")) return Game.bankOfMom(s);
+        if (s.flag("GAVE_EGG")) { s.flag("MOM_FIRST_BANKING", true); s.flag("MOM_TALKED_AFTER_EGG", true); return Game.bankOfMom(s); }
+        if (s.flag("GOT_STARTER")) return T("SoWhatWasProfElmsErrandText");
+        return T("HurryUpElmIsWaitingText");
       },
     }],
     signs: [
-      { x: 4, y: 1, script: talk("The TV is showing a show about faraway towns.") },
-      { x: 0, y: 1, script: talk("The stove is warm. Something smells good.") },
-      { x: 1, y: 1, script: talk("The sink is spotless.") },
-      { x: 2, y: 1, script: talk("The fridge hums quietly. It is full of food.") },
+      { x: 4, y: 1, script: Game.said("PlayersHouse1F", "PlayersHouse1FTVText") },
+      { x: 0, y: 1, script: Game.said("PlayersHouse1F", "PlayersHouse1FStoveText") },
+      { x: 1, y: 1, script: Game.said("PlayersHouse1F", "PlayersHouse1FSinkText") },
+      { x: 2, y: 1, script: Game.said("PlayersHouse1F", "PlayersHouse1FFridgeText") },
     ],
     // Like Gold: Mom spots you on the stairs, walks over to give you the BUDDYGEAR, then walks back.
     enter: async (s) => {
@@ -36,11 +48,14 @@
       await s.wait(30);
       await s.move(1, [3, 3, 1]);
       s.turn("player", 0);
-      await s.say(`Oh, ${s.name}! PROF. WILLOW from next door was looking for you.`);
-      await s.say("He wants you to do something for him. Oh, and your BUDDYGEAR came back from the repair shop!");
+      const T = (label) => s.text("PlayersHouse1F", label);
+      await T("ElmsLookingForYouText");
       s.flag("GOT_BUDDYGEAR", true);
-      await s.say(`${s.name} got the BUDDYGEAR!`);
-      await s.say("It is a handy device. You can use it to call your friends. Now go see PROF. WILLOW. His lab is just next door!");
+      await s.say(`${s.name} received BUDDYGEAR!`);
+      await T("MomGivesPokegearText");
+      await T("KnowThePhoneText");
+      if ((await s.ask()) === 0) await T("KnowTheInstructionsText"); else await T("DontKnowTheInstructionsText");
+      await T("InstructionsNextText");
       await s.move(1, [0, 2, 2]);
       s.turn(1, 2);
     },

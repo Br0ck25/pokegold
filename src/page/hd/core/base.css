@@ -14,3 +14,5 @@
 
 
 @media (prefers-reduced-motion: reduce) { #hd *, #hd *::before { animation:none !important; transition:none !important; } }
+#hd .fade { position:absolute; inset:0; z-index:30; background:#000; opacity:0; pointer-events:none; transition:opacity .16s linear; }
+#hd .fade.on { opacity:1; }

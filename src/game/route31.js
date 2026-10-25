@@ -13,20 +13,19 @@
   Game.outdoor("route31", "Route31", {
     label: "Route 31",
     style: { "4,6": { roof: "#8a6ad9", label: "GATE" } },
-    closed: { DARK_CAVE_VIOLET_ENTRANCE: "DARK CAVE. It's pitch black inside! Better come back when you have a light." },
     wild: { rate: 10, morn: MORN, day: DAY, nite: NITE },
     npcs: [
-      { id: 1, name: "FISHER", x: 17, y: 7, dir: 0, script: talk((s) => `... Hnuurg... Huh? I walked too far today looking for BUDDYMON. My feet hurt and I'm sleepy... If I were a wild BUDDYMON, I'd be easy to catch... ...Zzzz...`) },
-      { id: 2, name: "YOUNGSTER", x: 9, y: 5, dir: 3, wander: "spin", script: talk("I found a good BUDDYMON in DARK CAVE. I'm going to raise it to take on FALKNER. He's the leader of VIOLET CITY's GYM.") },
-      { id: 3, name: "BUG_CATCHER", x: 18, y: 15, dir: 1, trainer: trainer("BUG CATCHER", "WADE", [["grublet", 2], ["grublet", 2], ["stinglet", 3], ["grublet", 2]], "I caught a bunch of BUDDYMON. Let me battle with you!", "Awwwww...", "You can catch BUDDYMON even if you have six with you. If you catch one, it'll go to your BOX automatically.", "BEAT_WADE", 3) },
-      { id: 4, name: "COOLTRAINER_M", x: 33, y: 8, dir: 2, wander: "spin", script: talk("DARK CAVE... If BUDDYMON could light it up, I'd explore it.") },
+      { id: 1, name: "FISHER", x: 17, y: 7, dir: 0, script: Game.said("Route31", "Text_Route31SleepyMan") },
+      { id: 2, name: "YOUNGSTER", x: 9, y: 5, dir: 3, wander: "spin", script: Game.said("Route31", "Route31YoungsterText") },
+      { id: 3, name: "BUG_CATCHER", x: 18, y: 15, dir: 1, trainer: trainer("BUG CATCHER", "WADE", [["grublet", 2], ["grublet", 2], ["stinglet", 3], ["grublet", 2]], Game.line("Route31", "BugCatcherWade1SeenText"), Game.line("Route31", "BugCatcherWade1BeatenText"), Game.line("Route31", "BugCatcherWade1AfterText"), "BEAT_WADE", 3) },
+      { id: 4, name: "COOLTRAINER_M", x: 33, y: 8, dir: 2, wander: "spin", script: Game.said("Route31", "Route31CooltrainerMText") },
       { id: 5, name: "FRUIT_TREE", x: 16, y: 7, dir: 0, faces: false, script: Game.berryTree("TREE_R31") },
       ball(6, 29, 5, "GOT_R31_REMEDY", "remedy", "REMEDY"),
       ball(7, 21, 13, "GOT_R31_NET", "buddy_net", "BUDDY NET"),
     ],
     signs: [
-      { x: 7, y: 5, script: talk("ROUTE 31. VIOLET CITY - CHERRYGROVE CITY") },
-      { x: 31, y: 5, script: talk("DARK CAVE") },
+      { x: 7, y: 5, script: Game.said("Route31", "Route31SignText") },
+      { x: 31, y: 5, script: Game.said("Route31", "DarkCaveSignText") },
     ],
   });
 

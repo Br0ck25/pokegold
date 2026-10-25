@@ -6,18 +6,18 @@
     art: "neighborHouse", label: "New Bark Town · Neighbors' House",
     npcs: [{
       id: 1, name: "COOLTRAINER_F", x: 2, y: 3, dir: 3,
-      script: talk("A buddymon that evolves is a wonder. I was amazed by PROF. WILLOW's findings.", "She's so famous for her research on BUDDYMON evolution. ...sigh... I wish I could be a researcher like her..."),
+      script: Game.said("PlayersNeighborsHouse", "PlayersNeighborsDaughterText"),
     }],
     signs: [
       { x: 0, y: 1, script: talk("A shelf of magazines about BUDDYMON trainers.") },
       { x: 1, y: 1, script: talk("A shelf of magazines about BUDDYMON trainers.") },
-      {
-        x: 7, y: 1,
-        script: async (s) => {
-          await s.say("Tuning in to BUDDYMON TALK with PROF. ASPEN...");
-          await s.say("...BUDDYMON CHANNEL!");
-        },
-      },
+      { x: 7, y: 1, script: async (s) => { // PlayersNeighborsHouseRadioScript
+          const T = (label) => s.text("PlayersNeighborsHouse", label);
+          if (s.flag("GOT_STARTER")) return T("PlayerNeighborRadioText1");
+          if (s.flag("LISTENED_TO_RADIO_NEIGHBOR")) return T("PlayerNeighborRadioText4");
+          await T("PlayerNeighborRadioText1"); await T("PlayerNeighborRadioText2"); await T("PlayerNeighborRadioText3");
+          s.flag("LISTENED_TO_RADIO_NEIGHBOR", true);
+        } },
     ],
   });
 })();

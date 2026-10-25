@@ -18,10 +18,18 @@ const walk = (rel, ext, seen) => {
   if (!fs.statSync(abs).isDirectory()) return abs.endsWith(ext) && !seen.has(rel) ? (seen.add(rel), [rel]) : [];
   return fs.readdirSync(abs).sort().flatMap((f) => walk(path.posix.join(rel, f), ext, seen));
 };
+// A css file marked `/*wide*/` gets a copy of its cqw rules in cqh for wide stages (landscape phone): there the stage is as short as a portrait one is
+// narrow, so the same sizes measured against the height look right.
+const wide = (text) => {
+  if (!text.includes("/*wide*/")) return text;
+  const plain = text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/@keyframes[^{]*\{(?:[^{}]*\{[^{}]*\})*\s*\}/g, "");
+  const rules = [...plain.matchAll(/([^{}]+)\{([^{}]*cqw[^{}]*)\}/g)].map((m) => `${m[1].trim()} {${m[2].replace(/cqw/g, "cqh")}}`);
+  return `${text}\n@container (min-aspect-ratio: 11/10) {\n${rules.join("\n")}\n}\n`;
+};
 const bundle = (ext, tail) => {
   const seen = new Set();
   const files = [...hdOrder, ...tail].flatMap((e) => walk(e, ext, seen));
-  return { files, text: files.map((f) => `/* ${f} */\n${read(f)}`).join("\n") };
+  return { files, text: files.map((f) => `/* ${f} */\n${ext === ".css" ? wide(read(f)) : read(f)}`).join("\n") };
 };
 
 const js = bundle(".js", ["page/app.js", "page/pad.js"]);

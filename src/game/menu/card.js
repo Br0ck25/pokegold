@@ -10,10 +10,22 @@ Game.cardScreen = async (s) => {
 
 // BuddyGear shows the device's own clock and date.
 Game.gearScreen = async (s) => {
-  const now = new Date(), day = now.toLocaleDateString(undefined, { weekday: "long" });
-  const time = now.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-  const contacts = ["MOM", ...(s.flag("GOT_WILLOW_NUMBER") ? ["PROF. WILLOW"] : [])];
-  await s.panel({ title: "BUDDYGEAR", rows: [], lines: [time, day, "", `Phone: ${contacts.join(", ")}`] });
+  for (;;) {
+    const now = new Date(), day = now.toLocaleDateString(undefined, { weekday: "long" });
+    const time = now.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    const contacts = ["MOM", ...(s.flag("GOT_WILLOW_NUMBER") ? ["PROF. WILLOW"] : [])];
+    const rows = [...(s.flag("GOT_MAP_CARD") ? [{ label: "MAP", right: "▶" }] : []), { label: "PHONE", right: contacts.join(", ") }];
+    const r = await s.panel({ title: "BUDDYGEAR", rows, lines: [`${time}  ${day}`], hint: s.flag("GOT_MAP_CARD") ? "" : "Get a MAP CARD from the GUIDE GENT to see the map." });
+    if (r.key !== "A") return;
+    if (rows[r.i].label === "MAP") await Game.townMap(s);
+    else await s.say("Phone calls aren't connected yet. Your contacts will call you when they have news.");
+  }
+};
+
+// The map from the MAP CARD: Johto as far as we have built it, with a blinking dot where you are. (Art.townMap in art/townmap.js)
+Game.townMap = async (s) => {
+  const here = s.G.state.map.key, name = Art.townMapPlace(here);
+  await s.panel({ title: "MAP", townmap: here, rows: [], lines: [name ? `You are in ${name}.` : "You are somewhere unmarked."], hint: "Press B to close." });
 };
 
 // Options: text speed (how long battle messages stay up). Left/right changes the value.

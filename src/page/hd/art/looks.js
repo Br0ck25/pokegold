@@ -30,3 +30,25 @@ Art.looks = {
 };
 Art.heroLook = () => (Game.player.gender === 1 ? Art.looks.HEROINE : Art.looks.HERO);
 Art.heroSprite = (dir) => Art.person(dir, Art.heroLook());
+
+// Everyone of a generic kind (YOUNGSTER, TEACHER, ...) gets their own clothes and hair, chosen from the person's id and map so they stay the same every visit;
+// story characters (Mom, Willow, the rival, gym leaders, officers...) keep their one look.
+const SET = {
+  hair: ["#3a2418", "#6b3d1e", "#8a5a2b", "#c9a062", "#d9604c", "#2b2b3a", "#e8e8ee", "#a8452a"],
+  top: ["#ffb62e", "#4aa3e8", "#6fd382", "#ff8fa3", "#b58ad9", "#ff7a3c", "#e8e8f0", "#3fae62", "#e04a5a", "#7ab6ff"],
+  legs: ["#1f3a8a", "#3a3f52", "#6b4a2a", "#2a5a3a", "#5a3a6a", "#7a2a2a", "#2a2f45"],
+  hat: ["#4aa3e8", "#ffd25a", "#6fd382", "#e04a5a", "#ff8a3a", "#b58ad9"],
+  skin: ["#f4c397", "#e9b184", "#d99a6c", "#c98b5b", "#f8d2ae"],
+};
+const GENERIC = new Set(["YOUNGSTER", "BUG_CATCHER", "LASS", "COOLTRAINER_M", "COOLTRAINER_F", "TEACHER", "FISHER", "GRAMPS", "GRANNY", "POKEFAN_M", "SUPER_NERD", "BIRD_KEEPER", "GENTLEMAN", "GAMEBOY_KID", "CLERK", "SCIENTIST", "OTHER"]);
+Art.look = (name, id = 0, mapKey = "") => {
+  const base = Art.looks[name] || Art.looks.OTHER;
+  if (!GENERIC.has(name)) return base;
+  let n = 7;
+  for (const c of `${mapKey}:${id}:${name}`) n = (n * 31 + c.charCodeAt(0)) >>> 0;
+  const pick = (list, k) => list[(n >>> k) % list.length];
+  const o = { ...base, hair: pick(SET.hair, 0), top: pick(SET.top, 3), legs: pick(SET.legs, 6), skin: pick(SET.skin, 9) };
+  if (base.hat) o.hat = pick(SET.hat, 12);
+  if (name === "YOUNGSTER" || name === "BUG_CATCHER") o.hat = (n >>> 4) % 3 ? pick(SET.hat, 12) : undefined; // some go bareheaded
+  return o;
+};

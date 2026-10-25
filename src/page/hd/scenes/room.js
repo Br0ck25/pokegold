@@ -26,15 +26,15 @@ Scenes.room = function (root) {
       if (state.map.key !== map) build(state.map.key);
       people.update(state);
       const stageH = el.clientHeight, stageW = el.clientWidth, room = ROOMS[map];
-      // A wide stage draws rooms with the same tile as the world (8cqw) and the same camera: centred when it fits, else following the hero.
+      // A wide stage fills edge to edge: tiles at least the world's size (8cqw) and big enough to cover the stage; the camera follows the hero.
       if (stageW > stageH * 1.1) {
-        const w = stageW * 0.08 * (room.cols + 0.4), h = w * (room.rows + 0.4) / (room.cols + 0.4);
+        const c = Math.max(stageW * 0.08, stageW / room.cols, stageH / room.rows), w = c * (room.cols + 0.4), h = c * (room.rows + 0.4), m = c * 0.2; // m = the art's frame, kept off screen
         const hx = (parseFloat(people.hero.style.left) / 100) * w, hy = (parseFloat(people.hero.style.top) / 100) * h;
         const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
         wrap.style.width = `${w}px`;
         wrap.style.transform = "none";
-        wrap.style.left = `${w <= stageW ? (stageW - w) / 2 : clamp(stageW / 2 - hx, stageW - w, 0)}px`;
-        wrap.style.top = `${h <= stageH ? (stageH - h) / 2 : clamp(stageH * 0.45 - hy, stageH - h, 0)}px`;
+        wrap.style.left = `${clamp(stageW / 2 - hx, stageW - w + m, -m)}px`;
+        wrap.style.top = `${clamp(stageH * 0.45 - hy, stageH - h + m, -m)}px`;
         wrap.style.transition = snap ? "none" : "";
         snap = false;
         dlg.update(state.dialogue); menus.update(state.boxes); pic.update(state.pic); panel.update(state.panel);

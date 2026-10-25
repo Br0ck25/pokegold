@@ -47,6 +47,8 @@ const Game = (() => {
   };
 
   // A script that says each line in turn (a line may be a function of the script API, e.g. to use the player's name).
+  G.line = (gold, label) => G.text[gold][label].join(" "); // Gold's text for a label as one string (trainer speeches)
+  G.said = (gold, label, tokens) => (s) => s.text(gold, label, tokens); // a script that says Gold's text for a label (Game.text)
   G.talk = (...lines) => async (s) => { for (const l of lines) await s.say(typeof l === "function" ? l(s) : l); };
 
   G.step = (a, d) => { a.x += DX[d]; a.y += DY[d]; };
@@ -82,11 +84,14 @@ const Game = (() => {
     }
   }
 
+  const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
   G.warp = async (key, x, y, dir) => {
     const def = maps[key];
-    Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => (!n.hideIf || !G.player.flags[n.hideIf]) && (!n.showIf || G.player.flags[n.showIf])).map((n) => ({ ...n })) });
+    if (G.state.map.key) { G.fading = true; G.state.fade = true; await sleep(170); } // fade out, switch maps behind the veil, fade back in
+    Object.assign(G.state, { map: { key }, x, y, dir, boxes: [], objects: (def.npcs || []).filter((n) => (!n.hideIf || !G.player.flags[n.hideIf]) && (!n.showIf || G.player.flags[n.showIf]) && (!n.when || n.when(G.player))).map((n) => ({ ...n })) });
     moving = turning = 0;
     G.cool = 5;
+    if (G.fading) { G.state.fade = false; setTimeout(() => (G.fading = false), 120); } // fade back in while the map's own script (if any) starts
     if (def.enter) await G.run(def.enter);
   };
 
@@ -98,7 +103,7 @@ const Game = (() => {
 
   const LEDGES = { v: [0], ">": [3], "<": [2], R: [0, 3], L: [0, 2] }; // directions (0 down, 1 up, 2 left, 3 right) each hop cell can be jumped
   // Wild encounters, as in Gold: on tall grass each step rolls against the map's rate for the time of day; the species comes
-  // from 7 slots weighted 30/30/20/10/5/4/1 %, and the level is bumped by 0-4.
+  // from 7 slots weighted 30/30/20/10/5/4/1 %. The level is the table's own on land: Gold's 0-4 level bump (ChooseWildEncounter) only applies while surfing.
   const PROBS = [30, 60, 80, 90, 95, 99, 100];
   // Gold (engine/overworld/events.asm): entering a map starts a 5-step cooldown; the first 4 steps never roll for an encounter.
   G.cool = 5;
@@ -107,9 +112,8 @@ const Game = (() => {
     const wild = m.wild;
     if (!wild || kindAt(G.state.x, G.state.y) !== "g" || rand(256) >= Math.floor((wild.rate * 256) / 100)) return;
     const roll = rand(100) + 1, [level, species] = wild[timeOfDay()][PROBS.findIndex((p) => roll <= p)];
-    const r = rand(256), bump = r < 89 ? 0 : r < 166 ? 1 : r < 217 ? 2 : r < 242 ? 3 : 4; // 35 / 65 / 85 / 95 percent of 256
     G.run(async (s) => {
-      if ((await Game.battle(s, makeMon(species, level + bump))) === "lost") await Game.whiteout(s);
+      if ((await Game.battle(s, makeMon(species, level))) === "lost") await Game.whiteout(s);
     });
   }
   // Poison on foot (Gold: engine/events/poisonstep.asm): every 4 steps each poisoned buddymon loses 1 HP; at 0 it faints, and if that
@@ -159,7 +163,7 @@ const Game = (() => {
 
   function tick() {
     Input.poll();
-    if (G.script || G.state.screen) return;
+    if (G.script || G.state.screen || G.fading) return;
     const { state } = G;
     wander();
     if (moving) {

@@ -25,6 +25,7 @@ want = re.sub(r"(?<!^)(?=[A-Z])", "_", name).upper().replace("_", "")
 hit = [c for c in re.findall(r"map_const ([A-Z0-9_]+),\s+(\d+),\s+(\d+)", consts) if c[0].replace("_", "") == want]
 W, H = int(hit[0][1]), int(hit[0][2]); CONST = hit[0][0]
 tileset = re.search(rf"^\tmap {name},\s+TILESET_([A-Z0-9_]+)", show("data/maps/maps.asm"), re.M).group(1).lower()
+tileset = {"dark_cave": "cave"}.get(tileset, tileset)  # shares its files
 meta = raw(f"data/tilesets/{tileset}_metatiles.bin")
 coll = re.findall(r"tilecoll ([A-Z_0-9]+), ([A-Z_0-9]+), ([A-Z_0-9]+), ([A-Z_0-9]+)", show(f"data/tilesets/{tileset}_collision.asm"))
 kind = {"FLOOR": ".", "TALL_GRASS": "g", "WATER": "w", "BUOY": "w", "WHIRLPOOL": "w", "CUT_TREE": "c", "HOP_DOWN": "v", "HOP_RIGHT": ">", "HOP_LEFT": "<", "HOP_DOWN_RIGHT": "R", "HOP_DOWN_LEFT": "L",

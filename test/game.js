@@ -64,7 +64,7 @@ const out = process.argv[3] || "test/out";
   if (s.map !== "livingroom" || !/WILLOW/.test(s.say || "")) fail("Mom should greet you downstairs", s);
   const mom = await page.evaluate(() => HD.last.objects[0]);
   if (mom.x !== 9 || mom.y !== 2) fail("Mom should have walked over next to the stairs", mom);
-  for (let i = 0; i < 16; i++) await tapA();
+  for (let i = 0; i < 40 && (i < 3 || (await st()).say); i++) await tapA(); // every page of Gold's text, the phone question included
   s = await st();
   if (!s.flags.GOT_BUDDYGEAR || s.say) fail("Mom's scene should finish and set GOT_BUDDYGEAR", s);
 

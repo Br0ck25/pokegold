@@ -22,3 +22,5 @@ Art.props.FRUIT_TREE = () => `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/
 <g stroke="${INK}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"><rect x="25" y="46" width="10" height="24" rx="3" fill="#9a6a3a"/>
 <circle cx="30" cy="30" r="24" fill="#2f9b4a"/><circle cx="20" cy="20" r="8" fill="#4fc467" stroke="none"/>
 <circle cx="22" cy="34" r="4.5" fill="#ff6b5e" stroke-width="2"/><circle cx="38" cy="26" r="4.5" fill="#ff6b5e" stroke-width="2"/><circle cx="34" cy="40" r="4.5" fill="#ff6b5e" stroke-width="2"/></g></svg>`;
+Art.props.MONSTER = () => Art.creature("nibblet"); // a trainer's buddymon out on the road (Gold's SPRITE_MONSTER)
+Art.props.ROCK = () => `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="68" rx="24" ry="6" fill="#000" opacity=".25"/><path d="M6 66 Q4 34 22 26 Q38 20 52 36 Q58 52 54 66Z" fill="#a89a8a" stroke="${INK}" stroke-width="3.2" stroke-linejoin="round"/><path d="M16 40 Q22 30 32 30 M24 56 l10 -8" fill="none" stroke="#6b5e50" stroke-width="3" stroke-linecap="round"/></svg>`;

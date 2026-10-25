@@ -22,7 +22,8 @@ Game.packScreen = async (s) => {
     const item = list[r.i];
     if ((await s.choose(["USE", "CANCEL"], { c0: 13, r0: 5, cancel: 1 })) !== 0) continue;
     if (item.key === "buddygear") await Game.gearScreen(s);
-    else if (item.key === "mapcard" || ITEMS[item.key].pocket === "key") await s.say("It can't be used here.");
+    else if (item.key === "mapcard") await Game.townMap(s);
+    else if (ITEMS[item.key].pocket === "key") await s.say("It can't be used here.");
     else if (ITEMS[item.key].net) await s.say("Nets are for throwing at wild BUDDYMON in battle.");
     else {
       const who = await s.panel({ title: `Use ${ITEMS[item.key].name} on...`, rows: P.party.map((m) => { const max = statsFor(m).hp; return { label: m.nick, g: m.gender, sub: `Lv ${m.level}${m.status ? "  " + STATUS_TAG[m.status] : ""}`, right: `${m.hp}/${max}`, bar: m.hp / max, art: m.species }; }) });

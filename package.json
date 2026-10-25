@@ -5,7 +5,7 @@
     "build": "node build.js",
     "dev": "node build.js && wrangler dev",
     "deploy": "node build.js && wrangler deploy",
-    "test": "node build.js && node test/account.js && node test/game.js && node test/battle.js && node test/menu.js && node test/cherrygrove.js && node test/pwa.js && node test/reach.js && node test/errand.js && node test/layout.js && node test/status.js && node test/evolve.js && node test/pc.js && node test/violet.js && node test/encounter.js && node test/gold.js && node test/landscape.js && node test/extras.js"
+    "test": "node build.js && node test/account.js && node test/game.js && node test/battle.js && node test/menu.js && node test/cherrygrove.js && node test/pwa.js && node test/reach.js && node test/errand.js && node test/layout.js && node test/status.js && node test/evolve.js && node test/pc.js && node test/violet.js && node test/encounter.js && node test/gold.js && node test/landscape.js && node test/extras.js && node test/text.js && node test/catch.js"
   },
   "devDependencies": {
     "playwright": "^1",

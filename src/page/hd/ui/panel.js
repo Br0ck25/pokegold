@@ -22,6 +22,7 @@ function panelLayer(parent) {
       if (!p) { el.innerHTML = ""; return; }
       el.innerHTML = `<h2>${esc(p.title)}${genderTag(p.g)}</h2>
         ${p.art ? `<div class="pn-hero">${Art.creature(p.art)}</div>` : ""}
+        ${p.townmap ? `<div class="pn-hero pn-map">${Art.townMap(p.townmap)}</div>` : ""}
         ${p.tabs ? `<div class="pn-tabs">${p.tabs.map((t) => `<span class="${t.sel ? "sel" : ""}">${t.label}</span>`).join("")}</div>` : ""}
         ${(p.lines || []).map((l) => `<p class="pn-line">${l}</p>`).join("")}
         <ul>${p.rows.map((r, n) => row(r, n, p.sel)).join("")}</ul>
