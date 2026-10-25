@@ -2,7 +2,7 @@
 Scenes.prof = function (root) {
   const el = h(`<div class="scene prof">
     <div class="lab"></div>
-    <div class="portrait"></div>
+    <div class="portrait full"></div>
     <div class="creature" hidden></div>
   </div>`);
   el.prepend(h(`<div class="sky warm"></div>`));
@@ -16,7 +16,7 @@ Scenes.prof = function (root) {
       const { who: nextWho, species } = state.prof;
       if (nextWho !== who) {
         who = nextWho;
-        portrait.innerHTML = Art[who](Game.player.gender === 1);
+        portrait.innerHTML = Art.person(0, who === "hero" ? Art.heroLook() : Art.looks.WILLOW); // full body, standing, like Gold's intro
         dlg.setTag(who === "hero" ? (Game.player.name || "YOU") : "PROF. WILLOW");
       }
       dlg.update(state.dialogue);

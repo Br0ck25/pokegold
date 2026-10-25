@@ -41,7 +41,7 @@
     await s.move(RIVAL, [2, 2, 2, 2, 2]);
     s.turn("player", 3);
     for (const line of ["…", "You got a BUDDYMON at the LAB.", "What a waste. A wimp like you.", "…", "Don't you get what I'm saying?", "Well, I too, have a good BUDDYMON.", "I'll show you what I mean!"]) await s.say(line);
-    const result = await Game.battle(s, makeMon(Game.rivalSpecies(s.G.player), 5), { trainer: { name: Game.rivalName(s.G.player), money: 60, win: "Humph. Are you happy you won?" } });
+    const result = await Game.battle(s, makeMon(Game.rivalSpecies(s.G.player), 5), { trainer: { look: "RIVAL", name: Game.rivalName(s.G.player), money: 60, win: "Humph. Are you happy you won?" } });
     if (result === "lost") await s.say("Humph. That was a waste of time.");
     for (const line of ["…", `My name's ${Game.rivalName(s.G.player)}.`, "I'm going to be the world's greatest BUDDYMON trainer."]) await s.say(line);
     for (const m of s.G.player.party) healMon(m);

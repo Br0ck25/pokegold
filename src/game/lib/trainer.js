@@ -11,7 +11,7 @@ Game.trainerScript = (n) => async (s) => {
   o.dir = o.x === p.x ? (o.y < p.y ? 0 : 1) : o.x < p.x ? 3 : 2;
   await s.approach(n.id, [1, 0, 3, 2][o.dir]);
   await s.say(t.seen);
-  const result = await Game.battle(s, Game.mkParty(t.party), { trainer: { name: `${t.cls} ${t.name}`, money: t.money ?? 16, win: t.beaten } });
+  const result = await Game.battle(s, Game.mkParty(t.party), { trainer: { look: n.name, id: n.id, map: s.G.state.map.key, name: `${t.cls} ${t.name}`, money: t.money ?? 16, win: t.beaten } });
   if (result === "lost") return Game.whiteout(s);
   flags[t.flag] = true;
   s.G.state.dialogue = null;

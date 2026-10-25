@@ -16,7 +16,12 @@ Game.battle = async (s, foeMon, opts = {}) => {
   let me = side(alive()[0], alive()[0].nick), ended = null, tries = 0;
 
   const info = (x) => ({ species: x.mon.species, name: x.mon.nick, gender: x.mon.gender, level: x.mon.level, hp: x.mon.hp, max: statsFor(x.mon).hp, xp: xpBar(x.mon), exp: xpText(x.mon), status: x.mon.status });
-  const refresh = () => { state.battle.foe = info(them); state.battle.me = info(me); };
+  const ball = (m) => (m.hp <= 0 ? "f" : m.status ? "st" : "ok");
+  const refresh = () => {
+    state.battle.foe = info(them); state.battle.me = info(me);
+    state.battle.myBalls = P.party.map(ball); // Gold shows how many buddymon each side has left
+    state.battle.foeBalls = trainer ? foes.map(ball) : null;
+  };
   const partyMenu = async (forced) => {
     for (;;) {
       const i = await s.menu(P.party.map((m) => `${m.nick}  Lv${m.level}  ${m.hp}/${statsFor(m).hp}`), 1, "party");
@@ -27,7 +32,7 @@ Game.battle = async (s, foeMon, opts = {}) => {
       return i;
     }
   };
-  const sendOut = async (mon) => { me = side(mon, mon.nick); fought.add(mon); refresh(); await s.msg(`Go! ${mon.nick}!`); };
+  const sendOut = async (mon) => { me = side(mon, mon.nick); fought.add(mon); state.battle.pc = false; refresh(); await s.msg(`Go! ${mon.nick}!`); };
 
   const lastSlot = new Map();
   const lesson = opts.tutorial ? [{ type: "fight", slot: null }, { type: "item", id: "buddy_net" }] : null;
@@ -110,11 +115,12 @@ Game.battle = async (s, foeMon, opts = {}) => {
   const dex = (P.dex ||= {});
   for (const f of foes) dex[f.species] ||= "seen";
   state.screen = "battle";
-  state.battle = { foe: null, me: null, menu: null, net: null, fx: null };
+  state.battle = { foe: null, me: null, menu: null, net: null, fx: null, pc: true, foeSprite: trainer ? { name: trainer.look || "OTHER", id: trainer.id || 0, map: trainer.map || "" } : null };
   refresh();
   if (trainer) {
     await s.msg(`${trainer.name} wants to battle!`, Math.max(Game.msgMs, 900));
     await s.msg(`${trainer.name} sent out ${SPECIES[foeMon.species].name}!`);
+    state.battle.foeSprite = null;
   } else await s.msg(`${them.label} appeared!`, Math.max(Game.msgMs, 600));
   await sendOut(me.mon);
 

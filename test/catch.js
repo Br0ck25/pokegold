@@ -31,6 +31,8 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   const menu = () => page.evaluate(() => { const m = Game.state.battle && Game.state.battle.menu; return m ? { kind: m.kind, sel: m.items.findIndex((i) => i.sel) } : null; });
   const waitMenu = (kind) => page.waitForFunction((k) => { const m = Game.state.battle && Game.state.battle.menu; return m && m.kind === k; }, kind, { timeout: 20000 }).catch(async (e) => { console.error("stuck waiting for", kind, await page.evaluate(() => JSON.stringify({ menu: Game.state.battle && Game.state.battle.menu, d: Game.state.dialogue, boxes: Game.state.boxes.length, hp: Game.player.party.map((m) => m.hp) }))); throw e; });
   await waitMenu("cmd");
+  const balls = await page.evaluate(() => ({ total: document.querySelectorAll("#hd .bt-card.me .balls i").length, ok: document.querySelectorAll("#hd .bt-card.me .balls i.ok").length, pc: Game.state.battle.pc }));
+  if (balls.total !== 6 || balls.ok !== 1 || balls.pc) fail("the card shows six party balls (one full) and you have been sent out", balls);
   await page.waitForTimeout(300);
   await page.evaluate(() => Game.pick(0)); await waitMenu("moves");
   if ((await menu()).sel !== 0) fail("the first FIGHT menu starts on the first move", await menu());

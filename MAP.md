@@ -4,7 +4,7 @@ Every source file, its size and its first-line description. Add a header comment
 
 | File | Lines | What it is |
 |---|---|---|
-| `src/game/battle/battle.js` | 167 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
+| `src/game/battle/battle.js` | 173 | A battle, scripted like Gold's: intro, command menu (Fight / Pack / Buddymon / Run), turn order by priority then speed, |
 | `src/game/battle/calc.js` | 76 | Battle maths, the same formulas Gold uses (docs/ENGINE.md). All pure functions. |
 | `src/game/battle/evolve.js` | 24 | Evolution after a battle (Gold: engine/pokemon/evolve.asm): a buddymon that levelled up and reached its species' evolve level changes form, |
 | `src/game/battle/growth.js` | 40 | After a win: experience, level-ups and new moves (Gold: exp = base exp * foe level / 7, shared by buddymon that fought). |
@@ -86,8 +86,8 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/core/base.css` | 19 | Buddymon HD layer. Sized in cqw so it scales with the game screen. |
 | `src/page/hd/core/hd.js` | 33 | The renderer: 30 times a second asks the game for its state and shows the matching scene. |
 | `src/page/hd/core/registry.js` | 5 | Registries the art/ and scenes/ files add to. Loaded first by bundle.js. |
-| `src/page/hd/scenes/battle.css` | 102 | battle |
-| `src/page/hd/scenes/battle.js` | 112 | Battle screen. Moves animate from state.battle.fx = { n, who, type, anim, hurts, kind } (the move's own effect from battleFx.js, then stat arrows); |
+| `src/page/hd/scenes/battle.css` | 112 | battle |
+| `src/page/hd/scenes/battle.js` | 122 | Battle screen. Moves animate from state.battle.fx = { n, who, type, anim, hurts, kind } (the move's own effect from battleFx.js, then stat arrows); |
 | `src/page/hd/scenes/battleFx.js` | 41 | Per-move battle effects, in the spirit of Gold's move animations. Art.moveFx[anim](colour) returns SVG (viewBox 100 x 100) for the |
 | `src/page/hd/scenes/intro.css` | 50 | opening cinematic: act i starts at i*6s (--t) |
 | `src/page/hd/scenes/intro.js` | 26 | Opening cinematic: four 6s acts (sea, meadow, night, finale) timed by CSS from mount. |
@@ -113,7 +113,7 @@ Every source file, its size and its first-line description. Add a header comment
 | `src/page/hd/ui/pic.js` | 15 | The big buddymon picture shown while the game introduces one (state.pic = species name), like Gold's pokepic. |
 | `src/page/hd/ui/popup.css` | 10 | popup menus |
 | `src/page/hd/ui/popup.js` | 21 | List boxes (Start menu, Yes/No, submenus) drawn over a scene from state.boxes; tap a row to answer. |
-| `src/page/hd/ui/portrait.css` | 4 | portrait (shared by prof, names, naming) |
+| `src/page/hd/ui/portrait.css` | 7 | portrait (shared by prof, names, naming) |
 | `src/page/index.html` | 66 | <!doctype html> |
 | `src/page/pad.js` | 115 | Touch input: on-screen pad and gesture mode. Needs $ and setStatus from app.js (loaded after this file). |
 | `src/page/style.css` | 69 | App shell, tuned for a phone (target: Pixel 9, 412x924). Rules: docs/UI.md |

@@ -6,8 +6,8 @@ Scenes.battle = function (root) {
     <div class="bt-bg"></div>
     <div class="bt-side foe"><i class="plat"></i><div class="mon"></div><div class="bt-net" hidden>${Art.net()}</div><div class="fx"></div></div>
     <div class="bt-side me"><i class="plat"></i><div class="mon"></div><div class="fx"></div></div>
-    <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div></div>
-    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div><span class="num"></span><div class="xp" title="EXP"><i></i></div><span class="xpn"></span></div>
+    <div class="bt-card foe"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div><div class="balls"></div></div>
+    <div class="bt-card me"><b class="nm"></b><i class="gd"></i><span class="lv"></span><em class="st"></em><div class="hp"><i></i></div><span class="num"></span><div class="xp" title="EXP"><i></i></div><span class="xpn"></span><div class="balls"></div></div>
     <div class="bt-menu" hidden></div>
   </div>`);
   root.appendChild(el);
@@ -41,12 +41,20 @@ Scenes.battle = function (root) {
   };
   menu.addEventListener("pointerdown", (e) => { const b = e.target.closest("button"); if (b) Game.pick(+b.dataset.i); });
 
-  const update = (who, mon) => {
+  // `sprite` = a person drawn instead of the buddymon (Gold: you, then the foe trainer, stand there until the first buddymon is sent out)
+  const update = (who, mon, sprite, balls) => {
     const s = sides[who];
-    if (mon.species !== s.species) {
-      s.species = mon.species;
-      s.mon.innerHTML = Art.creature(mon.species);
+    const key = sprite ? `P:${sprite.look}:${sprite.dir}` : mon.species;
+    if (key !== s.species) {
+      s.species = key;
+      s.mon.innerHTML = sprite ? Art.person(sprite.dir, sprite.look) : Art.creature(mon.species);
+      s.mon.classList.toggle("person", !!sprite);
       s.mon.classList.remove("enter"); void s.mon.offsetWidth; s.mon.classList.add("enter");
+    }
+    const bl = s.card.querySelector(".balls");
+    if (bl) { // party balls like Gold's: full for ready, purple for a condition, grey for fainted, hollow for empty slots
+      const html = balls ? [...balls, ...Array(Math.max(0, 6 - balls.length)).fill("e")].map((k) => `<i class="${k}"></i>`).join("") : "";
+      if (bl.innerHTML !== html) bl.innerHTML = html;
     }
     if (s.hp !== null && mon.hp < s.hp) { s.mon.classList.remove("hit"); void s.mon.offsetWidth; s.mon.classList.add("hit"); }
     s.hp = mon.hp;
@@ -84,8 +92,10 @@ Scenes.battle = function (root) {
       const b = state.battle;
       if (!b) return;
       if (b.fx && b.fx.n !== lastFx) { lastFx = b.fx.n; play(b.fx); }
-      update("foe", b.foe);
-      update("me", b.me);
+      el.classList.toggle("pc", !!b.pc);
+      el.classList.toggle("tin", !!b.foeSprite);
+      update("foe", b.foe, b.foeSprite && { look: Art.look(b.foeSprite.name, b.foeSprite.id, b.foeSprite.map), dir: 0 }, b.foeBalls);
+      update("me", b.me, b.pc && { look: Art.heroLook(), dir: 1 }, b.myBalls);
       dlg.update(state.dialogue);
       menus.update(state.boxes);
       const nkey = JSON.stringify(b.net);

@@ -41,6 +41,7 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   const boyLook = await page.evaluate(() => Art.heroSprite(0));
   await page.locator("#hd .popup li").nth(1).tap();
   await page.waitForSelector("form.ask input", { timeout: 5000 });
+  if (!(await page.evaluate(() => !!document.querySelector("#hd .portrait.full svg .leg")))) fail("the speaker is drawn full body, with legs");
   const girl = await page.evaluate(() => ({ g: Game.player.gender, same: Art.heroSprite(0) === 0 }));
   if (girl.g !== 1) fail("choosing GIRL stores gender 1", girl);
   if ((await page.evaluate(() => Art.heroSprite(0))) === boyLook) fail("the girl looks different from the boy");

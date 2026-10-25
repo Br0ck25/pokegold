@@ -82,11 +82,11 @@
 
 /* wide stage (landscape phone): sizes follow the height, cards sit left, buttons bottom right */
 @container (min-aspect-ratio: 11/10) {
-  #hd .bt-side.foe { right:10cqw; top:3cqh; width:min(22cqw, 30cqh); }
+  #hd .bt-side.foe { right:10cqw; top:2cqh; width:min(21cqw, 28cqh); }
   #hd .bt-side.me { left:9cqw; top:40cqh; width:min(28cqw, 40cqh); }
   #hd .bt-card { padding:2cqh 2.4cqw; border-radius:3cqh; }
   #hd .bt-card.foe { left:3cqw; top:4cqh; width:40cqw; }
-  #hd .bt-card.me { right:3cqw; top:40cqh; width:40cqw; padding:1.2cqh 2.4cqw; }
+  #hd .bt-card.me { right:3cqw; top:37cqh; width:40cqw; padding:1cqh 2.4cqw; }
   #hd .bt-card .nm { font-size:6cqh; } #hd .bt-card .lv { font-size:4.4cqh; top:2.4cqh; right:2.4cqw; }
   #hd .bt-card .hp { height:3cqh; margin-top:1.2cqh; } #hd .bt-card .xp { height:2cqh; margin-top:1.4cqh; }
   #hd .bt-card .num, #hd .bt-card .xpn { font-size:4cqh; margin-top:.6cqh; }
@@ -99,3 +99,13 @@
 #hd .bt-menu.moves button { display:flex; flex-direction:column; justify-content:center; min-height:15cqw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 #hd .bt-menu.moves button small { font-size:3.2cqw; font-weight:500; opacity:.8; }
 @container (min-aspect-ratio: 11/10) { #hd .bt-menu.moves button { min-height:12cqh; } #hd .bt-menu.moves button small { font-size:3.8cqh; } }
+
+/* the person standing in for a buddymon at the start (your back, the trainer's front), and Gold's row of party balls */
+#hd .mon.person svg { width:82%; margin:0 auto; transform:none; }
+#hd .battle.pc .bt-card.me, #hd .battle.tin .bt-card.foe { visibility:hidden; }
+#hd .bt-card .balls { display:flex; gap:1cqw; margin-top:.8cqw; }
+#hd .bt-card .balls:empty { display:none; }
+#hd .bt-card .balls i { width:2.4cqw; height:2.4cqw; border-radius:50%; border:.4cqw solid rgba(255,246,220,.65); }
+#hd .bt-card .balls i.ok { background:#ff9a3c; } #hd .bt-card .balls i.st { background:#c88ad9; } #hd .bt-card .balls i.f { background:#555a70; }
+@container (min-aspect-ratio: 11/10) { #hd .bt-card .balls { gap:1.2cqh; margin-top:1cqh; } #hd .bt-card .balls i { width:3.4cqh; height:3.4cqh; border-width:.5cqh; } }
+#hd .bt-card.me { padding-bottom:1cqw; }
