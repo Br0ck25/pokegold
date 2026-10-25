@@ -53,6 +53,11 @@ Game.partyScreen = async (s) => {
   for (;;) {
     const r = await s.panel({ title: "BUDDYMON", rows: partyRows(), hint: "Pick one" }, at);
     if (r.key === "B") return;
+    if (r.key === "S" && P.party.length > 1) { // SELECT: pick one up, then choose where it goes (same as SWITCH)
+      const to = await s.panel({ title: `Switch ${P.party[r.i].nick} with...`, rows: partyRows() }, r.i);
+      if (to.key === "A" && to.i !== r.i) { [P.party[r.i], P.party[to.i]] = [P.party[to.i], P.party[r.i]]; at = to.i; } else at = r.i;
+      continue;
+    }
     if (r.key !== "A") continue;
     at = r.i;
     const mon = P.party[at], pick = await s.choose(["STATS", "SWITCH", "ITEM", "CANCEL"], { c0: 12, r0: 5, cancel: 3 });

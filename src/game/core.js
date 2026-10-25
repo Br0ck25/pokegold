@@ -175,6 +175,7 @@ const Game = (() => {
       return;
     }
     if (Input.pressed("START")) return G.run(Game.startMenu);
+    if (Input.pressed("SELECT")) return G.run(Game.registered); // the item set with REGISTER in the pack (Gold), nothing if none
     if (Input.pressed("A")) return interact();
     const d = Input.dir();
     if (d === null) return;

@@ -1,3 +1,11 @@
+// SELECT on the map: use the registered key item (Gold). Items we have: the MAP CARD's map and the BUDDYGEAR.
+Game.registered = async (s) => {
+  const k = s.G.player.registered;
+  if (k === "mapcard") await Game.townMap(s);
+  else if (k === "buddygear") await Game.gearScreen(s);
+  s.G.state.panel = null;
+};
+
 // The Start menu: Buddymon, Pack, BuddyGear (once you have it), your name card, Save, Option, Exit. Like Gold's list down the right side.
 Game.startMenu = async (s) => {
   const P = s.G.player;

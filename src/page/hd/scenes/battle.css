@@ -9,7 +9,10 @@
 #hd .bt-side .plat { position:absolute; left:-6%; right:-6%; bottom:-4%; height:28%; border-radius:50%; background:radial-gradient(#8de27a, #4fae57); border:.6cqw solid var(--ink); }
 #hd .bt-side .mon { position:relative; }
 #hd .bt-side .mon svg { width:100%; display:block; }
-#hd .bt-side.me .mon svg { transform:scaleX(-1); }
+/* turned in three-quarter view toward each other: ours (lower left) looks up and to the right at the foe (upper right), which looks back */
+#hd .bt-side .mon { perspective:90cqw; }
+#hd .bt-side.me .mon svg { transform:scaleX(-1) rotateY(48deg); transform-origin:50% 100%; }
+#hd .bt-side.foe .mon svg { transform:rotateY(-34deg); transform-origin:50% 100%; }
 #hd .mon.enter { animation:bt-enter .6s cubic-bezier(.3,1.5,.5,1) both; }
 @keyframes bt-enter { from { transform:translateY(-14cqw) scale(.6); opacity:0; } to { transform:none; opacity:1; } }
 #hd .mon.hit { animation:bt-hit .4s ease-in-out; }

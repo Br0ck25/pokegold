@@ -38,6 +38,7 @@ function menuVerbs(G, s) {
         show();
         if (n && Input.pressed("A")) out = { i, key: "A" };
         else if (Input.pressed("B")) out = { i, key: "B" };
+        else if (n && Input.pressed("SELECT")) out = { i, key: "S" }; // Gold: SELECT swaps entries in the pack and party
         else if (Input.pressed("LEFT")) out = { i, key: "L" };
         else if (Input.pressed("RIGHT")) out = { i, key: "R" };
         else if (G.picked !== null) { out = G.picked < 0 ? { i, key: "B" } : { i: (i = G.picked), key: "A" }; G.picked = null; }

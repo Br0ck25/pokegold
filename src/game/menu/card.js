@@ -33,12 +33,14 @@ Game.SPEEDS = { slow: 2000, mid: 1200, fast: 600 };
 Game.applyOptions = () => { Game.msgMs = Game.SPEEDS[Game.player.options.speed] ?? 1200; };
 Game.optionsScreen = async (s) => {
   const o = s.G.player.options, names = Object.keys(Game.SPEEDS);
+  let at = 0;
   for (;;) {
-    const r = await s.panel({ title: "OPTION", rows: [{ label: "TEXT SPEED", right: `◀ ${o.speed.toUpperCase()} ▶` }], hint: "Left / right to change" });
+    const r = await s.panel({ title: "OPTION", rows: [{ label: "TEXT SPEED", right: `◀ ${o.speed.toUpperCase()} ▶` }, { label: "VIBRATION", right: `◀ ${o.haptics === false ? "OFF" : "ON"} ▶` }], hint: "Left / right to change" }, at);
     if (r.key === "B") return;
+    at = r.i;
     if (r.key === "L" || r.key === "R" || r.key === "A") {
-      o.speed = names[(names.indexOf(o.speed) + (r.key === "L" ? names.length - 1 : 1)) % names.length];
-      Game.applyOptions();
+      if (r.i === 0) { o.speed = names[(names.indexOf(o.speed) + (r.key === "L" ? names.length - 1 : 1)) % names.length]; Game.applyOptions(); }
+      else o.haptics = o.haptics === false;
     }
   }
 };

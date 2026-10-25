@@ -22,6 +22,10 @@ const base = process.argv[2] || "http://127.0.0.1:8787";
   await page.waitForFunction(() => HD.last.screen === "menu"); await tapA();
   await page.waitForFunction(() => HD.last.map.key === "route29");
 
+  // the pad: Select and Start never sit on the D-pad
+  const pad = await page.evaluate(() => { const r = (sel) => { const b = document.querySelector(sel).getBoundingClientRect(); return { x: b.x, y: b.y, r: b.right, b: b.bottom }; }; return { d: r("#dpad"), s: r("[data-key=SELECT]"), t: r("[data-key=START]") }; });
+  for (const k of ["s", "t"]) if (pad[k].x < pad.d.r && pad.d.x < pad[k].r && pad[k].y < pad.d.b && pad.d.y < pad[k].b) fail(`${k === "s" ? "Select" : "Start"} overlaps the D-pad`, pad);
+
   // 1. the FIGHT cursor remembers the last move
   await page.evaluate(() => {
     Game.msgMs = 40; window.__r = Math.random;

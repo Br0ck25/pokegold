@@ -4,6 +4,8 @@
 // MIN_HOLD_MS so a tap can't fall between frames.
 const MIN_HOLD_MS = 110;
 const held = {}, pressedAt = {}, releaseTimer = {};
+// A short buzz for every press (arrows, A, B, Start, Select) when the phone has a vibrator; the OPTION screen can turn it off.
+const buzz = (ms) => { try { if (navigator.vibrate && !(typeof Game !== "undefined" && Game.player && Game.player.options && Game.player.options.haptics === false)) navigator.vibrate(ms); } catch {} };
 
 function setKey(key, down) {
   if (down) {
@@ -11,6 +13,7 @@ function setKey(key, down) {
     if (held[key]) return;
     held[key] = true;
     pressedAt[key] = performance.now();
+    buzz(key === "UP" || key === "DOWN" || key === "LEFT" || key === "RIGHT" ? 9 : 14);
   } else if (held[key]) {
     const wait = Math.max(0, MIN_HOLD_MS - (performance.now() - pressedAt[key]));
     releaseTimer[key] = setTimeout(() => { held[key] = false; }, wait);

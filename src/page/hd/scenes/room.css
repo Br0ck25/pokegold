@@ -4,16 +4,20 @@
 #hd .room-svg { width:100%; display:block; }
 #hd .actor { position:absolute; width:14%; aspect-ratio:60/80; transform:translate(-50%,-100%); transition:left .27s linear, top .27s linear; }
 #hd .actor svg { width:100%; height:100%; display:block; overflow:visible; }
-/* walk cycle: one stride per step (the game takes ~0.27s per tile) */
-#hd .actor .leg { transform-box:fill-box; transform-origin:50% 0; }
-#hd .actor.walk .leg.l { animation:stride .27s ease-in-out infinite alternate; }
-#hd .actor.walk .leg.r { animation:stride .27s ease-in-out infinite alternate-reverse; }
-/* facing the camera or away, the feet take turns lifting (no scissoring sideways) */
-#hd .actor[data-dir="0"].walk .leg.l, #hd .actor[data-dir="1"].walk .leg.l { animation:stride-fb .27s ease-in-out infinite alternate; }
-#hd .actor[data-dir="0"].walk .leg.r, #hd .actor[data-dir="1"].walk .leg.r { animation:stride-fb .27s ease-in-out infinite alternate-reverse; }
-@keyframes stride-fb { from { transform:translateY(-14%) scaleY(.8); } to { transform:translateY(3%); } }
+/* walk cycle: one stride per step (the game takes ~0.27s per tile). Legs move as a whole (pants and shoes together): feet take turns lifting facing the camera or away,
+   and swing back and forth from the side; arms swing the opposite way. */
+#hd .actor .leg { transform-box:fill-box; }
+#hd .actor .arm { transform-box:fill-box; transform-origin:50% 0; }
+#hd .actor.walk .leg.l { animation:stride-fb .27s ease-in-out infinite alternate; }
+#hd .actor.walk .leg.r { animation:stride-fb .27s ease-in-out infinite alternate-reverse; }
+#hd .actor[data-dir="2"].walk .leg.l, #hd .actor[data-dir="3"].walk .leg.l { animation-name:stride-side; }
+#hd .actor[data-dir="2"].walk .leg.r, #hd .actor[data-dir="3"].walk .leg.r { animation-name:stride-side; }
+#hd .actor.walk .arm.l { animation:swing .27s ease-in-out infinite alternate-reverse; }
+#hd .actor.walk .arm.r { animation:swing .27s ease-in-out infinite alternate; }
 #hd .actor.walk svg { animation:bob-step .27s ease-in-out infinite alternate; }
-@keyframes stride { from { transform:translateY(-6%) rotate(-22deg); } to { transform:translateY(0) rotate(22deg); } }
+@keyframes stride-fb { from { transform:translateY(-3px); } to { transform:translateY(0); } }
+@keyframes stride-side { from { transform:translateX(-4px); } to { transform:translateX(4px); } }
+@keyframes swing { from { transform:rotate(-14deg); } to { transform:rotate(14deg); } }
 @keyframes bob-step { from { transform:translateY(0); } to { transform:translateY(-3%); } }
 #hd .loc { position:absolute; left:4%; top:3%; padding:1cqw 3cqw; font-size:3cqw; border-radius:3cqw; background:rgba(10,18,50,.7); border:.4cqw solid rgba(255,246,220,.25); }
 
